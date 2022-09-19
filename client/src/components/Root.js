@@ -1,8 +1,17 @@
+import { useContext, useEffect } from "react"
+import { getRequest } from "./tools/FetchTypes"
+import { NavButton, UserContext } from "./tools/Hooks"
 
 export const Root = () => {
+
+    const {setUser} = useContext(UserContext)
+
+    useEffect(()=>{getRequest('/me', setUser)}, [setUser])
+
     return (
         <div>
-            <h1>Home Page</h1>
+            <NavButton path={'login'} text={'login'}/>
+            <NavButton path={'signup'} text={'signup'}/>
         </div>
     )
 }
