@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::API
     include ActionController::Cookies
+    require 'rest-client'
 
     before_action :authorize
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
+
+    def api_url endpoint
+        return "http://www.dnd5eapi.co#{endpoint}"
+    end
 
     def current_user
         user = User.find_by(id: session[:user_id])
