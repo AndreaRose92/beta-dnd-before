@@ -15,7 +15,7 @@ export const Signup = () => {
     const onSignup = e => {
         e.preventDefault()
         postRequest('/signup', {username, password, password_confirmation: passwordConfirmation}, setUser)
-        navigate(`/${username}`)
+        navigate(`/`)
     }
 
     return (

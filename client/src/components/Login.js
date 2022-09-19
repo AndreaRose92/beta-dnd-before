@@ -5,17 +5,16 @@ import { UserContext } from "./tools/Hooks"
 
 export const Login = () => {
 
+    const navigate = useNavigate()
     const {setUser} = useContext(UserContext)
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const navigate = useNavigate()
-
     const onLogin = e => {
         e.preventDefault()
         postRequest('/login', {username, password}, setUser)
-        navigate(`/${username}`)
+        navigate(`/`)
     }
 
     return (

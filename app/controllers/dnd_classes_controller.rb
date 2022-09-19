@@ -1,12 +1,21 @@
 class DndClassesController < ApplicationController
 
+    skip_before_action :authorize
+
     def index
-        data = []
-        DndClass.all.each do |dc|
-            resp = RestClient.get(api_url(dc[:url])) 
-            data << JSON.parse(resp)
-        end
-        render json: data
+        render json: DndClass.all
+    end
+
+    def show
+        response = RestClient.get("#{dnd_class_url}/#{params[:id].downcase}")
+        dndclass = JSON.parse(response)
+        render json: dndclass
+    end
+
+    private
+
+    def dnd_class_url
+        return "#{api_url("/api/classes")}"
     end
 
 end

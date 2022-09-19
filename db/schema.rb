@@ -10,8 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_19_185054) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_19_204009) do
   create_table "dnd_classes", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "races", force: :cascade do |t|
     t.string "name"
     t.string "url"
     t.datetime "created_at", null: false

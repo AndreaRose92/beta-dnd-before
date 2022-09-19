@@ -1,9 +1,12 @@
 import { useContext } from "react"
 import { Logout, UserContext } from "./tools/Hooks"
+// import { getRequest } from "./tools/FetchTypes"
 
 export const UserPage = () => {
 
     const {user} = useContext(UserContext)
+
+    // useEffect(()=>{getRequest('/me', setUser)}, [setUser])
 
     console.log(user)
 

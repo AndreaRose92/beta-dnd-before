@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
     require 'rest-client'
 
     before_action :authorize
+    skip_before_action :authorize, only: [:current_user]
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
 
