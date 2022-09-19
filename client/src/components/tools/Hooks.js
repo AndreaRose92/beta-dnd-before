@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import React, { useState } from "react"
 
@@ -29,5 +29,19 @@ export const Logout = () => {
     }
     return (
         <button onClick={handleLogout}>Logout</button>
+    )
+}
+
+export const AuthRoutes = ({children, setUser}) => {
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        fetch('/me').then(r=>{if(r.ok){r.json().then(user=>setUser(user))}else{navigate('/')}})
+    })
+
+    return (
+        <>
+            {children}
+        </>
     )
 }
