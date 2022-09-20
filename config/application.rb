@@ -4,6 +4,7 @@ require "rails/all"
 
 Bundler.require(*Rails.groups)
 
+
 module DndBefore
   class Application < Rails::Application
     config.middleware.use ActionDispatch::Cookies

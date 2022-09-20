@@ -1,2 +1,0 @@
-class Feat < ApplicationRecord
-end
