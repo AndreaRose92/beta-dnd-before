@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dnd_class: one
+  proficiency: one
+
+two:
+  dnd_class: two
+  proficiency: two

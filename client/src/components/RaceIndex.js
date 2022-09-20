@@ -11,8 +11,6 @@ export const RaceIndex = () => {
 
     const renderRaces = races.map(race => <Link key={race.id} to={`/races/${race.name}`}><button>{race.name}</button></Link>)
 
-    // console.log(races)
-
     return (
         <div>
             {renderRaces}

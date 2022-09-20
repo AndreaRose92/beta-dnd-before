@@ -10,8 +10,6 @@ export const RaceDetail = () => {
 
     useEffect(()=>{getRequest(`/races/${params.race}`, setRace)}, [params.race])
 
-    console.log(params)
-
     return (
         <div>
             <h4>{race.name}</h4>

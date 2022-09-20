@@ -1,0 +1,2 @@
+class CharSkillsController < ApplicationController
+end

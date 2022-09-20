@@ -10,8 +10,6 @@ export const DndClassDetail = () => {
 
     useEffect(()=>{getRequest(`/dnd_classes/${params.dnd_class}`, setDndClass)}, [params.dnd_class])
 
-    console.log(dndClass)
-
     return (
         <div>
             <h4>{dndClass.name}</h4>

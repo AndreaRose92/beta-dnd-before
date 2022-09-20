@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react"
 import { getRequest } from "./tools/FetchTypes"
-import { NavButton, UserContext } from "./tools/Hooks"
+import { Logout, NavButton, UserContext } from "./tools/Hooks"
 
 export const Root = () => {
 
@@ -8,13 +8,23 @@ export const Root = () => {
 
     useEffect(()=>{getRequest('/me', setUser)}, [setUser])
 
-    return (
-        <div>
-            <NavButton path={'login'} text={'login'}/>
-            <NavButton path={'signup'} text={'signup'}/>
-            {user ? <NavButton path={`${user.username}`} text={"me"}/> : null }
-            <NavButton path={'races'} text={"races"}/>
-            <NavButton path={'dnd_classes'} text={"classes"}/>
-        </div>
-    )
+    if (user === null) {
+        return (
+            <div>
+                <NavButton path={'login'} text={'login'}/>
+                <NavButton path={'signup'} text={'signup'}/>
+                <NavButton path={'races'} text={"races"}/>
+                <NavButton path={'dnd_classes'} text={"classes"}/>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <NavButton path={`/users/${user.username}`} text={"me"}/>
+                <Logout />
+                <NavButton path={'races'} text={"races"}/>
+                <NavButton path={'dnd_classes'} text={"classes"}/>
+            </div>
+        )
+    }
 }
