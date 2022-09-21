@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, Outlet } from "react-router-dom"
-import { getRequest } from "./tools/FetchTypes"
+import { getRequest } from "../tools/FetchTypes"
 
 
 export const RaceIndex = () => {

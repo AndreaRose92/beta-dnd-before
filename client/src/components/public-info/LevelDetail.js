@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getRequest } from './tools/FetchTypes'
-import { capitalize } from './tools/Hooks'
+import { getRequest } from '../tools/FetchTypes'
+import { capitalize } from '../tools/Hooks'
 
 const LevelDetail = () => {
 

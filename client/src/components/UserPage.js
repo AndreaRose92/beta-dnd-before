@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import CharacterCard from "./CharacterCard"
+import CharacterCard from "./characters/CharacterCard"
 import { Logout, NavButton, UserContext } from "./tools/Hooks"
 // import { getRequest } from "./tools/FetchTypes"
 

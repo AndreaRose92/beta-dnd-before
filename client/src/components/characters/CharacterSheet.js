@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { getRequest } from './tools/FetchTypes'
-import { CharacterContext, UserContext } from './tools/Hooks'
+import { getRequest } from '../tools/FetchTypes'
+import { CharacterContext, UserContext } from '../tools/Hooks'
 
 const CharacterSheet = () => {
   

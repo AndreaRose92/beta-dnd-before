@@ -7,15 +7,15 @@ import { Signup } from './components/Signup';
 import { CharacterProvider, UserContext } from './components/tools/Hooks';
 import { UserPage } from './components/UserPage';
 import { NotFound } from './components/NotFound';
-import { RaceIndex } from './components/RaceIndex'
-import { RaceDetail } from './components/RaceDetail'
-import { DndClassIndex } from './components/DndClassIndex'
-import { DndClassDetail } from './components/DndClassDetail'
-import LevelDetail from './components/LevelDetail';
+import { RaceIndex } from './components/public-info/RaceIndex'
+import { RaceDetail } from './components/public-info/RaceDetail'
+import { DndClassIndex } from './components/public-info/DndClassIndex'
+import { DndClassDetail } from './components/public-info/DndClassDetail'
+import LevelDetail from './components/public-info/LevelDetail';
 import { getRequest } from './components/tools/FetchTypes';
-import NewCharacter from './components/NewCharacter';
-import CharacterSheet from './components/CharacterSheet';
-import EditCharacter from './components/EditCharacter';
+import NewCharacter from './components/characters/NewCharacter';
+import CharacterSheet from './components/characters/CharacterSheet';
+import EditCharacter from './components/characters/EditCharacter';
 
 
 function App() {

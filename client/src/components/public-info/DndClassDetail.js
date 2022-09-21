@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { Outlet, useParams } from "react-router-dom"
 import LevelDetail from "./LevelDetail"
-import { getRequest } from "./tools/FetchTypes"
-import { NavButton } from "./tools/Hooks"
+import { getRequest } from "../tools/FetchTypes"
+import { NavButton } from "../tools/Hooks"
 
 export const DndClassDetail = (dnd_class) => {
 

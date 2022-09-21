@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { NavButton, UserContext } from './tools/Hooks'
-import { deleteRequest } from './tools/FetchTypes'
+import { NavButton, UserContext } from '../tools/Hooks'
+import { deleteRequest } from '../tools/FetchTypes'
 import { Link } from 'react-router-dom'
 
 const CharacterCard = ({character}) => {

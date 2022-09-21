@@ -1,5 +1,5 @@
 import { DndClassDetail } from "./DndClassDetail"
-import { NavButton } from "./tools/Hooks"
+import { NavButton } from "../tools/Hooks"
 
 export const DndClassIndex = () => {
     

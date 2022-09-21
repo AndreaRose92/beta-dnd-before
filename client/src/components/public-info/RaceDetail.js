@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getRequest } from "./tools/FetchTypes"
-import { NavButton } from "./tools/Hooks"
+import { getRequest } from "../tools/FetchTypes"
+import { NavButton } from "../tools/Hooks"
 
 export const RaceDetail = () => {
 
