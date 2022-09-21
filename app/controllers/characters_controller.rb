@@ -31,6 +31,6 @@ class CharactersController < ApplicationController
     end
 
     def char_params
-        params.permit(:name, :user_id, :dnd_class_id, :race_id, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :hp, :current_hp)
+        params.permit(:name, :level, :user_id, :dnd_class_id, :race_id, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :hp, :current_hp)
     end
 end

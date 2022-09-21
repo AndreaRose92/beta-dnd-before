@@ -7,7 +7,13 @@ class RacesController < ApplicationController
     end
 
     def show
-        race = Race.find_by(name: params[:id].capitalize)
+        if params[:id] == "half-elf"
+            race = Race.find_by(name: "Half-Elf")
+        elsif params[:id] == "half-orc"
+            race = Race.find_by(name: "Half-Orc")
+        else
+            race = Race.find_by(name: params[:id].capitalize)
+        end
         render json: race
     end
 

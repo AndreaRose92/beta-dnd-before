@@ -14,7 +14,7 @@ export const Login = () => {
     const onLogin = e => {
         e.preventDefault()
         postRequest('/login', {username, password}, setUser)
-        navigate(`/`)
+        navigate(`/users/${username}`)
     }
 
     return (

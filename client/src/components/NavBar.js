@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { NavWrapper } from './styles/Grids.styles'
-import { NavButton } from './styles/Nav.styles'
+import { Logo, NavButton } from './styles/Nav.styles'
 
 const NavBar = ({user, setUser}) => {
 
@@ -16,7 +16,7 @@ const NavBar = ({user, setUser}) => {
 
     return (
         <NavWrapper>
-            <h1 style={{"textAlign": "right", "marginRight": "20px"}}>DnD Before</h1>
+            <Logo as={NavLink} to='/' >DnD Before</Logo>
             {loginLink}
             {signupLink}
             <NavButton as={NavLink} to='/races'>Races</NavButton>

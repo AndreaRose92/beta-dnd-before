@@ -1,37 +1,58 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { postRequest } from '../tools/FetchTypes'
 import { CharacterContext, UserContext } from '../tools/Hooks'
 
-const NewCharacter = () => {
+const NewCharacter = ({setCharacters}) => {
 
+    const navigate = useNavigate()
     const {user} = useContext(UserContext)
-    const {character, setCharacter} = useContext(CharacterContext)
+    const {setCharacter} = useContext(CharacterContext)
+    const [newCharacter, setNewCharacter] = useState({
+        name: '',
+        level: 0,
+        user_id: user.id,
+        dnd_class_id: 0,
+        race_id: 0,
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0,
+        hp: 0,
+        current_hp: 0
+    }) 
+
 
     const [form, setForm] = useState('default')
 
     const handleInput = e => {
         const formName = e.target.name
         let formValue = e.target.value
-        setCharacter({
-            ...character,
+        setNewCharacter({
+            ...newCharacter,
             [formName]: formValue
         })
     }
 
     const submitCharacter = e => {
         e.preventDefault()
-        setCharacter(character => ({
-            ...character,
+        setNewCharacter(newCharacter => ({
+            ...newCharacter,
             user_id: user.id
         }))
-        postRequest('/characters', character, setCharacter)
+        postRequest('/characters', newCharacter, setNewCharacter)
+        setCharacter(newCharacter)
+        setCharacters(array => [...array, newCharacter])
+        navigate(`/users/${user.username}`)
     }
 
     const pageOne = 
     <form>
         <h2>Basic Information</h2>
-        <input type='text' name='name' placeholder='name' value={character.name} onChange={handleInput} /><br/>
-        <input type='number' name='level' placeholder='level' value={character.level} onChange={handleInput}/><br/>
+        <input type='text' name='name' placeholder='name' value={newCharacter.name} onChange={handleInput} /><br/>
+        <input type='number' name='level' placeholder='level' value={newCharacter.level} onChange={handleInput}/><br/>
         <select onChange={handleInput} name='dnd_class_id'>
             <option value={null}>Class</option>
             <option value={1}>Barbarian</option>
@@ -66,17 +87,17 @@ const NewCharacter = () => {
     <form>
         <h2>Ability Scores</h2>
         <label htmlFor='strength'>Strength: </label>
-        <input value={character.strength} onChange={handleInput} type='number' name='strength'/><br/>
+        <input value={newCharacter.strength} onChange={handleInput} type='number' name='strength'/><br/>
         <label htmlFor='dexterity'>Dexterity: </label>
-        <input value={character.dexterity} onChange={handleInput} type='number' name='dexterity'/><br/>
+        <input value={newCharacter.dexterity} onChange={handleInput} type='number' name='dexterity'/><br/>
         <label htmlFor='constitution'>Constitution: </label>
-        <input value={character.constitution} onChange={handleInput} type='number' name='constitution'/><br/>
+        <input value={newCharacter.constitution} onChange={handleInput} type='number' name='constitution'/><br/>
         <label htmlFor='intelligence'>Intelligence: </label>
-        <input value={character.intelligence} onChange={handleInput} type='number' name='intelligence'/><br/>
+        <input value={newCharacter.intelligence} onChange={handleInput} type='number' name='intelligence'/><br/>
         <label htmlFor='wisdom'>Wisdom: </label>
-        <input value={character.wisdom} onChange={handleInput} type='number' name='wisdom'/><br/>
+        <input value={newCharacter.wisdom} onChange={handleInput} type='number' name='wisdom'/><br/>
         <label htmlFor='charisma'>Charisma: </label>
-        <input value={character.charisma} onChange={handleInput} type='number' name='charisma'/><br/>
+        <input value={newCharacter.charisma} onChange={handleInput} type='number' name='charisma'/><br/>
         <button onClick={()=>setForm("default")}>Back</button>
         <button onClick={()=>setForm("skills")}>Next</button>
     </form>
@@ -92,15 +113,15 @@ const NewCharacter = () => {
     const lastPage = 
     <form onSubmit={submitCharacter} >
         <h2>Character Details</h2>
-        <h3>{character.name}</h3>
-        <h4>{character.race_id} {character.dnd_class_id}</h4>
+        <h3>{newCharacter.name}</h3>
+        <h4>{newCharacter.race_id} {newCharacter.dnd_class_id}</h4>
         <ul>
-            <li>Strength: {character.strength}</li>
-            <li>Dexterity: {character.dexterity}</li>
-            <li>Constitution: {character.constitution}</li>
-            <li>Intelligence: {character.intelligence}</li>
-            <li>Wisdom: {character.wisdom}</li>
-            <li>Charisma: {character.charisma}</li>
+            <li>Strength: {newCharacter.strength}</li>
+            <li>Dexterity: {newCharacter.dexterity}</li>
+            <li>Constitution: {newCharacter.constitution}</li>
+            <li>Intelligence: {newCharacter.intelligence}</li>
+            <li>Wisdom: {newCharacter.wisdom}</li>
+            <li>Charisma: {newCharacter.charisma}</li>
         </ul>
         <button type='submit'>Submit</button>
     </form>

@@ -1,12 +1,20 @@
 import React, { useContext } from 'react'
 import { CharacterContext, NavButton, UserContext } from '../tools/Hooks'
 import { deleteRequest } from '../tools/FetchTypes'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const CharacterCard = ({character}) => {
+const CharacterCard = ({character, deleteCharacter}) => {
 
     const {user} = useContext(UserContext)
     const {setCharacter} = useContext(CharacterContext)
+    const navigate = useNavigate()
+
+    const handleDelete = () => {
+        deleteCharacter(character)
+        deleteRequest(`/characters/${character.id}`)
+        navigate(`/users/${user.username}`)
+    }
+    
 
     return (
     <div>
@@ -15,7 +23,7 @@ const CharacterCard = ({character}) => {
             <p>Level {character.level} {character.race} {character.dnd_class}</p>
         </Link>
         <NavButton onClick={()=>setCharacter(character)} path={`/users/${user.username}/characters/${character.id}/edit`} text={"Edit"}/>
-        <button onClick={()=>deleteRequest(`/characters/${character.id}`)}>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
     </div>
   )
 }
