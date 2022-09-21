@@ -35,6 +35,7 @@ const NewCharacter = () => {
     <form>
         <h2>Basic Information</h2>
         <input type='text' name='name' placeholder='name' value={character.name} onChange={handleInput} /><br/>
+        <input type='number' name='level' placeholder='level' value={character.level} onChange={handleInput}/><br/>
         <select onChange={handleInput} name='dnd_class_id'>
             <option value={null}>Class</option>
             <option value={1}>Barbarian</option>

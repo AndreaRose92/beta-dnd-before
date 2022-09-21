@@ -1,8 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :characters
-  
-  def characters
-    self.object.characters.pluck(:name)
-  end
+  attributes :id, :username
+  has_many :characters, serializer: UserCharacterSerializer
 
 end

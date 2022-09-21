@@ -21,7 +21,6 @@ puts 'seeding races...'
 race_response = RestClient.get(url("races"))
 races = JSON.parse(race_response)["results"]
 races.each { |r| 
-    byebug
     resp = RestClient.get(url("races/#{r["index"]}"))
     race = JSON.parse(resp)
     Race.create(
@@ -50,4 +49,9 @@ class_skills.each {|cs| ClassSkill.create(dnd_class_id: cs[0], proficiency_id: c
 race_skills = [[3, 12], [6, 8]]
 race_skills.each {|rs| RaceSkill.create(race_id: rs[0], proficiency_id: rs[1])}
 
-puts 'done seeding...'
+puts 'seeding characters...'
+
+yeslah = Character.create(name: "Yeslah", level: 12, dnd_class_id: 2, race_id: 3, user_id: 1, strength: 12, dexterity: 12, constitution: 12, intelligence: 12, wisdom: 12, charisma: 12, hp: 100, current_hp: 100)
+
+
+puts 'done seeding'

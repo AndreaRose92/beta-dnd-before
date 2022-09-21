@@ -18,6 +18,7 @@ export const CharacterContext = React.createContext()
 export const CharacterProvider = ({children}) => {
     const [character, setCharacter] = useState({
         name: '',
+        level: 0,
         user_id: 0,
         dnd_class_id: 0,
         race_id: 0,
