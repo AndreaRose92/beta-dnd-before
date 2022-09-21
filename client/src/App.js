@@ -14,6 +14,8 @@ import { DndClassDetail } from './components/DndClassDetail'
 import LevelDetail from './components/LevelDetail';
 import { getRequest } from './components/tools/FetchTypes';
 import NewCharacter from './components/NewCharacter';
+import CharacterSheet from './components/CharacterSheet';
+import EditCharacter from './components/EditCharacter';
 
 
 function App() {
@@ -36,7 +38,9 @@ function App() {
         <Route path=':dnd_class' element={<DndClassDetail />}/>
         <Route path=':dnd_class/:level' element={<LevelDetail />}/>
         <Route path ='/users/:username' element={<UserPage />}/>
+        <Route path ='/users/:username/characters/:id/' element={<CharacterSheet />}/>
         <Route path ='/users/:usernane/characters/new' element={<NewCharacter />}/>
+        <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>
       </Routes>
     </CharacterProvider>
   );

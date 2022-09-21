@@ -11,7 +11,7 @@ const CharacterCard = ({character}) => {
     <div>
         <Link to={`/users/${user.username}/characters/${character.id}`}>
             <h3>{character.name}</h3>
-            <p>{character.level} {character.race.name} {character.dnd_class.name}</p>
+            <p>Level {character.level} {character.race} {character.dnd_class}</p>
         </Link>
         <NavButton path={`/users/${user.username}/characters/${character.id}/edit`} text={"Edit"}/>
         <button onClick={()=>deleteRequest(`/characters/${character.id}`)}>Delete</button>
