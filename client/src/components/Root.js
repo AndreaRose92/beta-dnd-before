@@ -1,12 +1,10 @@
-import { useContext, useEffect } from "react"
-import { getRequest } from "./tools/FetchTypes"
+import { useContext } from "react"
+// import { getRequest } from "./tools/FetchTypes"
 import { Logout, NavButton, UserContext } from "./tools/Hooks"
 
 export const Root = () => {
 
-    const {user, setUser} = useContext(UserContext)
-
-    useEffect(()=>{getRequest('/me', setUser)}, [setUser])
+    const {user} = useContext(UserContext)
 
     if (user === null) {
         return (

@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react"
-import { Outlet } from "react-router-dom"
-import { getRequest } from "./tools/FetchTypes"
+import { DndClassDetail } from "./DndClassDetail"
 import { NavButton } from "./tools/Hooks"
 
 export const DndClassIndex = () => {
     
-    const [classes, setClasses] = useState([])
+    // const [classes, setClasses] = useState([])
     
-    useEffect(()=>{getRequest('/dnd_classes', setClasses)},[])
+    // useEffect(()=>{getRequest('/dnd_classes', setClasses)},[])
+    const classes = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
 
-    const renderClasses = classes.map(c => <NavButton key={c.id} path={`/${c.name.toLowerCase()}`} text={c.name}/>)
+    const renderClasses = classes.map(c => <NavButton key={c} path={`/${c.toLowerCase()}`} text={c}><DndClassDetail /></NavButton>)
 
     return (
         <div>
             {renderClasses}
-            <Outlet />
+            <NavButton />
         </div>
     )
 }
