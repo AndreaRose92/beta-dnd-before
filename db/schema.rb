@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   create_table "barbarians", force: :cascade do |t|
     t.integer "level"
-    t.integer "ability_score_bonuseslity_score_bonuses"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -162,6 +162,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   create_table "races", force: :cascade do |t|
     t.string "name"
     t.string "url"
+    t.string "ability_score_bonuses"
+    t.string "size"
+    t.string "languages"
+    t.string "traits"
+    t.integer "speed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

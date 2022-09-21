@@ -20,7 +20,19 @@ puts 'seeding races...'
 
 race_response = RestClient.get(url("races"))
 races = JSON.parse(race_response)["results"]
-races.each { |r| Race.create(name: r["name"], url: r["url"])}
+races.each { |r| 
+    byebug
+    resp = RestClient.get(url("races/#{r["index"]}"))
+    race = JSON.parse(resp)
+    Race.create(
+        name: race["name"],
+        url: race["url"],
+        ability_score_bonuses: race["ability_bonuses"].map {|ab| "#{ab["ability_score"]["name"]} +#{ab["bonus"]}"}.join(", "),
+        size: race["size"],
+        languages: race["languages"].pluck("name").join(", "),
+        traits: race["traits"].pluck("name").join(", "),
+        speed: race["speed"]
+        )}
 
 puts 'seeding skills...'
 
