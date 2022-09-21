@@ -7,9 +7,7 @@ class RacesController < ApplicationController
     end
 
     def show
-        # byebug
-        response = RestClient.get("#{race_url}/#{params[:id].downcase}")
-        race = JSON.parse(response)
+        race = Race.find_by(name: params[:id].capitalize)
         render json: race
     end
 

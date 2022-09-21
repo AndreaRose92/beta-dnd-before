@@ -31,9 +31,8 @@ function App() {
         <Route path="*" element={<NotFound />}/>
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<Signup />} />
-        <Route path='races' element={<RaceIndex />}>
-          <Route path=':race' element={<RaceDetail />}/>
-        </Route>
+        <Route path='races' element={<RaceIndex />}/>
+        <Route path='races/:race' element={<RaceDetail />}/>
         <Route path='dnd_classes' element={<DndClassIndex />}/>
         <Route path=':dnd_class' element={<DndClassDetail />}/>
         <Route path=':dnd_class/:level' element={<LevelDetail />}/>
