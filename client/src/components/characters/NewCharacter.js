@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { postRequest } from '../tools/FetchTypes'
 import { CharacterContext, UserContext } from '../tools/Hooks'
 
 const NewCharacter = () => {
 
-    const navigate = useNavigate()
     const {user} = useContext(UserContext)
     const {character, setCharacter} = useContext(CharacterContext)
 
@@ -26,9 +24,7 @@ const NewCharacter = () => {
             ...character,
             user_id: user.id
         }))
-        console.log(character)
         postRequest('/characters', character, setCharacter)
-        // navigate(`/users/${user.username}`)
     }
 
     const pageOne = 

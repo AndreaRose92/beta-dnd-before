@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import CharacterCard from "./characters/CharacterCard"
 import { Logout, NavButton, UserContext } from "./tools/Hooks"
-// import { getRequest } from "./tools/FetchTypes"
 
 export const UserPage = () => {
 
@@ -9,7 +8,7 @@ export const UserPage = () => {
 
     const [characters, setCharacters] = useState([])
 
-    useEffect(()=>{setCharacters(user.characters)}, [])
+    useEffect(()=>{setCharacters(user.characters)}, [user.characters])
 
     const renderCards = characters.map(character => <CharacterCard character={character} />)
 
