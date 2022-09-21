@@ -1,3 +1,3 @@
 class ProficiencySerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :name, :stat
 end

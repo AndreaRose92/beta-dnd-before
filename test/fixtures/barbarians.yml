@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  level: 1
+  abi: 1
+  prof_bonus: 1
+  features: MyString
+  class_specific: MyString
+
+two:
+  level: 1
+  abi: 1
+  prof_bonus: 1
+  features: MyString
+  class_specific: MyString

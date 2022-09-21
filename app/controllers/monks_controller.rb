@@ -1,0 +1,31 @@
+class MonksController < ApplicationController
+    def index
+        render json: Monk.all
+    end
+
+    def show
+        level = Monk.find_by(level: params[:id])
+        if level
+            render json: level
+        else
+            response = RestClient.get(api_url(monk_url))
+            data = JSON.parse(response)
+            new_level = Monk.create(
+                level: data["level"],
+                prof_bonus: data["prof_bonus"],
+                features: data["features"].pluck("name").join(", "),
+                class_specific: data["class_specific"].map {
+                    |k,v| "#{k}: #{v}"
+                }.join(', '),
+                abi: data["ability_score_bonuses"],
+            )
+            render json: new_level
+        end
+    end
+
+    private
+
+    def monk_url 
+        return "/api/classes/monk/levels/#{params[:id]}"
+    end
+end

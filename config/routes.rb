@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :wizards
+  resources :warlocks
+  resources :sorcerers
+  resources :rogues
+  resources :rangers
+  resources :paladins
+  resources :monks
+  resources :fighters
+  resources :druids
+  resources :clerics
+  resources :bards
+  resources :barbarians
   resources :feats, only: [:index, :show]
   resources :equipment, only: [:index, :show]
   resources :race_skills, only: [:index, :show]
