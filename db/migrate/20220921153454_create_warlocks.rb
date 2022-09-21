@@ -2,7 +2,7 @@ class CreateWarlocks < ActiveRecord::Migration[7.0]
   def change
     create_table :warlocks do |t|
       t.integer :level
-      t.integer :abi
+      t.integer :ability_score_bonuses
       t.integer :prof_bonus
       t.string :features
       t.string :class_specific

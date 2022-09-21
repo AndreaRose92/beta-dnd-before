@@ -1,6 +1,11 @@
 class ClericsController < ApplicationController
+
+    skip_before_action :authorize
+
     def index
-        render json: Cleric.all
+        response = RestClient.get(api_url(cleric_url))
+        data = JSON.parse(response)
+        render json: data
     end
 
     def show
@@ -17,7 +22,7 @@ class ClericsController < ApplicationController
                 class_specific: data["class_specific"].map {
                     |k,v| "#{k}: #{v}"
                 }.join(', '),
-                abi: data["ability_score_bonuses"],
+                ability_score_bonuses: data["ability_score_bonuses"],
             )
             render json: new_level
         end

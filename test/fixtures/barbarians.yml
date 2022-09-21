@@ -2,14 +2,14 @@
 
 one:
   level: 1
-  abi: 1
+  ability_score_bonuses: 1
   prof_bonus: 1
   features: MyString
   class_specific: MyString
 
 two:
   level: 1
-  abi: 1
+  ability_score_bonuses: 1
   prof_bonus: 1
   features: MyString
   class_specific: MyString

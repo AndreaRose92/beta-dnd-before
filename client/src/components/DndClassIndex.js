@@ -9,7 +9,7 @@ export const DndClassIndex = () => {
     
     useEffect(()=>{getRequest('/dnd_classes', setClasses)},[])
 
-    const renderClasses = classes.map(c => <NavButton key={c.id} path={`/dnd_classes/${c.name}`} text={c.name}/>)
+    const renderClasses = classes.map(c => <NavButton key={c.id} path={`/${c.name.toLowerCase()}`} text={c.name}/>)
 
     return (
         <div>

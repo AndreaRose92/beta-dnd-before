@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   create_table "barbarians", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuseslity_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "bards", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "clerics", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "druids", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -112,7 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "fighters", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -123,7 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "monks", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -134,7 +134,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "paladins", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -168,7 +168,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "rangers", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -178,13 +178,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   end
 
   create_table "rogues", force: :cascade do |t|
+    t.integer "level"
+    t.integer "ability_score_bonuses"
+    t.integer "prof_bonus"
+    t.string "features"
+    t.string "class_specific"
+    t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "sorcerers", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -202,7 +208,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "warlocks", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"
@@ -213,7 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
 
   create_table "wizards", force: :cascade do |t|
     t.integer "level"
-    t.integer "abi"
+    t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
     t.string "features"
     t.string "class_specific"

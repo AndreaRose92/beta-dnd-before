@@ -1,6 +1,11 @@
 class RoguesController < ApplicationController
+
+    skip_before_action :authorize
+
     def index
-        render json: Rogue.all
+        response = RestClient.get(api_url(rogue_url))
+        data = JSON.parse(response)
+        render json: data
     end
 
     def show
@@ -17,7 +22,7 @@ class RoguesController < ApplicationController
                 class_specific: data["class_specific"].map {
                     |k,v| "#{k}: #{v}"
                 }.join(', '),
-                abi: data["ability_score_bonuses"],
+                ability_score_bonuses: data["ability_score_bonuses"],
             )
             render json: new_level
         end

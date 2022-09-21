@@ -23,9 +23,8 @@ function App() {
         <Route path='races' element={<RaceIndex />}>
           <Route path=':race' element={<RaceDetail />}/>
         </Route>
-        <Route path='dnd_classes' element={<DndClassIndex />}>
-          <Route path=':dnd_class' element={<DndClassDetail />}/>
-        </Route>
+        <Route path='dnd_classes' element={<DndClassIndex />}/>
+        <Route path=':dnd_class' element={<DndClassDetail />}/>
         <Route path ='/users/:username' element={<UserPage />}/>
       </Routes>
     </UserProvider>
