@@ -4,7 +4,7 @@ import { Root } from './components/Root'
 import './App.css';
 import { Login } from './components/Login';
 import { Signup } from './components/Signup';
-import { UserContext } from './components/tools/Hooks';
+import { CharacterProvider, UserContext } from './components/tools/Hooks';
 import { UserPage } from './components/UserPage';
 import { NotFound } from './components/NotFound';
 import { RaceIndex } from './components/RaceIndex'
@@ -13,6 +13,7 @@ import { DndClassIndex } from './components/DndClassIndex'
 import { DndClassDetail } from './components/DndClassDetail'
 import LevelDetail from './components/LevelDetail';
 import { getRequest } from './components/tools/FetchTypes';
+import NewCharacter from './components/NewCharacter';
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
   useEffect(()=>{getRequest('/me', setUser)}, [setUser])
 
   return (
-    <>
+    <CharacterProvider>
       <Routes>
         <Route index element={<Root />}/>
         <Route path="*" element={<NotFound />}/>
@@ -35,8 +36,9 @@ function App() {
         <Route path=':dnd_class' element={<DndClassDetail />}/>
         <Route path=':dnd_class/:level' element={<LevelDetail />}/>
         <Route path ='/users/:username' element={<UserPage />}/>
+        <Route path ='/users/:usernane/characters/new' element={<NewCharacter />}/>
       </Routes>
-    </>
+    </CharacterProvider>
   );
 }
 

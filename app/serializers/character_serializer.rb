@@ -3,5 +3,5 @@ class CharacterSerializer < ActiveModel::Serializer
   belongs_to :user
   has_one :dnd_class
   has_one :race
-  has_many :proficiencies
+  # has_many :proficiencies
 end

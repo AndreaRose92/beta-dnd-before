@@ -14,19 +14,10 @@ export const DndClassDetail = (dnd_class) => {
     useEffect(()=>{getRequest(`/${params.dnd_class.toLowerCase()}s`, setDndClassLevels)}, [params.dnd_class])
 
     const renderLevels = dndClassLevels.map(cl => {
-        // const features = cl.features.map(f=>{
-        //     return (
-        //         <li>{f.name}</li>
-        //     )
-        // })
         return (
-            <div>
+            <div key={cl.level}>
                 <h2>Level {cl.level}</h2>
                 <NavButton path={`/${params.dnd_class.toLowerCase()}/${cl.level}`} text={"More Detail"} ><LevelDetail /></NavButton>
-                {/* <p>Ability Score Increase: {cl.ability_score_bonuses}</p> */}
-                {/* <p>Proficiency Bonus: {cl.prof_bonus}</p> */}
-                {/* <h3>Features</h3> */}
-                {/* <ul>{features}</ul> */}
             </div>
         )
     })
