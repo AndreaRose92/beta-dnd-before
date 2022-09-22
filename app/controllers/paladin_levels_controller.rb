@@ -9,13 +9,13 @@ class PaladinLevelsController < ApplicationController
     end
 
     def show
-        level = Paladin.find_by(level: params[:id])
+        level = PaladinLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(paladin_url))
             data = JSON.parse(response)
-            new_level = Paladin.create(
+            new_level = PaladinLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

@@ -9,13 +9,13 @@ class RogueLevelsController < ApplicationController
     end
 
     def show
-        level = Rogue.find_by(level: params[:id])
+        level = RogueLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(rogue_url))
             data = JSON.parse(response)
-            new_level = Rogue.create(
+            new_level = RogueLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

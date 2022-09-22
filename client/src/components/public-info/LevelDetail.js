@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getRequest } from '../tools/FetchTypes'
-import { capitalize } from '../tools/Hooks'
+import { capitalize, NavButton } from '../tools/Hooks'
 
 const LevelDetail = () => {
 
     const params = useParams()
     const [classLevel, setClassLevel] = useState({})
 
-    useEffect(()=>{getRequest(`/${params.dnd_class}s/${params.level}`, setClassLevel)}, [params.dnd_class, params.level])
+    useEffect(()=>{getRequest(`/${params.dnd_class}_levels/${params.level}`, setClassLevel)}, [params.dnd_class, params.level])
     // const features = classLevel.features.map(f=>{
     //         return (
     //             <li>{f.name}</li>
@@ -25,6 +25,7 @@ const LevelDetail = () => {
         <h3>Class Features</h3>
         <p>{classLevel.features}</p>
         <p>{classLevel.class_specific}</p>
+        <NavButton path={`/${params.dnd_class}`} />
     </div>
   )
 }

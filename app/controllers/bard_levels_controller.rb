@@ -9,13 +9,13 @@ class BardLevelsController < ApplicationController
     end
 
     def show
-        level = Bard.find_by(level: params[:id])
+        level = BardLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(bard_url))
             data = JSON.parse(response)
-            new_level = Bard.create(
+            new_level = BardLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

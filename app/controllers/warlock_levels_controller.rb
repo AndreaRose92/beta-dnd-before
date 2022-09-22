@@ -9,13 +9,13 @@ class WarlockLevelsController < ApplicationController
     end
 
     def show
-        level = Warlock.find_by(level: params[:id])
+        level = WarlockLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(warlock_url))
             data = JSON.parse(response)
-            new_level = Warlock.create(
+            new_level = WarlockLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

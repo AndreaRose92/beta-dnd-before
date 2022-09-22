@@ -9,13 +9,13 @@ class FighterLevelsController < ApplicationController
     end
 
     def show
-        level = Fighter.find_by(level: params[:id])
+        level = FighterLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(fighter_url))
             data = JSON.parse(response)
-            new_level = Fighter.create(
+            new_level = FighterLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

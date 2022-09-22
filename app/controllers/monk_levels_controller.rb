@@ -9,13 +9,13 @@ class MonkLevelsController < ApplicationController
     end
 
     def show
-        level = Monk.find_by(level: params[:id])
+        level = MonkLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(monk_url))
             data = JSON.parse(response)
-            new_level = Monk.create(
+            new_level = MonkLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

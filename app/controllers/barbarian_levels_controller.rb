@@ -9,13 +9,13 @@ class BarbarianLevelsController < ApplicationController
     end
 
     def show
-        level = Barbarian.find_by(level: params[:id])
+        level = BarbarianLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(barbarian_url))
             data = JSON.parse(response)
-            new_level = Barbarian.create(
+            new_level = BarbarianLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

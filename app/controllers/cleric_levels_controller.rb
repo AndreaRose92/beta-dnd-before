@@ -9,13 +9,13 @@ class ClericLevelsController < ApplicationController
     end
 
     def show
-        level = Cleric.find_by(level: params[:id])
+        level = ClericLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(cleric_url))
             data = JSON.parse(response)
-            new_level = Cleric.create(
+            new_level = ClericLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

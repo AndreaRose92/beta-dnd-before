@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   resources :subraces
-  resources :wizards
-  resources :warlocks
-  resources :sorcerers
-  resources :rogues
-  resources :rangers
-  resources :paladins
-  resources :monks
-  resources :fighters
-  resources :druids
-  resources :clerics
-  resources :bards
-  resources :barbarians
+  resources :wizard_levels
+  resources :warlock_levels
+  resources :sorcerer_levels
+  resources :rogue_levels
+  resources :ranger_levels
+  resources :paladin_levels
+  resources :monk_levels
+  resources :fighter_levels
+  resources :druid_levels
+  resources :cleric_levels
+  resources :bard_levels
+  resources :barbarian_levels
   resources :feats, only: [:index, :show]
   resources :equipment, only: [:index, :show]
   resources :race_skills, only: [:index, :show]

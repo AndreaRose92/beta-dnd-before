@@ -36,5 +36,18 @@ puts 'seeding characters...'
 
 yeslah = Character.create(name: "Yeslah", level: 12, dnd_class_id: 2, race_id: 3, user_id: 1, strength: 12, dexterity: 12, constitution: 12, intelligence: 12, wisdom: 12, charisma: 12, hp: 100, current_hp: 100)
 
+DndClass.find_by(name: "Barbarian").update(hit_die: 12, recommended_stat_one: "Strength", recommended_stat_two: "Constitution")
+DndClass.find_by(name: "Bard").update(hit_die: 8, recommended_stat_one: "Charisma", recommended_stat_two: "Dexterity")
+DndClass.find_by(name: "Cleric").update(hit_die: 8, recommended_stat_one: "Wisdom", recommended_stat_two: "Strength or Constitution")
+DndClass.find_by(name: "Druid").update(hit_die: 8, recommended_stat_one: "Wisdom", recommended_stat_two: "Constitution")
+DndClass.find_by(name: "Fighter").update(hit_die: 10, recommended_stat_one: "Strength or Dexterity", recommended_stat_two: "Constitution")
+DndClass.find_by(name: "Monk").update(hit_die: 8, recommended_stat_one: "Dexterity", recommended_stat_two: "Wisdom")
+DndClass.find_by(name: "Paladin").update(hit_die: 10, recommended_stat_one: "Strength", recommended_stat_two: "Charisma")
+DndClass.find_by(name: "Ranger").update(hit_die: 10, recommended_stat_one: "Dexterity", recommended_stat_two: "Wisdom")
+DndClass.find_by(name: "Rogue").update(hit_die: 8, recommended_stat_one: "Dexterity", recommended_stat_two: "Intelligence or Charisma")
+DndClass.find_by(name: "Sorcerer").update(hit_die: 6, recommended_stat_one: "Charisma", recommended_stat_two: "Constitution")
+DndClass.find_by(name: "Warlock").update(hit_die: 8, recommended_stat_one: "Charisma", recommended_stat_two: "Constitution")
+DndClass.find_by(name: "Wizard").update(hit_die: 6, recommended_stat_one: "Intelligence", recommended_stat_two: "Constitution or Dexterity")
+
 
 puts 'done seeding'

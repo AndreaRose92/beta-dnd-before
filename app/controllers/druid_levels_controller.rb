@@ -9,13 +9,13 @@ class DruidLevelsController < ApplicationController
     end
 
     def show
-        level = Druid.find_by(level: params[:id])
+        level = DruidLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(druid_url))
             data = JSON.parse(response)
-            new_level = Druid.create(
+            new_level = DruidLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

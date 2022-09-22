@@ -1,6 +1,6 @@
 class CreateBarbarianLevels < ActiveRecord::Migration[7.0]
   def change
-    create_table :barbarians do |t|
+    create_table :barbarian_levels do |t|
       t.belongs_to :dnd_class, null: false, foreign_key: true
       t.integer :level
       t.integer :ability_score_bonuses

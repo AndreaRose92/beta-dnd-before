@@ -9,13 +9,13 @@ class SorcererLevelsController < ApplicationController
     end
 
     def show
-        level = Sorcerer.find_by(level: params[:id])
+        level = SorcererLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(sorcerer_url))
             data = JSON.parse(response)
-            new_level = Sorcerer.create(
+            new_level = SorcererLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

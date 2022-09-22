@@ -7,11 +7,11 @@ import { NavButton } from "../tools/Hooks"
 export const DndClassDetail = (dnd_class) => {
 
     const params = useParams()
-    // const [dndClass, setDndClass] = useState({})
+    const [dndClass, setDndClass] = useState({})
     const [dndClassLevels, setDndClassLevels] = useState([])
 
-    // useEffect(()=>{getRequest(`/dnd_classes/${params.dnd_class}`, setDndClass)}, [params.dnd_class])
-    useEffect(()=>{getRequest(`/${params.dnd_class.toLowerCase()}s`, setDndClassLevels)}, [params.dnd_class])
+    useEffect(()=>{getRequest(`/dnd_classes/${params.dnd_class}`, setDndClass)}, [params.dnd_class])
+    useEffect(()=>{getRequest(`/${params.dnd_class.toLowerCase()}_levels`, setDndClassLevels)}, [params.dnd_class])
 
     const renderLevels = dndClassLevels.map(cl => {
         return (

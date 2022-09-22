@@ -9,13 +9,13 @@ class WizardLevelsController < ApplicationController
     end
 
     def show
-        level = Wizard.find_by(level: params[:id])
+        level = WizardLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(wizard_url))
             data = JSON.parse(response)
-            new_level = Wizard.create(
+            new_level = WizardLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),

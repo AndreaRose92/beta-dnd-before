@@ -9,13 +9,13 @@ class RangerLevelsController < ApplicationController
     end
 
     def show
-        level = Ranger.find_by(level: params[:id])
+        level = RangerLevel.find_by(level: params[:id])
         if level
             render json: level
         else
             response = RestClient.get(api_url(ranger_url))
             data = JSON.parse(response)
-            new_level = Ranger.create(
+            new_level = RangerLevel.create(
                 level: data["level"],
                 prof_bonus: data["prof_bonus"],
                 features: data["features"].pluck("name").join(", "),
