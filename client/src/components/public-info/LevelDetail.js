@@ -15,7 +15,6 @@ const LevelDetail = () => {
     //         )
     //     })
 
-    console.log(classLevel.features)
 
   return (
     <div>

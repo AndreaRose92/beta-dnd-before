@@ -7,9 +7,13 @@ class DndClassesController < ApplicationController
     end
 
     def show
-        response = RestClient.get("#{api_url(dnd_class_url)}")
-        dndclass = JSON.parse(response)
-        render json: dndclass
+        dc = DndClass.find_by(name: params[:id].capitalize)
+
+        render json: dc
+
+        # response = RestClient.get("#{api_url(dnd_class_url)}")
+        # dndclass = JSON.parse(response)
+        # render json: dndclass
     end
 
     private

@@ -22,9 +22,22 @@ export const DndClassDetail = (dnd_class) => {
         )
     })
 
+    console.log(dndClass)
+
+    if (!dndClass) {
+        return (
+            <div>Loading...</div>
+        )
+    }
+
     return (
         <div>
-            <h4>{dnd_class.name}</h4>
+            <h4>{dndClass.name}</h4>
+            <ul>
+                <li>Hit Die: 1d{dndClass.hit_die}</li>
+                <li>Recommended Top Stat: {dndClass.recommended_stat_one}</li>
+                <li>Recommended Second Stat: {dndClass.recommended_stat_two}</li>
+            </ul>
             <NavButton path={'/dnd_classes'}/>
             {renderLevels}
             <Outlet />

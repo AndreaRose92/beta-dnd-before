@@ -16,6 +16,14 @@ dnd_classes.each { |dc|
     DndClass.create(name: dc["name"], url: dc["url"])
 }
 
+puts 'seeding races...'
+
+race_response = RestClient.get('http://www.dnd5eapi.co/api/races')
+races = JSON.parse(race_response)["results"]
+races.each { |r| 
+    Race.create(name: r["name"], url: r["url"])
+}
+
 puts 'seeding skills...'
 
 skills = [{name: 'Acrobatics', stat: 'dexterity'}, {name: 'Animal Handling', stat: 'wisdom'}, {name: 'Arcana', stat: 'intelligence'}, {name: 'Athletics', stat: 'strength'}, {name: 'Deception', stat: 'charisma'}, {name: 'History', stat: 'intelligence'}, {name: 'Insight', stat: 'wisdom'}, {name: 'Intimidation', stat: 'charisma'}, {name: 'Investigation', stat: 'intelligence'}, {name: 'Medicine', stat: 'wisdom'}, {name: 'Nature', stat: 'intelligence'}, {name: 'Perception', stat: 'wisdom'}, {name: 'Performance', stat: 'charisma'}, {name: 'Persuasion', stat: 'charisma'}, {name: 'Religion', stat: 'intelligence'}, {name: 'Sleight of Hand', stat: 'dexterity'}, {name: 'Stealth', stat: 'dexterity'}, {name: 'Survival', stat: 'wisdom'}, {name: 'Strength Save', stat: 'strength'}, {name: 'Dexterity Save', stat: 'dexterity'}, {name: 'Constitution Save', stat: 'constitution'}, {name: 'Intelligence Save', stat: 'intelligence'}, {name: 'Wisdom Save', stat: 'wisdom'}, {name: 'Charisma Save', stat: 'charisma'}]
