@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Root } from './components/Root'
 import './App.css';
@@ -12,7 +12,7 @@ import { RaceDetail } from './components/public-info/RaceDetail'
 import { DndClassIndex } from './components/public-info/DndClassIndex'
 import { DndClassDetail } from './components/public-info/DndClassDetail'
 import LevelDetail from './components/public-info/LevelDetail';
-import { getRequest } from './components/tools/FetchTypes';
+import { deleteRequest, getRequest } from './components/tools/FetchTypes';
 import NewCharacter from './components/characters/NewCharacter';
 import CharacterSheet from './components/characters/CharacterSheet';
 import EditCharacter from './components/characters/EditCharacter';
@@ -24,7 +24,22 @@ function App() {
 
   const {user, setUser} = useContext(UserContext)
 
+  const [userCharacters, setUserCharacters] = useState([])
+
+  const updateCharacters = data => {
+    setUserCharacters(characters => [...characters, data])
+  }
+
+  const deleteCharacter = e => {
+    deleteRequest(`/characters/${e.target.value}`, e.target.value, setUserCharacters)
+    // setUserCharacters(
+    //   characters => characters.filter(char => char.id !== e.target.value)
+    // )
+  }
+
   useEffect(()=>{getRequest('/me', setUser)}, [setUser])
+  useEffect(()=>{getRequest('/characters', setUserCharacters)}, [setUserCharacters])
+
 
   return (
     <CharacterProvider>
@@ -40,9 +55,9 @@ function App() {
           <Route path='dnd_classes' element={<DndClassIndex />}/>
           <Route path=':dnd_class' element={<DndClassDetail />}/>
           <Route path=':dnd_class/:level' element={<LevelDetail />}/>
-          <Route path ='/users/:username' element={<UserPage />}/>
+          <Route path ='/users/:username' element={<UserPage user={user} characters={userCharacters} deleteCharacter={deleteCharacter} />}/>
           <Route path ='/users/:username/characters/:id/' element={<CharacterSheet />}/>
-          <Route path ='/users/:usernane/characters/new' element={<NewCharacter />}/>
+          <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
           <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>
         </Routes>
       </PageWrapper>

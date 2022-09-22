@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   # resources :users, only: [:update, :destroy]
 
   get '/me', to: "users#show"
+  get '/dnd_classes/:dnd_class/proficiencies', to: "dnd_classes#proficiencies"
   post '/signup', to: "users#create"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"

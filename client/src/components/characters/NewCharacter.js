@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { postRequest } from '../tools/FetchTypes'
+import { getRequest, postRequest } from '../tools/FetchTypes'
 import { CharacterContext, UserContext } from '../tools/Hooks'
 
-const NewCharacter = ({setCharacters}) => {
+const NewCharacter = ({updateCharacters}) => {
 
     const navigate = useNavigate()
     const {user} = useContext(UserContext)
-    const {setCharacter} = useContext(CharacterContext)
+    const {character, setCharacter} = useContext(CharacterContext)
+    const [skills, setSkills] = useState([{name: ''}])
+    const [charSkills, setCharSkills] = useState([])
     const [newCharacter, setNewCharacter] = useState({
         name: '',
         level: 0,
@@ -44,17 +46,39 @@ const NewCharacter = ({setCharacters}) => {
         }))
         postRequest('/characters', newCharacter, setNewCharacter)
         setCharacter(newCharacter)
-        setCharacters(array => [...array, newCharacter])
+        updateCharacters(newCharacter)
+        charSkills.forEach(skill => postRequest(`/char_skills`, {character_id: character.id, proficiency: skill}, console.log))
         navigate(`/users/${user.username}`)
     }
+
+    const fetchSkills = () => {
+        getRequest(`/dnd_classes/${newCharacter.dnd_class_id}/proficiencies`, setSkills)
+        setForm("abilities")
+    }
+
+    const handleSkill = e => {
+        if (e.target.checked === true) {
+            setCharSkills(skills => [...skills, e.target.name])
+        } else {
+            setCharSkills(skills => skills.filter(skill => skill !== e.target.name))
+        }
+    }
+
+    const renderSkills = skills.slice(0, skills.length - 2).map(skill=>{
+        return (
+            <li key={skill.id}><label htmlFor={skill.name}>{skill.name}
+                <input type='checkbox' name={skill.name} defaultChecked={charSkills.includes(skill.name)} onClick={handleSkill}/>
+            </label></li>
+        )
+    })
 
     const pageOne = 
     <form>
         <h2>Basic Information</h2>
         <input type='text' name='name' placeholder='name' value={newCharacter.name} onChange={handleInput} /><br/>
         <input type='number' name='level' placeholder='level' value={newCharacter.level} onChange={handleInput}/><br/>
-        <select onChange={handleInput} name='dnd_class_id'>
-            <option value={null}>Class</option>
+        <select defaultValue={newCharacter.dnd_class_id} onChange={handleInput} name='dnd_class_id'>
+            <option value={0}>Class</option>
             <option value={1}>Barbarian</option>
             <option value={2}>Bard</option>
             <option value={3}>Cleric</option>
@@ -68,8 +92,8 @@ const NewCharacter = ({setCharacters}) => {
             <option value={11}>Warlock</option>
             <option value={12}>Wizard</option>
         </select><br/>
-        <select onChange={handleInput} name='race_id'>
-            <option value={null}>Race</option>
+        <select defaultValue={newCharacter.race_id} onChange={handleInput} name='race_id'>
+            <option value={0}>Race</option>
             <option value={1}>Dragonborn</option>
             <option value={2}>Dwarf</option>
             <option value={3}>Elf</option>
@@ -80,7 +104,7 @@ const NewCharacter = ({setCharacters}) => {
             <option value={8}>Human</option>
             <option value={9}>Tiefling</option>
         </select><br/>
-        <button onClick={()=>setForm("abilities")}>Next</button>
+        <button onClick={()=>fetchSkills()}>Next</button>
     </form>
 
     const pageTwo = 
@@ -106,6 +130,7 @@ const NewCharacter = ({setCharacters}) => {
     <form>
         <h2>Skill Proficiencies</h2>
         <h4>Class Options:</h4>
+        <ul>{renderSkills}</ul>
         <button onClick={()=>setForm("abilities")}>Back</button>
         <button onClick={()=>setForm("submit")}>Next</button>
     </form>
@@ -123,6 +148,8 @@ const NewCharacter = ({setCharacters}) => {
             <li>Wisdom: {newCharacter.wisdom}</li>
             <li>Charisma: {newCharacter.charisma}</li>
         </ul>
+        <ul>{charSkills.map(skill => <li key={skill}>{skill}</li>)}</ul>
+        <button onClick={()=>setForm("skills")}>Back</button>
         <button type='submit'>Submit</button>
     </form>
 
