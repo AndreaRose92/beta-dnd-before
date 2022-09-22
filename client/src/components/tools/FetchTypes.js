@@ -14,7 +14,8 @@ export const postRequest = (url, postObject, respFunc) => {
 }
 
 export const deleteRequest = (url, target, respFunc) => {
-    fetch(url, {method: "DELETE"}).then(()=>respFunc(state => state.filter(elem => elem.id !== target)))
+    fetch(url, {method: "DELETE"})
+        // .then(()=>respFunc(state => state.filter(elem => elem.id !== target)))
 }
 
 export const getRequest = (url, respFunc) => {

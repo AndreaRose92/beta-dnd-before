@@ -4,17 +4,17 @@ class CharSkillsController < ApplicationController
         render json: CharSkill.where(character_id: params[:id])
     end
 
-    # def show
-    #     render json: CharSkill.find_by(character_id: params[:character_id], proficiency_id: Proficiency.find_by(name: params[:proficiency]))
-    # end
-
     def create
-        skill = CharSkill.create!(character_id: params[:character_id], proficiency_id: Proficiency.find_by(name: params[:proficiency]).id)
-        render json: skill, status: :created
+
+        char = Character.find_by(name: params[:character])
+        skill = Proficiency.find_by(name: params[:proficiency])
+        new_skill = CharSkill.create!(character_id: char.id, proficiency_id: skill.id)
+        # skill = CharSkill.create!(character_id: Character.find_by(name: params[:character]), proficiency_id: Proficiency.find_by(name: params[:proficiency]).id)
+        render json: new_skill, status: :created
     end
 
     def destroy
-        CharSkill.find_by(character_id: params[:character_id], proficiency_id: Proficiency.find_by(name: params[:proficiency]).id).destroy
+        CharSkill.find_by(character_id: Character.find_by(name: params[:character]).id, proficiency_id: Proficiency.find_by(name: params[:proficiency]).id).destroy
         head :no_content
     end
 

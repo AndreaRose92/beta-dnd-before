@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getRequest, postRequest } from '../tools/FetchTypes'
+import { getRequest } from '../tools/FetchTypes'
 import { CharacterContext, UserContext } from '../tools/Hooks'
 
 const NewCharacter = ({updateCharacters}) => {
 
     const navigate = useNavigate()
     const {user} = useContext(UserContext)
-    const {character, setCharacter} = useContext(CharacterContext)
+    const {setCharacter} = useContext(CharacterContext)
     const [skills, setSkills] = useState([{name: ''}])
     const [charSkills, setCharSkills] = useState([])
     const [newCharacter, setNewCharacter] = useState({
@@ -23,7 +23,8 @@ const NewCharacter = ({updateCharacters}) => {
         wisdom: 0,
         charisma: 0,
         hp: 0,
-        current_hp: 0
+        current_hp: 0,
+        proficiencies: charSkills
     }) 
 
 
@@ -44,11 +45,45 @@ const NewCharacter = ({updateCharacters}) => {
             ...newCharacter,
             user_id: user.id
         }))
-        postRequest('/characters', newCharacter, setNewCharacter)
-        setCharacter(newCharacter)
-        updateCharacters(newCharacter)
-        charSkills.forEach(skill => postRequest(`/char_skills`, {character_id: character.id, proficiency: skill}, console.log))
-        navigate(`/users/${user.username}`)
+        fetch(`/characters`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(newCharacter)
+        }).then(r=>{
+            if (r.ok) {
+                r.json().then(data=>setCharacter(data))
+                // .then(()=>updateCharacters(character))
+                .then(()=>{
+                    // console.log(newCharacter)
+                    // const newSkills = charSkills.map(skill => {return {character: newCharacter.name, proficiency: skill}})
+                    // console.log(newSkills) 
+                    charSkills.forEach(skill => {
+                        fetch(`/char_skills`, {
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            body: JSON.stringify({
+                                character: newCharacter.name,
+                                proficiency: skill
+                            })
+                        }).then(r=>{
+                            if (r.ok) {
+                                r.json().then(()=>navigate(`/users/${user.username}`))
+                            } else {
+                                r.json().then(errors=>console.log(errors))
+                            }
+                        })
+                    })
+                })
+            } else {
+                r.json().then(errors=>console.log(errors))
+            }
+        })
+        // console.log(newCharacter)
+        // postRequest('/characters', newCharacter, setNewCharacter)
+        // setCharacter(newCharacter)
+        // updateCharacters(newCharacter)
+        // charSkills.forEach(skill => postRequest(`/char_skills`, {character: newCharacter.name, proficiency: skill}, console.log))
+        navigate('/')
     }
 
     const fetchSkills = () => {
@@ -66,7 +101,7 @@ const NewCharacter = ({updateCharacters}) => {
 
     const renderSkills = skills.slice(0, skills.length - 2).map(skill=>{
         return (
-            <li key={skill.id}><label htmlFor={skill.name}>{skill.name}
+            <li key={Math.random()}><label htmlFor={skill.name}>{skill.name}
                 <input type='checkbox' name={skill.name} defaultChecked={charSkills.includes(skill.name)} onClick={handleSkill}/>
             </label></li>
         )
@@ -148,7 +183,7 @@ const NewCharacter = ({updateCharacters}) => {
             <li>Wisdom: {newCharacter.wisdom}</li>
             <li>Charisma: {newCharacter.charisma}</li>
         </ul>
-        <ul>{charSkills.map(skill => <li key={skill}>{skill}</li>)}</ul>
+        <ul>{charSkills.map(skill => <li key={Math.random()}>{skill}</li>)}</ul>
         <button onClick={()=>setForm("skills")}>Back</button>
         <button type='submit'>Submit</button>
     </form>

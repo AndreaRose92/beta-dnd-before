@@ -28,17 +28,18 @@ function App() {
 
   const updateCharacters = data => {
     setUserCharacters(characters => [...characters, data])
+    // console.log(userCharacters)
   }
 
   const deleteCharacter = e => {
-    deleteRequest(`/characters/${e.target.value}`, e.target.value, setUserCharacters)
-    // setUserCharacters(
-    //   characters => characters.filter(char => char.id !== e.target.value)
-    // )
+    console.log(e.target.value)
+    deleteRequest(`/characters/${e.target.value}`)
+    setUserCharacters(characters => characters.filter(character => character.id !== e.target.value))
+    
   }
 
   useEffect(()=>{getRequest('/me', setUser)}, [setUser])
-  useEffect(()=>{getRequest('/characters', setUserCharacters)}, [setUserCharacters])
+  useEffect(()=>{getRequest('/characters', setUserCharacters)}, [setUserCharacters]);
 
 
   return (
@@ -55,7 +56,7 @@ function App() {
           <Route path='dnd_classes' element={<DndClassIndex />}/>
           <Route path=':dnd_class' element={<DndClassDetail />}/>
           <Route path=':dnd_class/:level' element={<LevelDetail />}/>
-          <Route path ='/users/:username' element={<UserPage user={user} characters={userCharacters} deleteCharacter={deleteCharacter} />}/>
+          <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
           <Route path ='/users/:username/characters/:id/' element={<CharacterSheet />}/>
           <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
           <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>

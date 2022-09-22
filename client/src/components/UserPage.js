@@ -4,9 +4,9 @@ import NewCharacter from "./characters/NewCharacter"
 import { NotFound } from "./NotFound"
 import { Logout, NavButton } from "./tools/Hooks"
 
-export const UserPage = ({user, characters, deleteCharacter}) => {
+export const UserPage = ({user, userCharacters, deleteCharacter}) => {
 
-    const renderCards = characters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter} />)
+    const renderCards = userCharacters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter} />)
 
     if (!user) {
         return <NotFound />

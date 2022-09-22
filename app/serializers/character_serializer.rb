@@ -3,7 +3,7 @@ class CharacterSerializer < ActiveModel::Serializer
   belongs_to :user
   has_one :dnd_class
   has_one :race
-  # has_many :proficiencies
+  has_many :proficiencies
   def stats
     [["Str", self.object.strength],["Dex", self.object.dexterity],["Con", self.object.constitution],["Int", self.object.intelligence],["Wis", self.object.wisdom],["Cha", self.object.charisma]]
   end
