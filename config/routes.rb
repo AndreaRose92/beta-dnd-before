@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subraces
   resources :wizards
   resources :warlocks
   resources :sorcerers

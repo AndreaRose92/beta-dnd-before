@@ -12,12 +12,23 @@ export const RaceDetail = () => {
         size: '',
         traits: '',
         languages: '',
-        proficiencies: []
+        ability_score_bonuses: ''
     })
+
+    const subraces = race && race.subraces ? race.subraces : []
 
     useEffect(()=>{getRequest(`/races/${params.race}`, setRace)}, [params.race])
 
-    // const proficiencies = race ? race.proficiencies : null
+    const renderSubraces = subraces.map(subrace => {
+        return (<div key={subrace.id}>
+            <h4>{subrace.name}</h4>
+            <ul>
+                <li>ABI: {subrace.ability_score_bonuses}</li>
+                <li>Traits: {subrace.traits}</li>
+                {subrace.languages ? <li>Pick One Language: {subrace.languages}</li> : null}
+            </ul>
+        </div>)
+    })
 
     while (race.name === '') {
         return <div>Loading...</div>
@@ -32,8 +43,8 @@ export const RaceDetail = () => {
                 <li>Size: {race.size}</li>
                 <li>Traits: {race.traits}</li>
                 <li>Languages: {race.languages}</li>
-                {/* {proficiencies ? <li>Proficiences: {proficiencies.map(p =>p.name)}</li> : null} */}
             </ul>
+            {renderSubraces}
             <NavButton path="/races"/>
         </div>
     )

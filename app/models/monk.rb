@@ -1,2 +1,0 @@
-class Monk < ApplicationRecord
-end

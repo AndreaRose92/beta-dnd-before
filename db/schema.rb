@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
   create_table "barbarians", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -20,9 +21,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_barbarians_on_dnd_class_id"
   end
 
   create_table "bards", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -31,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_bards_on_dnd_class_id"
   end
 
   create_table "char_skills", force: :cascade do |t|
@@ -73,6 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   end
 
   create_table "clerics", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -81,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_clerics_on_dnd_class_id"
   end
 
   create_table "dnd_classes", force: :cascade do |t|
@@ -91,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   end
 
   create_table "druids", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -99,6 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_druids_on_dnd_class_id"
   end
 
   create_table "equipment", force: :cascade do |t|
@@ -112,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   end
 
   create_table "fighters", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -120,9 +129,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_fighters_on_dnd_class_id"
   end
 
   create_table "monks", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -131,9 +142,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_monks_on_dnd_class_id"
   end
 
   create_table "paladins", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -142,6 +155,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_paladins_on_dnd_class_id"
   end
 
   create_table "proficiencies", force: :cascade do |t|
@@ -173,6 +187,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   end
 
   create_table "rangers", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -181,9 +196,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_rangers_on_dnd_class_id"
   end
 
   create_table "rogues", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -192,9 +209,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_rogues_on_dnd_class_id"
   end
 
   create_table "sorcerers", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -203,6 +222,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_sorcerers_on_dnd_class_id"
+  end
+
+  create_table "subraces", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
+    t.string "name"
+    t.integer "race_id", null: false
+    t.string "url"
+    t.string "ability_score_bonuses"
+    t.string "languages"
+    t.string "traits"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_subraces_on_dnd_class_id"
+    t.index ["race_id"], name: "index_subraces_on_race_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -213,6 +247,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   end
 
   create_table "warlocks", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -221,9 +256,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_warlocks_on_dnd_class_id"
   end
 
   create_table "wizards", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -232,8 +269,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_wizards_on_dnd_class_id"
   end
 
+  add_foreign_key "barbarians", "dnd_classes"
+  add_foreign_key "bards", "dnd_classes"
   add_foreign_key "char_skills", "characters"
   add_foreign_key "char_skills", "proficiencies"
   add_foreign_key "characters", "dnd_classes"
@@ -241,6 +281,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_153502) do
   add_foreign_key "characters", "users"
   add_foreign_key "class_skills", "dnd_classes"
   add_foreign_key "class_skills", "proficiencies"
+  add_foreign_key "clerics", "dnd_classes"
+  add_foreign_key "druids", "dnd_classes"
+  add_foreign_key "fighters", "dnd_classes"
+  add_foreign_key "monks", "dnd_classes"
+  add_foreign_key "paladins", "dnd_classes"
   add_foreign_key "race_skills", "proficiencies"
   add_foreign_key "race_skills", "races"
+  add_foreign_key "rangers", "dnd_classes"
+  add_foreign_key "rogues", "dnd_classes"
+  add_foreign_key "sorcerers", "dnd_classes"
+  add_foreign_key "subraces", "dnd_classes"
+  add_foreign_key "subraces", "races"
+  add_foreign_key "warlocks", "dnd_classes"
+  add_foreign_key "wizards", "dnd_classes"
 end
