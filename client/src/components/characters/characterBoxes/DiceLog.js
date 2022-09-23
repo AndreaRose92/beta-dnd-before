@@ -23,7 +23,7 @@ const DiceLog = ({diceRolls, setDiceRolls}) => {
                return (
                     <div className='rollBox' key={roll.id} onClick={()=>dismissRoll(roll.id)}>
                          <h3 className='skillName'>{roll.name} Check</h3>
-                         <h3 className='rollCalc' >{roll.amt}d{roll.dSize}: {roll.rolls.join(', ')} {roll.modifier}</h3>
+                         <h3 className='rollCalc' >{roll.amt}d{roll.dSize}: {`[${roll.rolls.join(', ')}]`} {roll.modifier}</h3>
                          <h1 className='total'>{roll.total}</h1>
                     </div>
                )
