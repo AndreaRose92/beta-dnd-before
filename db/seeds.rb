@@ -7,6 +7,7 @@ end
 puts 'seeding users...'
 
 User.create(username: "AndreaRose", password: "420-password")
+User.create(username: "Samwise", password: "420-password")
 
 puts 'seeding classes...'
 
@@ -26,7 +27,7 @@ races.each { |r|
 
 puts 'seeding skills...'
 
-skills = [{name: 'Acrobatics', stat: 'dexterity'}, {name: 'Animal Handling', stat: 'wisdom'}, {name: 'Arcana', stat: 'intelligence'}, {name: 'Athletics', stat: 'strength'}, {name: 'Deception', stat: 'charisma'}, {name: 'History', stat: 'intelligence'}, {name: 'Insight', stat: 'wisdom'}, {name: 'Intimidation', stat: 'charisma'}, {name: 'Investigation', stat: 'intelligence'}, {name: 'Medicine', stat: 'wisdom'}, {name: 'Nature', stat: 'intelligence'}, {name: 'Perception', stat: 'wisdom'}, {name: 'Performance', stat: 'charisma'}, {name: 'Persuasion', stat: 'charisma'}, {name: 'Religion', stat: 'intelligence'}, {name: 'Sleight of Hand', stat: 'dexterity'}, {name: 'Stealth', stat: 'dexterity'}, {name: 'Survival', stat: 'wisdom'}, {name: 'Strength Save', stat: 'strength'}, {name: 'Dexterity Save', stat: 'dexterity'}, {name: 'Constitution Save', stat: 'constitution'}, {name: 'Intelligence Save', stat: 'intelligence'}, {name: 'Wisdom Save', stat: 'wisdom'}, {name: 'Charisma Save', stat: 'charisma'}]
+skills = [{name: 'Acrobatics', stat: 'Dexterity'}, {name: 'Animal Handling', stat: 'Wisdom'}, {name: 'Arcana', stat: 'Intelligence'}, {name: 'Athletics', stat: 'Strength'}, {name: 'Deception', stat: 'Charisma'}, {name: 'History', stat: 'Intelligence'}, {name: 'Insight', stat: 'Wisdom'}, {name: 'Intimidation', stat: 'Charisma'}, {name: 'Investigation', stat: 'Intelligence'}, {name: 'Medicine', stat: 'Wisdom'}, {name: 'Nature', stat: 'Intelligence'}, {name: 'Perception', stat: 'Wisdom'}, {name: 'Performance', stat: 'Charisma'}, {name: 'Persuasion', stat: 'Charisma'}, {name: 'Religion', stat: 'Intelligence'}, {name: 'Sleight of Hand', stat: 'Dexterity'}, {name: 'Stealth', stat: 'Dexterity'}, {name: 'Survival', stat: 'Wisdom'}, {name: 'Strength Save', stat: 'Strength'}, {name: 'Dexterity Save', stat: 'Dexterity'}, {name: 'Constitution Save', stat: 'Constitution'}, {name: 'Intelligence Save', stat: 'Intelligence'}, {name: 'Wisdom Save', stat: 'Wisdom'}, {name: 'Charisma Save', stat: 'Charisma'}]
 
 skills.each {|skill| Proficiency.create(name: skill[:name], stat: skill[:stat])}
 
@@ -42,7 +43,11 @@ race_skills.each {|rs| RaceSkill.create(race_id: rs[0], proficiency_id: rs[1])}
 
 puts 'seeding characters...'
 
-yeslah = Character.create(name: "Yeslah", level: 12, dnd_class_id: 2, race_id: 3, user_id: 1, strength: 12, dexterity: 12, constitution: 12, intelligence: 12, wisdom: 12, charisma: 12, hp: 100, current_hp: 100)
+yeslah = Character.create(name: "Yeslah", level: 12, dnd_class_id: 2, race_id: 3, user_id: 1, Strength: 12, Dexterity: 12, Constitution: 12, Intelligence: 12, Wisdom: 12, Charisma: 12, hp: 45, current_hp: 100)
+des = Character.create(name: "Desdemona", level: 18, dnd_class_id: 8, race_id: 9, user_id: 1, Strength: 15, Dexterity: 15, Constitution: 15, Intelligence: 15, Wisdom: 15, Charisma: 15, hp: 90, current_hp: 82)
+bri = Character.create(name: "Brilaela", level: 8, dnd_class_id: 10, race_id: 5, user_id: 2, Strength: 15, Dexterity: 8, Constitution: 18, Intelligence: 6, Wisdom: 8, Charisma: 20, hp: 120, current_hp: 63)
+amy = Character.create(name: "Amethyst", level: 6, dnd_class_id: 12, race_id: 7, user_id: 2, Strength: 8, Dexterity: 20, Constitution: 12, Intelligence: 19, Wisdom: 16, Charisma: 14, hp: 80, current_hp: 75)
+
 
 DndClass.find_by(name: "Barbarian").update(hit_die: 12, recommended_stat_one: "Strength", recommended_stat_two: "Constitution")
 DndClass.find_by(name: "Bard").update(hit_die: 8, recommended_stat_one: "Charisma", recommended_stat_two: "Dexterity")
@@ -57,5 +62,181 @@ DndClass.find_by(name: "Sorcerer").update(hit_die: 6, recommended_stat_one: "Cha
 DndClass.find_by(name: "Warlock").update(hit_die: 8, recommended_stat_one: "Charisma", recommended_stat_two: "Constitution")
 DndClass.find_by(name: "Wizard").update(hit_die: 6, recommended_stat_one: "Intelligence", recommended_stat_two: "Constitution or Dexterity")
 
+char_skills = [[1,1],[1,5],[1,7],[1,12],[1,13],[1,16],[1,17],[1,20],[1,24],[2,4],[2,7],[2,9],[2,12],[2,16],[2,17],[2,18],[2,19],[2,20],[3,4],[3,5],[3,8],[3,12],[3,13],[3,14],[3,19],[3,21],[4,3],[4,5],[4,16],[4,17],[4,21],[4,22]]
+
+char_skills.each { |skill|
+    CharSkill.create(character_id: skill[0], proficiency_id: skill[1])
+}
+
+puts 'seeding class levels...'
+
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/barbarian/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = BarbarianLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Barbarian").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/bard/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = BardLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Bard").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/cleric/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = ClericLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Cleric").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/druid/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = DruidLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Druid").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/fighter/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = FighterLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Fighter").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/monk/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = MonkLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Monk").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/paladin/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = PaladinLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Paladin").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/ranger/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = RangerLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Ranger").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/rogue/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = RogueLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Rogue").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/sorcerer/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = SorcererLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Sorcerer").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/warlock/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = WarlockLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Warlock").id
+    )
+end
+20.times do |c|
+    response = RestClient.get("http://dnd5eapi.co/api/classes/wizard/levels/#{c+1}")
+    data = JSON.parse(response)
+    new_level = WizardLevel.create(
+        level: data["level"],
+        prof_bonus: data["prof_bonus"],
+        features: data["features"].pluck("name").join(", "),
+        class_specific: data["class_specific"].map {
+            |k,v| "#{k}: #{v}"
+        }.join(', '),
+        ability_score_bonuses: data["ability_score_bonuses"],
+        dnd_class_id: DndClass.find_by(name: "Wizard").id
+    )
+end
 
 puts 'done seeding'

@@ -18,6 +18,7 @@ import CharacterSheet from './components/characters/CharacterSheet';
 import EditCharacter from './components/characters/EditCharacter';
 import { PageWrapper } from './components/styles/Grids.styles';
 import NavBar from './components/NavBar';
+import DeleteMessage from './components/DeleteMessage';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           <Route path=':dnd_class' element={<DndClassDetail />}/>
           <Route path=':dnd_class/:level' element={<LevelDetail />}/>
           <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
+          <Route path ='/users/:username/delete' element={<DeleteMessage /> }/>
           <Route path ='/users/:username/characters/:id/' element={<CharacterSheet />}/>
           <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
           <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>

@@ -16,12 +16,12 @@ const NewCharacter = ({updateCharacters}) => {
         user_id: user.id,
         dnd_class_id: 0,
         race_id: 0,
-        strength: 0,
-        dexterity: 0,
-        constitution: 0,
-        intelligence: 0,
-        wisdom: 0,
-        charisma: 0,
+        Strength: 0,
+        Dexterity: 0,
+        Constitution: 0,
+        Intelligence: 0,
+        Wisdom: 0,
+        Charisma: 0,
         hp: 0,
         current_hp: 0,
         proficiencies: charSkills
@@ -145,18 +145,18 @@ const NewCharacter = ({updateCharacters}) => {
     const pageTwo = 
     <form>
         <h2>Ability Scores</h2>
-        <label htmlFor='strength'>Strength: </label>
-        <input value={newCharacter.strength} onChange={handleInput} type='number' name='strength'/><br/>
-        <label htmlFor='dexterity'>Dexterity: </label>
-        <input value={newCharacter.dexterity} onChange={handleInput} type='number' name='dexterity'/><br/>
-        <label htmlFor='constitution'>Constitution: </label>
-        <input value={newCharacter.constitution} onChange={handleInput} type='number' name='constitution'/><br/>
-        <label htmlFor='intelligence'>Intelligence: </label>
-        <input value={newCharacter.intelligence} onChange={handleInput} type='number' name='intelligence'/><br/>
-        <label htmlFor='wisdom'>Wisdom: </label>
-        <input value={newCharacter.wisdom} onChange={handleInput} type='number' name='wisdom'/><br/>
-        <label htmlFor='charisma'>Charisma: </label>
-        <input value={newCharacter.charisma} onChange={handleInput} type='number' name='charisma'/><br/>
+        <label htmlFor='Strength'>Strength: </label>
+        <input value={newCharacter.Strength} onChange={handleInput} type='number' name='Strength'/><br/>
+        <label htmlFor='Dexterity'>Dexterity: </label>
+        <input value={newCharacter.Dexterity} onChange={handleInput} type='number' name='Dexterity'/><br/>
+        <label htmlFor='Constitution'>Constitution: </label>
+        <input value={newCharacter.Constitution} onChange={handleInput} type='number' name='Constitution'/><br/>
+        <label htmlFor='Intelligence'>Intelligence: </label>
+        <input value={newCharacter.Intelligence} onChange={handleInput} type='number' name='Intelligence'/><br/>
+        <label htmlFor='Wisdom'>Wisdom: </label>
+        <input value={newCharacter.Wisdom} onChange={handleInput} type='number' name='Wisdom'/><br/>
+        <label htmlFor='Charisma'>Charisma: </label>
+        <input value={newCharacter.Charisma} onChange={handleInput} type='number' name='Charisma'/><br/>
         <button onClick={()=>setForm("default")}>Back</button>
         <button onClick={()=>setForm("skills")}>Next</button>
     </form>
@@ -176,12 +176,12 @@ const NewCharacter = ({updateCharacters}) => {
         <h3>{newCharacter.name}</h3>
         <h4>{newCharacter.race_id} {newCharacter.dnd_class_id}</h4>
         <ul>
-            <li>Strength: {newCharacter.strength}</li>
-            <li>Dexterity: {newCharacter.dexterity}</li>
-            <li>Constitution: {newCharacter.constitution}</li>
-            <li>Intelligence: {newCharacter.intelligence}</li>
-            <li>Wisdom: {newCharacter.wisdom}</li>
-            <li>Charisma: {newCharacter.charisma}</li>
+            <li>Strength: {newCharacter.Strength}</li>
+            <li>Dexterity: {newCharacter.Dexterity}</li>
+            <li>Constitution: {newCharacter.Constitution}</li>
+            <li>Intelligence: {newCharacter.Intelligence}</li>
+            <li>Wisdom: {newCharacter.Wisdom}</li>
+            <li>Charisma: {newCharacter.Charisma}</li>
         </ul>
         <ul>{charSkills.map(skill => <li key={Math.random()}>{skill}</li>)}</ul>
         <button onClick={()=>setForm("skills")}>Back</button>

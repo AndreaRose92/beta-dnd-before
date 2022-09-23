@@ -52,12 +52,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
     t.integer "user_id", null: false
     t.integer "dnd_class_id", null: false
     t.integer "race_id", null: false
-    t.integer "strength"
-    t.integer "dexterity"
-    t.integer "constitution"
-    t.integer "intelligence"
-    t.integer "wisdom"
-    t.integer "charisma"
+    t.integer "Strength"
+    t.integer "Dexterity"
+    t.integer "Constitution"
+    t.integer "Intelligence"
+    t.integer "Wisdom"
+    t.integer "Charisma"
     t.integer "hp"
     t.integer "current_hp"
     t.datetime "created_at", null: false

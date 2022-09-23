@@ -16,12 +16,12 @@ class CharactersController < ApplicationController
             user_id: params[:user_id],
             dnd_class_id: params[:dnd_class_id],
             race_id: params[:race_id],
-            strength: params[:strength],
-            dexterity: params[:dexterity],
-            constitution: params[:constitution],
-            intelligence: params[:intelligence],
-            wisdom: params[:wisdom],
-            charisma: params[:charisma],
+            Strength: params[:Strength],
+            Dexterity: params[:Dexterity],
+            Constitution: params[:Constitution],
+            Intelligence: params[:Intelligence],
+            Wisdom: params[:Wisdom],
+            Charisma: params[:Charisma],
             hp: params[:hp],
             current_hp: params[:current_hp]
         )
@@ -46,7 +46,7 @@ class CharactersController < ApplicationController
     end
 
     def char_params
-        params.require(:character).permit(:name, :level, :user_id, :dnd_class_id, :race_id, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, :hp, :current_hp, :proficiencies)
+        params.require(:character).permit(:name, :level, :user_id, :dnd_class_id, :race_id, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma, :hp, :current_hp, :proficiencies)
     end
 
     # def skill_params
