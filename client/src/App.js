@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Root } from './components/Root'
-import './App.css';
 import { Login } from './components/Login';
 import { Signup } from './components/Signup';
 import { CharacterProvider, UserContext } from './components/tools/Hooks';
@@ -30,7 +29,6 @@ function App() {
 
   const updateCharacters = data => {
     setUserCharacters(characters => [...characters, data])
-    // console.log(userCharacters)
   }
 
   const deleteCharacter = e => {

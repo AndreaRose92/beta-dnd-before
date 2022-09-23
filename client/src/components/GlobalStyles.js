@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
 
   * {
     font-family: 'Draconis';
+    /* font-family: 'Cinzel', serif; */
     color: black;
     text-decoration: none;
     margin: 0;
