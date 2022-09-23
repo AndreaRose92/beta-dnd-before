@@ -1,5 +1,5 @@
 class CharacterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills
+  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills, :image
   belongs_to :user
   has_one :dnd_class
   has_one :race

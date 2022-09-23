@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const NavStyles = styled.div`
-    
-`
-
 export const NavButton = styled.div`
     display: flex;
     align-items: center;

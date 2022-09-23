@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
+    t.string "image"
     t.integer "level"
     t.integer "user_id", null: false
     t.integer "dnd_class_id", null: false

@@ -16,9 +16,10 @@ import { deleteRequest, getRequest } from './components/tools/FetchTypes';
 import NewCharacter from './components/characters/NewCharacter';
 import CharacterSheet from './components/characters/CharacterSheet';
 import EditCharacter from './components/characters/EditCharacter';
-import { PageWrapper } from './components/styles/Grids.styles';
+import { ContentWrapper, PageWrapper } from './components/styles/Grids.styles';
 import NavBar from './components/NavBar';
 import DeleteMessage from './components/DeleteMessage';
+import GlobalStyles from './components/GlobalStyles';
 
 
 function App() {
@@ -46,23 +47,26 @@ function App() {
   return (
     <CharacterProvider>
       <PageWrapper>
+        <GlobalStyles />
         <NavBar user={user} setUser={setUser}/>
-        <Routes>
-          <Route index element={<Root />}/>
-          <Route path="*" element={<NotFound />}/>
-          <Route path='login' element={<Login />} />
-          <Route path='signup' element={<Signup />} />
-          <Route path='races' element={<RaceIndex />}/>
-          <Route path='races/:race' element={<RaceDetail />}/>
-          <Route path='dnd_classes' element={<DndClassIndex />}/>
-          <Route path=':dnd_class' element={<DndClassDetail />}/>
-          <Route path=':dnd_class/:level' element={<LevelDetail />}/>
-          <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
-          <Route path ='/users/:username/delete' element={<DeleteMessage /> }/>
-          <Route path ='/users/:username/characters/:id/' element={<CharacterSheet />}/>
-          <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
-          <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>
-        </Routes>
+        <ContentWrapper>
+          <Routes>
+            <Route index element={<Root />}/>
+            <Route path="*" element={<NotFound />}/>
+            <Route path='login' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
+            <Route path='races' element={<RaceIndex />}/>
+            <Route path='races/:race' element={<RaceDetail />}/>
+            <Route path='dnd_classes' element={<DndClassIndex />}/>
+            <Route path=':dnd_class' element={<DndClassDetail />}/>
+            <Route path=':dnd_class/:level' element={<LevelDetail />}/>
+            <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
+            <Route path ='/users/:username/delete' element={<DeleteMessage /> }/>
+            <Route path ='/users/:username/characters/:id/' element={<CharacterSheet />}/>
+            <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
+            <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>
+          </Routes>
+        </ContentWrapper>
       </PageWrapper>
     </CharacterProvider>
   );

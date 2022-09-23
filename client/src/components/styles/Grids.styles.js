@@ -14,8 +14,19 @@ export const NavWrapper = styled.div`
     gap: 5px;
 `
 
-export const CharacterGrid = styled.div`
+export const ContentWrapper = styled.div`
     grid-row: 2;
+`
+
+export const CharacterWrapper = styled.div`
+margin: 25px;
+display: grid;
+grid-template-columns: 3fr 1fr;
+grid-template-rows: 1fr;
+`
+
+export const CharacterGrid = styled.div`
+    grid-row: 1;
     display: grid;
     grid-template-columns: repeat(12, 110px);
     grid-template-rows: repeat(6, 110px);
