@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CSHeader = styled.section`
-  grid-area: hd;
+  grid-row: 1;
   display: flex;
 
   div.CSHeader1 {
@@ -14,7 +14,6 @@ const CSHeader = styled.section`
       #fff 0%, #aaa9ad 100%);
     display: flex;
     align-items: center;
-    
   }
 
   div.CSHeader1 > img {

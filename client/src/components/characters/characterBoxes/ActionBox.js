@@ -1,12 +1,13 @@
 import { useState } from "react"
 import Button from "../../styles/Buttons.style"
 import { EquipmentBox } from "../../styles/CharacterSheetGrids.style"
+import { diceRoll } from "../../tools/PlayerEvents"
 
-export const ActionBox = () => {
+export const ActionBox = ({stats, diceRolls, setDiceRolls}) => {
     const [box, setBox] = useState('actions')
     let boxType
     if (box === 'actions') {
-        boxType = <ActionGrid />
+        boxType = <ActionGrid stats={stats} diceRolls={diceRolls} setDiceRolls={setDiceRolls} />
     } else if (box === 'spells') {
         boxType = <SpellBook />
     } else if (box === 'equipment') {
@@ -31,10 +32,25 @@ export const ActionBox = () => {
     )
 }
 
-const ActionGrid = () => {
+const ActionGrid = ({stats, diceRolls, setDiceRolls}) => {
+
+    const skillCheck = (skill, mod, dSize, amt) => {
+        let newRoll = diceRoll(skill, mod, dSize, amt)
+        console.log(newRoll)
+        if (!diceRolls[0]) {
+          newRoll = {id: 1, ...newRoll}
+        } else {
+          newRoll = {id: (diceRolls[diceRolls.length - 1].id + 1), ...newRoll}
+        }
+        setDiceRolls(history => [
+          ...history,
+          newRoll
+        ])
+      }
+
     return (
         <div>
-            <h1>Coming Soon....</h1>
+            <h1 onClick={()=>skillCheck("sword", stats[0].modifier, 8, 4)} >Sword Attack</h1>
         </div>
     )
 }

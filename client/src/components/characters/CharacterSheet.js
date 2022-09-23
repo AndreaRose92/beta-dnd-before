@@ -2,10 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRequest } from '../tools/FetchTypes';
 import { CharacterContext } from '../tools/Hooks';
-import { skills, savingThrows } from '../data/skills';
 import { CharacterGrid, CharacterWrapper } from '../styles/Grids.styles';
-import { ArmorClass, AuxiliaryBox, CSHeader, DefensesConditions, EquipmentBox, HealthBox, InitiativeBox, InspirationBox, ProficiencyBox, SavingThrow, SensesBox, StatBox,
-} from '../styles/CharacterSheetGrids.style';
 import { ActionBox } from './characterBoxes/ActionBox';
 import { CombatBox } from './characterBoxes/CombatBox';
 import { SkillBox } from './characterBoxes/SkillBox';
@@ -15,10 +12,12 @@ import { HPBox } from './characterBoxes/HPBox';
 import { AuxBox } from './characterBoxes/AuxBox';
 import StatGrid from './characterBoxes/StatGrid';
 import CharHeader from './characterBoxes/CharHeader';
+import DiceLog from './characterBoxes/DiceLog';
 
 const CharacterSheet = () => {
     const params = useParams();
     const { character, setCharacter } = useContext(CharacterContext);
+    const [diceRolls, setDiceRolls] = useState([])
     const stats = character.name !== '' ? character.stats : [{ name: '', value: 0 }];
     useEffect(() => {getRequest(`/characters/${params.id}`, setCharacter);}, [params.id, setCharacter]);
 
@@ -42,13 +41,13 @@ const CharacterSheet = () => {
         return total;
     }
 
-    const calculations = {isProficient, skillProficiency}
-    const charStats = {character, stats, prof_bonus}
+    const calculations = {isProficient, skillProficiency, setDiceRolls}
+    const charStats = {character, stats, prof_bonus, diceRolls, setDiceRolls}
 
     return (
         <CharacterWrapper>
+            <CharHeader {...charStats}/>
             <CharacterGrid>
-                <CharHeader {...charStats}/>
                 <StatGrid {...charStats}/>
                 <AuxBox {...charStats}/>
                 <HPBox character={character} setCharacter={setCharacter}/>
@@ -56,8 +55,9 @@ const CharacterSheet = () => {
                 <Traits {...charStats} />
                 <SkillBox {...calculations}/>
                 <CombatBox dex={stats[1]} />
-                <ActionBox />
+                <ActionBox {...charStats}/>
             </CharacterGrid>
+            <DiceLog diceRolls={diceRolls} setDiceRolls={setDiceRolls} />
         </CharacterWrapper>
     );
 };
