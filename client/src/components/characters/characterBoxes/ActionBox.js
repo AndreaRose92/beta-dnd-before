@@ -33,19 +33,16 @@ export const ActionBox = ({stats}) => {
 }
 
 const ActionGrid = ({stats}) => {
-    const {dice, setDice} = useContext(DiceContext)
+    const {diceHistory, setDiceHistory} = useContext(DiceContext)
 
     const skillCheck = (skill, mod, dSize, amt) => {
         let newRoll = diceRoll(skill, mod, dSize, amt)
-        if (!dice[0]) {
+        if (!diceHistory,[0]) {
           newRoll = {id: 1, ...newRoll}
         } else {
-          newRoll = {id: (dice[dice.length - 1].id + 1), ...newRoll}
+          newRoll = {id: (diceHistory[diceHistory.length - 1].id + 1), ...newRoll}
         }
-        setDice(history => [
-          ...history,
-          newRoll
-        ])
+        setDiceHistory(history => [...history,newRoll])
       }
 
     return (

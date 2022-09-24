@@ -3,9 +3,9 @@ import React, { useContext, useState } from "react"
 export const DiceContext = React.createContext()
 
 export const DiceProvider = ({children}) => {
-    const [dice, setDice] = useState([])
+    const [diceHistory, setDiceHistory] = useState([])
     return (
-        <DiceContext.Provider value={{dice, setDice}}>
+        <DiceContext.Provider value={{diceHistory, setDiceHistory}}>
             {children}
         </DiceContext.Provider>
     )

@@ -5,15 +5,15 @@ import { DiceBox } from '../../styles/Grids.styles'
 
 const DiceLog = () => {
      
-     const {dice, setDice} = useContext(DiceContext)
+     const {diceHistory, setDiceHistory} = useContext(DiceContext)
 
      const dismissRoll = input => {
-          setDice(rolls => rolls.filter(roll => roll.id !== input))
+          setDiceHistory(rolls => rolls.filter(roll => roll.id !== input))
      }
 
      const history = 
-     dice.length <= 5
-          ? dice.map(roll => {
+     diceHistory.length <= 5
+          ? diceHistory.map(roll => {
                return (
                     <div className='rollBox' key={roll.id} onClick={()=>dismissRoll(roll.id)}>
                          <h3 className='skillName'>{roll.name}</h3>
@@ -22,7 +22,7 @@ const DiceLog = () => {
                     </div>
                )
           })
-          : dice.slice(dice.length - 5).map(roll => {
+          : diceHistory.slice(diceHistory.length - 5).map(roll => {
                return (
                     <div className='rollBox' key={roll.id} onClick={()=>dismissRoll(roll.id)}>
                          <h3 className='skillName'>{roll.name}</h3>
@@ -36,7 +36,7 @@ const DiceLog = () => {
           <DiceBox>
                <h2>Dice Log</h2>
                {history}<br/>
-               <Button className='clear' onClick={()=>setDice([])} >Clear Log</Button>
+               <Button className='clear' onClick={()=>setDiceHistory([])} >Clear Log</Button>
           </DiceBox>
      )
 }

@@ -5,13 +5,13 @@ import { DiceContext, diceRoll } from "../../tools/PlayerEvents";
 
 export const SavingThrows = ({ isProficient, skillProficiency }) => { 
 
-  const {dice, setDice} = useContext(DiceContext)
+  const {diceHistory, setDiceHistory} = useContext(DiceContext)
   
   const skillCheck = (skill, mod) => {
     let newRoll = diceRoll(skill, mod)
-    if (!dice[0]) { newRoll.id = 1 }
-    else { newRoll.id = dice[dice.length - 1].id + 1 }
-    setDice(history => [...history,newRoll])
+    if (!diceHistory[0]) { newRoll.id = 1 }
+    else { newRoll.id = diceHistory[diceHistory.length - 1].id + 1 }
+    setDiceHistory(history => [...history,newRoll])
   }
 
   const renderSaves = savingThrows.map((save) => {
