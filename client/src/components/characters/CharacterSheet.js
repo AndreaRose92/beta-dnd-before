@@ -17,7 +17,6 @@ import DiceLog from './characterBoxes/DiceLog';
 const CharacterSheet = () => {
     const params = useParams();
     const { character, setCharacter } = useContext(CharacterContext);
-    const [diceRolls, setDiceRolls] = useState([])
     const stats = character.name !== '' ? character.stats : [{ name: '', value: 0 }];
     useEffect(() => {getRequest(`/characters/${params.id}`, setCharacter);}, [params.id, setCharacter]);
 
@@ -41,8 +40,8 @@ const CharacterSheet = () => {
         return total;
     }
 
-    const calculations = {isProficient, skillProficiency, setDiceRolls}
-    const charStats = {character, stats, prof_bonus, diceRolls, setDiceRolls}
+    const calculations = {isProficient, skillProficiency}
+    const charStats = {character, stats, prof_bonus}
 
     return (
         <CharacterWrapper>
@@ -57,7 +56,7 @@ const CharacterSheet = () => {
                 <CombatBox dex={stats[1]} />
                 <ActionBox {...charStats}/>
             </CharacterGrid>
-            <DiceLog diceRolls={diceRolls} setDiceRolls={setDiceRolls} />
+            <DiceLog/>
         </CharacterWrapper>
     );
 };

@@ -1,3 +1,16 @@
+import React, { useContext, useState } from "react"
+
+export const DiceContext = React.createContext()
+
+export const DiceProvider = ({children}) => {
+    const [dice, setDice] = useState([])
+    return (
+        <DiceContext.Provider value={{dice, setDice}}>
+            {children}
+        </DiceContext.Provider>
+    )
+}
+
 export const diceRoll = (name = '', modifier = '', dSize = 20, amt = 1) => {
     let total = 0
     let rolls = []

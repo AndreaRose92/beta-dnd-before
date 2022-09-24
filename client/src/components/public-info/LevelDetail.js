@@ -9,12 +9,6 @@ const LevelDetail = () => {
     const [classLevel, setClassLevel] = useState({})
 
     useEffect(()=>{getRequest(`/${params.dnd_class}_levels/${params.level}`, setClassLevel)}, [params.dnd_class, params.level])
-    // const features = classLevel.features.map(f=>{
-    //         return (
-    //             <li>{f.name}</li>
-    //         )
-    //     })
-
 
   return (
     <div>

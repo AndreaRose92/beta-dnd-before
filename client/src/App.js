@@ -19,6 +19,7 @@ import { ContentWrapper, PageWrapper } from './components/styles/Grids.styles';
 import NavBar from './components/NavBar';
 import DeleteMessage from './components/DeleteMessage';
 import GlobalStyles from './components/GlobalStyles';
+import { DiceProvider } from './components/tools/PlayerEvents';
 
 
 function App() {
@@ -60,7 +61,7 @@ function App() {
             <Route path=':dnd_class/:level' element={<LevelDetail />}/>
             <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
             <Route path ='/users/:username/delete' element={<DeleteMessage /> }/>
-            <Route path ='/users/:username/characters/:id/' element={<CharacterSheet />}/>
+            <Route path ='/users/:username/characters/:id/' element={<DiceProvider><CharacterSheet /></DiceProvider>}/>
             <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
             <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>
           </Routes>

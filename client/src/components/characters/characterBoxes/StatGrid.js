@@ -1,20 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StatBox } from '../../styles/CharacterSheetGrids.style';
-import { diceRoll } from '../../tools/PlayerEvents';
+import { DiceContext, diceRoll } from '../../tools/PlayerEvents';
 
-const StatGrid = ({stats, diceRolls, setDiceRolls}) => {
+const StatGrid = ({stats}) => {
+
+  const {dice, setDice} = useContext(DiceContext)
 
   const skillCheck = (skill, mod) => {
     let newRoll = diceRoll(skill, mod)
-    if (!diceRolls[0]) {
-      newRoll = {id: 1, ...newRoll}
-    } else {
-      newRoll = {id: (diceRolls[diceRolls.length - 1].id + 1), ...newRoll}
-    }
-    setDiceRolls(history => [
-      ...history,
-      newRoll
-    ])
+    if (!dice[0]) { newRoll.id = 1 }
+    else { newRoll.id = dice[dice.length - 1].id + 1 }
+    setDice(history => [...history,newRoll])
   }
 
   const renderStats = stats.map((stat) => {

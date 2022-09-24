@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { skills } from "../../data/skills";
+import {DiceContext, diceRoll} from '../../tools/PlayerEvents'
 import { ProficiencyBox } from "../../styles/CharacterSheetGrids.style";
+import { SkillButton }  from "../../styles/Buttons.style"
 
 export const SkillBox = ({ isProficient, skillProficiency }) => {
+
+  const {dice, setDice} = useContext(DiceContext)
+  
+  const skillCheck = (skill, mod) => {
+    let newRoll = diceRoll(skill, mod)
+    if (!dice[0]) { newRoll.id = 1 }
+    else { newRoll.id = dice[dice.length - 1].id + 1 }
+    setDice(history => [...history,newRoll])
+  }
+
     const renderSkills = skills.map((skill) => {
+
+      const modifier = skillProficiency(skill.name, skill.stat)
+
       return (
         <React.Fragment key={skill.name}>
           <h3>{isProficient(skill.name) ? '●' : '○'} </h3>
           <h3>{skill.stat.slice(0, 3)}</h3>
           <h3 className='skill'>{skill.name}</h3>
-          <h3>{skillProficiency(skill.name, skill.stat)}</h3>
+          <SkillButton onClick={()=>skillCheck(skill.name, modifier)}>{modifier}</SkillButton>
         </React.Fragment>
       );
     });

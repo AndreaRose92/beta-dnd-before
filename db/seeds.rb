@@ -25,6 +25,18 @@ races.each { |r|
     Race.create(name: r["name"], url: r["url"])
 }
 
+Race.all.each { |race| 
+    response = RestClient.get("http://www.dnd5eapi.co#{race.url}")
+    data = JSON.parse(response)
+    Race.update(
+        ability_score_bonuses: data["ability_bonuses"].map {|ab| "#{ab["ability_score"]["name"]} +#{ab["bonus"]}"}.join(", "),
+        size: data["size"],
+        languages: data["languages"].pluck("name").join(", "),
+        traits: data["traits"].pluck("name").join(", "),
+        speed: data["speed"]
+    )
+}
+
 puts 'seeding skills...'
 
 skills = [{name: 'Acrobatics', stat: 'Dexterity'}, {name: 'Animal Handling', stat: 'Wisdom'}, {name: 'Arcana', stat: 'Intelligence'}, {name: 'Athletics', stat: 'Strength'}, {name: 'Deception', stat: 'Charisma'}, {name: 'History', stat: 'Intelligence'}, {name: 'Insight', stat: 'Wisdom'}, {name: 'Intimidation', stat: 'Charisma'}, {name: 'Investigation', stat: 'Intelligence'}, {name: 'Medicine', stat: 'Wisdom'}, {name: 'Nature', stat: 'Intelligence'}, {name: 'Perception', stat: 'Wisdom'}, {name: 'Performance', stat: 'Charisma'}, {name: 'Persuasion', stat: 'Charisma'}, {name: 'Religion', stat: 'Intelligence'}, {name: 'Sleight of Hand', stat: 'Dexterity'}, {name: 'Stealth', stat: 'Dexterity'}, {name: 'Survival', stat: 'Wisdom'}, {name: 'Strength Save', stat: 'Strength'}, {name: 'Dexterity Save', stat: 'Dexterity'}, {name: 'Constitution Save', stat: 'Constitution'}, {name: 'Intelligence Save', stat: 'Intelligence'}, {name: 'Wisdom Save', stat: 'Wisdom'}, {name: 'Charisma Save', stat: 'Charisma'}]
@@ -70,7 +82,7 @@ char_skills.each { |skill|
 
 puts 'seeding class levels...'
 
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/barbarian/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = BarbarianLevel.create(
@@ -84,7 +96,7 @@ puts 'seeding class levels...'
         dnd_class_id: DndClass.find_by(name: "Barbarian").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/bard/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = BardLevel.create(
@@ -98,7 +110,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Bard").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/cleric/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = ClericLevel.create(
@@ -112,7 +124,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Cleric").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/druid/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = DruidLevel.create(
@@ -126,7 +138,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Druid").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/fighter/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = FighterLevel.create(
@@ -140,7 +152,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Fighter").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/monk/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = MonkLevel.create(
@@ -154,7 +166,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Monk").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/paladin/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = PaladinLevel.create(
@@ -168,7 +180,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Paladin").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/ranger/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = RangerLevel.create(
@@ -182,7 +194,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Ranger").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/rogue/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = RogueLevel.create(
@@ -196,7 +208,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Rogue").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/sorcerer/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = SorcererLevel.create(
@@ -210,7 +222,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Sorcerer").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/warlock/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = WarlockLevel.create(
@@ -224,7 +236,7 @@ end
         dnd_class_id: DndClass.find_by(name: "Warlock").id
     )
 end
-20.times do |c|
+10.times do |c|
     response = RestClient.get("http://dnd5eapi.co/api/classes/wizard/levels/#{c+1}")
     data = JSON.parse(response)
     new_level = WizardLevel.create(

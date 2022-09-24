@@ -55,6 +55,18 @@ const StatBox = styled.section`
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+    border: 2px outset #d4af37;
+    box-shadow: 2px 2px;
+    width: 50px;
+    margin-left: 22px;
+    background: radial-gradient(farthest-corner at 5px 5px,
+    #fff 0%, #aaa9ad 80%);
+    :hover {
+      background: radial-gradient(farthest-corner at 0px 0px,
+      #fff 0%, #d4af37 80%);
+    }
+
   }
 
   .bottom {
@@ -172,6 +184,24 @@ const SavingThrow = styled.section`
     height: auto;
     text-align: center;
     margin-left: 10px;
+  }
+
+  .save {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px outset #d4af37;
+    box-shadow: 2px 2px;
+    width: 50px;
+    margin-left: 22px;
+    background: radial-gradient(farthest-corner at 5px 5px,
+    #fff 0%, #aaa9ad 80%);
+    :hover {
+      background: radial-gradient(farthest-corner at 0px 0px,
+      #fff 0%, #d4af37 80%);
+    }
+
   }
 
   .top {

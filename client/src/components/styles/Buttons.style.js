@@ -41,6 +41,24 @@ const HealthButton = styled.button`
   }
 `
 
+export const SkillButton = styled.h3`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: radial-gradient(farthest-corner at 0px 0px,
+    #fff 0%, #aaa9ad 80%);
+  border-radius: 10px;
+  box-shadow: 2px 2px;
+
+  :hover {
+    border: 2px ridge #d4af37;
+    background: radial-gradient(farthest-corner at 0px 0px,
+    #fff 0%, #d4af37 80%);
+  }
+
+`
+
 
 export { HealthButton }
 export default Button

@@ -1,13 +1,13 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Button from "../../styles/Buttons.style"
 import { EquipmentBox } from "../../styles/CharacterSheetGrids.style"
-import { diceRoll } from "../../tools/PlayerEvents"
+import { DiceContext, diceRoll } from "../../tools/PlayerEvents"
 
-export const ActionBox = ({stats, diceRolls, setDiceRolls}) => {
+export const ActionBox = ({stats}) => {
     const [box, setBox] = useState('actions')
     let boxType
     if (box === 'actions') {
-        boxType = <ActionGrid stats={stats} diceRolls={diceRolls} setDiceRolls={setDiceRolls} />
+        boxType = <ActionGrid stats={stats}/>
     } else if (box === 'spells') {
         boxType = <SpellBook />
     } else if (box === 'equipment') {
@@ -32,17 +32,17 @@ export const ActionBox = ({stats, diceRolls, setDiceRolls}) => {
     )
 }
 
-const ActionGrid = ({stats, diceRolls, setDiceRolls}) => {
+const ActionGrid = ({stats}) => {
+    const {dice, setDice} = useContext(DiceContext)
 
     const skillCheck = (skill, mod, dSize, amt) => {
         let newRoll = diceRoll(skill, mod, dSize, amt)
-        console.log(newRoll)
-        if (!diceRolls[0]) {
+        if (!dice[0]) {
           newRoll = {id: 1, ...newRoll}
         } else {
-          newRoll = {id: (diceRolls[diceRolls.length - 1].id + 1), ...newRoll}
+          newRoll = {id: (dice[dice.length - 1].id + 1), ...newRoll}
         }
-        setDiceRolls(history => [
+        setDice(history => [
           ...history,
           newRoll
         ])
