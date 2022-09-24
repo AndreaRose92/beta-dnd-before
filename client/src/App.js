@@ -18,7 +18,7 @@ import EditCharacter from './components/characters/EditCharacter';
 import { ContentWrapper, PageWrapper } from './components/styles/Grids.styles';
 import NavBar from './components/NavBar';
 import DeleteMessage from './components/DeleteMessage';
-import GlobalStyles from './components/GlobalStyles';
+import GlobalStyles from './GlobalStyles';
 import { DiceProvider } from './components/tools/PlayerEvents';
 
 
