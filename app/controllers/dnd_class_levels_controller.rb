@@ -28,7 +28,7 @@ class DndClassLevelsController < ApplicationController
      private
 
      def find_class_id
-          DndClass.find_by(name: params[:dnd_class]).id
+          DndClass.find_by(name: params[:dnd_class].capitalize).id
      end
 
      def find_level
