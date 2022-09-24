@@ -10,33 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
-  create_table "barbarian_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_barbarian_levels_on_dnd_class_id"
-  end
-
-  create_table "bard_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_bard_levels_on_dnd_class_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2022_09_24_153140) do
   create_table "char_skills", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "proficiency_id", null: false
@@ -77,7 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
     t.index ["proficiency_id"], name: "index_class_skills_on_proficiency_id"
   end
 
-  create_table "cleric_levels", force: :cascade do |t|
+  create_table "dnd_class_levels", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
     t.integer "level"
     t.integer "ability_score_bonuses"
@@ -87,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
     t.string "spells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_cleric_levels_on_dnd_class_id"
+    t.index ["dnd_class_id"], name: "index_dnd_class_levels_on_dnd_class_id"
   end
 
   create_table "dnd_classes", force: :cascade do |t|
@@ -100,20 +74,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "druid_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_druid_levels_on_dnd_class_id"
-  end
-
   create_table "equipment", force: :cascade do |t|
+    t.string "name"
+    t.string "weapon_type"
+    t.integer "dSize"
+    t.integer "dAmt"
+    t.string "damage_type"
+    t.string "properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -121,45 +88,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
   create_table "feats", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "fighter_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_fighter_levels_on_dnd_class_id"
-  end
-
-  create_table "monk_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_monk_levels_on_dnd_class_id"
-  end
-
-  create_table "paladin_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_paladin_levels_on_dnd_class_id"
   end
 
   create_table "proficiencies", force: :cascade do |t|
@@ -190,45 +118,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ranger_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_ranger_levels_on_dnd_class_id"
-  end
-
-  create_table "rogue_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_rogue_levels_on_dnd_class_id"
-  end
-
-  create_table "sorcerer_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_sorcerer_levels_on_dnd_class_id"
-  end
-
   create_table "subraces", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
     t.string "name"
@@ -250,34 +139,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "warlock_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_warlock_levels_on_dnd_class_id"
-  end
-
-  create_table "wizard_levels", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.integer "level"
-    t.integer "ability_score_bonuses"
-    t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_wizard_levels_on_dnd_class_id"
-  end
-
-  add_foreign_key "barbarian_levels", "dnd_classes"
-  add_foreign_key "bard_levels", "dnd_classes"
   add_foreign_key "char_skills", "characters"
   add_foreign_key "char_skills", "proficiencies"
   add_foreign_key "characters", "dnd_classes"
@@ -285,18 +146,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_124839) do
   add_foreign_key "characters", "users"
   add_foreign_key "class_skills", "dnd_classes"
   add_foreign_key "class_skills", "proficiencies"
-  add_foreign_key "cleric_levels", "dnd_classes"
-  add_foreign_key "druid_levels", "dnd_classes"
-  add_foreign_key "fighter_levels", "dnd_classes"
-  add_foreign_key "monk_levels", "dnd_classes"
-  add_foreign_key "paladin_levels", "dnd_classes"
+  add_foreign_key "dnd_class_levels", "dnd_classes"
   add_foreign_key "race_skills", "proficiencies"
   add_foreign_key "race_skills", "races"
-  add_foreign_key "ranger_levels", "dnd_classes"
-  add_foreign_key "rogue_levels", "dnd_classes"
-  add_foreign_key "sorcerer_levels", "dnd_classes"
   add_foreign_key "subraces", "dnd_classes"
   add_foreign_key "subraces", "races"
-  add_foreign_key "warlock_levels", "dnd_classes"
-  add_foreign_key "wizard_levels", "dnd_classes"
 end

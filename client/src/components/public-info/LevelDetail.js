@@ -8,7 +8,7 @@ const LevelDetail = () => {
     const params = useParams()
     const [classLevel, setClassLevel] = useState({})
 
-    useEffect(()=>{getRequest(`/${params.dnd_class}_levels/${params.level}`, setClassLevel)}, [params.dnd_class, params.level])
+    useEffect(()=>{getRequest(`/dnd_class_levels/${params.dnd_class}/${params.level_id}`, setClassLevel)}, [params.dnd_class, params.level_id])
 
   return (
     <div>

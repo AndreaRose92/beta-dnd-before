@@ -8,16 +8,17 @@ export const DndClassDetail = (dnd_class) => {
 
     const params = useParams()
     const [dndClass, setDndClass] = useState({})
-    const [dndClassLevels, setDndClassLevels] = useState([])
+    // const [dndClassLevels, setDndClassLevels] = useState([])
+    const dndClassLevels = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
     useEffect(()=>{getRequest(`/dnd_classes/${params.dnd_class}`, setDndClass)}, [params.dnd_class])
-    useEffect(()=>{getRequest(`/${params.dnd_class.toLowerCase()}_levels`, setDndClassLevels)}, [params.dnd_class])
+    // useEffect(()=>{getRequest(`/dnd_class_levels/${params.dnd_class}`, setDndClassLevels)}, [params.dnd_class])
 
-    const renderLevels = dndClassLevels.map(cl => {
+    const renderLevels = dndClassLevels.map(level => {
         return (
-            <div key={cl.level}>
-                <h2>Level {cl.level}</h2>
-                <NavButton path={`/${params.dnd_class.toLowerCase()}/${cl.level}`} text={"More Detail"} ><LevelDetail /></NavButton>
+            <div key={level}>
+                <h2>Level {level}</h2>
+                <NavButton path={`/${params.dnd_class}/${level}`} text={"More Detail"}><LevelDetail/></NavButton>
             </div>
         )
     })

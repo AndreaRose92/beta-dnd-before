@@ -58,7 +58,7 @@ function App() {
             <Route path='races/:race' element={<RaceDetail />}/>
             <Route path='dnd_classes' element={<DndClassIndex />}/>
             <Route path=':dnd_class' element={<DndClassDetail />}/>
-            <Route path=':dnd_class/:level' element={<LevelDetail />}/>
+            <Route path=':dnd_class/:level_id' element={<LevelDetail />}/>
             <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
             <Route path ='/users/:username/delete' element={<DeleteMessage /> }/>
             <Route path ='/users/:username/characters/:id/' element={<DiceProvider><CharacterSheet /></DiceProvider>}/>

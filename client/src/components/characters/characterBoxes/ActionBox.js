@@ -37,7 +37,7 @@ const ActionGrid = ({stats}) => {
 
     const skillCheck = (skill, mod, dSize, amt) => {
         let newRoll = diceRoll(skill, mod, dSize, amt)
-        if (!diceHistory,[0]) {
+        if (!diceHistory[0]) {
           newRoll = {id: 1, ...newRoll}
         } else {
           newRoll = {id: (diceHistory[diceHistory.length - 1].id + 1), ...newRoll}
