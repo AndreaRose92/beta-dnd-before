@@ -5,7 +5,7 @@ export const NavButton = styled.div`
     align-items: center;
     justify-content: center;
     background-color: gold;
-    color: antiquewhite;
+    color: silver;
 
     .active {
         background-color: crimson;
@@ -13,6 +13,7 @@ export const NavButton = styled.div`
 `
 
 export const Logo = styled.h1`
+    margin-top: 13px;
     text-align: right;
     margin-right: 20px;
 `

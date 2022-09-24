@@ -24,7 +24,7 @@ const CharacterSheet = () => {
 
     const isProficient = (string) => {return character.skills.includes(string);};
 
-    const prof_bonus = character.name !== '' ? character.dnd_class.levels[character.level - 1].prof_bonus : null;
+    const prof_bonus = character.name !== '' ? character.class_levels[character.level-1].prof_bonus : null;
 
     const findStat = (str) => {
         const stat = stats.find((stat) => stat.name === str);

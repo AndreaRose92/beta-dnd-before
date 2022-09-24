@@ -3,8 +3,9 @@ import { Outlet, useParams } from "react-router-dom"
 import LevelDetail from "./LevelDetail"
 import { getRequest } from "../tools/FetchTypes"
 import { NavButton } from "../tools/Hooks"
+import { TitleCard } from "../styles/Details.style"
 
-export const DndClassDetail = (dnd_class) => {
+export const DndClassDetail = () => {
 
     const params = useParams()
     const [dndClass, setDndClass] = useState({})
@@ -32,8 +33,8 @@ export const DndClassDetail = (dnd_class) => {
     }
 
     return (
-        <div>
-            <h4>{dndClass.name}</h4>
+        <TitleCard>
+            <h1>{dndClass.name}</h1>
             <ul>
                 <li>Hit Die: 1d{dndClass.hit_die}</li>
                 <li>Recommended Top Stat: {dndClass.recommended_stat_one}</li>
@@ -42,7 +43,7 @@ export const DndClassDetail = (dnd_class) => {
             <NavButton path={'/dnd_classes'}/>
             {renderLevels}
             <Outlet />
-        </div>
+        </TitleCard>
     )
 
 }

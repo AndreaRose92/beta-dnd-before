@@ -20,6 +20,7 @@ import NavBar from './components/NavBar';
 import DeleteMessage from './components/DeleteMessage';
 import GlobalStyles from './GlobalStyles';
 import { DiceProvider } from './components/tools/PlayerEvents';
+import { PrototypeClassPage } from './components/public-info/PrototypeClassPage';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Routes>
             <Route index element={<Root />}/>
             <Route path="*" element={<NotFound />}/>
+            <Route path='test/:dnd_class' element={<PrototypeClassPage />}/>
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
             <Route path='races' element={<RaceIndex />}/>
