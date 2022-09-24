@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { skills } from "../../data/skills";
+import { skills } from "../../data/miscData";
 import {DiceContext, diceRoll} from '../../tools/PlayerEvents'
 import { ProficiencyBox } from "../../styles/CharacterSheetGrids.style";
 import { SkillButton }  from "../../styles/Buttons.style"

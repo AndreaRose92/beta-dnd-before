@@ -8,9 +8,6 @@ import { UserPage } from './components/UserPage';
 import { NotFound } from './components/NotFound';
 import { RaceIndex } from './components/public-info/RaceIndex'
 import { RaceDetail } from './components/public-info/RaceDetail'
-import { DndClassIndex } from './components/public-info/DndClassIndex'
-import { DndClassDetail } from './components/public-info/DndClassDetail'
-import LevelDetail from './components/public-info/LevelDetail';
 import { deleteRequest, getRequest } from './components/tools/FetchTypes';
 import NewCharacter from './components/characters/NewCharacter';
 import CharacterSheet from './components/characters/CharacterSheet';
@@ -20,7 +17,7 @@ import NavBar from './components/NavBar';
 import DeleteMessage from './components/DeleteMessage';
 import GlobalStyles from './GlobalStyles';
 import { DiceProvider } from './components/tools/PlayerEvents';
-import { PrototypeClassPage } from './components/public-info/PrototypeClassPage';
+import { DndClassDetails } from './components/public-info/DndClassDetails';
 
 
 function App() {
@@ -53,14 +50,11 @@ function App() {
           <Routes>
             <Route index element={<Root />}/>
             <Route path="*" element={<NotFound />}/>
-            <Route path='test/:dnd_class' element={<PrototypeClassPage />}/>
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
             <Route path='races' element={<RaceIndex />}/>
             <Route path='races/:race' element={<RaceDetail />}/>
-            <Route path='dnd_classes' element={<DndClassIndex />}/>
-            <Route path=':dnd_class' element={<DndClassDetail />}/>
-            <Route path=':dnd_class/:level_id' element={<LevelDetail />}/>
+            <Route path='classes/:dnd_class' element={<DndClassDetails />}/>
             <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
             <Route path ='/users/:username/delete' element={<DeleteMessage /> }/>
             <Route path ='/users/:username/characters/:id/' element={<DiceProvider><CharacterSheet /></DiceProvider>}/>

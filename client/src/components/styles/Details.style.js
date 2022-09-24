@@ -31,7 +31,7 @@ export const TableHeader = styled.div`
           switch (props.variant) {
                case 'Barbarian': return '1fr 1fr 2fr 1fr 1fr';
                case 'Bard': return '1fr 1fr 2fr 1fr 1fr 6fr';
-               case 'Cleric': return '1fr 1fr 2fr 1fr 5fr';
+               case 'Cleric': return '1fr 1fr 2.5fr 1fr 4.5fr';
                case 'Druid': return '1fr 1fr 2fr 1fr 5fr';
                case 'Fighter': return '1fr 1fr 4fr';
                case 'Monk': return '1fr 1fr 1fr 1fr 1fr 4fr';
@@ -88,11 +88,18 @@ export const TableGrid = styled.div`
      display: grid;
      grid-row: 2;
      grid-auto-rows: repeat(20, 40px);
+     grid-template-columns: 1fr;
+     text-align: center;
+`
+
+export const TableRow = styled.div`
+     display: grid;
+     grid-row: ${props => props.level};
      grid-template-columns: ${props => {
           switch (props.variant) {
                case 'Barbarian': return '1fr 1fr 2fr 1fr 1fr';
                case 'Bard': return '1.5fr 1.5fr 3fr 1.5fr 1.5fr repeat(9, 1fr)';
-               case 'Cleric': return '1fr 1fr 2fr 1fr repeat(5, 1fr)';
+               case 'Cleric': return '1fr 1fr 2.5fr 1fr repeat(9, .5fr)';
                case 'Druid': return '1fr 1fr 2fr 1fr repeat(5, 1fr)';
                case 'Fighter': return '1fr 1fr 4fr';
                case 'Monk': return '1fr 1fr 1fr 1fr 1fr 4fr';

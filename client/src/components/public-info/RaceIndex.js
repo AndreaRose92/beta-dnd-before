@@ -1,10 +1,8 @@
 import { NavButton } from "../tools/Hooks"
 import { RaceDetail } from "./RaceDetail"
-
+import { races } from '../data/miscData'
 
 export const RaceIndex = () => {
-    
-    const races = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"]
 
     const renderRaces = races.map(r => <NavButton key={r} path={`/races/${r.toLowerCase()}`} text={r}><RaceDetail /></NavButton>)
 

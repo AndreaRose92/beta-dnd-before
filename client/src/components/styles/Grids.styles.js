@@ -9,12 +9,14 @@ export const PageWrapper = styled.div`
 `
 export const NavWrapper = styled.div`
     display: grid;
-    grid-row: 1;
+    grid-row: 1/2;
     grid-template-columns: 20% 1fr 1fr 1fr 1fr 20%;
     gap: 5px;
+    max-height: fit-content;
 `
 
 export const ContentWrapper = styled.div`
+    margin-top: 50px;
     grid-row: 2;
 `
 
