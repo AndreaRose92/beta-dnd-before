@@ -82,28 +82,13 @@ const CreateCharacter = () => {
                headers: {"Content-Type": "application/json"},
                body: JSON.stringify({
                     ...newCharacter,
-                    user_id: user.id
+                    user_id: user.id,
+                    proficiency_choices: newSkills
                })
           }).then(r=>{
                if (r.ok) {
                     r.json().then(data=>{
                          setCharacter(data);
-                         newSkills.forEach(skill => {
-                              fetch('/char_skills',{
-                                   method: "POST",
-                                   headers: {"Content-Type": "application/json"},
-                                   body: JSON.stringify({
-                                        character: data.name,
-                                        proficiency: skill
-                                   })
-                              }).then(r=>{
-                                   if (r.ok) {
-                                        r.json().then(data=>console.log(data))
-                                   } else {
-                                        r.json().then(errors=>console.log(errors))
-                                   }
-                              })
-                         })
                          navigate(`/users/${user.username}/characters/${data.id}`)
                     })
                } else {
