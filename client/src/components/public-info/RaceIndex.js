@@ -1,6 +1,6 @@
 import { NavButton } from "../tools/Hooks"
 import { RaceDetail } from "./RaceDetail"
-import { races } from '../data/miscData'
+import { races } from '../tools/miscData'
 
 export const RaceIndex = () => {
 

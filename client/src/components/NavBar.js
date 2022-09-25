@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { NavWrapper } from './styles/Grids.styles'
 import { DropButton, DropDown, DropDownContent, Logo, NavButton } from './styles/Nav.styles'
-import { classes, races } from './data/miscData'
+import { classes, races } from './tools/miscData'
 
 const NavBar = ({user, setUser}) => {
 

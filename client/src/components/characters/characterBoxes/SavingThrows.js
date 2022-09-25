@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { savingThrows } from "../../data/miscData";
+import { savingThrows } from "../../tools/miscData";
 import { SavingThrow } from "../../styles/CharacterSheetGrids.style";
 import { DiceContext, diceRoll } from "../../tools/PlayerEvents";
 

@@ -14,7 +14,6 @@ import CharacterSheet from './components/characters/CharacterSheet';
 import EditCharacter from './components/characters/EditCharacter';
 import { ContentWrapper, PageWrapper } from './components/styles/Grids.styles';
 import NavBar from './components/NavBar';
-import DeleteMessage from './components/DeleteMessage';
 import GlobalStyles from './GlobalStyles';
 import { DiceProvider } from './components/tools/PlayerEvents';
 import { DndClassDetails } from './components/public-info/DndClassDetails';
@@ -31,10 +30,8 @@ function App() {
   }
 
   const deleteCharacter = e => {
-    console.log(e.target.value)
     deleteRequest(`/characters/${e.target.value}`)
     setUserCharacters(characters => characters.filter(character => character.id !== e.target.value))
-    
   }
 
   useEffect(()=>{getRequest('/me', setUser)}, [setUser])
@@ -56,7 +53,6 @@ function App() {
             <Route path='races/:race' element={<RaceDetail />}/>
             <Route path='classes/:dnd_class' element={<DndClassDetails />}/>
             <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
-            <Route path ='/users/:username/delete' element={<DeleteMessage /> }/>
             <Route path ='/users/:username/characters/:id/' element={<DiceProvider><CharacterSheet /></DiceProvider>}/>
             <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
             <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>
