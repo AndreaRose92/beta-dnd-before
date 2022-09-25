@@ -10,6 +10,7 @@ class CharactersController < ApplicationController
 
     def create
         char = Character.create!(char_params)
+        char.dnd_class.proficiencies.last(2).each do |save| CharSkill.create(character_id: char.id, proficiency_id: save.id) end
         render json: char, status: :created
     end
 

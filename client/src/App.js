@@ -9,7 +9,6 @@ import { NotFound } from './components/NotFound';
 import { RaceIndex } from './components/public-info/RaceIndex'
 import { RaceDetail } from './components/public-info/RaceDetail'
 import { deleteRequest, getRequest } from './components/tools/FetchTypes';
-import NewCharacter from './components/characters/NewCharacter';
 import CharacterSheet from './components/characters/CharacterSheet';
 import EditCharacter from './components/characters/EditCharacter';
 import { ContentWrapper, PageWrapper } from './components/styles/Grids.styles';
@@ -17,22 +16,18 @@ import NavBar from './components/NavBar';
 import GlobalStyles from './GlobalStyles';
 import { DiceProvider } from './components/tools/PlayerEvents';
 import { DndClassDetails } from './components/public-info/DndClassDetails';
-import CreateCharacter from './components/characters/characterEditor/CreateCharacter';
-import { CharPageOne } from './components/characters/characterEditor/CharPageOne';
-import { CharPageTwo } from './components/characters/characterEditor/CharPageTwo';
-import CharPageThree from './components/characters/characterEditor/CharPageThree';
-import { CharPageFour } from './components/characters/characterEditor/CharPageFour';
+import CreateCharacter from './components/characters/characterCreator/CreateCharacter';
+import { CharPageOne } from './components/characters/characterCreator/CharPageOne';
+import { CharPageTwo } from './components/characters/characterCreator/CharPageTwo';
+import CharPageThree from './components/characters/characterCreator/CharPageThree';
+import { CharPageFour } from './components/characters/characterCreator/CharPageFour';
 
 
 export const App = () => {
 
      const {user, setUser} = useContext(UserContext)
-
      const [userCharacters, setUserCharacters] = useState([])
 
-     const updateCharacters = data => {
-          setUserCharacters(characters => [...characters, data])
-     }
 
      const deleteCharacter = e => {
           deleteRequest(`/characters/${e.target.value}`)
@@ -59,9 +54,8 @@ export const App = () => {
                          <Route path='classes/:dnd_class' element={<DndClassDetails />}/>
                          <Route path ='/users/:username' element={<UserPage user={user} userCharacters={userCharacters} deleteCharacter={deleteCharacter} />}/>
                          <Route path ='/users/:username/characters/:id/' element={<DiceProvider><CharacterSheet /></DiceProvider>}/>
-                         <Route path ='/users/:usernane/characters/new' element={<NewCharacter updateCharacters={updateCharacters} />}/>
                          <Route path ='/users/:username/characters/:id/edit' element={<EditCharacter />}/>
-                         <Route path ='/test/new_character' element={<CreateCharacter />}>
+                         <Route path ='/new_character' element={<CreateCharacter />}>
                               <Route exact path='basic' element={<CharPageOne />}/>
                               <Route exact path='stats' element={<CharPageTwo />}/>
                               <Route exact path='skills' element={<CharPageThree />}/>
