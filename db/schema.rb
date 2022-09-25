@@ -70,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_153140) do
     t.integer "hit_die"
     t.string "recommended_stat_one"
     t.string "recommended_stat_two"
+    t.integer "starting_proficiencies"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
