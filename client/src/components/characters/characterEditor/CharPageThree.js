@@ -7,7 +7,7 @@ const CharPageThree = () => {
 	
      const [formHandlers, formData] = useOutletContext()
 
-     const filteredSkills = formData.skills.filter(skill => skill.name !== formData.skillOne || formData.skillTwo || formData.skillThree || formData.skillFour)
+     const filteredSkills = formData.skills.filter(skill => skill.name !== formData.skillOne || skill.name !== formData.skillTwo || skill.name !== formData.skillThree || skill.name !== formData.skillFour)
 
      const renderSkills = filteredSkills.map(skill => {
           return <option key={Math.random()} value={skill.name}>{skill.name}</option>
@@ -32,8 +32,8 @@ const CharPageThree = () => {
                     <option value='default'>---</option>
                     {renderSkills}
                </select> : null}
-               <NavButton path={'/test/new_character/stats'} text={'Back'}/>
-               <NavButton path={'/test/new_character/review'} text={'Next'}/>
+               <NavButton path={'../stats'} text={'Back'}/>
+               <NavButton path={'../review'} text={'Next'}/>
           </FormBox>
      )
 };

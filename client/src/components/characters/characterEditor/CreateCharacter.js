@@ -1,10 +1,14 @@
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { FormGrid } from '../../styles/Grids.styles'
+import { CharacterContext, UserContext } from '../../tools/Hooks'
 import { blankCharacter } from '../../tools/miscData'
 
 const CreateCharacter = () => {
-     
+
+     const navigate = useNavigate()
+     const {user} = useContext(UserContext)
+     const {setCharacter} = useContext(CharacterContext)
      const [newCharacter, setNewCharacter] = useState(blankCharacter)
      const [amount, setAmount] = useState(0)
      const [skills, setSkills] = useState([])
@@ -12,7 +16,6 @@ const CreateCharacter = () => {
      const [skillTwo, setSkillTwo] = useState('')
      const [skillThree, setSkillThree] = useState('')
      const [skillFour, setSkillFour] = useState('')
-     const stats = newCharacter.stats
 
      const resetSkills = () => {setSkillOne(''); setSkillTwo(''); setSkillThree(''); setSkillFour('');}
 
@@ -43,13 +46,10 @@ const CreateCharacter = () => {
 
      const handleStats = e => {
           const formName = e.target.name
-          let formValue = e.target.value
+          let formValue = parseInt(e.target.value)
           setNewCharacter({
                ...newCharacter,
-               stats: {
-                    ...newCharacter.stats,
-                    [formName]: formValue
-               }
+               [formName]: formValue
           })
      }
 
@@ -74,9 +74,47 @@ const CreateCharacter = () => {
           }
      }
 
-     const formHandlers = {handleInput, handleClassChange, handleStats, handleSkill}
+     const handleSubmit = e => {
+          e.preventDefault()
+          let newSkills = [skillOne, skillTwo, skillThree, skillFour].filter(skill => skill !== '')
+          fetch(`/characters`, {
+               method: "POST",
+               headers: {"Content-Type": "application/json"},
+               body: JSON.stringify({
+                    ...newCharacter,
+                    user_id: user.id
+               })
+          }).then(r=>{
+               if (r.ok) {
+                    r.json().then(data=>{
+                         setCharacter(data);
+                         newSkills.forEach(skill => {
+                              fetch('/char_skills',{
+                                   method: "POST",
+                                   headers: {"Content-Type": "application/json"},
+                                   body: JSON.stringify({
+                                        character: data.name,
+                                        proficiency: skill
+                                   })
+                              }).then(r=>{
+                                   if (r.ok) {
+                                        r.json().then(data=>console.log(data))
+                                   } else {
+                                        r.json().then(errors=>console.log(errors))
+                                   }
+                              })
+                         })
+                         navigate(`/users/${user.username}/characters/${data.id}`)
+                    })
+               } else {
+                    r.json().then(errors=>console.log(errors))
+               }
+          })
+     }
 
-     const formData = {stats, skills, skillOne, skillTwo, skillThree, skillFour, amount}
+     const formHandlers = {handleInput, handleClassChange, handleStats, handleSkill, handleSubmit}
+
+     const formData = {skills, skillOne, skillTwo, skillThree, skillFour, amount}
 
      return (
           <FormGrid>

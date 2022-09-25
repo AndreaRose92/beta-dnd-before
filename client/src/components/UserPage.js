@@ -16,7 +16,7 @@ export const UserPage = ({user, userCharacters, deleteCharacter}) => {
         <div>
             <h2>Hello, {user.username}</h2>
             {renderCards}<br/>
-            <NavButton path={`/users/${user.username}/characters/new`} text={"Create a Character"}><NewCharacter /></NavButton>
+            <NavButton path={`/test/new_character/basic`} text={"Create a Character"}><NewCharacter /></NavButton>
             <Logout />
         </div>
     )

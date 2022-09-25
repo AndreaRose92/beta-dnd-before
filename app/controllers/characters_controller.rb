@@ -9,22 +9,7 @@ class CharactersController < ApplicationController
     end
 
     def create
-        skills = params[:proficiencies]
-        char = Character.create!(
-            name: params[:name],
-            level: params[:level],
-            user_id: params[:user_id],
-            dnd_class_id: params[:dnd_class_id],
-            race_id: params[:race_id],
-            Strength: params[:Strength],
-            Dexterity: params[:Dexterity],
-            Constitution: params[:Constitution],
-            Intelligence: params[:Intelligence],
-            Wisdom: params[:Wisdom],
-            Charisma: params[:Charisma],
-            hp: params[:hp],
-            current_hp: params[:current_hp]
-        )
+        char = Character.create!(char_params)
         render json: char, status: :created
     end
 
@@ -46,7 +31,7 @@ class CharactersController < ApplicationController
     end
 
     def char_params
-        params.require(:character).permit(:name, :level, :user_id, :dnd_class_id, :race_id, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma, :hp, :current_hp)
+        params.permit(:name, :level, :user_id, :dnd_class_id, :race_id, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma, :hp, :current_hp)
     end
 
     # def skill_params
