@@ -1,7 +1,8 @@
 
-import CharacterCard from "./characters/CharacterCard"
+import { Logout, NavButton } from "../tools/Hooks"
+import CharacterCard from "../characters/CharacterCard"
 import { NotFound } from "./NotFound"
-import { Logout, NavButton } from "./tools/Hooks"
+
 
 export const UserPage = ({user, userCharacters, deleteCharacter}) => {
 
@@ -15,6 +16,7 @@ export const UserPage = ({user, userCharacters, deleteCharacter}) => {
         <div>
             <h2>Hello, {user.username}</h2>
             {renderCards}<br/>
+            <NavButton path={'/new_character'} text={'create a character'}/>
             <Logout />
         </div>
     )

@@ -1,8 +1,9 @@
+import React from "react";
 import { ArmorClass, DefensesConditions, InitiativeBox } from "../../styles/CharacterSheetGrids.style";
 
 export const CombatBox = ({ dex }) => {
     return (
-      <>
+      <React.Fragment>
         <InitiativeBox>
           <div>
             <div>
@@ -38,6 +39,6 @@ export const CombatBox = ({ dex }) => {
             <div className='bottom'></div>
           </div>
         </DefensesConditions>
-      </>
+      </React.Fragment>
     );
   };

@@ -12,6 +12,8 @@ module DndBefore
 
     config.action_dispatch.cookies_same_site_protection = :strict
 
+    config.autoload_paths += Dir[Rails.root.join('app', '**/')]
+
     config.load_defaults 7.0
     
     config.api_only = true

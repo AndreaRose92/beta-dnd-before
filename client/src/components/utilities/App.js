@@ -1,26 +1,26 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Root } from './components/Root'
-import { Login } from './components/Login';
-import { Signup } from './components/Signup';
-import { CharacterProvider, UserContext } from './components/tools/Hooks';
-import { UserPage } from './components/UserPage';
-import { NotFound } from './components/NotFound';
-import { RaceIndex } from './components/public-info/RaceIndex'
-import { RaceDetail } from './components/public-info/RaceDetail'
-import { deleteRequest, getRequest } from './components/tools/FetchTypes';
-import CharacterSheet from './components/characters/CharacterSheet';
-import EditCharacter from './components/characters/EditCharacter';
-import { ContentWrapper, PageWrapper } from './components/styles/Grids.styles';
-import NavBar from './components/NavBar';
-import GlobalStyles from './GlobalStyles';
-import { DiceProvider } from './components/tools/PlayerEvents';
-import { DndClassDetails } from './components/public-info/DndClassDetails';
-import CreateCharacter from './components/characters/characterCreator/CreateCharacter';
-import { CharPageOne } from './components/characters/characterCreator/CharPageOne';
-import { CharPageTwo } from './components/characters/characterCreator/CharPageTwo';
-import CharPageThree from './components/characters/characterCreator/CharPageThree';
-import { CharPageFour } from './components/characters/characterCreator/CharPageFour';
+import { Root } from './Root'
+import { Login } from './Login';
+import { Signup } from './Signup';
+import { CharacterProvider, UserContext } from '../tools/Hooks';
+import { UserPage } from './UserPage';
+import { NotFound } from './NotFound';
+import { RaceIndex } from '../public-info/RaceIndex'
+import { RaceDetail } from '../public-info/RaceDetail'
+import { deleteRequest, getRequest } from '../tools/FetchTypes';
+import CharacterSheet from '../characters/CharacterSheet';
+import EditCharacter from '../characters/EditCharacter';
+import { ContentWrapper, PageWrapper } from '../styles/Grids.styles';
+import NavBar from './NavBar';
+import GlobalStyles from '../../GlobalStyles';
+import { DiceProvider } from '../tools/PlayerEvents';
+import { DndClassDetails } from '../public-info/DndClassDetails';
+import CreateCharacter from '../characters/characterCreator/CreateCharacter';
+import { CharPageOne } from '../characters/characterCreator/CharPageOne';
+import { CharPageTwo } from '../characters/characterCreator/CharPageTwo';
+import CharPageThree from '../characters/characterCreator/CharPageThree';
+import { CharPageFour } from '../characters/characterCreator/CharPageFour';
 
 
 export const App = () => {

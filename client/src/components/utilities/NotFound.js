@@ -1,4 +1,4 @@
-import { NavButton } from "./tools/Hooks"
+import { NavButton } from "../tools/Hooks"
 
 
 export const NotFound = () => {
