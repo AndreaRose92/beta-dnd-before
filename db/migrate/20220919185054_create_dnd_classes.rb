@@ -6,6 +6,7 @@ class CreateDndClasses < ActiveRecord::Migration[7.0]
       t.integer :hit_die
       t.string :recommended_stat_one
       t.string :recommended_stat_two
+      t.integer :starting_proficiencies
 
       t.timestamps
     end

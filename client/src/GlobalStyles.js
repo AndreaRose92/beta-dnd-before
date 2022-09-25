@@ -29,6 +29,5 @@ const GlobalStyles = createGlobalStyle`
   p {
     font-size: 10px;
   }
-
 `
 export default GlobalStyles

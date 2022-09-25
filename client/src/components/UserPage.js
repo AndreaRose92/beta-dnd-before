@@ -1,6 +1,5 @@
 
 import CharacterCard from "./characters/CharacterCard"
-import NewCharacter from "./characters/NewCharacter"
 import { NotFound } from "./NotFound"
 import { Logout, NavButton } from "./tools/Hooks"
 
@@ -16,7 +15,6 @@ export const UserPage = ({user, userCharacters, deleteCharacter}) => {
         <div>
             <h2>Hello, {user.username}</h2>
             {renderCards}<br/>
-            <NavButton path={`/users/${user.username}/characters/new`} text={"Create a Character"}><NewCharacter /></NavButton>
             <Logout />
         </div>
     )

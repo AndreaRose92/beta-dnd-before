@@ -18,6 +18,7 @@ export const NavWrapper = styled.div`
 export const ContentWrapper = styled.div`
     margin-top: 50px;
     grid-row: 2;
+
 `
 
 export const CharacterWrapper = styled.div`
@@ -92,4 +93,28 @@ export const DiceBox = styled.div`
         position: fixed;
         top: 78%
     }
+`
+
+export const FormGrid = styled.div`
+     display: grid;
+     grid-template-columns: 100px 1fr 100px;
+     grid-template-rows: 60px 1fr;
+     justify-content: center;
+
+     h1 {
+          grid-column: 2;
+          grid-row: 1;
+          text-align: center;
+     }
+`
+export const FormBox = styled.form`
+     grid-column: 2;
+     grid-row: 2;
+     justify-self: center;
+     
+     h2, input, select, button {
+          margin: 5px;
+          display: block;
+     }
+
 `
