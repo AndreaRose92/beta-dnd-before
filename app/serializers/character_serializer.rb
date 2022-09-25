@@ -1,11 +1,15 @@
 class CharacterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills, :image
+  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills, :image, :class_levels
   belongs_to :user
   has_one :dnd_class
   has_one :race
 
   def skills
     self.object.proficiencies.pluck(:name)
+  end
+
+  def class_levels
+    self.object.dnd_class.dnd_class_levels.limit(self.object.level)
   end
 
   def stats

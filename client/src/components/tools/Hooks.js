@@ -74,3 +74,37 @@ export const AuthRoutes = ({children, setUser}) => {
 export const capitalize = string => {
     return (string.charAt(0).toUpperCase()+string.slice(1))
 }
+
+export const FullCaster = ({variant}) => {
+    return (
+        <>
+            <h3>Spell Slots per Spell Level</h3>
+            <div className="spellTable" variant={variant}>
+                <h4>1st</h4>
+                <h4>2nd</h4>
+                <h4>3rd</h4>
+                <h4>4th</h4>
+                <h4>5th</h4>
+                <h4>6th</h4>
+                <h4>7th</h4>
+                <h4>8th</h4>
+                <h4>9th</h4>
+            </div>
+        </>
+    )
+}
+
+export const HalfCaster = ({variant}) => {
+    return (
+        <>
+            <h3>Spell Slots per Spell Level</h3>
+            <div className="halfSpellTable" variant={variant}>
+                <h4>1st</h4>
+                <h4>2nd</h4>
+                <h4>3rd</h4>
+                <h4>4th</h4>
+                <h4>5th</h4>
+            </div>
+        </>
+    )
+}
