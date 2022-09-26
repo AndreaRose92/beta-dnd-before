@@ -3,7 +3,12 @@ class CreateRaces < ActiveRecord::Migration[7.0]
     create_table :races do |t|
       t.string :name
       t.string :url
-      t.string :ability_score_bonuses
+      t.integer :Strength
+      t.integer :Dexterity
+      t.integer :Constitution
+      t.integer :Intelligence
+      t.integer :Wisdom
+      t.integer :Charisma
       t.string :size
       t.string :languages
       t.string :traits

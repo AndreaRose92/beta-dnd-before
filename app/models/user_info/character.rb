@@ -14,6 +14,25 @@ class Character < ApplicationRecord
 
   attr_accessor :hp_option, :hp_values, :proficiency_choices
 
+  def str_bonus
+    self.Strength + self.race.Strength
+  end
+  def dex_bonus
+    self.Dexterity + self.race.Dexterity
+  end
+  def con_bonus
+    self.Constitution + self.race.Constitution
+  end
+  def int_bonus
+    self.Intelligence + self.race.Intelligence
+  end
+  def wis_bonus
+    self.Wisdom + self.race.Wisdom
+  end
+  def cha_bonus
+    self.Charisma + self.race.Charisma
+  end
+
   def stat_modifier number
     modifier = ((number-10)/2).floor
     if modifier > 0

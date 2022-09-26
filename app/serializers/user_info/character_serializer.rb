@@ -14,12 +14,12 @@ class CharacterSerializer < ActiveModel::Serializer
 
   def stats
     [
-      {name: "Strength", value: self.object.Strength, modifier: self.object.stat_modifier(self.object.Strength)},
-      {name: "Dexterity", value: self.object.Dexterity, modifier: self.object.stat_modifier(self.object.Dexterity)},
-      {name: "Constitution", value: self.object.Constitution, modifier: self.object.stat_modifier(self.object.Constitution)},
-      {name: "Intelligence", value: self.object.Intelligence, modifier: self.object.stat_modifier(self.object.Intelligence)},
-      {name: "Wisdom", value: self.object.Wisdom, modifier: self.object.stat_modifier(self.object.Wisdom)},
-      {name: "Charisma", value: self.object.Charisma, modifier: self.object.stat_modifier(self.object.Charisma)}
+      {name: "Strength", base_value: self.object.Strength, value: self.object.str_bonus, modifier: self.object.stat_modifier(self.object.str_bonus)},
+      {name: "Dexterity", base_value: self.object.Dexterity, value: self.object.dex_bonus, modifier: self.object.stat_modifier(self.object.dex_bonus)},
+      {name: "Constitution", base_value: self.object.Constitution, value: self.object.con_bonus, modifier: self.object.stat_modifier(self.object.con_bonus)},
+      {name: "Intelligence", base_value: self.object.Intelligence, value: self.object.int_bonus, modifier: self.object.stat_modifier(self.object.int_bonus)},
+      {name: "Wisdom", base_value: self.object.Wisdom, value: self.object.wis_bonus, modifier: self.object.stat_modifier(self.object.wis_bonus)},
+      {name: "Charisma", base_value: self.object.Charisma, value: self.object.cha_bonus, modifier: self.object.stat_modifier(self.object.cha_bonus)}
     ]
   end
 

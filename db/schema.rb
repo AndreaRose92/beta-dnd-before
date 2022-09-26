@@ -164,7 +164,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
   create_table "races", force: :cascade do |t|
     t.string "name"
     t.string "url"
-    t.string "ability_score_bonuses"
+    t.integer "Strength"
+    t.integer "Dexterity"
+    t.integer "Constitution"
+    t.integer "Intelligence"
+    t.integer "Wisdom"
+    t.integer "Charisma"
     t.string "size"
     t.string "languages"
     t.string "traits"

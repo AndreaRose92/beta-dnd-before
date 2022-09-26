@@ -35,7 +35,7 @@ const NavBar = ({user, setUser}) => {
                     {classLinks}
                 </DropDownContent>
             </DropDown>
-            <Logo as={NavLink} to='/new_character/basic' style={{"textAlign": "left", "marginLeft": "40px"}} ><h1>Test</h1></Logo>
+            <Logo as={NavLink} to='/test' style={{"textAlign": "left", "marginLeft": "40px"}} ><h1>Test</h1></Logo>
         </NavWrapper>
   )
 }

@@ -1,5 +1,8 @@
 require 'json'
 
+timeOne = Time.now.utc.to_i
+puts Time.now.utc.iso8601
+
 BardSlots = [[2,4,2,0,0,0,0,0,0,0,0],[2,5,3,0,0,0,0,0,0,0,0],[2,6,4,2,0,0,0,0,0,0,0],[3,7,4,3,0,0,0,0,0,0,0],[3,8,4,3,1,0,0,0,0,0,0],[3,9,4,3,2,0,0,0,0,0,0],[3,10,4,3,3,1,0,0,0,0,0],[3,11,4,3,3,2,0,0,0,0,0],[3,12,4,3,3,3,1,0,0,0,0],[3,14,4,3,3,3,2,0,0,0,0],[3,15,4,3,3,3,2,1,0,0,0],[3,15,4,3,3,3,2,1,0,0,0],[3,16,4,3,3,3,2,1,1,0,0],[3,18,4,3,3,3,2,1,1,0,0],[3,19,4,3,3,3,2,1,1,1,0],[3,19,4,3,3,3,2,1,1,1,0],[3,20,4,3,3,3,2,1,1,1,1],[3,22,4,3,3,3,2,1,1,1,1],[3,22,4,3,3,3,3,1,1,1,1],[3,22,4,3,3,3,3,2,1,1,1]
 ]
 
@@ -28,6 +31,60 @@ puts 'seeding users...'
 
 User.create(username: "AndreaRose", password: "420-password")
 User.create(username: "Samwise", password: "420-password")
+
+puts 'seeding races...'
+
+race_response = RestClient.get('http://www.dnd5eapi.co/api/races')
+races = JSON.parse(race_response)["results"]
+races.each { |r| 
+    Race.create(name: r["name"], url: r["url"])
+}
+
+Race.all.each { |race| 
+
+    def stat_name string
+        case string
+        when "STR"
+            stat = "Strength"
+        when "DEX"
+            stat = "Dexterity"
+        when "CON"
+            stat = "Constitution"
+        when "INT"
+            stat = "Intelligence"
+        when "WIS"
+            stat = "Wisdom"
+        when "CHA"
+            stat = "Charisma"
+        end
+        stat
+    end
+
+    response = RestClient.get("http://www.dnd5eapi.co#{race.url}")
+    data = JSON.parse(response)
+    Race.update(
+        size: data["size"],
+        languages: data["languages"].pluck("name").join(", "),
+        traits: data["traits"].pluck("name").join(", "),
+        speed: data["speed"]
+    )
+    data["ability_bonuses"].each do |stat|
+        case stat["ability_score"]["name"]
+        when "STR"
+            Race.update(Strength: stat["bonus"])
+        when "DEX"
+            Race.update(Dexterity: stat["bonus"])
+        when "CON"
+            Race.update(Constitution: stat["bonus"])
+        when "INT"
+            Race.update(Intelligence: stat["bonus"])
+        when "WIS"
+            Race.update(Wisdom: stat["bonus"])
+        when "CHA"
+            Race.update(Charisma: stat["bonus"])
+        end
+    end
+}
 
 puts 'seeding classes...'
 
@@ -184,26 +241,6 @@ DndClass.all.each do |dc|
     end
 end
 
-puts 'seeding races...'
-
-race_response = RestClient.get('http://www.dnd5eapi.co/api/races')
-races = JSON.parse(race_response)["results"]
-races.each { |r| 
-    Race.create(name: r["name"], url: r["url"])
-}
-
-Race.all.each { |race| 
-    response = RestClient.get("http://www.dnd5eapi.co#{race.url}")
-    data = JSON.parse(response)
-    Race.update(
-        ability_score_bonuses: data["ability_bonuses"].map {|ab| "#{ab["ability_score"]["name"]} +#{ab["bonus"]}"}.join(", "),
-        size: data["size"],
-        languages: data["languages"].pluck("name").join(", "),
-        traits: data["traits"].pluck("name").join(", "),
-        speed: data["speed"]
-    )
-}
-
 puts 'seeding skills...'
 
 skills = [{name: 'Acrobatics', stat: 'Dexterity'}, {name: 'Animal Handling', stat: 'Wisdom'}, {name: 'Arcana', stat: 'Intelligence'}, {name: 'Athletics', stat: 'Strength'}, {name: 'Deception', stat: 'Charisma'}, {name: 'History', stat: 'Intelligence'}, {name: 'Insight', stat: 'Wisdom'}, {name: 'Intimidation', stat: 'Charisma'}, {name: 'Investigation', stat: 'Intelligence'}, {name: 'Medicine', stat: 'Wisdom'}, {name: 'Nature', stat: 'Intelligence'}, {name: 'Perception', stat: 'Wisdom'}, {name: 'Performance', stat: 'Charisma'}, {name: 'Persuasion', stat: 'Charisma'}, {name: 'Religion', stat: 'Intelligence'}, {name: 'Sleight of Hand', stat: 'Dexterity'}, {name: 'Stealth', stat: 'Dexterity'}, {name: 'Survival', stat: 'Wisdom'}, {name: 'Strength Save', stat: 'Strength'}, {name: 'Dexterity Save', stat: 'Dexterity'}, {name: 'Constitution Save', stat: 'Constitution'}, {name: 'Intelligence Save', stat: 'Intelligence'}, {name: 'Wisdom Save', stat: 'Wisdom'}, {name: 'Charisma Save', stat: 'Charisma'}]
@@ -276,5 +313,8 @@ classes_with_spells.each do |c|
     end
 end
 
-puts 'done seeding'
+timeTwo = Time.now.utc.to_i
+puts Time.now.utc.iso8601
+puts "#{timeTwo - timeOne} seconds"
 
+puts 'done seeding'
