@@ -19,7 +19,7 @@ export const BarbarianRows = ({levels}) => {
                <TableRow key={level.level} level={level.level} variant="Barbarian">
                     <h2>{level.level}</h2>
                     <h2>{level.prof_bonus}</h2>
-                    <h2>{level.features}</h2>
+                    <h2>{level.features !== '' ? level.features : '-'}</h2>
                     <h2>{level.rage_count}</h2>
                     <h2>{level.rage_damage_bonus}</h2>
                </TableRow>

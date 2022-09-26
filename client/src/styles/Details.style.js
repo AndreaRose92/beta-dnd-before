@@ -32,13 +32,13 @@ export const TableHeader = styled.div`
                case 'Barbarian': return '1fr 1fr 2fr 1fr 1fr';
                case 'Bard': return '1fr 1fr 1fr 1fr 2fr 1fr 1fr 9fr';
                case 'Cleric': return '1fr 1fr 2.5fr 1fr 4.5fr';
-               case 'Druid': return '1fr 1fr 2fr 1fr 5fr';
-               case 'Fighter': return '1fr 1fr 4fr';
+               case 'Druid': return '1fr 1fr 2fr 1fr 9fr';
+               case 'Fighter': return '1fr 1fr 1fr 1fr 1fr 3fr';
                case 'Monk': return '1fr 1fr 1fr 1fr 1fr 4fr';
                case 'Paladin': return '1fr 1fr 3fr 2fr';
                case 'Ranger': return '1fr 1fr 3fr 1fr 2fr';
                case 'Rogue': return '1fr 1fr 1fr 3fr';
-               case 'Sorcerer': return '1fr 1fr 1fr 3fr 1fr 1fr 6fr';
+               case 'Sorcerer': return '1fr 1fr 1fr 1fr 3fr 1fr 1fr 9fr';
                case 'Warlock': return '1fr 1fr 3fr 1fr 1fr 1fr 1fr 1fr';
                case 'Wizard': return '1fr 1fr 3fr 1fr 6fr';
                default: return 'none';
@@ -63,7 +63,7 @@ export const TableHeader = styled.div`
                     case 'Bard': return "8";
                     case 'Cleric': return "5";
                     case 'Druid': return "5";
-                    case 'Sorcerer': return "7";
+                    case 'Sorcerer': return "8";
                     case 'Wizard': return "5";
                     default: return "none"
                }
@@ -105,13 +105,13 @@ export const TableRow = styled.div`
                case 'Barbarian': return '1fr 1fr 2fr 1fr 1fr';
                case 'Bard': return '1fr 1fr 1fr 1fr 2fr 1fr 1fr repeat(9, 1fr)';
                case 'Cleric': return '1fr 1fr 2.5fr 1fr repeat(9, .5fr)';
-               case 'Druid': return '1fr 1fr 2fr 1fr repeat(5, 1fr)';
-               case 'Fighter': return '1fr 1fr 4fr';
+               case 'Druid': return '1fr 1fr 2fr 1fr repeat(9, 1fr)';
+               case 'Fighter': return '1fr 1fr 1fr 1fr 1fr 3fr';
                case 'Monk': return '1fr 1fr 1fr 1fr 1fr 4fr';
                case 'Paladin': return '1fr 1fr 3fr repeat(5, 0.4fr)';
                case 'Ranger': return '1fr 1fr 3fr 1fr repeat(5, 0.4fr)';
                case 'Rogue': return '1fr 1fr 1fr 3fr';
-               case 'Sorcerer': return '1.5fr 1.5fr 1.5fr 3fr 1.5fr 1.5fr repeat(9, 1fr)';
+               case 'Sorcerer': return '1fr 1fr 1fr 1fr 3fr 1fr 1fr repeat(9, 1fr)';
                case 'Warlock': return '1fr 1fr 3fr 1fr 1fr 1fr 1fr 1fr';
                case 'Wizard': return '1.5fr 1.5fr 4.5fr 1.5fr repeat(9, 1fr)';
                default: return 'none'

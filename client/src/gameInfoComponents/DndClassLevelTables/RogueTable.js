@@ -1,33 +1,28 @@
-import React from 'react'
-import { TableRow } from '../../styles/Details.style'
+import React from 'react';
+import { TableRow } from '../../styles/Details.style';
 
 export const RogueHeader = () => {
-  return (
-    <React.Fragment>
-      
-      
-      <h2>Sneak Attack</h2>
-      <h2>Features</h2>
-    </React.Fragment>
-  )
-}
+	return (
+		<React.Fragment>
+			<h2>Sneak Attack</h2>
+			<h2>Features</h2>
+		</React.Fragment>
+	);
+};
 
-export const RogueRows = ({levels, spells}) => {
-  
-  const renderRows = levels && spells ? levels.map(level => {
+export const RogueRows = ({ levels }) => {
+	const renderRows = levels
+		? levels.map((level) => {
+				return (
+					<TableRow key={level.level} level={level.level} variant='Rogue'>
+						<h2>{level.level}</h2>
+						<h2>{level.prof_bonus}</h2>
+						<h2>{level.sneak_attack_dice_count}d{level.sneak_attack_dice_value}</h2>
+						<h2>{level.features !== '' ? level.features : '-'}</h2>
+					</TableRow>
+				);
+		  })
+		: null;
 
-    let spell = level ? spells[level.level - 1] : null
-
-    return (
-      <TableRow>
-      </TableRow>
-    )
-
-  }) : null
-  
-  return (
-       <React.Fragment>
-            {renderRows}
-       </React.Fragment>
-  )
-}
+	return <React.Fragment>{renderRows}</React.Fragment>;
+};

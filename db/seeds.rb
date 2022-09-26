@@ -139,8 +139,8 @@ DndClass.all.each do |dc|
             )
         when "Monk"
             new_level.update(
-                martial_arts_dice_count: class_specific["martial_arts_dice_count"],
-                martial_arts_dice_value: class_specific["martial_arts_dice_value"],
+                martial_arts_dice_count: class_specific["martial_arts"]["dice_count"],
+                martial_arts_dice_value: class_specific["martial_arts"]["dice_value"],
                 ki_points: class_specific["ki_points"],
                 unarmored_movement: class_specific["unarmored_movement"]
             )
@@ -155,8 +155,8 @@ DndClass.all.each do |dc|
             )
         when "Rogue"
             new_level.update(
-                sneak_attack_dice_count: class_specific["sneak_attack_dice_count"],
-                sneak_attack_dice_value: class_specific["sneak_attack_dice_value"]
+                sneak_attack_dice_count: class_specific["sneak_attack"]["dice_count"],
+                sneak_attack_dice_value: class_specific["sneak_attack"]["dice_value"]
             )
         when "Sorcerer"
             new_level.update(
@@ -277,3 +277,4 @@ classes_with_spells.each do |c|
 end
 
 puts 'done seeding'
+
