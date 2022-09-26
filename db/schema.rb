@@ -78,7 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
     t.integer "rage_count"
     t.integer "rage_damage_bonus"
     t.integer "brutal_critical_dice"
-    t.integer "baric_inspiration_die"
+    t.integer "bardic_inspiration_die"
     t.integer "song_of_rest_die"
     t.integer "magical_secrets_max_5"
     t.integer "magical_secrets_max_7"

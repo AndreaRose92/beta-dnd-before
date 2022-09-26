@@ -1,4 +1,5 @@
 import React from 'react'
+import { TableRow } from '../../styles/Details.style'
 
 export const RogueHeader = () => {
   return (
@@ -11,10 +12,22 @@ export const RogueHeader = () => {
   )
 }
 
-export const RogueRows = () => {
+export const RogueRows = ({levels, spells}) => {
+  
+  const renderRows = levels && spells ? levels.map(level => {
+
+    let spell = level ? spells[level.level - 1] : null
+
+    return (
+      <TableRow>
+      </TableRow>
+    )
+
+  }) : null
+  
   return (
        <React.Fragment>
-            <div>Rogue</div>
+            {renderRows}
        </React.Fragment>
   )
 }

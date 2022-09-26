@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { getRequest } from '../hookComponents/FetchTypes'
 import { DetailGrid, LevelsTable, TableGrid, TableHeader, TitleCard } from '../styles/Details.style'
 import * as All from './DndClassLevelTables/'
 import { useParams } from 'react-router-dom'
+import { capitalize } from '../hookComponents/Hooks'
 
 export const DndClassDetails = () => {
 
   const params = useParams()
 
   const [dndClassLevels, setDndClassLevels] = useState(null)
-  useEffect(()=>{getRequest(`/dnd_class_levels/${params.dnd_class}`, setDndClassLevels)},[params.dnd_class])
+  const [spellLevels, setSpellLevels] = useState(null)
+  
+  useEffect(()=>{
+    fetch(`/dnd_classes/${params.dnd_class}`)
+      .then(r=>{
+        if (r.ok) {
+          r.json().then(data=>{setDndClassLevels(data.levels); setSpellLevels(data.spell_levels)})
+        } else {
+          r.json().then(errors=>console.log(errors))
+        }
+      })
+  }, [params.dnd_class])
 
   const renderHeader = () => {
-    if (dndClassLevels !== null) {
-      switch (dndClassLevels[0].dnd_class.name) {
+    if (params.dnd_class !== null) {
+      switch (capitalize(params.dnd_class)) {
         case "Barbarian": return <All.BarbarianHeader />;
         case "Bard": return <All.BardHeader />;
         case "Cleric": return <All.ClericHeader />;
@@ -31,20 +42,20 @@ export const DndClassDetails = () => {
   }
 
   const renderRows = () => {
-    if (dndClassLevels !== null) {
-      switch (dndClassLevels[0].dnd_class.name) {
-        case "Barbarian": return <All.BarbarianRows levels={dndClassLevels}/>;
-        case "Bard": return <All.BardRows levels={dndClassLevels}/>;
-        case "Cleric": return <All.ClericRows levels={dndClassLevels}/>;
-        case "Druid": return <All.DruidRows levels={dndClassLevels}/>;
-        case "Fighter": return <All.FighterRows levels={dndClassLevels}/>;
-        case "Monk": return <All.MonkRows levels={dndClassLevels}/>;
-        case "Paladin": return <All.PaladinRows levels={dndClassLevels}/>;
-        case "Ranger": return <All.RangerRows levels={dndClassLevels}/>;
-        case "Rogue": return <All.RogueRows levels={dndClassLevels}/>;
-        case "Sorcerer": return <All.SorcererRows levels={dndClassLevels}/>;
-        case "Warlock": return <All.WarlockRows levels={dndClassLevels}/>;
-        case "Wizard": return <All.WizardRows levels={dndClassLevels}/>;
+    if (params.dnd_class !== null) {
+      switch (capitalize(params.dnd_class)) {
+        case "Barbarian": return <All.BarbarianRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Bard": return <All.BardRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Cleric": return <All.ClericRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Druid": return <All.DruidRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Fighter": return <All.FighterRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Monk": return <All.MonkRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Paladin": return <All.PaladinRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Ranger": return <All.RangerRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Rogue": return <All.RogueRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Sorcerer": return <All.SorcererRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Warlock": return <All.WarlockRows levels={dndClassLevels} spells={spellLevels}/>;
+        case "Wizard": return <All.WizardRows levels={dndClassLevels} spells={spellLevels}/>;
         default: return <h1>Damn Dude, you broke it!</h1>;
     }}
   }
@@ -56,10 +67,10 @@ export const DndClassDetails = () => {
   return (
     <DetailGrid>
       <TitleCard>
-        <h1>{dndClassLevels[0].dnd_class.name}</h1>
+        <h1>{capitalize(params.dnd_class)}</h1>
       </TitleCard>
       <LevelsTable>
-        <TableHeader variant={dndClassLevels[0].dnd_class.name}>
+        <TableHeader variant={capitalize(params.dnd_class)}>
           <h2>Level</h2>
           <h2>Prof Bonus</h2>
           {renderHeader()}

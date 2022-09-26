@@ -1,5 +1,6 @@
 import React from 'react'
 import {FullCaster} from '../../hookComponents/Hooks'
+import { TableRow } from '../../styles/Details.style'
 
 export const DruidHeader = () => {
   return (
@@ -11,10 +12,22 @@ export const DruidHeader = () => {
   )
 }
 
-export const DruidRows = () => {
+export const DruidRows = ({levels, spells}) => {
+  
+   const renderRows = levels && spells ? levels.map(level => {
+ 
+     let spell = level ? spells[level.level - 1] : null
+ 
+     return (
+       <TableRow>
+       </TableRow>
+     )
+ 
+   }) : null
+   
    return (
         <React.Fragment>
-             <div>Druid</div>
+             {renderRows}
         </React.Fragment>
    )
-}
+ }

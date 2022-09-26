@@ -1,4 +1,5 @@
 import React from 'react'
+import { TableRow } from '../../styles/Details.style'
 
 export const WarlockHeader = () => {
   return (
@@ -13,10 +14,22 @@ export const WarlockHeader = () => {
   )
 }
 
-export const WarlockRows = () => {
+export const WarlockRows = ({levels, spells}) => {
+  
+  const renderRows = levels && spells ? levels.map(level => {
+
+    let spell = level ? spells[level.level - 1] : null
+
+    return (
+      <TableRow>
+      </TableRow>
+    )
+
+  }) : null
+  
   return (
        <React.Fragment>
-            <div>Warlock</div>
+            {renderRows}
        </React.Fragment>
   )
 }

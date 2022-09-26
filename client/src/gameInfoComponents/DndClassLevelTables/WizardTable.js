@@ -1,4 +1,5 @@
 import React from 'react'
+import { TableRow } from '../../styles/Details.style'
 import {FullCaster} from '../../hookComponents/Hooks'
 
 export const WizardHeader = () => {
@@ -11,10 +12,22 @@ export const WizardHeader = () => {
   )
 }
 
-export const WizardRows = () => {
+export const WizardRows = ({levels, spells}) => {
+  
+  const renderRows = levels && spells ? levels.map(level => {
+
+    let spell = level ? spells[level.level - 1] : null
+
+    return (
+      <TableRow>
+      </TableRow>
+    )
+
+  }) : null
+  
   return (
        <React.Fragment>
-            <div>Wizard</div>
+            {renderRows}
        </React.Fragment>
   )
 }

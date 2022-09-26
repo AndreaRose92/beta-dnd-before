@@ -1,5 +1,6 @@
 import React from 'react'
 import {HalfCaster} from '../../hookComponents/Hooks'
+import { TableRow } from '../../styles/Details.style'
 
 export const PaladinHeader = () => {
   return (
@@ -10,10 +11,22 @@ export const PaladinHeader = () => {
   )
 }
 
-export const PaladinRows = () => {
+export const PaladinRows = ({levels, spells}) => {
+  
+  const renderRows = levels && spells ? levels.map(level => {
+
+    let spell = level ? spells[level.level - 1] : null
+
+    return (
+      <TableRow>
+      </TableRow>
+    )
+
+  }) : null
+  
   return (
        <React.Fragment>
-            <div>Paladin</div>
+            {renderRows}
        </React.Fragment>
   )
 }
