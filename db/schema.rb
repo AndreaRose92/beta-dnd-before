@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_26_002014) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
   create_table "char_skills", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "proficiency_id", null: false
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_002014) do
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_char_skills_on_character_id"
     t.index ["proficiency_id"], name: "index_char_skills_on_proficiency_id"
+  end
+
+  create_table "char_spells", force: :cascade do |t|
+    t.integer "character_id", null: false
+    t.integer "spell_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_char_spells_on_character_id"
+    t.index ["spell_id"], name: "index_char_spells_on_spell_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -49,6 +58,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_002014) do
     t.datetime "updated_at", null: false
     t.index ["dnd_class_id"], name: "index_class_skills_on_dnd_class_id"
     t.index ["proficiency_id"], name: "index_class_skills_on_proficiency_id"
+  end
+
+  create_table "class_spells", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
+    t.integer "spell_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_class_spells_on_dnd_class_id"
+    t.index ["spell_id"], name: "index_class_spells_on_spell_id"
   end
 
   create_table "dnd_class_levels", force: :cascade do |t|
@@ -173,6 +191,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_002014) do
     t.index ["dnd_class_id"], name: "index_spell_levels_on_dnd_class_id"
   end
 
+  create_table "spells", force: :cascade do |t|
+    t.string "name"
+    t.string "desc"
+    t.string "higher_level"
+    t.string "range"
+    t.boolean "ritual"
+    t.string "duration"
+    t.boolean "concentration"
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subraces", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
     t.string "name"
@@ -196,11 +227,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_002014) do
 
   add_foreign_key "char_skills", "characters"
   add_foreign_key "char_skills", "proficiencies"
+  add_foreign_key "char_spells", "characters"
+  add_foreign_key "char_spells", "spells"
   add_foreign_key "characters", "dnd_classes"
   add_foreign_key "characters", "races"
   add_foreign_key "characters", "users"
   add_foreign_key "class_skills", "dnd_classes"
   add_foreign_key "class_skills", "proficiencies"
+  add_foreign_key "class_spells", "dnd_classes"
+  add_foreign_key "class_spells", "spells"
   add_foreign_key "dnd_class_levels", "dnd_classes"
   add_foreign_key "race_skills", "proficiencies"
   add_foreign_key "race_skills", "races"

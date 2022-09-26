@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :char_spells
+  resources :class_spells
+  resources :spells
   resources :spell_levels
   resources :subraces
   resources :feats, only: [:index, :show]

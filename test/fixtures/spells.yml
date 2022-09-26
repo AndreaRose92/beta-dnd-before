@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  desc: MyString
+  higher_level: MyString
+  range: MyString
+  ritual: false
+  duration: MyString
+  concentration: false
+  level: 1
+
+two:
+  name: MyString
+  desc: MyString
+  higher_level: MyString
+  range: MyString
+  ritual: false
+  duration: MyString
+  concentration: false
+  level: 1

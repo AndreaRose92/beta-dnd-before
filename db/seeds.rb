@@ -37,7 +37,7 @@ skills = [{name: 'Acrobatics', stat: 'Dexterity'}, {name: 'Animal Handling', sta
 
 skills.each {|skill| Proficiency.create(name: skill[:name], stat: skill[:stat])}
 
-puts 'creating class/race/skill join tables...'
+puts 'seeding class/race/skill join tables...'
 
 class_skills = [[1,2],[1,4],[1,8],[1,11],[1,12],[1,18],[1,19],[1,21],[2,1],[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13],[2,14],[2,15],[2,16],[2,17],[2,18],[2,20],[2,24],[3,6],[3,7],[3,10],[3,14],[3,15],[3,23],[3,24],[4,3],[4,2],[4,7],[4,10],[4,11],[4,12],[4,15],[4,18],[4,22],[4,23],[5,1],[5,2],[5,4],[5,6],[5,7],[5,8],[5,9],[5,12],[5,18],[5,19],[5,21],[6,1],[6,4],[6,6],[6,7],[6,15],[6,17],[6,19],[6,20],[7,4],[7,7],[7,8],[7,10],[7,14],[7,15],[7,23],[7,24],[8,2],[8,4],[8,7],[8,9],[8,11],[8,12],[8,17],[8,18],[8,19],[8,20],[9,1],[9,4],[9,5],[9,7],[9,8],[9,9],[9,12],[9,13],[9,14],[9,16],[9,17],[9,20],[9,22],[10,3],[10,5],[10,7],[10,8],[10,14],[10,15],[10,21],[10,24],[11,3],[11,5],[11,6],[11,8],[11,9],[11,15],[11,23],[11,24],[12,3],[12,6],[12,7],[12,9],[12,10],[12,15],[12,22],[12,23]]
 class_skills.each {|cs| ClassSkill.create(dnd_class_id: cs[0], proficiency_id: cs[1])}
@@ -72,9 +72,10 @@ char_skills.each { |skill|
     CharSkill.create(character_id: skill[0], proficiency_id: skill[1])
 }
 
-puts 'seeding class levels...'
-
 DndClass.all.each do |dc| 
+
+    puts "seeding #{dc.name} levels..."
+
     20.times do |c|
         response = RestClient.get("http://dnd5eapi.co/api/classes/#{dc.name.downcase}/levels/#{c+1}")
         data = JSON.parse(response)
@@ -353,13 +354,44 @@ WizardSlots = [
     [5,0,4,3,3,3,3,2,2,1,1]
 ]
 
-BardSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-ClericSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-DruidSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-PaladinSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-RangerSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-SorcSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-WarlockSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-WizardSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+BardSlots.each do |level| SpellLevel.create(dnd_class_id: 2, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+ClericSlots.each do |level| SpellLevel.create(dnd_class_id: 3, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+DruidSlots.each do |level| SpellLevel.create(dnd_class_id: 4, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+PaladinSlots.each do |level| SpellLevel.create(dnd_class_id: 7, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+RangerSlots.each do |level| SpellLevel.create(dnd_class_id: 8, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+SorcSlots.each do |level| SpellLevel.create(dnd_class_id: 10, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+WarlockSlots.each do |level| SpellLevel.create(dnd_class_id: 11, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+WizardSlots.each do |level| SpellLevel.create(dnd_class_id: 12, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+
+puts 'seeding spells....'
+
+spells_response = RestClient.get("http://www.dnd5eapi.co/api/spells")
+spells_list = JSON.parse(spells_response)["results"]
+spells_list.each do |spell| 
+    spell_response = RestClient.get("https://www.dnd5eapi.co#{spell["url"]}")
+    spell = JSON.parse(spell_response)
+    Spell.create(
+        name: spell["name"],
+        desc: spell["desc"][0],
+        higher_level: spell["higher_level"],
+        range: spell["range"],
+        ritual: spell["ritual"],
+        duration: spell["duration"],
+        concentration: spell["concentration"],
+        level: spell["level"]
+    )
+end
+
+puts 'seeding class/spell join...'
+
+classes_with_spells = ['bard', 'cleric', 'druid', 'paladin', 'ranger','sorcerer','warlock','wizard']
+
+classes_with_spells.each do |c|
+    response = RestClient.get("https://www.dnd5eapi.co/api/classes/#{c}/spells")
+    spells = JSON.parse(response)["results"]
+    spells.each do |spell|
+        ClassSpell.create(dnd_class: DndClass.find_by(name: c.capitalize), spell: Spell.find_by(name: spell['name']))
+    end
+end
 
 puts 'done seeding'

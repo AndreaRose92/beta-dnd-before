@@ -1,6 +1,8 @@
 class Character < ApplicationRecord
   has_many :char_skills, dependent: :destroy
   has_many :proficiencies, through: :char_skills
+  has_many :char_spells, dependent: :destroy
+  has_many :spells, through: :char_spells
   belongs_to :user
   belongs_to :dnd_class
   belongs_to :race
