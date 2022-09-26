@@ -21,6 +21,7 @@ import { CharPageOne } from '../characterComponents/characterCreator/CharPageOne
 import { CharPageTwo } from '../characterComponents/characterCreator/CharPageTwo';
 import CharPageThree from '../characterComponents/characterCreator/CharPageThree';
 import { CharPageFour } from '../characterComponents/characterCreator/CharPageFour';
+import { StatTestSheet } from '../StatTestSheet';
 
 
 export const App = () => {
@@ -61,6 +62,7 @@ export const App = () => {
                               <Route exact path='skills' element={<CharPageThree />}/>
                               <Route exact path='review' element={<CharPageFour />}/>
                          </Route>
+                         <Route path ='test' element={<StatTestSheet />}/>
                     </Routes>
                </ContentWrapper>
                </PageWrapper>

@@ -15,20 +15,6 @@ class RacesController < ApplicationController
             race = Race.find_by(name: params[:id].capitalize)
         end
 
-        if race.size != nil
-            render json: race
-        else
-            response = RestClient.get(race_url)
-            data = JSON.parse(response)
-            race = Race.update(
-                ability_score_bonuses: data["ability_bonuses"].map {|ab| "#{ab["ability_score"]["name"]} +#{ab["bonus"]}"}.join(", "),
-                size: data["size"],
-                languages: data["languages"].pluck("name").join(", "),
-                traits: data["traits"].pluck("name").join(", "),
-                speed: data["speed"]
-                )
-            render json: race
-        end
     end
 
     private
