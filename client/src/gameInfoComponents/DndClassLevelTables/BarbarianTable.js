@@ -4,11 +4,11 @@ import { TableRow } from '../../styles/Details.style'
 export const BarbarianHeader = () => {
 
      return (
-          <>
+          <React.Fragment>
                <h2>Features</h2>
                <h2>Rages</h2>
                <h2>Rage Damage</h2>
-          </>
+          </React.Fragment>
      )
 }
 
@@ -31,6 +31,6 @@ export const BarbarianRows = ({levels}) => {
      })
      
      return (
-          <>{renderRows}</>
+          <React.Fragment>{renderRows}</React.Fragment>
      )
 }

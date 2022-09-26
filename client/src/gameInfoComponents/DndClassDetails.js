@@ -56,10 +56,7 @@ export const DndClassDetails = () => {
   return (
     <DetailGrid>
       <TitleCard>
-        <h1>Class Name</h1>
-        <h3>Features</h3>
-        <h3>Subclasses</h3>
-        <h3>Extras</h3>
+        <h1>{dndClassLevels[0].dnd_class.name}</h1>
       </TitleCard>
       <LevelsTable>
         <TableHeader variant={dndClassLevels[0].dnd_class.name}>

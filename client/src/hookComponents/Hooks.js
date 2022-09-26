@@ -70,7 +70,7 @@ export const AuthRoutes = ({ children, setUser }) => {
 		});
 	});
 
-	return <>{children}</>;
+	return <React.Fragment>{children}</React.Fragment>;
 };
 
 export const capitalize = (string) => {
@@ -79,7 +79,7 @@ export const capitalize = (string) => {
 
 export const FullCaster = ({ variant }) => {
 	return (
-		<>
+		<React.Fragment>
 			<h3>Spell Slots per Spell Level</h3>
 			<div className='spellTable' variant={variant}>
 				<h4>1st</h4>
@@ -92,13 +92,13 @@ export const FullCaster = ({ variant }) => {
 				<h4>8th</h4>
 				<h4>9th</h4>
 			</div>
-		</>
+		</React.Fragment>
 	);
 };
 
 export const HalfCaster = ({ variant }) => {
 	return (
-		<>
+		<React.Fragment>
 			<h3>Spell Slots per Spell Level</h3>
 			<div className='halfSpellTable' variant={variant}>
 				<h4>1st</h4>
@@ -107,6 +107,6 @@ export const HalfCaster = ({ variant }) => {
 				<h4>4th</h4>
 				<h4>5th</h4>
 			</div>
-		</>
+		</React.Fragment>
 	);
 };

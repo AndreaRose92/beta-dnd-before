@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :spell_levels
   resources :subraces
   resources :feats, only: [:index, :show]
   resources :equipment, only: [:index, :show]

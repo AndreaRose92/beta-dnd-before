@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_24_153140) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_002014) do
   create_table "char_skills", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "proficiency_id", null: false
@@ -53,12 +53,48 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_153140) do
 
   create_table "dnd_class_levels", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
+    t.string "features"
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
-    t.string "features"
-    t.string "class_specific"
-    t.string "spells"
+    t.integer "rage_count"
+    t.integer "rage_damage_bonus"
+    t.integer "brutal_critical_dice"
+    t.integer "baric_inspiration_die"
+    t.integer "song_of_rest_die"
+    t.integer "magical_secrets_max_5"
+    t.integer "magical_secrets_max_7"
+    t.integer "magical_secrets_max_9"
+    t.integer "channel_divinity_charges"
+    t.integer "destroy_undead_cr"
+    t.integer "wild_shape_max_cr"
+    t.boolean "wild_shape_swim"
+    t.boolean "wild_shape_fly"
+    t.integer "action_surges"
+    t.integer "indomitable_uses"
+    t.integer "extra_attacks"
+    t.integer "martial_arts_dice_count"
+    t.integer "martial_arts_dice_value"
+    t.integer "ki_points"
+    t.integer "unarmored_movement"
+    t.integer "aura_range"
+    t.integer "favored_enemies"
+    t.integer "favored_terrain"
+    t.integer "sneak_attack_dice_count"
+    t.integer "sneak_attack_dice_value"
+    t.integer "sorcery_points"
+    t.integer "metamagic_known"
+    t.integer "create_lvl_1_slot"
+    t.integer "create_lvl_2_slot"
+    t.integer "create_lvl_3_slot"
+    t.integer "create_lvl_4_slot"
+    t.integer "create_lvl_5_slot"
+    t.integer "invocations_known"
+    t.integer "mystic_arcanum_level_6"
+    t.integer "mystic_arcanum_level_7"
+    t.integer "mystic_arcanum_level_8"
+    t.integer "mystic_arcanum_level_9"
+    t.integer "arcane_recovery_levels"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dnd_class_id"], name: "index_dnd_class_levels_on_dnd_class_id"
@@ -119,6 +155,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_153140) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "spell_levels", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
+    t.integer "cantrips_known"
+    t.integer "spells_known"
+    t.integer "lvl_1"
+    t.integer "lvl_2"
+    t.integer "lvl_3"
+    t.integer "lvl_4"
+    t.integer "lvl_5"
+    t.integer "lvl_6"
+    t.integer "lvl_7"
+    t.integer "lvl_8"
+    t.integer "lvl_9"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_spell_levels_on_dnd_class_id"
+  end
+
   create_table "subraces", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
     t.string "name"
@@ -150,6 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_24_153140) do
   add_foreign_key "dnd_class_levels", "dnd_classes"
   add_foreign_key "race_skills", "proficiencies"
   add_foreign_key "race_skills", "races"
+  add_foreign_key "spell_levels", "dnd_classes"
   add_foreign_key "subraces", "dnd_classes"
   add_foreign_key "subraces", "races"
 end

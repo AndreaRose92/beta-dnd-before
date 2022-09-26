@@ -78,15 +78,288 @@ DndClass.all.each do |dc|
     20.times do |c|
         response = RestClient.get("http://dnd5eapi.co/api/classes/#{dc.name.downcase}/levels/#{c+1}")
         data = JSON.parse(response)
+        class_specific = data["class_specific"]
         new_level = DndClassLevel.create(
             level: data["level"],
-            prof_bonus: data["prof_bonus"],
             features: data["features"].pluck("name").join(", "),
-            class_specific: data["class_specific"].map{|k,v| "#{k}: #{v}"}.join(', '),
+            prof_bonus: data["prof_bonus"],
             ability_score_bonuses: data["ability_score_bonuses"],
             dnd_class_id: DndClass.find_by(name: "#{dc.name}").id
         )
+        case dc.name
+        when "Barbarian"
+            new_level.update(
+                rage_count: class_specific["rage_count"],
+                rage_damage_bonus: class_specific["rage_damage_bonus"],
+                brutal_critical_dice: class_specific["brutal_critical_dice"]
+            )
+        when "Bard"
+            new_level.update(
+                baric_inspiration_die: class_specific["bardic_inspiration_die"],
+                song_of_rest_die: class_specific["song_of_rest_die"],
+                magical_secrets_max_5: class_specific["magical_secrets_max_5"],
+                magical_secrets_max_7: class_specific["magical_secrets_max_7"],
+                magical_secrets_max_9: class_specific["magical_secrets_max_9"]
+            )
+        when "Cleric"
+            new_level.update(
+                channel_divinity_charges: class_specific["class_divinity_charges"],
+                destroy_undead_cr: class_specific["destroy_undead_cr"]
+            )
+        when "Druid"
+            new_level.update(
+                wild_shape_max_cr: class_specific["wild_shape_max_cr"],
+                wild_shape_swim: class_specific["wild_shape__swim"],
+                wild_shape_fly: class_specific["wild_shape_fly"]
+            )
+        when "Fighter"
+            new_level.update(
+                action_surges: class_specific["action_surges"],
+                indomitable_uses: class_specific["indomitable_uses"],
+                extra_attacks: class_specific["extra_attacks"]
+            )
+        when "Monk"
+            new_level.update(
+                martial_arts_dice_count: class_specific["martial_arts_dice_count"],
+                martial_arts_dice_value: class_specific["martial_arts_dice_value"],
+                ki_points: class_specific["ki_points"],
+                unarmored_movement: class_specific["unarmored_movement"]
+            )
+        when "Paladin"
+            new_level.update(
+                aura_range: class_specific["aura_range"]
+            )
+        when "Ranger"
+            new_level.update(
+                favored_enemies: class_specific["favored_enemies"],
+                favored_terrain: class_specific["favored_terrain"]
+            )
+        when "Rogue"
+            new_level.update(
+                sneak_attack_dice_count: class_specific["sneak_attack_dice_count"],
+                sneak_attack_dice_value: class_specific["sneak_attack_dice_value"]
+            )
+        when "Sorcerer"
+            new_level.update(
+                sorcery_points: class_specific["sorcery_points"],
+                metamagic_known: class_specific["metamagic_known"],
+                create_lvl_1_slot: class_specific["create_lvl_1_slot"],
+                create_lvl_2_slot: class_specific["create_lvl_2_slot"],
+                create_lvl_3_slot: class_specific["create_lvl_3_slot"],
+                create_lvl_4_slot: class_specific["create_lvl_4_slot"],
+                create_lvl_5_slot: class_specific["create_lvl_5_slot"]
+            )
+        when "Warlock"
+            new_level.update(
+                invocations_known: class_specific["invocations_known"],
+                mystic_arcanum_level_6: class_specific["mystic_arcanum_level_6"],
+                mystic_arcanum_level_7: class_specific["mystic_arcanum_level_7"],
+                mystic_arcanum_level_8: class_specific["mystic_arcanum_level_8"],
+                mystic_arcanum_level_9: class_specific["mystic_arcanum_level_9"]
+            )
+        when "Wizard"
+            new_level.update(
+                arcane_recovery_levels: class_specific["arcane_recovery_levels"]
+            )
+        end
     end
 end
+
+
+
+puts 'seeding spell table...'
+
+BardSlots = [
+    [2,4,2,0,0,0,0,0,0,0,0],
+    [2,5,3,0,0,0,0,0,0,0,0],
+    [2,6,4,2,0,0,0,0,0,0,0],
+    [3,7,4,3,0,0,0,0,0,0,0],
+    [3,8,4,3,1,0,0,0,0,0,0],
+    [3,9,4,3,2,0,0,0,0,0,0],
+    [3,10,4,3,3,1,0,0,0,0,0],
+    [3,11,4,3,3,2,0,0,0,0,0],
+    [3,12,4,3,3,3,1,0,0,0,0],
+    [3,14,4,3,3,3,2,0,0,0,0],
+    [3,15,4,3,3,3,2,1,0,0,0],
+    [3,15,4,3,3,3,2,1,0,0,0],
+    [3,16,4,3,3,3,2,1,1,0,0],
+    [3,18,4,3,3,3,2,1,1,0,0],
+    [3,19,4,3,3,3,2,1,1,1,0],
+    [3,19,4,3,3,3,2,1,1,1,0],
+    [3,20,4,3,3,3,2,1,1,1,1],
+    [3,22,4,3,3,3,2,1,1,1,1],
+    [3,22,4,3,3,3,3,1,1,1,1],
+    [3,22,4,3,3,3,3,2,1,1,1]
+]
+
+ClericSlots = [
+    [3,0,2,0,0,0,0,0,0,0,0],
+    [3,0,3,0,0,0,0,0,0,0,0],
+    [3,0,4,2,0,0,0,0,0,0,0],
+    [4,0,4,3,0,0,0,0,0,0,0],
+    [4,0,4,3,2,0,0,0,0,0,0],
+    [4,0,4,3,3,0,0,0,0,0,0],
+    [4,0,4,3,3,1,0,0,0,0,0],
+    [4,0,4,3,3,2,0,0,0,0,0],
+    [4,0,4,3,3,3,1,0,0,0,0],
+    [5,0,4,3,3,3,2,0,0,0,0],
+    [5,0,4,3,3,3,2,1,0,0,0],
+    [5,0,4,3,3,3,2,1,0,0,0],
+    [5,0,4,3,3,3,2,1,1,0,0],
+    [5,0,4,3,3,3,2,1,1,0,0],
+    [5,0,4,3,3,3,2,1,1,1,0],
+    [5,0,4,3,3,3,2,1,1,1,0],
+    [5,0,4,3,3,3,2,1,1,1,1],
+    [5,0,4,3,3,3,3,1,1,1,1],
+    [5,0,4,3,3,3,3,2,1,1,1],
+    [5,0,4,3,3,3,3,2,2,1,1]
+]
+
+DruidSlots = [
+    [2,0,2,0,0,0,0,0,0,0,0],
+    [2,0,3,0,0,0,0,0,0,0,0],
+    [2,0,4,2,0,0,0,0,0,0,0],
+    [3,0,4,3,0,0,0,0,0,0,0],
+    [3,0,4,3,2,0,0,0,0,0,0],
+    [3,0,4,3,3,0,0,0,0,0,0],
+    [3,0,4,3,3,1,0,0,0,0,0],
+    [3,0,4,3,3,2,0,0,0,0,0],
+    [3,0,4,3,3,3,1,0,0,0,0],
+    [4,0,4,3,3,3,2,0,0,0,0],
+    [4,0,4,3,3,3,2,1,0,0,0],
+    [4,0,4,3,3,3,2,1,0,0,0],
+    [4,0,4,3,3,3,2,1,1,0,0],
+    [4,0,4,3,3,3,2,1,1,0,0],
+    [4,0,4,3,3,3,2,1,1,1,0],
+    [4,0,4,3,3,3,2,1,1,1,0],
+    [4,0,4,3,3,3,2,1,1,1,1],
+    [4,0,4,3,3,3,3,1,1,1,1],
+    [4,0,4,3,3,3,3,2,1,1,1],
+    [4,0,4,3,3,3,3,2,2,1,1]
+]
+
+PaladinSlots = [
+    [0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,2,0,0,0,0,0,0,0,0],
+    [0,0,3,0,0,0,0,0,0,0,0],
+    [0,0,3,0,0,0,0,0,0,0,0],
+    [0,0,4,2,0,0,0,0,0,0,0],
+    [0,0,4,2,0,0,0,0,0,0,0],
+    [0,0,4,3,0,0,0,0,0,0,0],
+    [0,0,4,3,0,0,0,0,0,0,0],
+    [0,0,4,3,2,0,0,0,0,0,0],
+    [0,0,4,3,2,0,0,0,0,0,0],
+    [0,0,4,3,3,0,0,0,0,0,0],
+    [0,0,4,3,3,0,0,0,0,0,0],
+    [0,0,4,3,3,1,0,0,0,0,0],
+    [0,0,4,3,3,1,0,0,0,0,0],
+    [0,0,4,3,3,2,0,0,0,0,0],
+    [0,0,4,3,3,2,0,0,0,0,0],
+    [0,0,4,3,3,3,1,0,0,0,0],
+    [0,0,4,3,3,3,1,0,0,0,0],
+    [0,0,4,3,3,3,2,0,0,0,0],
+    [0,0,4,3,3,3,2,0,0,0,0]
+]
+
+RangerSlots = [
+    [0,0,0,0,0,0,0,0,0,0,0],
+    [0,2,2,0,0,0,0,0,0,0,0],
+    [0,3,3,0,0,0,0,0,0,0,0],
+    [0,3,3,0,0,0,0,0,0,0,0],
+    [0,4,4,2,0,0,0,0,0,0,0],
+    [0,4,4,2,0,0,0,0,0,0,0],
+    [0,5,4,3,0,0,0,0,0,0,0],
+    [0,5,4,3,0,0,0,0,0,0,0],
+    [0,6,4,3,2,0,0,0,0,0,0],
+    [0,6,4,3,2,0,0,0,0,0,0],
+    [0,7,4,3,3,0,0,0,0,0,0],
+    [0,7,4,3,3,0,0,0,0,0,0],
+    [0,8,4,3,3,1,0,0,0,0,0],
+    [0,8,4,3,3,1,0,0,0,0,0],
+    [0,9,4,3,3,2,0,0,0,0,0],
+    [0,9,4,3,3,2,0,0,0,0,0],
+    [0,10,4,3,3,3,1,0,0,0,0],
+    [0,10,4,3,3,3,1,0,0,0,0],
+    [0,11,4,3,3,3,2,0,0,0,0],
+    [0,11,4,3,3,3,2,0,0,0,0]
+]
+
+SorcSlots = [
+    [4,2,2,0,0,0,0,0,0,0,0],
+    [4,3,3,0,0,0,0,0,0,0,0],
+    [4,4,4,2,0,0,0,0,0,0,0],
+    [5,5,4,3,0,0,0,0,0,0,0],
+    [5,6,4,3,2,0,0,0,0,0,0],
+    [5,7,4,3,3,0,0,0,0,0,0],
+    [5,8,4,3,3,1,0,0,0,0,0],
+    [5,9,4,3,3,2,0,0,0,0,0],
+    [5,10,4,3,3,3,1,0,0,0,0],
+    [6,11,4,3,3,3,2,0,0,0,0],
+    [6,12,4,3,3,3,2,1,0,0,0],
+    [6,12,4,3,3,3,2,1,1,0,0],
+    [6,13,4,3,3,3,2,1,1,0,0],
+    [6,13,4,3,3,3,2,1,1,0,0],
+    [6,14,4,3,3,3,2,1,1,1,0],
+    [6,14,4,3,3,3,2,1,1,1,0],
+    [6,15,4,3,3,3,2,1,1,1,1],
+    [6,15,4,3,3,3,3,1,1,1,1],
+    [6,15,4,3,3,3,3,2,1,1,1],
+    [6,15,4,3,3,3,3,2,2,1,1]
+]
+
+WarlockSlots = [
+    [2,2,1,0,0,0,0,0,0,0,0],
+    [2,3,2,0,0,0,0,0,0,0,0],
+    [2,4,0,2,0,0,0,0,0,0,0],
+    [3,5,0,2,0,0,0,0,0,0,0],
+    [3,6,0,0,2,0,0,0,0,0,0],
+    [3,7,0,0,2,0,0,0,0,0,0],
+    [3,8,0,0,0,2,0,0,0,0,0],
+    [3,9,0,0,0,2,0,0,0,0,0],
+    [3,10,0,0,0,0,2,0,0,0,0],
+    [4,10,0,0,0,0,2,0,0,0,0],
+    [4,11,0,0,0,0,3,0,0,0,0],
+    [4,11,0,0,0,0,3,0,0,0,0],
+    [4,12,0,0,0,0,3,0,0,0,0],
+    [4,12,0,0,0,0,3,0,0,0,0],
+    [4,13,0,0,0,0,3,0,0,0,0],
+    [4,13,0,0,0,0,3,0,0,0,0],
+    [4,14,0,0,0,0,4,0,0,0,0],
+    [4,14,0,0,0,0,4,0,0,0,0],
+    [4,15,0,0,0,0,4,0,0,0,0],
+    [4,15,0,0,0,0,4,0,0,0,0]
+]
+
+WizardSlots = [
+    [3,0,2,0,0,0,0,0,0,0,0],
+    [3,0,3,0,0,0,0,0,0,0,0],
+    [3,0,4,2,0,0,0,0,0,0,0],
+    [4,0,4,3,0,0,0,0,0,0,0],
+    [4,0,4,3,2,0,0,0,0,0,0],
+    [4,0,4,3,3,0,0,0,0,0,0],
+    [4,0,4,3,3,1,0,0,0,0,0],
+    [4,0,4,3,3,2,0,0,0,0,0],
+    [4,0,4,3,3,3,1,0,0,0,0],
+    [5,0,4,3,3,3,2,0,0,0,0],
+    [5,0,4,3,3,3,2,1,0,0,0],
+    [5,0,4,3,3,3,2,1,0,0,0],
+    [5,0,4,3,3,3,2,1,1,0,0],
+    [5,0,4,3,3,3,2,1,1,0,0],
+    [5,0,4,3,3,3,2,1,1,1,0],
+    [5,0,4,3,3,3,2,1,1,1,0],
+    [5,0,4,3,3,3,2,1,1,1,1],
+    [5,0,4,3,3,3,2,1,1,1,1],
+    [5,0,4,3,3,3,3,2,1,1,1],
+    [5,0,4,3,3,3,3,2,2,1,1]
+]
+
+BardSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+ClericSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+DruidSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+PaladinSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+RangerSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+SorcSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+WarlockSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
+WizardSlots.each do |level| SpellLevel.create(dnd_class_id: 1, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
 
 puts 'done seeding'
