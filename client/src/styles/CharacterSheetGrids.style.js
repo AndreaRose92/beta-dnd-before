@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CSHeader = styled.section`
+export const CSHeader = styled.section`
   grid-row: 1;
   display: flex;
 
@@ -34,7 +34,7 @@ const CSHeader = styled.section`
   }
 `
 
-const StatBox = styled.section`
+export const StatBox = styled.section`
   margin: 5px 15px;
   border-radius: 10px;
   border: 2px outset #d4af37;
@@ -75,7 +75,7 @@ const StatBox = styled.section`
   
 `
 
-const AuxiliaryBox = styled.section`
+export const AuxiliaryBox = styled.section`
   margin: 5px;
   border-radius: 10px;
   border: 2px outset #d4af37;
@@ -103,7 +103,7 @@ const AuxiliaryBox = styled.section`
   }
 `
 
-const InspirationBox = styled.section`
+export const InspirationBox = styled.section`
   grid-area: in;
   margin: 5px;
   
@@ -132,7 +132,7 @@ const InspirationBox = styled.section`
   }
 `
 
-const HealthBox = styled.section`
+export const HealthBox = styled.section`
   grid-area: hb;
   margin: 5px;
   border-radius: 10px;
@@ -170,7 +170,7 @@ const HealthBox = styled.section`
   }
 `
 
-const SavingThrow = styled.section`
+export const SavingThrow = styled.section`
   grid-area: st;
   margin: 5px 15px;
   border-radius: 10px;
@@ -226,7 +226,7 @@ const SavingThrow = styled.section`
   }
 `
 
-const SensesBox = styled.section`
+export const SensesBox = styled.section`
   grid-area: sn;
   margin: 5px 15px;
   border-radius: 10px;
@@ -238,7 +238,7 @@ const SensesBox = styled.section`
   padding:20px;
 `
 
-const ProficiencyBox = styled.section`
+export const ProficiencyBox = styled.section`
   grid-area: pb;
   margin: 5px 15px;
   padding: 5px 10px;
@@ -271,7 +271,7 @@ const ProficiencyBox = styled.section`
   }
 `
 
-const InitiativeBox = styled.section`
+export const InitiativeBox = styled.section`
   grid-area: it;
   margin: 5px;
 
@@ -295,7 +295,7 @@ const InitiativeBox = styled.section`
   }
 `
 
-const ArmorClass = styled.section`
+export const ArmorClass = styled.section`
   grid-area: ac;
   margin: 5px;
   border-radius: 10px;
@@ -329,7 +329,7 @@ const ArmorClass = styled.section`
   }
 `
 
-const DefensesConditions = styled.section`
+export const DefensesConditions = styled.section`
   grid-area: dc;
   margin: 5px;
   border-radius: 10px;
@@ -342,7 +342,7 @@ const DefensesConditions = styled.section`
   padding: 2px 10px;
 `
 
-const EquipmentBox = styled.section`
+export const EquipmentBox = styled.section`
   grid-area: eb;
   margin: 5px;
   padding: 5px 10px;
@@ -359,7 +359,7 @@ const EquipmentBox = styled.section`
   }
 `
 
-const EquipmentWrap = styled.nav`
+export const EquipmentWrap = styled.nav`
   height: 300px;
   overflow-y: auto;
   
@@ -411,5 +411,3 @@ const EquipmentWrap = styled.nav`
     white-space: normal;
   }
 `
-
-export {StatBox, CSHeader, AuxiliaryBox, InspirationBox, HealthBox, SavingThrow, ProficiencyBox, EquipmentBox, EquipmentWrap, SensesBox, ArmorClass, DefensesConditions, InitiativeBox}

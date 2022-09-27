@@ -1,20 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getRequest } from '../hookComponents/FetchTypes';
-import { CharacterContext } from '../hookComponents/Hooks';
-import { CharacterGrid, CharacterWrapper } from '../styles/Grids.styles';
-import { ActionBox } from './characterSheetBoxes/ActionBox';
-import { CombatBox } from './characterSheetBoxes/CombatBox';
-import { SkillBox } from './characterSheetBoxes/SkillBox';
-import { Traits } from './characterSheetBoxes/Traits';
-import { SavingThrows } from './characterSheetBoxes/SavingThrows';
-import { HPBox } from './characterSheetBoxes/HPBox';
-import { AuxBox } from './characterSheetBoxes/AuxBox';
-import StatGrid from './characterSheetBoxes/StatGrid';
-import CharHeader from './characterSheetBoxes/CharHeader';
-import DiceLog from './characterSheetBoxes/DiceLog';
+import { CharacterGrid, CharacterWrapper } from '../styles';
+import { getRequest, CharacterContext } from '../hookComponents';
+import { ActionBox, CombatBox, SkillBox, Traits, SavingThrows, HPBox, AuxBox, StatGrid, CharHeader, DiceLog } from './characterSheetBoxes';
 
-const CharacterSheet = () => {
+export const CharacterSheet = () => {
     const params = useParams();
     const { character, setCharacter } = useContext(CharacterContext);
     const stats = character.name !== '' ? character.stats : [{ name: '', value: 0 }];
@@ -60,5 +50,3 @@ const CharacterSheet = () => {
         </CharacterWrapper>
     );
 };
-
-export default CharacterSheet;

@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-import { skills } from "../../hookComponents/miscData";
-import {DiceContext, diceRoll} from '../../hookComponents/PlayerEvents'
-import { ProficiencyBox } from "../../styles/CharacterSheetGrids.style";
-import { SkillButton }  from "../../styles/Buttons.style"
+import { skills, DiceContext, diceRoll } from "../../hookComponents";
+import { ProficiencyBox, SkillButton } from "../../styles";
 
 export const SkillBox = ({ isProficient, skillProficiency }) => {
 

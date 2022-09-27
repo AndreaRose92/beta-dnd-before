@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
-import { CharacterContext, damageTypeIcon } from '../../../hookComponents/Hooks'
-import { DiceContext, diceRoll } from '../../../hookComponents/PlayerEvents'
-import { SpellGrid, SpellHeader, SpellRow, SpellTable } from '../../../styles/ActionBox.style'
-import { SpellButton } from '../../../styles/Buttons.style'
+import { CharacterContext, damageTypeIcon, DiceContext, diceRoll } from '../../../hookComponents'
+import { SpellGrid, SpellHeader, SpellRow, SpellTable, SpellButton } from '../../../styles'
 
 export const SpellBook = () => {
   

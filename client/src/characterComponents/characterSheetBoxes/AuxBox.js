@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AuxiliaryBox, InspirationBox } from "../../styles/CharacterSheetGrids.style";
+import { AuxiliaryBox, InspirationBox } from "../../styles";
 
 export const AuxBox = ({ character, prof_bonus }) => {
     const [isInspired, setIsInspired] = useState(false);

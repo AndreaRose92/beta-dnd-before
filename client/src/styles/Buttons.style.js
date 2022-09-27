@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+export const Button = styled.button`
   display:flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@ const Button = styled.button`
   }
 `
 
-const HealthButton = styled.button`
+export const HealthButton = styled.button`
   display:flex;
   align-items: center;
   justify-content: center;
@@ -72,6 +72,3 @@ export const SpellButton = styled.h4`
     #fff 0%, #d4af37 80%);
   }
 `
-
-export { HealthButton }
-export default Button

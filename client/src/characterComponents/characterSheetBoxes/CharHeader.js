@@ -1,7 +1,7 @@
 import React from 'react'
-import { CSHeader } from '../../styles/CharacterSheetGrids.style'
+import { CSHeader } from '../../styles'
 
-const CharHeader = ({character}) => {
+export const CharHeader = ({character}) => {
   return (
     <CSHeader>
         <div className='CSHeader1'>
@@ -14,5 +14,3 @@ const CharHeader = ({character}) => {
     </CSHeader>
   )
 }
-
-export default CharHeader

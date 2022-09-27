@@ -1,4 +1,3 @@
-
 export const postRequest = (url, postObject, respFunc) => {
     fetch(url, {
         method: "POST",

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { StatBox } from '../../styles/CharacterSheetGrids.style';
-import { DiceContext, diceRoll } from '../../hookComponents/PlayerEvents';
+import { StatBox } from '../../styles';
+import { DiceContext, diceRoll } from '../../hookComponents';
 
-const StatGrid = ({stats}) => {
+export const StatGrid = ({stats}) => {
 
   const {diceHistory, setDiceHistory} = useContext(DiceContext)
 
@@ -33,5 +33,3 @@ const StatGrid = ({stats}) => {
     </React.Fragment>
   )
 }
-
-export default StatGrid

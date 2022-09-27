@@ -1,7 +1,7 @@
 
-import { Logout, NavButton } from "../hookComponents/Hooks"
-import CharacterCard from "../characterComponents/CharacterCard"
-import { NotFound } from "./NotFound"
+import { Logout, NavButton } from "../hookComponents"
+import { CharacterCard } from "../characterComponents"
+import { NotFound } from "./"
 
 
 export const UserPage = ({user, userCharacters, deleteCharacter}) => {

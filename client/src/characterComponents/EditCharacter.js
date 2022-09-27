@@ -1,11 +1,5 @@
-// import React, { useContext } from 'react'
-// import { CharacterContext } from '../hookComponents/Hooks'
 
-const EditCharacter = () => {
-
-  // const {character, setCharacter} = useContext(CharacterContext)
-
-
+export const EditCharacter = () => {
 
   return (
     <div>
@@ -13,5 +7,3 @@ const EditCharacter = () => {
     </div>
   )
 }
-
-export default EditCharacter

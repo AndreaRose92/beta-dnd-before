@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { UserContext } from "../hookComponents/Hooks"
+import { UserContext } from "../hookComponents"
 
 export const Root = () => {
 

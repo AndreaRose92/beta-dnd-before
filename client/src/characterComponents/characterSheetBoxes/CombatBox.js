@@ -1,5 +1,5 @@
 import React from "react";
-import { ArmorClass, DefensesConditions, InitiativeBox } from "../../styles/CharacterSheetGrids.style";
+import { ArmorClass, DefensesConditions, InitiativeBox } from "../../styles";
 
 export const CombatBox = ({ dex }) => {
     return (

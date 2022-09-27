@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getRequest } from "../hookComponents/FetchTypes"
-import { NavButton, capitalize } from "../hookComponents/Hooks"
+import { getRequest, NavButton, capitalize } from "../hookComponents"
 
 export const RaceDetail = () => {
 

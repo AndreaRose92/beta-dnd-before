@@ -1,5 +1,5 @@
 import React from "react"
-import { NavButton } from "../hookComponents/Hooks"
+import { NavButton } from "../hookComponents"
 
 
 export const NotFound = () => {

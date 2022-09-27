@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Button from "../../styles/Buttons.style"
-import { EquipmentBox } from "../../styles/CharacterSheetGrids.style"
+import { Button } from "../../styles"
+import { EquipmentBox } from "../../styles"
 import * as All from './actionBoxTabs'
 
 

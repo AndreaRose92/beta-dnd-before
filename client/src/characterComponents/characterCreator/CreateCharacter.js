@@ -1,10 +1,9 @@
 import { useContext, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { FormGrid } from '../../styles/Grids.styles'
-import { CharacterContext, UserContext } from '../../hookComponents/Hooks'
-import { blankCharacter } from '../../hookComponents/miscData'
+import { FormGrid } from '../../styles'
+import { CharacterContext, UserContext, blankCharacter } from '../../hookComponents'
 
-const CreateCharacter = () => {
+export const CreateCharacter = () => {
 
      const navigate = useNavigate()
      const {user} = useContext(UserContext)
@@ -109,5 +108,3 @@ const CreateCharacter = () => {
      )
 
 }
-
-export default CreateCharacter

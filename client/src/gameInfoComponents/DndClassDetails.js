@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { DetailGrid, LevelsTable, TableGrid, TableHeader, TitleCard } from '../styles/Details.style'
-import * as All from './DndClassLevelTables/'
 import { useParams } from 'react-router-dom'
-import { capitalize } from '../hookComponents/Hooks'
+import * as All from './DndClassLevelTables/'
+import { capitalize } from '../hookComponents'
+import { DetailGrid, LevelsTable, TableGrid, TableHeader, TitleCard } from '../styles'
 
 export const DndClassDetails = () => {
 

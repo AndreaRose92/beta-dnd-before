@@ -1,4 +1,4 @@
-import { SensesBox } from "../../styles/CharacterSheetGrids.style";
+import { SensesBox } from "../../styles";
 
 export const Traits = ({ character }) => {
     if (character.race.languages === null) {
