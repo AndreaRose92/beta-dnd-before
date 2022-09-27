@@ -2,6 +2,7 @@ class CreateSpellLevels < ActiveRecord::Migration[7.0]
   def change
     create_table :spell_levels do |t|
       t.belongs_to :dnd_class, null: false, foreign_key: true
+      t.integer :dnd_class_level
       t.integer :cantrips_known
       t.integer :spells_known
       t.integer :lvl_1

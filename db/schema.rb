@@ -185,6 +185,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
 
   create_table "spell_levels", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
+    t.integer "dnd_class_level"
     t.integer "cantrips_known"
     t.integer "spells_known"
     t.integer "lvl_1"

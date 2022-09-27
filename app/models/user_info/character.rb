@@ -1,11 +1,12 @@
 class Character < ApplicationRecord
+  belongs_to :user
+  belongs_to :dnd_class
+  belongs_to :race
+  has_many :spell_levels, through: :dnd_class
   has_many :char_skills, dependent: :destroy
   has_many :proficiencies, through: :char_skills
   has_many :char_spells, dependent: :destroy
   has_many :spells, through: :char_spells
-  belongs_to :user
-  belongs_to :dnd_class
-  belongs_to :race
 
   validates :name, :level, presence: true
   validates :dnd_class_id, inclusion: (1..12)
@@ -44,7 +45,7 @@ class Character < ApplicationRecord
     end
   end
 
-  def calculate_hp option, values = nil
+  def calculate_hp option = 'fixed', values = nil
      hit_die = self.dnd_class.hit_die
      modifier = self.stat_modifier(self.Constitution).to_i
 
@@ -60,6 +61,41 @@ class Character < ApplicationRecord
      end
 
      self.update(hp: total_hp, current_hp: total_hp)
+  end
+
+  def spells_by_class_and_level number
+    self.dnd_class.spells.where(level: number)
+  end
+
+  def spells_by_level number
+    self.spells.where(level: number)
+  end
+
+  def spellcasting_level
+    self.dnd_class.spell_levels.first(self.level).last
+  end
+
+  def assign_random_spells
+    cantrips = self.spells_by_class_and_level 0
+    available_spells = []
+    available_spells << self.spells_by_class_and_level 1
+    available_spells << self.spells_by_class_and_level 2
+    available_spells << self.spells_by_class_and_level 3
+    available_spells << self.spells_by_class_and_level 4
+    available_spells << self.spells_by_class_and_level 5
+    available_spells << self.spells_by_class_and_level 6
+    available_spells << self.spells_by_class_and_level 7
+    available_spells << self.spells_by_class_and_level 8
+    available_spells << self.spells_by_class_and_level 9
+
+    while self.spells_by_class_and_level(0).length < self.spellcasting_level.cantrips_known
+      CharSpell.create(character: self, spell: cantrips.sample)
+    end
+
+    while self.spells_by_class_and_level(!0) < self.spellcasting_level.spells_known
+      CharSpell.create(character: self, spell: available_spells.sample)
+    end
+
   end
 
 end

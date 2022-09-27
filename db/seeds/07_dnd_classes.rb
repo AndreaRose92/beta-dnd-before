@@ -1,7 +1,8 @@
-require_relative 'reference_data.rb'
+require './db/reference_data.rb'
 
 puts 'busting labor unions...'
 
+Character.destroy_all
 SpellLevel.destroy_all
 DndClassLevel.destroy_all
 ClassSpell.destroy_all
@@ -12,6 +13,7 @@ ClassSkill.reset_pk_sequence
 ClassSpell.reset_pk_sequence
 DndClassLevel.reset_pk_sequence
 SpellLevel.reset_pk_sequence
+Character.reset_pk_sequence
 
 puts 'gaining class consciousness...'
 
@@ -35,17 +37,6 @@ DndClass.find_by(name: "Wizard").update(hit_die: 6, recommended_stat_one: "Intel
 DndClass.all.each do |dc|
 
     def feature_filter name, array
-        # bard_filters = ["Bardic Inspiration", "Song of Rest", "Spellcasting"]
-        # cleric_filters = ["Channel Divinity", "Destroy Undead", "Spellcasting"]
-        # druid_filters = ["Wild Shape", "Spellcasting"]
-        # fighter_filters = ["Action Surge", "Extra Attack", "Indomitable"]
-        # monk_filters = ["Martial Arts", "Unarmored Movement"]
-        # paladin_filters = ["Spellcasting"]
-        # ranger_filters = ["Favored Enemy", "Spellcasting", "Natural Explorer"]
-        # rogue_filters = ["Sneak Attack"]
-        # sorcerer_filters = ["Spellcasting", "Flexible Casting", "Metamagic"]
-        # warlock_filters = ["Eldritch Invocations", "Mystic Arcanum"]
-        # wizard_filters = ["Spellcasting", "Arcane Recovery"]
         case name
         when "Barbarian"
             new_array = array
@@ -81,7 +72,6 @@ DndClass.all.each do |dc|
         response = RestClient.get("http://dnd5eapi.co/api/classes/#{dc.name.downcase}/levels/#{c+1}")
         data = JSON.parse(response)
         class_specific = data["class_specific"]
-        # byebug
         new_level = DndClassLevel.create(
             level: data["level"],
             features: feature_filter(dc.name, data["features"].pluck("name")).join(", "),
@@ -170,12 +160,9 @@ end
 
 puts 'seeding class proficiencies...'
 
-# class_skills = [[1,2],[1,4],[1,8],[1,11],[1,12],[1,18],[1,19],[1,21],[2,1],[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[2,8],[2,9],[2,10],[2,11],[2,12],[2,13],[2,14],[2,15],[2,16],[2,17],[2,18],[2,20],[2,24],[3,6],[3,7],[3,10],[3,14],[3,15],[3,23],[3,24],[4,3],[4,2],[4,7],[4,10],[4,11],[4,12],[4,15],[4,18],[4,22],[4,23],[5,1],[5,2],[5,4],[5,6],[5,7],[5,8],[5,9],[5,12],[5,18],[5,19],[5,21],[6,1],[6,4],[6,6],[6,7],[6,15],[6,17],[6,19],[6,20],[7,4],[7,7],[7,8],[7,10],[7,14],[7,15],[7,23],[7,24],[8,2],[8,4],[8,7],[8,9],[8,11],[8,12],[8,17],[8,18],[8,19],[8,20],[9,1],[9,4],[9,5],[9,7],[9,8],[9,9],[9,12],[9,13],[9,14],[9,16],[9,17],[9,20],[9,22],[10,3],[10,5],[10,7],[10,8],[10,14],[10,15],[10,21],[10,24],[11,3],[11,5],[11,6],[11,8],[11,9],[11,15],[11,23],[11,24],[12,3],[12,6],[12,7],[12,9],[12,10],[12,15],[12,22],[12,23]]
 $class_skills.each {|cs| ClassSkill.create(dnd_class_id: cs[0], proficiency_id: cs[1])}
 
 puts 'seeding class spell list...'
-
-# classes_with_spells = ['bard', 'cleric', 'druid', 'paladin', 'ranger','sorcerer','warlock','wizard']
 
 $classes_with_spells.each do |c|
     response = RestClient.get("https://www.dnd5eapi.co/api/classes/#{c}/spells")
@@ -184,25 +171,3 @@ $classes_with_spells.each do |c|
         ClassSpell.create(dnd_class: DndClass.find_by(name: c.capitalize), spell: Spell.find_by(name: spell['name']))
     end
 end
-
-puts 'seeding spell table...'
-
-$bardSlots.each do |level| SpellLevel.create(dnd_class_id: 2, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-$clericSlots.each do |level| SpellLevel.create(dnd_class_id: 3, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-$druidSlots.each do |level| SpellLevel.create(dnd_class_id: 4, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-$paladinSlots.each do |level| SpellLevel.create(dnd_class_id: 7, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-$rangerSlots.each do |level| SpellLevel.create(dnd_class_id: 8, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-$sorcererSlots.each do |level| SpellLevel.create(dnd_class_id: 10, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-$warlockSlots.each do |level| SpellLevel.create(dnd_class_id: 11, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-$wizardSlots.each do |level| SpellLevel.create(dnd_class_id: 12, cantrips_known: level[0], spells_known: level[1], lvl_1: level[2], lvl_2: level[3], lvl_3: level[4], lvl_4: level[5],lvl_5: level[6],lvl_6: level[7],lvl_7: level[8],lvl_8: level[9],lvl_9: level[10]) end
-
-
-
-# $bardSlots = [[2,4,2,0,0,0,0,0,0,0,0],[2,5,3,0,0,0,0,0,0,0,0],[2,6,4,2,0,0,0,0,0,0,0],[3,7,4,3,0,0,0,0,0,0,0],[3,8,4,3,1,0,0,0,0,0,0],[3,9,4,3,2,0,0,0,0,0,0],[3,10,4,3,3,1,0,0,0,0,0],[3,11,4,3,3,2,0,0,0,0,0],[3,12,4,3,3,3,1,0,0,0,0],[3,14,4,3,3,3,2,0,0,0,0],[3,15,4,3,3,3,2,1,0,0,0],[3,15,4,3,3,3,2,1,0,0,0],[3,16,4,3,3,3,2,1,1,0,0],[3,18,4,3,3,3,2,1,1,0,0],[3,19,4,3,3,3,2,1,1,1,0],[3,19,4,3,3,3,2,1,1,1,0],[3,20,4,3,3,3,2,1,1,1,1],[3,22,4,3,3,3,2,1,1,1,1],[3,22,4,3,3,3,3,1,1,1,1],[3,22,4,3,3,3,3,2,1,1,1]]
-# $clericSlots = [[3,0,2,0,0,0,0,0,0,0,0],[3,0,3,0,0,0,0,0,0,0,0],[3,0,4,2,0,0,0,0,0,0,0],[4,0,4,3,0,0,0,0,0,0,0],[4,0,4,3,2,0,0,0,0,0,0],[4,0,4,3,3,0,0,0,0,0,0],[4,0,4,3,3,1,0,0,0,0,0],[4,0,4,3,3,2,0,0,0,0,0],[4,0,4,3,3,3,1,0,0,0,0],[5,0,4,3,3,3,2,0,0,0,0],[5,0,4,3,3,3,2,1,0,0,0],[5,0,4,3,3,3,2,1,0,0,0],[5,0,4,3,3,3,2,1,1,0,0],[5,0,4,3,3,3,2,1,1,0,0],[5,0,4,3,3,3,2,1,1,1,0],[5,0,4,3,3,3,2,1,1,1,0],[5,0,4,3,3,3,2,1,1,1,1],[5,0,4,3,3,3,3,1,1,1,1],[5,0,4,3,3,3,3,2,1,1,1],[5,0,4,3,3,3,3,2,2,1,1]]
-# $druidSlots = [[2,0,2,0,0,0,0,0,0,0,0],[2,0,3,0,0,0,0,0,0,0,0],[2,0,4,2,0,0,0,0,0,0,0],[3,0,4,3,0,0,0,0,0,0,0],[3,0,4,3,2,0,0,0,0,0,0],[3,0,4,3,3,0,0,0,0,0,0],[3,0,4,3,3,1,0,0,0,0,0],[3,0,4,3,3,2,0,0,0,0,0],[3,0,4,3,3,3,1,0,0,0,0],[4,0,4,3,3,3,2,0,0,0,0],[4,0,4,3,3,3,2,1,0,0,0],[4,0,4,3,3,3,2,1,0,0,0],[4,0,4,3,3,3,2,1,1,0,0],[4,0,4,3,3,3,2,1,1,0,0],[4,0,4,3,3,3,2,1,1,1,0],[4,0,4,3,3,3,2,1,1,1,0],[4,0,4,3,3,3,2,1,1,1,1],[4,0,4,3,3,3,3,1,1,1,1],[4,0,4,3,3,3,3,2,1,1,1],[4,0,4,3,3,3,3,2,2,1,1]]
-# $paladinSlots = [[0,0,0,0,0,0,0,0,0,0,0],[0,0,2,0,0,0,0,0,0,0,0],[0,0,3,0,0,0,0,0,0,0,0],[0,0,3,0,0,0,0,0,0,0,0],[0,0,4,2,0,0,0,0,0,0,0],[0,0,4,2,0,0,0,0,0,0,0],[0,0,4,3,0,0,0,0,0,0,0],[0,0,4,3,0,0,0,0,0,0,0],[0,0,4,3,2,0,0,0,0,0,0],[0,0,4,3,2,0,0,0,0,0,0],[0,0,4,3,3,0,0,0,0,0,0],[0,0,4,3,3,0,0,0,0,0,0],[0,0,4,3,3,1,0,0,0,0,0],[0,0,4,3,3,1,0,0,0,0,0],[0,0,4,3,3,2,0,0,0,0,0],[0,0,4,3,3,2,0,0,0,0,0],[0,0,4,3,3,3,1,0,0,0,0],[0,0,4,3,3,3,1,0,0,0,0],[0,0,4,3,3,3,2,0,0,0,0],[0,0,4,3,3,3,2,0,0,0,0]]
-# $rangerSlots = [[0,0,0,0,0,0,0,0,0,0,0],[0,2,2,0,0,0,0,0,0,0,0],[0,3,3,0,0,0,0,0,0,0,0],[0,3,3,0,0,0,0,0,0,0,0],[0,4,4,2,0,0,0,0,0,0,0],[0,4,4,2,0,0,0,0,0,0,0],[0,5,4,3,0,0,0,0,0,0,0],[0,5,4,3,0,0,0,0,0,0,0],[0,6,4,3,2,0,0,0,0,0,0],[0,6,4,3,2,0,0,0,0,0,0],[0,7,4,3,3,0,0,0,0,0,0],[0,7,4,3,3,0,0,0,0,0,0],[0,8,4,3,3,1,0,0,0,0,0],[0,8,4,3,3,1,0,0,0,0,0],[0,9,4,3,3,2,0,0,0,0,0],[0,9,4,3,3,2,0,0,0,0,0],[0,10,4,3,3,3,1,0,0,0,0],[0,10,4,3,3,3,1,0,0,0,0],[0,11,4,3,3,3,2,0,0,0,0],[0,11,4,3,3,3,2,0,0,0,0]]
-# $sorcererSlots = [[4,2,2,0,0,0,0,0,0,0,0],[4,3,3,0,0,0,0,0,0,0,0],[4,4,4,2,0,0,0,0,0,0,0],[5,5,4,3,0,0,0,0,0,0,0],[5,6,4,3,2,0,0,0,0,0,0],[5,7,4,3,3,0,0,0,0,0,0],[5,8,4,3,3,1,0,0,0,0,0],[5,9,4,3,3,2,0,0,0,0,0],[5,10,4,3,3,3,1,0,0,0,0],[6,11,4,3,3,3,2,0,0,0,0],[6,12,4,3,3,3,2,1,0,0,0],[6,12,4,3,3,3,2,1,1,0,0],[6,13,4,3,3,3,2,1,1,0,0],[6,13,4,3,3,3,2,1,1,0,0],[6,14,4,3,3,3,2,1,1,1,0],[6,14,4,3,3,3,2,1,1,1,0],[6,15,4,3,3,3,2,1,1,1,1],[6,15,4,3,3,3,3,1,1,1,1],[6,15,4,3,3,3,3,2,1,1,1],[6,15,4,3,3,3,3,2,2,1,1]]
-# $warlockSlots = [[2,2,1,0,0,0,0,0,0,0,0],[2,3,2,0,0,0,0,0,0,0,0],[2,4,0,2,0,0,0,0,0,0,0],[3,5,0,2,0,0,0,0,0,0,0],[3,6,0,0,2,0,0,0,0,0,0],[3,7,0,0,2,0,0,0,0,0,0],[3,8,0,0,0,2,0,0,0,0,0],[3,9,0,0,0,2,0,0,0,0,0],[3,10,0,0,0,0,2,0,0,0,0],[4,10,0,0,0,0,2,0,0,0,0],[4,11,0,0,0,0,3,0,0,0,0],[4,11,0,0,0,0,3,0,0,0,0],[4,12,0,0,0,0,3,0,0,0,0],[4,12,0,0,0,0,3,0,0,0,0],[4,13,0,0,0,0,3,0,0,0,0],[4,13,0,0,0,0,3,0,0,0,0],[4,14,0,0,0,0,4,0,0,0,0],[4,14,0,0,0,0,4,0,0,0,0],[4,15,0,0,0,0,4,0,0,0,0],[4,15,0,0,0,0,4,0,0,0,0]]
-# $wizardSlots = [[3,0,2,0,0,0,0,0,0,0,0],[3,0,3,0,0,0,0,0,0,0,0],[3,0,4,2,0,0,0,0,0,0,0],[4,0,4,3,0,0,0,0,0,0,0],[4,0,4,3,2,0,0,0,0,0,0],[4,0,4,3,3,0,0,0,0,0,0],[4,0,4,3,3,1,0,0,0,0,0],[4,0,4,3,3,2,0,0,0,0,0],[4,0,4,3,3,3,1,0,0,0,0],[5,0,4,3,3,3,2,0,0,0,0],[5,0,4,3,3,3,2,1,0,0,0],[5,0,4,3,3,3,2,1,0,0,0],[5,0,4,3,3,3,2,1,1,0,0],[5,0,4,3,3,3,2,1,1,0,0],[5,0,4,3,3,3,2,1,1,1,0],[5,0,4,3,3,3,2,1,1,1,0],[5,0,4,3,3,3,2,1,1,1,1],[5,0,4,3,3,3,2,1,1,1,1],[5,0,4,3,3,3,3,2,1,1,1],[5,0,4,3,3,3,3,2,2,1,1]]
