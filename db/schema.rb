@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_27_154049) do
   create_table "char_skills", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "proficiency_id", null: false
@@ -183,6 +183,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "spell_damages", force: :cascade do |t|
+    t.integer "spell_id", null: false
+    t.string "damage_type"
+    t.string "slot_lvl_1"
+    t.string "slot_lvl_2"
+    t.string "slot_lvl_3"
+    t.string "slot_lvl_4"
+    t.string "slot_lvl_5"
+    t.string "slot_lvl_6"
+    t.string "slot_lvl_7"
+    t.string "slot_lvl_8"
+    t.string "slot_lvl_9"
+    t.string "char_lvl_1"
+    t.string "char_lvl_5"
+    t.string "char_lvl_11"
+    t.string "char_lvl_17"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spell_id"], name: "index_spell_damages_on_spell_id"
+  end
+
   create_table "spell_levels", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
     t.integer "dnd_class_level_id", null: false
@@ -214,6 +235,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
     t.integer "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "casting_time"
+    t.string "damage_type"
+    t.string "dc"
   end
 
   create_table "subraces", force: :cascade do |t|
@@ -254,6 +278,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
   add_foreign_key "dnd_class_levels", "dnd_classes"
   add_foreign_key "race_skills", "proficiencies"
   add_foreign_key "race_skills", "races"
+  add_foreign_key "spell_damages", "spells"
   add_foreign_key "spell_levels", "dnd_class_levels"
   add_foreign_key "spell_levels", "dnd_classes"
   add_foreign_key "subraces", "races"

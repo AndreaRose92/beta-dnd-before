@@ -157,17 +157,3 @@ DndClass.all.each do |dc|
         end
     end
 end
-
-puts 'seeding class proficiencies...'
-
-$class_skills.each {|cs| ClassSkill.create(dnd_class_id: cs[0], proficiency_id: cs[1])}
-
-puts 'seeding class spell list...'
-
-$classes_with_spells.each do |c|
-    response = RestClient.get("https://www.dnd5eapi.co/api/classes/#{c}/spells")
-    spells = JSON.parse(response)["results"]
-    spells.each do |spell|
-        ClassSpell.create(dnd_class: DndClass.find_by(name: c.capitalize), spell: Spell.find_by(name: spell['name']))
-    end
-end

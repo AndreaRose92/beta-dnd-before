@@ -111,11 +111,11 @@ class Character < ApplicationRecord
   end
 
   def known_spells
-    self.spells.where('level < ?', self.max_spell_level).filter{ |spell| spell.level != 0}
+    self.spells.where("level < ?", self.max_spell_level).filter { |spell| spell.level != 0 }
   end
 
   def possible_spells
-    self.dnd_class.spells.where('level < ?', self.max_spell_level).filter{ |spell| spell.level != 0}
+    self.dnd_class.spells.where("level < ?", self.max_spell_level).filter { |spell| spell.level != 0 }
   end
 
   def assign_random_spells

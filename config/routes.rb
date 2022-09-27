@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   delete '/logout', to: "sessions#destroy"
   get '/dnd_class_levels/:dnd_class', to: "dnd_class_levels#index"
   get '/dnd_class_levels/:dnd_class/:level_id', to: "dnd_class_levels#show"
+  get '/spells/damage/:spell_id', to: "spell_damages#show"
 end

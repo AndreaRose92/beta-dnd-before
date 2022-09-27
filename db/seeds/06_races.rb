@@ -81,6 +81,3 @@ subraces_data.each do |subrace|
         end
     end
 end
-
-race_skills = [[3, 12], [6, 8]]
-race_skills.each {|rs| RaceSkill.create(race_id: rs[0], proficiency_id: rs[1])}
