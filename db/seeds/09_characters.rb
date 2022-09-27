@@ -1,9 +1,12 @@
+
 puts 'flipping the table...'
 
+CharSpell.destroy_all
 CharSkill.destroy_all
 Character.destroy_all
 Character.reset_pk_sequence
 CharSkill.reset_pk_sequence
+CharSpell.reset_pk_sequence
 
 puts 'rolling a new adventuring party...'
 
@@ -21,3 +24,5 @@ char_skills.each { |skill|
 }
 
 
+puts Time.now.utc.iso8601
+time_two = Time.now.utc.to_i

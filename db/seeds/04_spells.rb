@@ -1,7 +1,13 @@
 puts 'burying arcane secrets...'
 
+SpellLevel.destroy_all
+ClassSpell.destroy_all
+CharSpell.destroy_all
 Spell.destroy_all
 Spell.reset_pk_sequence
+CharSpell.reset_pk_sequence
+ClassSpell.reset_pk_sequence
+SpellLevel.reset_pk_sequence
 
 puts 'discovering lost knowledge...'
 

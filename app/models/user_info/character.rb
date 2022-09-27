@@ -75,27 +75,27 @@ class Character < ApplicationRecord
     self.dnd_class.spell_levels.first(self.level).last
   end
 
-  def assign_random_spells
-    cantrips = self.spells_by_class_and_level 0
-    available_spells = []
-    available_spells << self.spells_by_class_and_level 1
-    available_spells << self.spells_by_class_and_level 2
-    available_spells << self.spells_by_class_and_level 3
-    available_spells << self.spells_by_class_and_level 4
-    available_spells << self.spells_by_class_and_level 5
-    available_spells << self.spells_by_class_and_level 6
-    available_spells << self.spells_by_class_and_level 7
-    available_spells << self.spells_by_class_and_level 8
-    available_spells << self.spells_by_class_and_level 9
+  # def assign_random_spells
+  #   cantrips = self.spells_by_class_and_level(0)
+  #   available_spells = []
+  #   available_spells << self.spells_by_class_and_level(1)
+  #   available_spells << self.spells_by_class_and_level(2)
+  #   available_spells << self.spells_by_class_and_level(3)
+  #   available_spells << self.spells_by_class_and_level(4)
+  #   available_spells << self.spells_by_class_and_level(5)
+  #   available_spells << self.spells_by_class_and_level(6)
+  #   available_spells << self.spells_by_class_and_level(7)
+  #   available_spells << self.spells_by_class_and_level(8)
+  #   available_spells << self.spells_by_class_and_level(9)
 
-    while self.spells_by_class_and_level(0).length < self.spellcasting_level.cantrips_known
-      CharSpell.create(character: self, spell: cantrips.sample)
-    end
+  #   while self.spells_by_class_and_level(0).length < self.spellcasting_level.cantrips_known
+  #     CharSpell.create(character: self, spell: cantrips.sample)
+  #   end
 
-    while self.spells_by_class_and_level(!0) < self.spellcasting_level.spells_known
-      CharSpell.create(character: self, spell: available_spells.sample)
-    end
+  #   while self.spells_by_class_and_level(!0) < self.spellcasting_level.spells_known
+  #     CharSpell.create(character: self, spell: available_spells.sample)
+  #   end
 
-  end
+  # end
 
 end
