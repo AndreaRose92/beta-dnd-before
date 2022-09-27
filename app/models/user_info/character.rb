@@ -15,22 +15,22 @@ class Character < ApplicationRecord
   attr_accessor :hp_option, :hp_values, :proficiency_choices
 
   def str_bonus
-    self.Strength + self.race.Strength
+    if self.race.Strength then self.Strength + self.race.Strength else self.Strength end
   end
   def dex_bonus
-    self.Dexterity + self.race.Dexterity
+    if self.race.Dexterity then self.Dexterity + self.race.Dexterity else self.Dexterity end
   end
   def con_bonus
-    self.Constitution + self.race.Constitution
+    if self.race.Constitution then self.Constitution + self.race.Constitution else self.Constitution end
   end
   def int_bonus
-    self.Intelligence + self.race.Intelligence
+    if self.race.Intelligence then self.Intelligence + self.race.Intelligence else self.Intelligence end
   end
   def wis_bonus
-    self.Wisdom + self.race.Wisdom
+    if self.race.Wisdom then self.Wisdom + self.race.Wisdom else self.Wisdom end
   end
   def cha_bonus
-    self.Charisma + self.race.Charisma
+    if self.race.Charisma then self.Charisma + self.race.Charisma else self.Charisma end
   end
 
   def stat_modifier number

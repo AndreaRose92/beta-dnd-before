@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :feats
+  resources :equipment
   resources :char_spells
   resources :class_spells
   resources :spells

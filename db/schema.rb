@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
   create_table "char_skills", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "proficiency_id", null: false
@@ -131,7 +131,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
 
   create_table "equipment", force: :cascade do |t|
     t.string "name"
-    t.string "weapon_type"
+    t.string "url"
+    t.string "weapon_category"
+    t.string "weapon_range"
     t.integer "dSize"
     t.integer "dAmt"
     t.string "damage_type"
@@ -141,6 +143,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
   end
 
   create_table "feats", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "prerequisites"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -210,16 +215,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
   end
 
   create_table "subraces", force: :cascade do |t|
-    t.integer "dnd_class_id", null: false
-    t.string "name"
     t.integer "race_id", null: false
+    t.string "name"
     t.string "url"
-    t.string "ability_score_bonuses"
     t.string "languages"
     t.string "traits"
+    t.integer "Strength"
+    t.integer "Dexterity"
+    t.integer "Constitution"
+    t.integer "Intelligence"
+    t.integer "Wisdom"
+    t.integer "Charisma"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dnd_class_id"], name: "index_subraces_on_dnd_class_id"
     t.index ["race_id"], name: "index_subraces_on_race_id"
   end
 
@@ -245,6 +253,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_133406) do
   add_foreign_key "race_skills", "proficiencies"
   add_foreign_key "race_skills", "races"
   add_foreign_key "spell_levels", "dnd_classes"
-  add_foreign_key "subraces", "dnd_classes"
   add_foreign_key "subraces", "races"
 end
