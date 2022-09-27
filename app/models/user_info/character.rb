@@ -15,27 +15,36 @@ class Character < ApplicationRecord
 
   attr_accessor :hp_option, :hp_values, :proficiency_choices
 
-  def str_bonus
-    if self.race.Strength then self.Strength + self.race.Strength else self.Strength end
-  end
-  def dex_bonus
-    if self.race.Dexterity then self.Dexterity + self.race.Dexterity else self.Dexterity end
-  end
-  def con_bonus
-    if self.race.Constitution then self.Constitution + self.race.Constitution else self.Constitution end
-  end
-  def int_bonus
-    if self.race.Intelligence then self.Intelligence + self.race.Intelligence else self.Intelligence end
-  end
-  def wis_bonus
-    if self.race.Wisdom then self.Wisdom + self.race.Wisdom else self.Wisdom end
-  end
-  def cha_bonus
-    if self.race.Charisma then self.Charisma + self.race.Charisma else self.Charisma end
+  def class_level
+    self.dnd_class.dnd_class_levels.find_by(level: self.level)
   end
 
-  def stat_modifier number
-    modifier = ((number-10)/2).floor
+  def str_bonus
+    self.Strength + self.race.Strength
+  end
+
+  def dex_bonus
+    self.Dexterity + self.race.Dexterity
+  end
+
+  def con_bonus
+    self.Constitution + self.race.Constitution
+  end
+
+  def int_bonus
+    self.Intelligence + self.race.Intelligence
+  end
+
+  def wis_bonus
+    self.Wisdom + self.race.Wisdom
+  end
+
+  def cha_bonus
+    self.Charisma + self.race.Charisma
+  end
+
+  def stat_modifier(number)
+    modifier = ((number - 10) / 2).floor
     if modifier > 0
       "+#{modifier}"
     elsif modifier < 0
@@ -45,57 +54,80 @@ class Character < ApplicationRecord
     end
   end
 
-  def calculate_hp option = 'fixed', values = nil
-     hit_die = self.dnd_class.hit_die
-     modifier = self.stat_modifier(self.Constitution).to_i
-
-     base_hp = (hit_die + modifier)
-     avg_hit_die = ((hit_die + 1)/2)
-
-     if option == 'fixed'
-          total_hp = (avg_hit_die + modifier) * (self.level - 1) + base_hp
-     elsif option == 'rolled'
-          total_hp = values.sum + (modifier * (self.level - 1)) + base_hp
-     elsif
-          total_hp = base_hp
-     end
-
-     self.update(hp: total_hp, current_hp: total_hp)
+  def calculate_hp(option = "fixed", values = nil)
+    hit_die = self.dnd_class.hit_die
+    modifier = self.stat_modifier(self.Constitution).to_i
+    base_hp = (hit_die + modifier)
+    avg_hit_die = ((hit_die + 1) / 2)
+    if option == "fixed"
+      total_hp = (avg_hit_die + modifier) * (self.level - 1) + base_hp
+    elsif option == "rolled"
+      total_hp = values.sum + (modifier * (self.level - 1)) + base_hp
+    elsif total_hp = base_hp
+    end
+    self.update(hp: total_hp, current_hp: total_hp)
   end
 
-  def spells_by_class_and_level number
+  def spells_by_class_and_level(number)
     self.dnd_class.spells.where(level: number)
   end
 
-  def spells_by_level number
+  def spells_by_level(number)
     self.spells.where(level: number)
   end
 
   def spellcasting_level
-    self.dnd_class.spell_levels.first(self.level).last
+    self.class_level.spell_level
   end
 
-  # def assign_random_spells
-  #   cantrips = self.spells_by_class_and_level(0)
-  #   available_spells = []
-  #   available_spells << self.spells_by_class_and_level(1)
-  #   available_spells << self.spells_by_class_and_level(2)
-  #   available_spells << self.spells_by_class_and_level(3)
-  #   available_spells << self.spells_by_class_and_level(4)
-  #   available_spells << self.spells_by_class_and_level(5)
-  #   available_spells << self.spells_by_class_and_level(6)
-  #   available_spells << self.spells_by_class_and_level(7)
-  #   available_spells << self.spells_by_class_and_level(8)
-  #   available_spells << self.spells_by_class_and_level(9)
+  def max_spell_level
+    if self.spellcasting_level.lvl_9 > 0
+      return 9
+    elsif self.spellcasting_level.lvl_8 > 0
+      return 8
+    elsif self.spellcasting_level.lvl_7 > 0
+      return 7
+    elsif self.spellcasting_level.lvl_6 > 0
+      return 6
+    elsif self.spellcasting_level.lvl_5 > 0
+      return 5
+    elsif self.spellcasting_level.lvl_4 > 0
+      return 4
+    elsif self.spellcasting_level.lvl_3 > 0
+      return 3
+    elsif self.spellcasting_level.lvl_2 > 0
+      return 2
+    elsif self.spellcasting_level.lvl_1 > 0
+      return 1
+    end
+  end
 
-  #   while self.spells_by_class_and_level(0).length < self.spellcasting_level.cantrips_known
-  #     CharSpell.create(character: self, spell: cantrips.sample)
-  #   end
+  def cantrips
+    self.spells.where(level: 0)
+  end
 
-  #   while self.spells_by_class_and_level(!0) < self.spellcasting_level.spells_known
-  #     CharSpell.create(character: self, spell: available_spells.sample)
-  #   end
+  def possible_cantrips
+    self.dnd_class.spells.where(level: 0)
+  end
 
-  # end
+  def known_spells
+    self.spells.where('level < ?', self.max_spell_level).filter{ |spell| spell.level != 0}
+  end
 
+  def possible_spells
+    self.dnd_class.spells.where('level < ?', self.max_spell_level).filter{ |spell| spell.level != 0}
+  end
+
+  def assign_random_spells
+    if self.possible_cantrips.length > 0
+      while self.cantrips.length < self.spellcasting_level.cantrips_known
+        new_cantrip = CharSpell.create(character: self, spell: self.possible_cantrips.sample)
+      end
+    end
+    if self.possible_spells.length > 0
+      while self.known_spells.size < self.spellcasting_level.spells_known
+        new_spell = CharSpell.create(character: self, spell: self.possible_spells.sample)
+      end
+    end
+  end
 end

@@ -1,8 +1,40 @@
 class CharacterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills, :image, :class_levels, :spellcasting_level
+  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills, :image, :class_levels, :spellcasting_level, :cantrips, :lvl_1_spells, :lvl_2_spells, :lvl_3_spells,  :lvl_4_spells,  :lvl_5_spells,  :lvl_6_spells,  :lvl_7_spells,  :lvl_8_spells,  :lvl_9_spells
   belongs_to :user
   has_one :dnd_class
   has_one :race
+
+  def cantrips
+    self.object.spells.where(level: 0)
+  end
+
+  def lvl_1_spells
+    self.object.spells.where(level: 1)
+  end
+  def lvl_2_spells
+    self.object.spells.where(level: 2)
+  end
+  def lvl_3_spells
+    self.object.spells.where(level: 3)
+  end
+  def lvl_4_spells
+    self.object.spells.where(level: 4)
+  end
+  def lvl_5_spells
+    self.object.spells.where(level: 5)
+  end
+  def lvl_6_spells
+    self.object.spells.where(level: 6)
+  end
+  def lvl_7_spells
+    self.object.spells.where(level: 7)
+  end
+  def lvl_8_spells
+    self.object.spells.where(level: 8)
+  end
+  def lvl_9_spells
+    self.object.spells.where(level: 9)
+  end
 
   def skills
     self.object.proficiencies.pluck(:name)

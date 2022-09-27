@@ -6,10 +6,10 @@ SpellLevel.destroy_all
 SpellLevel.reset_pk_sequence
 
 puts "seeding spell table..."
-$bardSlots.size.times do |c| 
-    lvl = $bardSlots[c]
+$bardSlots.size.times do |c|
+  lvl = $bardSlots[c]
   splvl = SpellLevel.create(
-    dnd_class_id: 2,
+    dnd_class: $bard,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -21,7 +21,7 @@ $bardSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $bard.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)
@@ -30,10 +30,10 @@ $bardSlots.size.times do |c|
     splvl.update(spells_known: nil)
   end
 end
-$clericSlots.size.times do |c| 
-    lvl = $clericSlots[c]
-    splvl = SpellLevel.create(
-    dnd_class_id: 3,
+$clericSlots.size.times do |c|
+  lvl = $clericSlots[c]
+  splvl = SpellLevel.create(
+    dnd_class:$cleric,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -45,7 +45,7 @@ $clericSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $cleric.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)
@@ -54,10 +54,10 @@ $clericSlots.size.times do |c|
     splvl.update(spells_known: nil)
   end
 end
-$druidSlots.size.times do |c| 
-    lvl = $druidSlots[c]
-    splvl = SpellLevel.create(
-    dnd_class_id: 4,
+$druidSlots.size.times do |c|
+  lvl = $druidSlots[c]
+  splvl = SpellLevel.create(
+    dnd_class:$druid,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -69,7 +69,7 @@ $druidSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $druid.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)
@@ -78,10 +78,10 @@ $druidSlots.size.times do |c|
     splvl.update(spells_known: nil)
   end
 end
-$paladinSlots.size.times do |c| 
-    lvl = $paladinSlots[c]
-    splvl = SpellLevel.create(
-    dnd_class_id: 7,
+$paladinSlots.size.times do |c|
+  lvl = $paladinSlots[c]
+  splvl = SpellLevel.create(
+    dnd_class:$paladin,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -93,7 +93,7 @@ $paladinSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $paladin.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)
@@ -102,10 +102,10 @@ $paladinSlots.size.times do |c|
     splvl.update(spells_known: nil)
   end
 end
-$rangerSlots.size.times do |c| 
-    lvl = $rangerSlots[c]
-    splvl = SpellLevel.create(
-    dnd_class_id: 8,
+$rangerSlots.size.times do |c|
+  lvl = $rangerSlots[c]
+  splvl = SpellLevel.create(
+    dnd_class:$ranger,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -117,7 +117,7 @@ $rangerSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $ranger.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)
@@ -126,10 +126,10 @@ $rangerSlots.size.times do |c|
     splvl.update(spells_known: nil)
   end
 end
-$sorcererSlots.size.times do |c| 
-    lvl = $sorcererSlots[c]
-    splvl = SpellLevel.create(
-    dnd_class_id: 10,
+$sorcererSlots.size.times do |c|
+  lvl = $sorcererSlots[c]
+  splvl = SpellLevel.create(
+    dnd_class:$sorcerer,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -141,7 +141,7 @@ $sorcererSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $sorcerer.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)
@@ -150,10 +150,10 @@ $sorcererSlots.size.times do |c|
     splvl.update(spells_known: nil)
   end
 end
-$warlockSlots.size.times do |c| 
-    lvl = $warlockSlots[c]
-    splvl = SpellLevel.create(
-    dnd_class_id: 11,
+$warlockSlots.size.times do |c|
+  lvl = $warlockSlots[c]
+  splvl = SpellLevel.create(
+    dnd_class:$warlock,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -165,7 +165,7 @@ $warlockSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $warlock.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)
@@ -174,10 +174,10 @@ $warlockSlots.size.times do |c|
     splvl.update(spells_known: nil)
   end
 end
-$wizardSlots.size.times do |c| 
-    lvl = $wizardSlots[c]
-    splvl = SpellLevel.create(
-    dnd_class_id: 12,
+$wizardSlots.size.times do |c|
+  lvl = $wizardSlots[c]
+  splvl = SpellLevel.create(
+    dnd_class:$wizard,
     cantrips_known: lvl[0],
     spells_known: lvl[1],
     lvl_1: lvl[2],
@@ -189,7 +189,7 @@ $wizardSlots.size.times do |c|
     lvl_7: lvl[8],
     lvl_8: lvl[9],
     lvl_9: lvl[10],
-    dnd_class_level: c+1
+    dnd_class_level: $wizard.dnd_class_levels.find_by(level: c+1)
   )
   if splvl.cantrips_known == 0
     splvl.update(cantrips_known: nil)

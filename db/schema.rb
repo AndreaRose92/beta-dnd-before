@@ -185,7 +185,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
 
   create_table "spell_levels", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
-    t.integer "dnd_class_level"
+    t.integer "dnd_class_level_id", null: false
     t.integer "cantrips_known"
     t.integer "spells_known"
     t.integer "lvl_1"
@@ -200,6 +200,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dnd_class_id"], name: "index_spell_levels_on_dnd_class_id"
+    t.index ["dnd_class_level_id"], name: "index_spell_levels_on_dnd_class_level_id"
   end
 
   create_table "spells", force: :cascade do |t|
@@ -253,6 +254,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_235222) do
   add_foreign_key "dnd_class_levels", "dnd_classes"
   add_foreign_key "race_skills", "proficiencies"
   add_foreign_key "race_skills", "races"
+  add_foreign_key "spell_levels", "dnd_class_levels"
   add_foreign_key "spell_levels", "dnd_classes"
   add_foreign_key "subraces", "races"
 end
