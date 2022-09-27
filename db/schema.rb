@@ -236,7 +236,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_154049) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "casting_time"
-    t.string "damage_type"
     t.string "dc"
   end
 

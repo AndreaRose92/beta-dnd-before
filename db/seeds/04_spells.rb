@@ -21,13 +21,14 @@ spells_list.each do |spell|
   new_spell = Spell.create(
     name: spell["name"],
     desc: spell["desc"][0],
-    higher_level: spell["higher_level"],
+    higher_level: spell["higher_level"][0],
     range: spell["range"],
     ritual: spell["ritual"],
     duration: spell["duration"],
     concentration: spell["concentration"],
     level: spell["level"],
     casting_time: spell["casting_time"],
+    dc: spell["dc"] ? spell["dc"]["dc_type"]["name"] : nil
   )
   if spell["damage"]
     damage = SpellDamage.create(

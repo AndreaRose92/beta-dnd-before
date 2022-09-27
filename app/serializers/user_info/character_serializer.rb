@@ -1,9 +1,41 @@
 class CharacterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills, :image, :class_levels, :spellcasting_level, :cantrips, :lvl_1_spells, :lvl_2_spells, :lvl_3_spells,  :lvl_4_spells,  :lvl_5_spells,  :lvl_6_spells,  :lvl_7_spells,  :lvl_8_spells,  :lvl_9_spells
+  attributes :id, :name, :level, :hp, :current_hp, :stats, :skills, :image, :class_levels, :spellcasting_level, :spellcasting_modifier
+  has_many :cantrips, serializer: CharSpellInfoSerializer
+  has_many :lvl_1_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_2_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_3_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_4_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_5_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_6_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_7_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_8_spells, serializer: CharSpellInfoSerializer
+  has_many :lvl_9_spells, serializer: CharSpellInfoSerializer
   belongs_to :user
   has_one :dnd_class
   has_one :race
 
+  
+  def spellcasting_modifier
+    case self.object.dnd_class.name
+    when "Bard"
+      return self.object.stat_modifier(self.object.Charisma)
+    when "Cleric"
+      return self.object.stat_modifier(self.object.Wisdom)
+    when "Druid"
+      return self.object.stat_modifier(self.object.Wisdom)
+    when "Paladin"
+      return self.object.stat_modifier(self.object.Charisma)
+    when "Ranger"
+      return self.object.stat_modifier(self.object.Wisdom)
+    when "Sorcerer"
+      return self.object.stat_modifier(self.object.Charisma)
+    when "Warlock"
+      return self.object.stat_modifier(self.object.Charisma)
+    when "Wizard"
+      return self.object.stat_modifier(self.object.Intelligence)
+    end
+  end
+  
   def cantrips
     self.object.spells.where(level: 0)
   end

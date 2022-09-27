@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Button from "../../styles/Buttons.style"
 import { EquipmentBox } from "../../styles/CharacterSheetGrids.style"
-import * as All from './actionGridTabs'
+import * as All from './actionBoxTabs'
 
 
 export const ActionBox = ({stats}) => {
