@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import { ContentWrapper, PageWrapper } from './styles';
-import { CharacterProvider, UserContext, deleteRequest, getRequest, DiceProvider } from './hookComponents';
+import { CharacterProvider, UserContext, DiceProvider } from './hookComponents';
 import { StatTestSheet } from './StatTestSheet';
 import * as AllChar from './characterComponents'
 import * as AllUtil from './utilityComponents'
@@ -16,13 +16,31 @@ export const App = () => {
 
 
      const deleteCharacter = e => {
-          deleteRequest(`/characters/${e.target.value}`)
-          setUserCharacters(characters => characters.filter(character => character.id !== e.target.value))
+          fetch(`/characters/${e.target.value}`, {method: "DELETE"}).then(()=>{
+               setUserCharacters(characters => characters.filter(character => character.id !== e.target.value))
+          })
      }
 
-     useEffect(()=>{getRequest('/me', setUser)}, [setUser])
-     useEffect(()=>{getRequest('/characters', setUserCharacters)}, [setUserCharacters]);
-
+     // useEffect(()=>{getRequest('/me', setUser)}, [setUser])
+     // useEffect(()=>{getRequest('/characters', setUserCharacters)}, [setUserCharacters]);
+     useEffect(()=>{
+          fetch('/me').then(r=>{
+               if (r.ok) {
+                    r.json().then(me=>setUser(me))
+               } else {
+                    r.json().then(errors=>console.log(errors))
+               }
+          })
+     }, [setUser])
+     useEffect(()=>{
+          fetch(`/characters`).then(r=>{
+               if (r.ok) {
+                    r.json().then(data=>setUserCharacters(data))
+               } else {
+                    r.json().then(errors=>console.log(errors))
+               }
+          })
+     }, [setUserCharacters])
 
      return (
           <CharacterProvider>

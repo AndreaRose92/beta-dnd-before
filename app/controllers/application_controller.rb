@@ -17,7 +17,7 @@ class ApplicationController < ActionController::API
     end
 
     def render_not_found invalid
-        render json: {error: invalid.message}, status: :not_found
+        render json: {error: [invalid.message]}, status: :not_found
     end
 
     def render_invalid invalid
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::API
     end
 
     def authorize
-        return render json: {error: 'Not Authorized'}, status: :unauthorized unless current_user
+        return render json: {error: ['Not Authorized']}, status: :unauthorized unless current_user
     end
 
 end

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getRequest, NavButton, capitalize } from "../hookComponents"
+import { NavButton, capitalize } from "../hookComponents"
 
 export const RaceDetail = () => {
 
@@ -15,8 +15,16 @@ export const RaceDetail = () => {
     })
 
     const subraces = race && race.subraces ? race.subraces : []
-
-    useEffect(()=>{getRequest(`/races/${params.race}`, setRace)}, [params.race])
+    
+    useEffect(()=>{
+        fetch(`/races/${params.race}`).then(r=>{
+            if (r.ok) {
+                r.json().then(race=>setRace(race))
+            } else {
+                r.json().then(errors=>console.log(errors))
+            }
+        })
+    }, [params.race])
 
     const renderSubraces = subraces.map(subrace => {
         return (<div key={subrace.id}>

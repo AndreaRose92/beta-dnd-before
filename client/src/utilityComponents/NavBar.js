@@ -34,7 +34,7 @@ export const NavBar = ({user, setUser}) => {
                     {classLinks}
                 </DropDownContent>
             </DropDown>
-            <Logo as={NavLink} to='/new_character/basic' style={{"textAlign": "left", "marginLeft": "40px"}} ><h1>Test</h1></Logo>
+            {user ? <NavButton as={NavLink} to='/new_character/basic'><h1>New Character</h1></NavButton> : null}
         </NavWrapper>
   )
 }

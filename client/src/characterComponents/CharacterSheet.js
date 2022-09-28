@@ -1,14 +1,22 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { CharacterGrid, CharacterWrapper } from '../styles';
-import { getRequest, CharacterContext } from '../hookComponents';
+import { CharacterContext } from '../hookComponents';
 import { ActionBox, CombatBox, SkillBox, Traits, SavingThrows, HPBox, AuxBox, StatGrid, CharHeader, DiceLog } from './characterSheetBoxes';
 
 export const CharacterSheet = () => {
     const params = useParams();
     const { character, setCharacter } = useContext(CharacterContext);
     const stats = character.name !== '' ? character.stats : [{ name: '', value: 0 }];
-    useEffect(() => {getRequest(`/characters/${params.id}`, setCharacter);}, [params.id, setCharacter]);
+    useEffect(()=>{
+        fetch(`/characters/${params.id}`).then(r=>{
+            if (r.ok) {
+                r.json().then(character=>setCharacter(character))
+            } else {
+                r.json().then(errors=>console.log(errors))
+            }
+        })
+    }, [params.id, setCharacter])
 
     while (character.name === '') {return (<div><h3>Loading...</h3></div>);}
 
