@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  url: MyString
+  api_index: MyString
+  desc: MyString
+  level: 1
+  class: one
+
+two:
+  name: MyString
+  url: MyString
+  api_index: MyString
+  desc: MyString
+  level: 1
+  class: two

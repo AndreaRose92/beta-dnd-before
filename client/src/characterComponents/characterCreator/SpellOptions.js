@@ -10,38 +10,6 @@ export const SpellOptions = () => {
 	let spells =  formData.availableSpells
 	let level =  formData.maxSpellLevel
 	let spellcast =  formData.spellcastingLevel
-	// let spellBuild = newCharacter.level !== null ? {
-	// 	level: newCharacter.level,
-	// 	dnd_class_id: newCharacter.dnd_class_id,
-	// 	race_id: newCharacter.race_id
-	// } : null
-
-	// const randNum = (min, max) => {
-	// 	return Math.floor(Math.random() * (max - min) + min)
-	// }
-
-	// const getSpells = e => {
-	// 	e.preventDefault()
-	// 	let fetchLevel = randNum(5, 15)
-	// 	let fetchClass = [2, 3, 4, 7, 8, 10, 11, 12][randNum(0,8)]
-	// 	let fetchRace = randNum(1, 9)
-	// 	formHandlers.handleSpells(e)
-	// 	fetch('/character_builders', {
-	// 		method: "POST",
-	// 		headers: {"Content-Type": "application/json"},
-	// 		body: JSON.stringify({
-	// 			level: fetchLevel,
-	// 			dnd_class_id: fetchClass,
-	// 			race_id: fetchRace
-	// 		})
-	// 	}).then(r=>{
-	// 		if (r.ok) {
-	// 			r.json().then(data=>formHandlers.handleTest(data))
-	// 		} else {
-	// 			r.json().then(errors=>console.log(errors))
-	// 		}
-	// 	})
-	// }
 
 	const handleDisplay = e => {
 		e.preventDefault()

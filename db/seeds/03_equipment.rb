@@ -21,8 +21,9 @@ all_weapons.each { |weapon|
   weapon_data = JSON.parse(weapon_response)
 
     item = Equipment.create(
-        name: weapon_data[:name],
-        url: weapon_data[:url]
+        name: weapon_data["name"],
+        url: weapon_data["url"],
+        api_index: weapon_data["index"]
     )
 
     if weapon_data["damage"]

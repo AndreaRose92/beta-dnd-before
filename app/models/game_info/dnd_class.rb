@@ -6,6 +6,7 @@ class DndClass < ApplicationRecord
     has_many :spells, through: :class_spells
     has_many :spell_levels, dependent: :destroy
     has_many :character_builders, dependent: :destroy
+    has_many :features
 
     attr_accessor :spellcasting_level, :available_spells
 
