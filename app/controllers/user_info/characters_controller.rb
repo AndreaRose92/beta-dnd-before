@@ -18,12 +18,12 @@ class CharactersController < ApplicationController
       Intelligence: params[:Intelligence],
       Wisdom: params[:Wisdom],
       Charisma: params[:Charisma],
-      user: User.find_by(username: params[:user]),
-      dnd_class: DndClass.find_by(name: params[:dnd_class]),
-      race: Race.find_by(name: params[:race]),
+      user: User.find(params[:user_id]),
+      dnd_class: DndClass.find(params[:dnd_class_id]),
+      race: Race.find(params[:race_id]),
     )
     # char.update!(char_params)
-    char.calculate_hp(params[:hp_option], params[:hp_values])
+    char.calculate_hp("fixed")
     params[:proficiency_choices].each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: Proficiency.find_by(name: prof).id) end
     char.dnd_class.proficiencies.last(2).each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: prof.id) end
     params[:starting_spells].each do |spell| CharSpell.create!(character_id: char.id, spell_id: Spell.find_by(name: spell).id) end

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { FormBox } from '../../styles';
 import { NavButton } from '../../hookComponents';
 
 export const CharPageThree = () => {
 	
-     const [formHandlers, formData] = useOutletContext()
+     const [formHandlers, formData, newCharacter] = useOutletContext()
+
+     useEffect(()=>{formHandlers.handleSpells()}, [newCharacter])
 
      const filteredSkills = formData.skills.filter(skill => skill.name !== formData.skillOne || skill.name !== formData.skillTwo || skill.name !== formData.skillThree || skill.name !== formData.skillFour)
 
@@ -33,7 +35,7 @@ export const CharPageThree = () => {
                     {renderSkills}
                </select> : null}
                <NavButton path={'../stats'} text={'Back'}/>
-               <NavButton path={'../review'} text={'Next'}/>
+               <NavButton path={'../spells'} text={'Next'}/>
           </FormBox>
      )
 };

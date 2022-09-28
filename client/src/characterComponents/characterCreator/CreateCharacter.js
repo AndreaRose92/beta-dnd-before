@@ -9,9 +9,10 @@ export const CreateCharacter = () => {
      const {user} = useContext(UserContext)
      const {setCharacter} = useContext(CharacterContext)
      const [newCharacter, setNewCharacter] = useState(blankCharacter)
-     const [availableSpells, setAvailableSpells] = useState([])
+     const [availableSpells, setAvailableSpells] = useState({})
      const [spellcastingLevel, setSpellcastingLevel] = useState({})
      const [selectedSpells, setSelectedSpells] = useState([])
+     const [maxSpellLevel, setMaxSpellLevel] = useState(0)
      const [amount, setAmount] = useState(0)
      const [skills, setSkills] = useState([])
      const [skillOne, setSkillOne] = useState('')
@@ -99,8 +100,7 @@ export const CreateCharacter = () => {
           })
      }
 
-     const handleSpells = e => {
-          e.preventDefault()
+     const handleSpells = () => {
           fetch(`/character_builders`, {
                method: "POST",
                headers: {"Content-Type": "application/json"},
@@ -114,6 +114,8 @@ export const CreateCharacter = () => {
                     r.json().then(data=>{
                          setAvailableSpells(data.available_spells)
                          setSpellcastingLevel(data.spellcasting_level)
+                         setMaxSpellLevel(data.max_spell_level)
+                         console.log(data)
                     })
                } else {
                     r.json().then(errors=>console.log(errors))
@@ -121,9 +123,27 @@ export const CreateCharacter = () => {
           })
      }
 
-     const formHandlers = {handleInput, handleClassChange, handleStats, handleSkill, handleSubmit, handleSpells}
+     const handleTest = e => {
+          setAvailableSpells(e.available_spells)
+          setSpellcastingLevel(e.spellcasting_level)
+          setMaxSpellLevel(e.max_spell_level)
+     }
 
-     const formData = {skills, skillOne, skillTwo, skillThree, skillFour, amount, availableSpells, spellcastingLevel}
+     const handleSelect = e => {
+          
+          const formName = e.target.name
+          let formValue = e.target.value
+
+          if (selectedSpells.includes(formValue)) {
+               setSelectedSpells(spells => spells.filter(spell => spell !== formValue))
+          } else {
+               setSelectedSpells(spells => [...spells, formValue])
+          }
+     }
+
+     const formHandlers = {handleInput, handleClassChange, handleStats, handleSkill, handleSubmit, handleSpells, handleTest, handleSelect}
+
+     const formData = {skills, skillOne, skillTwo, skillThree, skillFour, amount, availableSpells, spellcastingLevel, maxSpellLevel, selectedSpells}
 
      return (
           <FormGrid>

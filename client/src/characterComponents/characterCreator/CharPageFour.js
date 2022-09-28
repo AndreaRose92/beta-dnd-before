@@ -25,7 +25,7 @@ export const CharPageFour = () => {
                     </tbody>
                </table>
                <NavButton path={'../skills'} text={'Back'} />
-               <NavButton path={'../spell-test'} text={"Next"}/>
+               <button type='submit'>Submit</button>
           </FormBox>
      )
 };
