@@ -20,8 +20,6 @@ class DndClassesController < ApplicationController
 
      private
 
-
-
      def max_spell_level spellcasting_level
           if spellcasting_level.lvl_9 > 0
                return 9

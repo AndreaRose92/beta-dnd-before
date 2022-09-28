@@ -1,23 +1,48 @@
-
-import { Logout, NavButton } from "../hookComponents"
+import { ErrorContext, UserContext } from "../hookComponents"
 import { CharacterCard } from "../characterComponents"
-import { NotFound } from "./"
+import { useContext, useEffect, useState } from "react"
+import { CardWrapper, Error, UserWrapper } from "../styles"
 
+export const UserPage = () => {
 
-export const UserPage = ({user, userCharacters, deleteCharacter}) => {
+    const {user} = useContext(UserContext)
+    const {errors, setErrors} = useContext(ErrorContext)
+    const [characters, setCharacters] = useState([])
 
-    const renderCards = userCharacters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter} />)
+    useEffect(()=>{
+        fetch(`/characters`).then(r=>{
+            if (r.ok) {
+                r.json().then(data=>setCharacters(data))
+            } else {
+                r.json().then(errors=>setErrors([errors]))
+            }
+        })
+    }, [setErrors])
+
+    const deleteCharacter = e => {
+        fetch(`/characters/${e.target.value}`, {method: "DELETE"})
+            .then(()=>setCharacters(characters=>characters.filter(char => char.id !== e.target.value)))
+    }
+
+    const renderCards = characters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter} />)
 
     if (!user) {
-        return <NotFound />
+        return (
+            <div>Loading...</div>
+        )
     }
 
     return (
-        <div>
+        <UserWrapper>
             <h2>Hello, {user.username}</h2>
-            {renderCards}<br/>
-            <NavButton path={'/new_character/basic'} text={'create a character'}/>
-            <Logout />
-        </div>
+            <CardWrapper>
+                {renderCards}
+            </CardWrapper>
+            {errors ? errors.map(err=>(
+                <Error key={err}>
+                    {err}
+                </Error>
+            )) : null}
+        </UserWrapper>
     )
 }

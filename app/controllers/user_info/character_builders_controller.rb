@@ -7,10 +7,12 @@ class CharacterBuildersController < ApplicationController
 
     def update
         new_char = CharacterBuilder.find(params[:id])
+        new_char.update!(builder_params)
     end
 
     def destroy
-        CharacterBuilder.find(params[:id]).destroy
+        CharacterBuilder.destroy_all
+        CharacterBuilder.reset_pk_sequence
         head :no_content
     end
 

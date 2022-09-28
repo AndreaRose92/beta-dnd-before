@@ -56,3 +56,24 @@ export const DropButton = styled(NavButton)`
         display: block;
     }
 `
+
+export const AuthForm = styled.div`
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        margin: 5px;
+        height: 40px;
+        width: 400px;
+        font-size: x-large;
+    }
+
+    button {
+        margin-left: 32%;
+        height: 50px;
+        width: 150px;
+        font-size: large;
+    }
+`

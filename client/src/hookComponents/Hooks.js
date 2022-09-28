@@ -57,18 +57,21 @@ export const Logout = () => {
 	return <button onClick={handleLogout}>Logout</button>;
 };
 
-export const AuthRoutes = ({ children, setUser }) => {
-	const navigate = useNavigate();
+export const AuthRoutes = ({ children }) => {
+
+	const [user, setUser] = useState(null)
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		fetch('/me').then((r) => {
 			if (r.ok) {
 				r.json().then((user) => setUser(user));
 			} else {
-				navigate('/');
+				r.json().then(()=>navigate('/not_found'));
 			}
 		});
-	});
+	}, [setUser, navigate]);
 
 	return <React.Fragment>{children}</React.Fragment>;
 };

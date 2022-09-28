@@ -3,9 +3,9 @@ import { useOutletContext } from 'react-router-dom';
 import { FormBox } from '../../styles';
 import { NavButton } from '../../hookComponents';
 
-export const CharPageOne = () => {
+export const CharBasicsPage = () => {
 	
-     const [formHandlers, newCharacter] = useOutletContext()
+     const [formHandlers, fromData, newCharacter] = useOutletContext()
 
      return (
           <FormBox>

@@ -29,7 +29,7 @@ export const BardRows = ({ levels, spells }) => {
 							<h2>
 								{level.song_of_rest_die ? `d${level.song_of_rest_die}` : 'n/a'}
 							</h2>
-							<h2>{level.features !== '' ? level.features : '-'}</h2><h2>{level.features}</h2>
+							<h2>{level.features !== '' ? level.features : '-'}</h2>
 							<h2>{spell.cantrips_known}</h2>
 							<h2>{spell.spells_known}</h2>
 							<h4>{spell.lvl_1 !== 0 ? spell.lvl_1 : `-`}</h4>

@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom'
 import { NavButton } from '../../hookComponents'
 import { FormBox } from '../../styles'
 
-export const SpellOptions = () => {
+export const CharSpellsPage = () => {
 	const [formHandlers, formData] = useOutletContext()
 	const [display, setDisplay] = useState('default')
 
@@ -24,7 +24,6 @@ export const SpellOptions = () => {
   return (
 	<FormBox>
 		<h2>Spell Levels</h2>
-		{/* <button onClick={e=>getSpells(e)}>Get Spells</button> */}
 		<Buttons level={level} handleDisplay={handleDisplay} spellcast={spellcast}/>
 		<h2>Spell Options</h2>
 		<SpellMenu display={display} spells={spells} selectSpell={selectSpell} />

@@ -69,3 +69,5 @@ export const blankCharacter = {
 	hp: 0,
 	current_hp: 0,
 };
+
+export const spellcasterIDs = [2,3,4,7,8,10,11,12]
