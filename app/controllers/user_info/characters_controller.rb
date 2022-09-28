@@ -8,7 +8,6 @@ class CharactersController < ApplicationController
   end
 
   def create
-    # char = Character.create!(char_params)
     char = Character.create!(
       name: params[:name],
       level: params[:level],
@@ -22,7 +21,6 @@ class CharactersController < ApplicationController
       dnd_class: DndClass.find(params[:dnd_class_id]),
       race: Race.find(params[:race_id]),
     )
-    # char.update!(char_params)
     char.calculate_hp("fixed")
     params[:proficiency_choices].each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: Proficiency.find_by(name: prof).id) end
     char.dnd_class.proficiencies.last(2).each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: prof.id) end

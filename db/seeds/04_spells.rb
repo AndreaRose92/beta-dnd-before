@@ -20,6 +20,7 @@ spells_list.each do |spell|
   spell = JSON.parse(spell_response)
   new_spell = Spell.create(
     name: spell["name"],
+    api_index: spell["index"],
     desc: spell["desc"][0],
     higher_level: spell["higher_level"][0],
     range: spell["range"],

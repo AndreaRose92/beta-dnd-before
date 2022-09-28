@@ -19,7 +19,7 @@ puts 'gaining class consciousness...'
 
 class_response = RestClient.get("http://www.dnd5eapi.co/api/classes")
 dnd_classes = JSON.parse(class_response)["results"]
-dnd_classes.each { |dc| DndClass.create(name: dc["name"], url: dc["url"]) }
+dnd_classes.each { |dc| DndClass.create(name: dc["name"], url: dc["url"], api_index: dc["index"],) }
 
 DndClass.find_by(name: "Barbarian").update(hit_die: 12, recommended_stat_one: "Strength", recommended_stat_two: "Constitution", starting_proficiencies: 2)
 DndClass.find_by(name: "Bard").update(hit_die: 8, recommended_stat_one: "Charisma", recommended_stat_two: "Dexterity", starting_proficiencies: 3)

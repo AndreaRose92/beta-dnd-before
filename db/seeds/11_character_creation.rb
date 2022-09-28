@@ -16,13 +16,13 @@ puts 'default character spell lists'
 Character.all.each { |character|
     case character.dnd_class
     when $barbarian
-        puts "No Spells for #{character.name}"
+        puts "#{character.name} is a #{character.dnd_class.name} and that's just not interesting :/"
     when $fighter
-        puts "No Spells for #{character.name}"
+        puts "#{character.name} is a #{character.dnd_class.name} and that's just not interesting :/"
     when $monk
-        puts "No Spells for #{character.name}"
+        puts "#{character.name} is a #{character.dnd_class.name} and that's just not interesting :/"
     when $rogue
-        puts "No Spells for #{character.name}"
+        puts "#{character.name} is a #{character.dnd_class.name} and that's just not interesting :/"
     when $bard
         character.assign_random_spells
         puts "#{character.name} is a #{character.dnd_class.name}!"

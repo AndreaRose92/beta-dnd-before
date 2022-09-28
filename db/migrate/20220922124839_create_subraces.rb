@@ -3,6 +3,7 @@ class CreateSubraces < ActiveRecord::Migration[7.0]
     create_table :subraces do |t|
       t.belongs_to :race, null: false, foreign_key: true
       t.string :name
+      t.string :api_index
       t.string :url
       t.string :languages
       t.string :traits
