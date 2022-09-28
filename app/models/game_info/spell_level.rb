@@ -1,5 +1,6 @@
 class SpellLevel < ApplicationRecord
   belongs_to :dnd_class
+  belongs_to :dnd_class_level
 
   attr_accessor :warlock_slot
 

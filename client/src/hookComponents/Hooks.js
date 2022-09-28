@@ -1,6 +1,6 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+
 
 export const UserContext = React.createContext();
 
@@ -110,3 +110,22 @@ export const HalfCaster = ({ variant }) => {
 		</React.Fragment>
 	);
 };
+
+export const damageTypeIcon = (damageType) => {
+	switch (damageType) {
+		case 'Acid': return '☢️';
+		case 'Bludgeoning': return '🔨';
+		case 'Cold': return '❄️';
+		case 'Fire': return '🔥';
+		case 'Force': return '‼️';
+		case 'Lightning': return '⚡';
+		case 'Necrotic': return '💀';
+		case 'Piercing': return '🗡️';
+		case 'Poison': return '☣️';
+		case 'Psychic': return '🧠';
+		case 'Radiant': return '🔆';
+		case 'Slashing': return '⚔️';
+		case 'Thunder': return '⛈️';
+		default: return '-'
+	}
+}

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import { savingThrows } from "../../hookComponents/miscData";
-import { SavingThrow } from "../../styles/CharacterSheetGrids.style";
-import { DiceContext, diceRoll } from "../../hookComponents/PlayerEvents";
+import { savingThrows, DiceContext, diceRoll } from "../../hookComponents";
+import { SavingThrow } from "../../styles";
 
 export const SavingThrows = ({ isProficient, skillProficiency }) => { 
 

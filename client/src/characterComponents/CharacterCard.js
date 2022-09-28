@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavButton } from '../hookComponents/Hooks'
 import { Link, useParams } from 'react-router-dom'
+import { NavButton } from '../hookComponents'
 
-const CharacterCard = ({character, deleteCharacter}) => {
+export const CharacterCard = ({character, deleteCharacter}) => {
 
     const params = useParams()
 
@@ -17,5 +17,3 @@ const CharacterCard = ({character, deleteCharacter}) => {
     </div>
   )
 }
-
-export default CharacterCard

@@ -1,6 +1,6 @@
 import React from 'react';
-import { TableRow } from '../../styles/Details.style';
-import { FullCaster } from '../../hookComponents/Hooks';
+import { TableRow } from '../../styles';
+import { FullCaster } from '../../hookComponents';
 
 export const WizardHeader = () => {
 	return (

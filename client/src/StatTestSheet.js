@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormBox, FormGrid } from './styles/Grids.styles'
+import { FormBox, FormGrid } from './styles'
 
 export const StatTestSheet = () => {
 

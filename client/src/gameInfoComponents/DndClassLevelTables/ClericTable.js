@@ -1,6 +1,6 @@
 import React from 'react';
-import { FullCaster } from '../../hookComponents/Hooks';
-import { TableRow } from '../../styles/Details.style';
+import { FullCaster } from '../../hookComponents';
+import { TableRow } from '../../styles';
 
 export const ClericHeader = () => {
 	return (

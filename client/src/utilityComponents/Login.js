@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { postRequest } from "../hookComponents/FetchTypes"
-import { UserContext } from "../hookComponents/Hooks"
+import { postRequest, UserContext } from "../hookComponents"
+
 
 export const Login = () => {
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { HalfCaster } from '../../hookComponents/Hooks';
-import { TableRow } from '../../styles/Details.style';
+import { HalfCaster } from '../../hookComponents';
+import { TableRow } from '../../styles';
 
 export const RangerHeader = () => {
 	return (

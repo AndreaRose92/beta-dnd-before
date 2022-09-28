@@ -1,6 +1,5 @@
-import { NavButton } from "../hookComponents/Hooks"
-import { RaceDetail } from "./RaceDetail"
-import { races } from '../hookComponents/miscData'
+import { NavButton, races } from "../hookComponents"
+import { RaceDetail } from "./"
 
 export const RaceIndex = () => {
 

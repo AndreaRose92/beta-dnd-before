@@ -1,10 +1,9 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { NavWrapper } from '../styles/Grids.styles'
-import { DropButton, DropDown, DropDownContent, Logo, NavButton } from '../styles/Nav.styles'
-import { classes, races } from '../hookComponents/miscData'
+import { NavWrapper, DropButton, DropDown, DropDownContent, Logo, NavButton } from '../styles'
+import { classes, races } from '../hookComponents'
 
-const NavBar = ({user, setUser}) => {
+export const NavBar = ({user, setUser}) => {
 
     const navigate = useNavigate()
     const handleLogout = () => {
@@ -35,9 +34,7 @@ const NavBar = ({user, setUser}) => {
                     {classLinks}
                 </DropDownContent>
             </DropDown>
-            <Logo as={NavLink} to='/test' style={{"textAlign": "left", "marginLeft": "40px"}} ><h1>Test</h1></Logo>
+            <Logo as={NavLink} to='/new_character/basic' style={{"textAlign": "left", "marginLeft": "40px"}} ><h1>Test</h1></Logo>
         </NavWrapper>
   )
 }
-
-export default NavBar

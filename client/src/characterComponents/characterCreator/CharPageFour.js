@@ -1,7 +1,7 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { FormBox } from '../../styles/Grids.styles';
-import { NavButton } from '../../hookComponents/Hooks';
+import { FormBox } from '../../styles';
+import { NavButton } from '../../hookComponents';
 
 export const CharPageFour = () => {
 	
@@ -25,7 +25,7 @@ export const CharPageFour = () => {
                     </tbody>
                </table>
                <NavButton path={'../skills'} text={'Back'} />
-               <button type='submit'>Submit</button>
+               <NavButton path={'../spell-test'} text={"Next"}/>
           </FormBox>
      )
 };

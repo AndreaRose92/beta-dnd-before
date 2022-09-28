@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Input = styled.input`
+export const Input = styled.input`
   height: 30px;
   width: 75px;
   border: 2px ridge #d4af37;
@@ -15,7 +15,7 @@ const Input = styled.input`
   }
 `
 
-const SubmitInput = styled.input`
+export const SubmitInput = styled.input`
   height: 30px;
   width: 45px;
   border-radius: 10px;
@@ -29,7 +29,7 @@ const SubmitInput = styled.input`
   }
 `
 
-const SelectInput = styled.select`
+export const SelectInput = styled.select`
   height: 30px;
   width: 100px;
   border: 2px ridge #d4af37;
@@ -44,7 +44,7 @@ const SelectInput = styled.select`
   }
 `
 
-const HealthInput = styled.input`
+export const HealthInput = styled.input`
   height: 40px;
   width: 40px;
   text-align: center;
@@ -60,6 +60,3 @@ const HealthInput = styled.input`
     outline: none;
   }
 `
-
-export { SubmitInput, SelectInput, HealthInput }
-export default Input

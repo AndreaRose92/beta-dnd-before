@@ -1,7 +1,7 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { FormBox } from '../../styles/Grids.styles';
-import { NavButton } from '../../hookComponents/Hooks';
+import { FormBox } from '../../styles';
+import { NavButton } from '../../hookComponents';
 
 export const CharPageOne = () => {
 	
@@ -47,9 +47,8 @@ export const CharPageOne = () => {
                          <option value={9}>Tiefling</option>
                     </select><br/>
                </label>
-               <NavButton path={'/new_character/stats'} text={'Next'}/>
+               <NavButton path={"../spell-test"} text={"spells"} />
+               <NavButton path={'../stats'} text={'Next'}/>
           </FormBox>
      )
 };
-
-

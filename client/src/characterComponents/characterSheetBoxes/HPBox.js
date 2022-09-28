@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { HealthButton } from "../../styles/Buttons.style";
-import { HealthBox } from "../../styles/CharacterSheetGrids.style";
-import { HealthInput } from "../../styles/Input.style";
+import { HealthButton, HealthBox, HealthInput } from "../../styles";
 
 export const HPBox = ({ character, setCharacter }) => {
     const [newHP, setNewHP] = useState(0);

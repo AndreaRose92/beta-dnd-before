@@ -1,15 +1,17 @@
 import { useContext, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { FormGrid } from '../../styles/Grids.styles'
-import { CharacterContext, UserContext } from '../../hookComponents/Hooks'
-import { blankCharacter } from '../../hookComponents/miscData'
+import { FormGrid } from '../../styles'
+import { CharacterContext, UserContext, blankCharacter } from '../../hookComponents'
 
-const CreateCharacter = () => {
+export const CreateCharacter = () => {
 
      const navigate = useNavigate()
      const {user} = useContext(UserContext)
      const {setCharacter} = useContext(CharacterContext)
      const [newCharacter, setNewCharacter] = useState(blankCharacter)
+     const [availableSpells, setAvailableSpells] = useState([])
+     const [spellcastingLevel, setSpellcastingLevel] = useState({})
+     const [selectedSpells, setSelectedSpells] = useState([])
      const [amount, setAmount] = useState(0)
      const [skills, setSkills] = useState([])
      const [skillOne, setSkillOne] = useState('')
@@ -34,14 +36,13 @@ const CreateCharacter = () => {
                ...newCharacter,
                dnd_class_id: e.target.value
           })
-          fetch(`/dnd_classes/${e.target.value}/proficiencies`)
-               .then(r=>{
-                    if (r.ok) {
-                         r.json().then(data=>{setSkills(data[0].slice(0, (data[0].length - 3))); setAmount(data[1])})
-                    } else {
-                         r.json().then(errors=>console.log(errors))
-                    }
-               })
+          fetch(`/dnd_classes/${e.target.value}/proficiencies`).then(r=>{
+               if (r.ok) {
+                    r.json().then(data=>{setSkills(data[0].slice(0, (data[0].length - 3))); setAmount(data[1])})
+               } else {
+                    r.json().then(errors=>console.log(errors))
+               }
+          })
      }
 
      const handleStats = e => {
@@ -83,7 +84,8 @@ const CreateCharacter = () => {
                body: JSON.stringify({
                     ...newCharacter,
                     user_id: user.id,
-                    proficiency_choices: newSkills
+                    proficiency_choices: newSkills,
+                    starting_spells: selectedSpells
                })
           }).then(r=>{
                if (r.ok) {
@@ -97,9 +99,31 @@ const CreateCharacter = () => {
           })
      }
 
-     const formHandlers = {handleInput, handleClassChange, handleStats, handleSkill, handleSubmit}
+     const handleSpells = e => {
+          e.preventDefault()
+          fetch(`/character_builders`, {
+               method: "POST",
+               headers: {"Content-Type": "application/json"},
+               body: JSON.stringify({
+                    level: parseInt(newCharacter.level),
+                    dnd_class_id: parseInt(newCharacter.dnd_class_id),
+                    race_id: parseInt(newCharacter.race_id)
+               })
+          }).then(r=>{
+               if(r.ok) {
+                    r.json().then(data=>{
+                         setAvailableSpells(data.available_spells)
+                         setSpellcastingLevel(data.spellcasting_level)
+                    })
+               } else {
+                    r.json().then(errors=>console.log(errors))
+               }
+          })
+     }
 
-     const formData = {skills, skillOne, skillTwo, skillThree, skillFour, amount}
+     const formHandlers = {handleInput, handleClassChange, handleStats, handleSkill, handleSubmit, handleSpells}
+
+     const formData = {skills, skillOne, skillTwo, skillThree, skillFour, amount, availableSpells, spellcastingLevel}
 
      return (
           <FormGrid>
@@ -109,5 +133,3 @@ const CreateCharacter = () => {
      )
 
 }
-
-export default CreateCharacter

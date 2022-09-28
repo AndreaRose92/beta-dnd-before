@@ -1,9 +1,9 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { FormBox } from '../../styles/Grids.styles';
-import { NavButton } from '../../hookComponents/Hooks';
+import { FormBox } from '../../styles';
+import { NavButton } from '../../hookComponents';
 
-const CharPageThree = () => {
+export const CharPageThree = () => {
 	
      const [formHandlers, formData] = useOutletContext()
 
@@ -37,5 +37,3 @@ const CharPageThree = () => {
           </FormBox>
      )
 };
-
-export default CharPageThree;

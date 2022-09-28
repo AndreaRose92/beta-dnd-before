@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
-import { DiceContext } from '../../hookComponents/PlayerEvents'
-import Button from '../../styles/Buttons.style'
-import { DiceBox } from '../../styles/Grids.styles'
+import { DiceContext } from '../../hookComponents'
+import { Button, DiceBox } from '../../styles'
 
-const DiceLog = () => {
+export const DiceLog = () => {
      
      const {diceHistory, setDiceHistory} = useContext(DiceContext)
 
@@ -40,5 +39,3 @@ const DiceLog = () => {
           </DiceBox>
      )
 }
-
-export default DiceLog

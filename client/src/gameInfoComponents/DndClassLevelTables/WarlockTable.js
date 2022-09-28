@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableRow } from '../../styles/Details.style';
+import { TableRow } from '../../styles';
 
 export const WarlockHeader = () => {
 	return (
