@@ -46,6 +46,7 @@ export const App = () => {
                               <Route exact path='stats' element={<AllChar.CharPageTwo />}/>
                               <Route exact path='skills' element={<AllChar.CharPageThree />}/>
                               <Route exact path='review' element={<AllChar.CharPageFour />}/>
+                              <Route exact path='spell-test' element={<AllChar.SpellOptions />}/>
                          </Route>
                          <Route path ='test' element={<StatTestSheet />}/>
                     </Routes>

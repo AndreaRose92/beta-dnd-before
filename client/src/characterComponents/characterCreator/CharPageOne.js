@@ -47,9 +47,8 @@ export const CharPageOne = () => {
                          <option value={9}>Tiefling</option>
                     </select><br/>
                </label>
-               <NavButton path={'/new_character/stats'} text={'Next'}/>
+               <NavButton path={"../spell-test"} text={"spells"} />
+               <NavButton path={'../stats'} text={'Next'}/>
           </FormBox>
      )
 };
-
-

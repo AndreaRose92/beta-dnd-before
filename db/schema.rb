@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_27_154049) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_27_210231) do
   create_table "char_skills", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "proficiency_id", null: false
@@ -27,6 +27,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_154049) do
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_char_spells_on_character_id"
     t.index ["spell_id"], name: "index_char_spells_on_spell_id"
+  end
+
+  create_table "character_builders", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
+    t.integer "race_id", null: false
+    t.integer "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_character_builders_on_dnd_class_id"
+    t.index ["race_id"], name: "index_character_builders_on_race_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -263,22 +273,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_154049) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "char_skills", "characters"
-  add_foreign_key "char_skills", "proficiencies"
-  add_foreign_key "char_spells", "characters"
-  add_foreign_key "char_spells", "spells"
-  add_foreign_key "characters", "dnd_classes"
-  add_foreign_key "characters", "races"
-  add_foreign_key "characters", "users"
   add_foreign_key "class_skills", "dnd_classes"
-  add_foreign_key "class_skills", "proficiencies"
-  add_foreign_key "class_spells", "dnd_classes"
-  add_foreign_key "class_spells", "spells"
-  add_foreign_key "dnd_class_levels", "dnd_classes"
-  add_foreign_key "race_skills", "proficiencies"
-  add_foreign_key "race_skills", "races"
-  add_foreign_key "spell_damages", "spells"
-  add_foreign_key "spell_levels", "dnd_class_levels"
   add_foreign_key "spell_levels", "dnd_classes"
+  add_foreign_key "dnd_class_levels", "dnd_classes"
+  add_foreign_key "character_builders", "dnd_classes"
+  add_foreign_key "characters", "dnd_classes"
+  add_foreign_key "class_spells", "dnd_classes"
+  add_foreign_key "character_builders", "races"
+  add_foreign_key "race_skills", "races"
+  add_foreign_key "characters", "races"
   add_foreign_key "subraces", "races"
+  add_foreign_key "race_skills", "proficiencies"
+  add_foreign_key "char_skills", "proficiencies"
+  add_foreign_key "class_skills", "proficiencies"
+  add_foreign_key "char_spells", "spells"
+  add_foreign_key "class_spells", "spells"
+  add_foreign_key "spell_damages", "spells"
+  add_foreign_key "char_skills", "characters"
+  add_foreign_key "char_spells", "characters"
+  add_foreign_key "spell_levels", "dnd_class_levels"
+  add_foreign_key "characters", "users"
 end

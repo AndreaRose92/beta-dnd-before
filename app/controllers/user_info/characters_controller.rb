@@ -26,6 +26,7 @@ class CharactersController < ApplicationController
     char.calculate_hp(params[:hp_option], params[:hp_values])
     params[:proficiency_choices].each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: Proficiency.find_by(name: prof).id) end
     char.dnd_class.proficiencies.last(2).each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: prof.id) end
+    params[:starting_spells].each do |spell| CharSpell.create!(character_id: char.id, spell_id: Spell.find_by(name: spell).id) end
     render json: char, status: :created
   end
 
@@ -48,6 +49,6 @@ class CharactersController < ApplicationController
   end
 
   def char_params
-    params.permit(:name, :level, :user_id, :dnd_class_id, :race_id, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma, :hp, :current_hp, :hp_option, :hp_values, :proficiency_choices, :user, :dnd_class, :race)
+    params.permit(:name, :level, :user_id, :dnd_class_id, :race_id, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma, :hp, :current_hp, :hp_option, :hp_values, :proficiency_choices, :user, :dnd_class, :race, :starting_spells)
   end
 end

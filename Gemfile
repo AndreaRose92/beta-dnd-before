@@ -52,3 +52,4 @@ gem "activerecord-reset-pk-sequence", "~> 0.2.1"
 gem "net-http", "~> 0.2.2"
 gem "json", "~> 2.6"
 gem "rest-client", "~> 2.1"
+gem 'faker'
