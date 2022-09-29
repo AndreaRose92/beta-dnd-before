@@ -12,17 +12,7 @@ import * as AllInfo from './gameInfoComponents'
 export const App = () => {
 
      const {user, setUser} = useContext(UserContext)
-     // const [userCharacters, setUserCharacters] = useState([])
-
-
-     // const deleteCharacter = e => {
-     //      fetch(`/characters/${e.target.value}`, {method: "DELETE"}).then(()=>{
-     //           setUserCharacters(characters => characters.filter(character => character.id !== e.target.value))
-     //      })
-     // }
-
-     // useEffect(()=>{getRequest('/me', setUser)}, [setUser])
-     // useEffect(()=>{getRequest('/characters', setUserCharacters)}, [setUserCharacters]);
+   
      useEffect(()=>{
           fetch('/me').then(r=>{
                if (r.ok) {
@@ -32,16 +22,7 @@ export const App = () => {
                }
           })
      }, [setUser])
-     // useEffect(()=>{
-     //      fetch(`/characters`).then(r=>{
-     //           if (r.ok) {
-     //                r.json().then(data=>setUserCharacters(data))
-     //           } else {
-     //                r.json().then(errors=>console.log(errors))
-     //           }
-     //      })
-     // }, [setUserCharacters])
-
+   
      return (
           <CharacterProvider>
                <PageWrapper>
@@ -63,8 +44,8 @@ export const App = () => {
                               <Route exact path='basic' element={<AllChar.CharBasicsPage/>}/>
                               <Route exact path='stats' element={<AllChar.CharStatsPage/>}/>
                               <Route exact path='skills' element={<AllChar.CharSkillsPage/>}/>
-                              <Route exact path='review' element={<AllChar.CharSpellsPage/>}/>
-                              <Route exact path='spells' element={<AllChar.CharReviewPage/>}/>
+                              {/* <Route exact path='spells' element={<AllChar.CharSpellsPage/>}/> */}
+                              <Route exact path='review' element={<AllChar.CharReviewPage/>}/>
                          </Route>
                          <Route path ='test' element={<StatTestSheet/>}/>
                     </Routes>

@@ -16,6 +16,9 @@ export const CharBasicsPage = () => {
                <label>Level: 
                     <input type='number' name='level' defaultValue={newCharacter.level} onChange={formHandlers.handleInput} /><br/>
                </label>
+               <label htmlFor='image'>Avatar: 
+                    <input type='text' name='image' defaultValue={newCharacter.image} onChange={formHandlers.handleInput}/><br/>
+               </label>
                <label>Class:
                     <select name='dnd_class' defaultValue={newCharacter.dnd_class} onChange={formHandlers.handleClassChange}>
                          <option value=''>---</option>

@@ -5,9 +5,10 @@ import { NavButton } from "../hookComponents"
 export const NotFound = () => {
     return (
         <React.Fragment>
-            <h1>You've lost your way, traveller. Head back to the tavern.</h1>
-            <h3>404 page not found</h3>
+            <h1 style={{"textAlign": "center"}} >You've lost your way, traveller. Head back to the tavern.</h1>
+            <h3 style={{"textAlign": "center"}} >404 page not found <br/>
             <NavButton />
+            </h3>
         </React.Fragment>
     )
 }

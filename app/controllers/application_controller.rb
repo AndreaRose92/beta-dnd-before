@@ -11,8 +11,7 @@ class ApplicationController < ActionController::API
     end
 
     def current_user
-        user = User.find_by(id: session[:user_id])
-        user
+        User.find_by(id: session[:user_id])
     end
 
     def render_not_found invalid
@@ -50,7 +49,7 @@ class ApplicationController < ActionController::API
     
       def find_abi array
         stat_bonuses = {
-          Strengh: 0,
+          Strength: 0,
           Dexterity: 0,
           Constitution: 0,
           Intelligence: 0,

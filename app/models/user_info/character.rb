@@ -11,8 +11,8 @@ class Character < ApplicationRecord
   belongs_to :race
 
   validates :name, :level, presence: true
-  validates :dnd_class_id, inclusion: (1..12)
-  validates :race_id, inclusion: (1..9)
+  # validates :dnd_class_id, inclusion: (1..12)
+  # validates :race_id, inclusion: (1..9)
   validates :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma, inclusion: (3..20)
 
   attr_accessor :hp_option, :hp_values, :proficiency_choices, :starting_spells

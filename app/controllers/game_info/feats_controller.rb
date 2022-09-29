@@ -1,2 +1,0 @@
-class FeatsController < ApplicationController
-end

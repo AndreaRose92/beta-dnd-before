@@ -58,6 +58,7 @@ export const races = [
 export const blankCharacter = {
 	name: '',
 	level: 0,
+	image: '',
 	dnd_class: '',
 	race: '',
 	Strength: 0,
