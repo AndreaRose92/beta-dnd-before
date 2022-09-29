@@ -1,11 +1,13 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { FormBox } from '../../styles';
-import { NavButton } from '../../hookComponents';
+import { Error, FormBox } from '../../styles';
+import { ErrorContext, NavButton } from '../../hookComponents';
+import { useContext } from 'react';
 
-export const CharPageFour = () => {
+export const CharReviewPage = () => {
 	
      const [formHandlers, formData, newCharacter] = useOutletContext()
+     const {errors} = useContext(ErrorContext)
 
      return (
           <FormBox onSubmit={formHandlers.handleSubmit} >
@@ -26,6 +28,7 @@ export const CharPageFour = () => {
                </table>
                <NavButton path={'../skills'} text={'Back'} />
                <button type='submit'>Submit</button>
+               {formData.errors ? errors.map(err =>(<Error key={err}>{err}</Error>)) : null}
           </FormBox>
      )
 };

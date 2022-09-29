@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StatBox } from "./CharacterSheetGrids.style";
 
 export const PageWrapper = styled.div`
     margin: 0;
@@ -24,27 +25,27 @@ export const ContentWrapper = styled.div`
 export const CharacterWrapper = styled.div`
     margin: 25px;
     display: grid;
-    grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr 5fr;
 `
 
 export const CharacterGrid = styled.div`
     grid-row: 2;
     display: grid;
-    grid-template-columns: repeat(12, 110px);
+    grid-template-columns: repeat(12, 110px) 1fr;
     grid-template-rows: repeat(5, 110px);
     grid-template-areas: 
-    'sb sb sb sb sb sb ab ab hb hb hb hb'
-    'st st st pb pb pb it ac in dc dc dc'
-    'st st st pb pb pb eb eb eb eb eb eb'
-    'sn sn sn pb pb pb eb eb eb eb eb eb'
-    'sn sn sn pb pb pb eb eb eb eb eb eb'
+    'sb sb sb sb sb sb ab ab hb hb hb hb dl'
+    'st st st pb pb pb it ac in dc dc dc dl'
+    'st st st pb pb pb eb eb eb eb eb eb dl'
+    'sn sn sn pb pb pb eb eb eb eb eb eb dl'
+    'sn sn sn pb pb pb eb eb eb eb eb eb dl'
     ;
     gap: 10px;
     `
 export const DiceBox = styled.div`
-    grid-column: 2;
-    grid-row: 2;
+    /* grid-column: 13; */
+    grid-row: 1 / 6;
+    grid-area: 'dl';
     border-radius: 10px;
     border: 2px outset #d4af37;
     background: radial-gradient(farthest-corner at 5px 5px,
@@ -53,7 +54,7 @@ export const DiceBox = styled.div`
     padding: 5px 10px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 30px 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
 
     div.rollBox {
         display: grid;
@@ -63,6 +64,7 @@ export const DiceBox = styled.div`
         background-color: darkgray;
         border-radius: 10px;
         height: 90px;
+        margin-bottom: 5px;
     }
 
     .skillName {
@@ -90,8 +92,12 @@ export const DiceBox = styled.div`
     }
 
     .clear {
-        position: fixed;
-        top: 78%
+        display: flex;
+        margin-bottom: 10px;
+        position: relative;
+        justify-self: center;
+        width: 200px;
+        font-size: larger;
     }
 `
 
@@ -117,4 +123,143 @@ export const FormBox = styled.form`
           display: block;
      }
 
+`
+
+export const UserWrapper = styled.div`
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 150px 1fr 150px;
+    text-align: center;
+
+    h2 {
+        grid-column: 2;
+    }
+`
+
+export const CardWrapper = styled.div`
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+`
+
+export const CharCard = styled.div`
+    height: 200px;
+    border-radius: 10px;
+    border: black 2px solid;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: ${props => {
+        switch (props.variant) {
+            case 'Barbarian': return '#B87333';
+            case 'Bard': return '#B990BA';
+            case 'Cleric': return '#AAABAD';
+            case 'Druid': return '#8A9453';
+            case 'Fighter': return '#674A37';
+            case 'Monk': return '#6DB7D5';
+            case 'Paladin': return '#B49E53';
+            case 'Ranger': return '#4E8062';
+            case 'Rogue': return '#4A4B45';
+            case 'Sorcerer': return '#C1525B';
+            case 'Warlock': return '#8253B1';
+            case 'Wizard': return '#2C5EB5';
+        }
+    }};
+
+    .avatar > img {
+        border: black 2px solid;
+        grid-row: 1/2;
+        grid-column: 1;
+        max-height: 100px;
+        margin-left: 10%;
+        border-radius: 25%;
+        margin-top: 10px;
+    }
+
+
+`
+export const CharName = styled.div`
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    h3 {
+        margin-top: 10%;
+    }
+`
+
+export const CharButtons = styled.div`
+    display: grid;
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    .edit {
+        grid-row: 1;
+        grid-column: 1;
+        padding: none;
+        border-radius: 10px;
+        max-height: 30px;
+        max-width: 75px;
+        justify-self: center;
+        margin-top: 30%;
+        /* margin-bottom: 50%; */
+    }
+
+    .delete {
+        grid-row: 1;
+        grid-column: 2;
+        padding: none;
+        border-radius: 10px;
+        max-height: 30px;
+        max-width: 75px;
+        justify-self: center;
+        margin-top: 30%;
+    }
+`
+
+export const EditWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: 60px 1fr;
+    text-align: center;
+    justify-content: center;
+
+    input, 
+    select {
+        text-align: center;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        height: 40px;
+        width: 300px;
+        font-size: large;       
+    }
+    button {
+        height: 50px;
+        width: 150px;
+        font-size: large;
+    }
+    h2 {
+        grid-row: 1;
+        grid-column: 2;
+    }
+`
+export const EditForm = styled.form`
+    grid-row: 2;
+    grid-column: 2;
+
+`
+
+export const StatForm = styled.div`
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 150px;
+    text-align: center;
+`
+
+export const EditStatBox = styled(StatBox)`
+    
 `

@@ -1,6 +1,7 @@
 class CharactersController < ApplicationController
+
   def index
-    render json: Character.where(user_id: current_user.id)
+    render json: Character.where(user: current_user)
   end
 
   def show
@@ -8,30 +9,24 @@ class CharactersController < ApplicationController
   end
 
   def create
-    char = Character.create!(
-      name: params[:name],
-      level: params[:level],
-      Strength: params[:Strength],
-      Dexterity: params[:Dexterity],
-      Constitution: params[:Constitution],
-      Intelligence: params[:Intelligence],
-      Wisdom: params[:Wisdom],
-      Charisma: params[:Charisma],
-      user: User.find(params[:user_id]),
-      dnd_class: DndClass.find(params[:dnd_class_id]),
-      race: Race.find(params[:race_id]),
-    )
-    char.calculate_hp("fixed")
-    params[:proficiency_choices].each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: Proficiency.find_by(name: prof).id) end
-    char.dnd_class.proficiencies.last(2).each do |prof| CharSkill.create!(character_id: char.id, proficiency_id: prof.id) end
-    params[:starting_spells].each do |spell| CharSpell.create!(character_id: char.id, spell_id: Spell.find_by(name: spell).id) end
+    user = current_user
+    char = Character.create!(char_params)
+    char.calculate_hp(hp_params)
+    new_char_params[:proficiency_choices].each do |prof| CharSkill.create!(character: char, proficiency: Proficiency.find_by(name: prof)) end
+    char.dnd_class.proficiencies.last(2).each do |prof| CharSkill.create!(character: char, proficiency: prof) end
+    new_char_params[:starting_spells].each do |spell| CharSpell.create!(character: char, spell: Spell.find_by(name: spell)) end
     render json: char, status: :created
   end
 
   def update
     char = find_character
     char.update!(char_params)
-    
+    render json: char, status: :accepted
+  end
+
+  def health
+    char = find_character
+    char.update(current_hp: hp_params[:current_hp].clamp(0, char.hp) )
     render json: char, status: :accepted
   end
 
@@ -47,6 +42,15 @@ class CharactersController < ApplicationController
   end
 
   def char_params
-    params.permit(:name, :level, :user_id, :dnd_class_id, :race_id, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma, :hp, :current_hp, :hp_option, :hp_values, :proficiency_choices, :user, :dnd_class, :race, :starting_spells)
+    params.permit(:name, :level, :user_id, :dnd_class_id, :race_id, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma)
   end
+
+  def hp_params
+    params.permit(:name, :hp, :current_hp, :hp_option, :hp_values)
+  end
+
+  def new_char_params
+    params.permit(:name, :proficiency_choices, :starting_spells)
+  end
+
 end

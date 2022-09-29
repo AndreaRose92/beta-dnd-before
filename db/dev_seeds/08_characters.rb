@@ -69,4 +69,4 @@ User.all.where('id > ?', User.find_by(username: "SamRose").id).each do |user|
     end
 end
 
-Character.all.each {|character| character.calculate_hp}
+Character.all.each {|character| character.calculate_hp("fixed")}

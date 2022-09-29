@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { CharacterGrid, CharacterWrapper } from '../styles';
-import { CharacterContext } from '../hookComponents';
+import { CharacterContext, ErrorContext } from '../hookComponents';
 import { ActionBox, CombatBox, SkillBox, Traits, SavingThrows, HPBox, AuxBox, StatGrid, CharHeader, DiceLog } from './characterSheetBoxes';
 
 export const CharacterSheet = () => {
     const params = useParams();
+    const { errors, setErrors } = useContext(ErrorContext)
     const { character, setCharacter } = useContext(CharacterContext);
     const stats = character.name !== '' ? character.stats : [{ name: '', value: 0 }];
     useEffect(()=>{
@@ -43,18 +44,18 @@ export const CharacterSheet = () => {
 
     return (
         <CharacterWrapper>
-            <CharHeader {...charStats}/>
+            <CharHeader {...charStats} errors={errors}/>
             <CharacterGrid>
                 <StatGrid {...charStats}/>
                 <AuxBox {...charStats}/>
-                <HPBox character={character} setCharacter={setCharacter}/>
+                <HPBox character={character} setCharacter={setCharacter} setErrors={setErrors}/>
                 <SavingThrows {...charStats} {...calculations}/>
                 <Traits {...charStats} />
                 <SkillBox {...calculations}/>
                 <CombatBox dex={stats[1]} />
                 <ActionBox {...charStats}/>
+                <DiceLog/>
             </CharacterGrid>
-            <DiceLog/>
         </CharacterWrapper>
     );
 };

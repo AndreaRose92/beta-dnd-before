@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HealthButton, HealthBox, HealthInput } from "../../styles";
 
-export const HPBox = ({ character, setCharacter }) => {
+export const HPBox = ({ character, setCharacter, setErrors }) => {
     const [newHP, setNewHP] = useState(0);
     const handleHP = (e) => {
       e.preventDefault();
@@ -11,7 +11,7 @@ export const HPBox = ({ character, setCharacter }) => {
       } else if (e.target.name === 'damage') {
         updatedHP = parseInt(character.current_hp) - parseInt(newHP);
       }
-      fetch(`/characters/${character.id}`, {
+      fetch(`/characters/${character.id}/health`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -21,7 +21,7 @@ export const HPBox = ({ character, setCharacter }) => {
         if (r.ok) {
           r.json().then((update) => setCharacter(update));
         } else {
-          r.json().then((errors) => console.log(errors));
+          r.json().then((errors) => setErrors(errors));
         }
       });
     };

@@ -1,13 +1,14 @@
 import { useContext, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { FormGrid } from '../../styles'
-import { CharacterContext, UserContext, blankCharacter } from '../../hookComponents'
+import { Error, FormGrid } from '../../styles'
+import { CharacterContext, UserContext, blankCharacter, ErrorContext, spellcasterIDs } from '../../hookComponents'
 
 export const CreateCharacter = () => {
 
      const navigate = useNavigate()
      const {user} = useContext(UserContext)
      const {setCharacter} = useContext(CharacterContext)
+     const {errors, setErrors} = useContext(ErrorContext)
      const [newCharacter, setNewCharacter] = useState(blankCharacter)
      const [availableSpells, setAvailableSpells] = useState({})
      const [spellcastingLevel, setSpellcastingLevel] = useState({})
@@ -35,13 +36,13 @@ export const CreateCharacter = () => {
           resetSkills()
           setNewCharacter({
                ...newCharacter,
-               dnd_class_id: e.target.value
+               dnd_class: e.target.value
           })
           fetch(`/dnd_classes/${e.target.value}/proficiencies`).then(r=>{
                if (r.ok) {
                     r.json().then(data=>{setSkills(data[0].slice(0, (data[0].length - 3))); setAmount(data[1])})
                } else {
-                    r.json().then(errors=>console.log(errors))
+                    r.json().then(errors=>setErrors(errors))
                }
           })
      }
@@ -78,36 +79,85 @@ export const CreateCharacter = () => {
 
      const handleSubmit = e => {
           e.preventDefault()
+          createDndClass().then(r=>{
+               if (r.ok) {
+                    r.json().then(()=>createRace()).then(r=>{
+                         if (r.ok) {
+                              r.json().then(()=>postCharacter())
+                         } else {
+                              r.json().then(errors=>setErrors(errors))         
+                         }
+                    })
+               } else {
+                    r.json().then(errors=>setErrors(errors))
+               }
+          })
+     }
+
+     const createDndClass = () => {
+          fetch(`/dnd_classes/${newCharacter.dnd_class}/${newCharacter.level}`, {method: "POST"})
+     }
+
+     const createRace = () => {
+          fetch(`/races/${newCharacter.race}`, {method: "POST"})
+     }
+
+     const postCharacter = () => {
           let newSkills = [skillOne, skillTwo, skillThree, skillFour].filter(skill => skill !== '')
           fetch(`/characters`, {
                method: "POST",
                headers: {"Content-Type": "application/json"},
                body: JSON.stringify({
                     ...newCharacter,
-                    user_id: user.id,
                     proficiency_choices: newSkills,
                     starting_spells: selectedSpells
                })
           }).then(r=>{
                if (r.ok) {
                     r.json().then(data=>{
-                         setCharacter(data);
+                         setCharacter(data)
                          navigate(`/users/${user.username}/characters/${data.id}`)
-                    })
+                    }).then(()=>{fetch(`/character_builders`, {method: "DELETE"})})
                } else {
-                    r.json().then(errors=>console.log(errors))
+                    r.json().then(errors=>setErrors(errors.errors))
                }
           })
      }
 
+     // const handleSubmit = e => {
+     //      e.preventDefault()
+     //      let newSkills = [skillOne, skillTwo, skillThree, skillFour].filter(skill => skill !== '')
+     //      fetch(`/characters`, {
+     //           method: "POST",
+     //           headers: {"Content-Type": "application/json"},
+     //           body: JSON.stringify({
+     //                ...newCharacter,
+     //                proficiency_choices: newSkills,
+     //                starting_spells: selectedSpells
+     //           })
+     //      }).then(r=>{
+     //           if (r.ok) {
+     //                r.json().then(data=>{
+     //                     setCharacter(data);
+     //                     navigate(`/users/${user.username}/characters/${data.id}`)
+     //                }).then(()=>{
+     //                     fetch(`/character_builders`, {method: "DELETE"})
+     //                })
+     //           } else {
+     //                r.json().then(errors=>setErrors(errors.errors));
+     //           }
+     //      })
+     // }
+
      const handleSpells = () => {
+          if (spellcasterIDs.includes(newCharacter.dnd_class))
           fetch(`/character_builders`, {
                method: "POST",
                headers: {"Content-Type": "application/json"},
                body: JSON.stringify({
                     level: parseInt(newCharacter.level),
-                    dnd_class_id: parseInt(newCharacter.dnd_class_id),
-                    race_id: parseInt(newCharacter.race_id)
+                    dnd_class_id: parseInt(newCharacter.dnd_class),
+                    race_id: parseInt(newCharacter.race)
                })
           }).then(r=>{
                if(r.ok) {
@@ -115,10 +165,9 @@ export const CreateCharacter = () => {
                          setAvailableSpells(data.available_spells)
                          setSpellcastingLevel(data.spellcasting_level)
                          setMaxSpellLevel(data.max_spell_level)
-                         console.log(data)
                     })
                } else {
-                    r.json().then(errors=>console.log(errors))
+                    r.json().then(errors=>setErrors([errors]))
                }
           })
      }
@@ -143,7 +192,7 @@ export const CreateCharacter = () => {
 
      const formHandlers = {handleInput, handleClassChange, handleStats, handleSkill, handleSubmit, handleSpells, handleTest, handleSelect}
 
-     const formData = {skills, skillOne, skillTwo, skillThree, skillFour, amount, availableSpells, spellcastingLevel, maxSpellLevel, selectedSpells}
+     const formData = {skills, skillOne, skillTwo, skillThree, skillFour, amount, availableSpells, spellcastingLevel, maxSpellLevel, selectedSpells, errors}
 
      return (
           <FormGrid>

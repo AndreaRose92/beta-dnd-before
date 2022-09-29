@@ -1,3 +1,3 @@
 class SubraceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :url, :ability_score_bonuses, :languages, :traits
+  attributes :id, :name, :url, :languages, :traits, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma
 end

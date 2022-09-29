@@ -31,12 +31,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_121407) do
 
   create_table "character_builders", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
-    t.integer "race_id", null: false
+    t.string "race_name"
     t.integer "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dnd_class_id"], name: "index_character_builders_on_dnd_class_id"
-    t.index ["race_id"], name: "index_character_builders_on_race_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -296,7 +295,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_121407) do
   add_foreign_key "char_spells", "characters"
   add_foreign_key "char_spells", "spells"
   add_foreign_key "character_builders", "dnd_classes"
-  add_foreign_key "character_builders", "races"
   add_foreign_key "characters", "dnd_classes"
   add_foreign_key "characters", "races"
   add_foreign_key "characters", "users"

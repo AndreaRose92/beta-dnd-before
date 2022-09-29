@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { ErrorContext, UserContext } from "../hookComponents"
-import { Error } from '../styles'
+import { AuthForm, Error } from '../styles'
 
 
 export const Login = () => {
@@ -17,11 +17,11 @@ export const Login = () => {
         e.preventDefault()
         fetch('/login', {
             method: "POST",
-            headers: {"Contenet-Type": "application/json"},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({username, password})
         }).then(r=>{
             if (r.ok) {
-                r.json().then(me=>setUser(me)).then(()=>navigate(`/users/${user.username}`))
+                r.json().then(me=>{setUser(me); navigate(`/users/${username}`)})
             } else {
                 r.json().then(errors=>setErrors(errors))
             }
@@ -29,18 +29,18 @@ export const Login = () => {
     }
 
     return (
-        <div>
+        <AuthForm>
             <form onSubmit={onLogin}>
                 <input type='text' placeholder="username" onChange={e=>setUsername(e.target.value)} /><br/>
                 <input type='password' placeholder="password" onChange={e=>setPassword(e.target.value)} /><br/>
                 <button type='submit'>Submit</button>
-                {errors.map(err=>(
+                {errors ? errors.map(err=>(
                     <Error key={err}>
                         {err}
                     </Error>
-                ))}
+                )) : null}
             </form>
-        </div>
+        </AuthForm>
     )
 
 }

@@ -1,19 +1,27 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { NavButton } from '../hookComponents'
+import { CharCard } from '../styles'
+import { CharButtons, CharName } from '../styles/Grids.styles'
 
 export const CharacterCard = ({character, deleteCharacter}) => {
 
     const params = useParams()
+    const navigate = useNavigate()
 
     return (
-    <div>
-        <Link to={`/users/${params.username}/characters/${character.id}`}>
-            <h3>{character.name}</h3>
-            <p>Level {character.level} {character.race.name} {character.dnd_class.name}</p>
+    <CharCard variant={character.dnd_class.name} >
+        <Link className='avatar' to={`./characters/${character.id}`}>
+            <img src={character.image} alt={character.name}/>
         </Link>
-        <NavButton path={`/users/${params.username}/characters/${character.id}/edit`} text={"Edit"}/>
-        <button value={character.id} onClick={deleteCharacter}>Delete</button>
-    </div>
+        <CharName as={Link} to={`./characters/${character.id}`}>
+            <h3>{character.name}</h3>
+            <h4>Level {character.level} {character.race.name} {character.dnd_class.name}</h4>
+        </CharName>
+        <CharButtons>
+            <button className='edit' onClick={()=>navigate(`./characters/${character.id}/edit`)}>Edit</button>
+            <button className='delete' value={character.id} onClick={deleteCharacter}>Delete</button>
+        </CharButtons>
+    </CharCard>
   )
 }
