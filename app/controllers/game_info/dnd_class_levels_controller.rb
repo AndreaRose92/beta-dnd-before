@@ -58,6 +58,10 @@ class DndClassLevelsController < ApplicationController
 
      private
 
+     def fetch_data
+          JSON.parse(RestClient.get("#{api_url}/classes/#{params[:dnd_class]}/levels/#{params[:level_id]}"))
+     end
+
      def find_class_id
           DndClass.find_by(name: params[:dnd_class].capitalize).id
      end

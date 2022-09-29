@@ -1,4 +1,5 @@
 class DndClass < ApplicationRecord
+    require './db/reference_data.rb'
     has_many :class_skills, dependent: :destroy
     has_many :proficiencies, through: :class_skills
     has_many :dnd_class_levels, dependent: :destroy
@@ -18,4 +19,9 @@ class DndClass < ApplicationRecord
         self.spells.where('level < ?', input)
     end
 
+    def create_proficiencies
+        $class_skills.filter{ |skill| skill[0] == self }.each do |pair|
+            ClassSkill.create(dnd_class: self, proficiency_id: skill[1])
+        end
+    end
 end

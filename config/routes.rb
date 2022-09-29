@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 # data pulled from api
-  resources :dnd_classes, only: [:index, :show]
-  resources :races, only: [:index, :show]
-  resources :subraces, only: [:index, :show]
   resources :spells, only: [:index, :show]
   resources :equipment, only: [:index, :show]
   
@@ -39,6 +36,14 @@ Rails.application.routes.draw do
   get "/spells/:dnd_class/list", to: "class_spells#class_index"
   get "/spells/:dnd_class/:level", to: "class_spells#level_index"
   post "/spells/:dnd_class/:spell", to: "class_spells#create"
+  get "/races", to: "races#index"
+  get "/races/:race", to: "races#show"
+  post "/races/:race", to: "races#create"
+  get "/races/:race/:subrace", to: "subraces#show"
+  post "/races/:race/:subrace", to: "subraces#create"
+  get "/dnd_classes", to: "dnd_classes#index"
+  get "/dnd_classes/:dnd_class", to: "dnd_classes#show"
+  post "/dnd_classes/:dnd_class/:level", to: "dnd_classes#create"
 
 
 # custom routes for more specific rendering
