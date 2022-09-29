@@ -35,11 +35,27 @@ class DndClassesController < ApplicationController
   end
 
   def proficiencies
-    amount = DndClass.find(params[:dnd_class]).starting_proficiencies
-    skills = DndClass.find(params[:dnd_class]).proficiencies
+    dc = DndClass.find_by(api_index: params[:dnd_class])
+    if dc
+      amount = dc.starting_proficiencies
+      skills = dc.proficiencies
+    else
+      amount = fetch_data["proficiency_choices"]["choose"]
+      skills = []
+      $class_skills.filter{ |skill| skill[0].api_index == params[:api_index] }.each do |prof|
+        skills << Proficiency.find(prof[1])
+      end
+    end
     data = [skills, amount]
     render json: data
   end
+
+  # def proficiencies
+  #   amount = DndClass.find(params[:dnd_class]).starting_proficiencies
+  #   skills = DndClass.find(params[:dnd_class]).proficiencies
+  #   data = [skills, amount]
+  #   render json: data
+  # end
 
   private
 

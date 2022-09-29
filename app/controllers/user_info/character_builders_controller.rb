@@ -1,8 +1,16 @@
 class CharacterBuildersController < ApplicationController
 
     def create
-        new_char = CharacterBuilder.create!(builder_params)
-        render json: new_char
+       if find_class && find_race
+        new_char == CharacterBuilder.create!(builder_params)
+       elsif find_class
+        race = JSON.parse(RestClient.get("#{api_url}/races/#{params[:race]}")).name
+        new_char = CharacterBuilder.create!(
+            dnd_class: find_class,
+            race_name: race,
+            level: params[:level]
+        )
+       end
     end
 
     def update
@@ -19,8 +27,14 @@ class CharacterBuildersController < ApplicationController
     private
     
     def builder_params
-        params.permit(:dnd_class_id, :race_id, :level, :id)
+        params.permit(:dnd_class, :race, :level, :id)
     end
 
+    def find_class
+        DndClass.find_by(api_index: params[:dnd_class])
+    end
+    def find_race
+        Race.find_by(api_index: params[:race])
+    end
 
 end

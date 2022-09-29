@@ -36,7 +36,7 @@ export const CreateCharacter = () => {
           resetSkills()
           setNewCharacter({
                ...newCharacter,
-               dnd_class_id: e.target.value
+               dnd_class: e.target.value
           })
           fetch(`/dnd_classes/${e.target.value}/proficiencies`).then(r=>{
                if (r.ok) {
@@ -79,6 +79,30 @@ export const CreateCharacter = () => {
 
      const handleSubmit = e => {
           e.preventDefault()
+          createDndClass().then(r=>{
+               if (r.ok) {
+                    r.json().then(()=>createRace()).then(r=>{
+                         if (r.ok) {
+                              r.json().then(()=>postCharacter())
+                         } else {
+                              r.json().then(errors=>setErrors(errors))         
+                         }
+                    })
+               } else {
+                    r.json().then(errors=>setErrors(errors))
+               }
+          })
+     }
+
+     const createDndClass = () => {
+          fetch(`/dnd_classes/${newCharacter.dnd_class}/${newCharacter.level}`, {method: "POST"})
+     }
+
+     const createRace = () => {
+          fetch(`/races/${newCharacter.race}`, {method: "POST"})
+     }
+
+     const postCharacter = () => {
           let newSkills = [skillOne, skillTwo, skillThree, skillFour].filter(skill => skill !== '')
           fetch(`/characters`, {
                method: "POST",
@@ -91,26 +115,49 @@ export const CreateCharacter = () => {
           }).then(r=>{
                if (r.ok) {
                     r.json().then(data=>{
-                         setCharacter(data);
+                         setCharacter(data)
                          navigate(`/users/${user.username}/characters/${data.id}`)
-                    }).then(()=>{
-                         fetch(`/character_builders`, {method: "DELETE"})
-                    })
+                    }).then(()=>{fetch(`/character_builders`, {method: "DELETE"})})
                } else {
-                    r.json().then(errors=>setErrors(errors.errors));
+                    r.json().then(errors=>setErrors(errors.errors))
                }
           })
      }
 
+     // const handleSubmit = e => {
+     //      e.preventDefault()
+     //      let newSkills = [skillOne, skillTwo, skillThree, skillFour].filter(skill => skill !== '')
+     //      fetch(`/characters`, {
+     //           method: "POST",
+     //           headers: {"Content-Type": "application/json"},
+     //           body: JSON.stringify({
+     //                ...newCharacter,
+     //                proficiency_choices: newSkills,
+     //                starting_spells: selectedSpells
+     //           })
+     //      }).then(r=>{
+     //           if (r.ok) {
+     //                r.json().then(data=>{
+     //                     setCharacter(data);
+     //                     navigate(`/users/${user.username}/characters/${data.id}`)
+     //                }).then(()=>{
+     //                     fetch(`/character_builders`, {method: "DELETE"})
+     //                })
+     //           } else {
+     //                r.json().then(errors=>setErrors(errors.errors));
+     //           }
+     //      })
+     // }
+
      const handleSpells = () => {
-          if (spellcasterIDs.includes(parseInt(newCharacter.dnd_class_id)))
+          if (spellcasterIDs.includes(newCharacter.dnd_class))
           fetch(`/character_builders`, {
                method: "POST",
                headers: {"Content-Type": "application/json"},
                body: JSON.stringify({
                     level: parseInt(newCharacter.level),
-                    dnd_class_id: parseInt(newCharacter.dnd_class_id),
-                    race_id: parseInt(newCharacter.race_id)
+                    dnd_class_id: parseInt(newCharacter.dnd_class),
+                    race_id: parseInt(newCharacter.race)
                })
           }).then(r=>{
                if(r.ok) {

@@ -57,17 +57,17 @@ export const races = [
 
 export const blankCharacter = {
 	name: '',
-     level: 0,
-	dnd_class_id: 0,
-	race_id: 0,
-     Strength: 0,
-     Dexterity: 0,
-     Constitution: 0,
-     Intelligence: 0,
-     Wisdom: 0,
-     Charisma: 0,
+	level: 0,
+	dnd_class: '',
+	race: '',
+	Strength: 0,
+	Dexterity: 0,
+	Constitution: 0,
+	Intelligence: 0,
+	Wisdom: 0,
+	Charisma: 0,
 	hp: 0,
 	current_hp: 0,
 };
 
-export const spellcasterIDs = [2,3,4,7,8,10,11,12]
+export const spellcasterIDs = ["bard", "cleric", "druid", "paladin", "ranger", "sorcerer", "warlock", "wizard"];
