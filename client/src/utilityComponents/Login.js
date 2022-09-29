@@ -7,7 +7,7 @@ import { AuthForm, Error } from '../styles'
 export const Login = () => {
 
     const navigate = useNavigate()
-    const {user, setUser} = useContext(UserContext)
+    const {setUser} = useContext(UserContext)
     const {errors, setErrors} = useContext(ErrorContext)
 
     const [username, setUsername] = useState('')
@@ -34,7 +34,7 @@ export const Login = () => {
                 <input type='text' placeholder="username" onChange={e=>setUsername(e.target.value)} /><br/>
                 <input type='password' placeholder="password" onChange={e=>setPassword(e.target.value)} /><br/>
                 <button type='submit'>Submit</button>
-                {errors ? errors.map(err=>(
+                {errors && errors.error !== "Not authorized" ? errors.map(err=>(
                     <Error key={err}>
                         {err}
                     </Error>

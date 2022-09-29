@@ -7,7 +7,7 @@ export const CharSkillsPage = () => {
 	
      const [formHandlers, formData, newCharacter] = useOutletContext()
 
-     useEffect(()=>{formHandlers.handleSpells()}, [newCharacter])
+     // useEffect(()=>{formHandlers.handleSpells()}, [newCharacter, formHandlers])
 
      const filteredSkills = formData.skills.filter(skill => skill.name !== formData.skillOne || skill.name !== formData.skillTwo || skill.name !== formData.skillThree || skill.name !== formData.skillFour)
 
@@ -35,7 +35,7 @@ export const CharSkillsPage = () => {
                     {renderSkills}
                </select> : null}
                <NavButton path={'../stats'} text={'Back'}/>
-               <NavButton path={'../spells'} text={'Next'}/>
+               <NavButton path={'../review'} text={'Next'}/>
           </FormBox>
      )
 };

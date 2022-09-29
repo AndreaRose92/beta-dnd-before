@@ -21,7 +21,7 @@ export const UserPage = () => {
 
     const deleteCharacter = e => {
         fetch(`/characters/${e.target.value}`, {method: "DELETE"})
-            .then(()=>setCharacters(characters=>characters.filter(char => char.id !== e.target.value)))
+        setCharacters(characters.filter(char => char.id !== e.target.value))
     }
 
     const renderCards = characters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter} />)

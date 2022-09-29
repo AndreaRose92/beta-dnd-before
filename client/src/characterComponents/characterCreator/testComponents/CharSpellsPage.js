@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
-import { NavButton } from '../../hookComponents'
-import { FormBox } from '../../styles'
+import { NavButton } from '../../../hookComponents'
+import { FormBox } from '../../../styles'
 
 export const CharSpellsPage = () => {
 	const [formHandlers, formData] = useOutletContext()

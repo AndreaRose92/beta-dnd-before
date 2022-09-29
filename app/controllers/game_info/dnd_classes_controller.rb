@@ -1,6 +1,6 @@
 class DndClassesController < ApplicationController
-     require './db/reference_data.rb'
-  skip_before_action :authorize
+  require "./db/reference_data.rb"
+  skip_before_action :authorize, only: [:index, :show]
 
   def index
     render json: JSON.parse(RestClient.get("#{api_url}/classes"))["results"]
@@ -22,14 +22,16 @@ class DndClassesController < ApplicationController
   def create
     dc = DndClass.find_or_create_by(api_index: params[:dnd_class]) do |dc|
       dc.update(parse_class_fetch)
+      dc.create_proficiencies
     end
     params[:level].to_i.times do |c|
-     dcl = DndClassLevel.find_or_create_by(dnd_class_id: dc.id, level: c+1) do |dcl|
-          dcl.update(parse_level_fetch)
-          features ? dcl.feature_filter(features) : nil
-          class_specifics ? dcl.parse_class_specifics(class_specifics) : nil
-          dc.create_proficiencies
+      dcl = DndClassLevel.find_or_create_by(dnd_class_id: dc.id, level: c + 1) do |dcl|
+        if dcl.prof_bonus == nil
+          dcl.update(parse_level_fetch(c))
+          features(c) ? dcl.feature_filter(features(c)) : nil
+          class_specifics(c) ? dcl.parse_class_specifics(class_specifics(c)) : nil
         end
+      end
     end
     render json: dc
   end
@@ -40,22 +42,15 @@ class DndClassesController < ApplicationController
       amount = dc.starting_proficiencies
       skills = dc.proficiencies
     else
-      amount = fetch_data["proficiency_choices"]["choose"]
+      amount = fetch_data["proficiency_choices"][0]["choose"]
       skills = []
-      $class_skills.filter{ |skill| skill[0].api_index == params[:api_index] }.each do |prof|
+      $class_skills.filter { |skill| skill[0].api_index == params[:dnd_class] }.each do |prof|
         skills << Proficiency.find(prof[1])
       end
     end
     data = [skills, amount]
     render json: data
   end
-
-  # def proficiencies
-  #   amount = DndClass.find(params[:dnd_class]).starting_proficiencies
-  #   skills = DndClass.find(params[:dnd_class]).proficiencies
-  #   data = [skills, amount]
-  #   render json: data
-  # end
 
   private
 
@@ -64,7 +59,7 @@ class DndClassesController < ApplicationController
   end
 
   def fetch_level
-    JSON.parse(RestClient.get("#{api_url}/classes/#{params[:dnd_class]}/levels/#{params[:level].to_i}"))
+    JSON.parse(RestClient.get("#{api_url}/classes/#{params[:dnd_class]}/levels/"))
   end
 
   def parse_class_fetch
@@ -80,34 +75,34 @@ class DndClassesController < ApplicationController
     dnd_class_data
   end
 
-  def parse_level_fetch
+  def parse_level_fetch(num)
     level_data = {
-      api_index: fetch_level["index"],
-      level: fetch_level["level"],
-      ability_score_bonuses: fetch_level["ability_score_bonuses"],
-      prof_bonus: fetch_level["prof_bonus"],
+      api_index: fetch_level[num-1]["index"],
+      level: fetch_level[num-1]["level"],
+      ability_score_bonuses: fetch_level[num-1]["ability_score_bonuses"],
+      prof_bonus: fetch_level[num-1]["prof_bonus"],
     }
     level_data
   end
 
-  def parse_level_show
+  def parse_level_show(num)
     level_data = {
-      api_index: fetch_level["index"],
-      level: fetch_level["level"],
-      ability_score_bonuses: fetch_level["ability_score_bonuses"],
-      prof_bonus: fetch_level["prof_bonus"],
-      features: stringify_fetch(fetch_level["features"]),
-      class_specific: fetch_level["class_specific"].map { |k, v| "#{k}: #{v}" },
+      api_index: fetch_level[num-1]["index"],
+      level: fetch_level[num-1]["level"],
+      ability_score_bonuses: fetch_level[num-1]["ability_score_bonuses"],
+      prof_bonus: fetch_level[num-1]["prof_bonus"],
+      features: stringify_fetch(fetch_level[num-1]["features"]),
+      class_specific: fetch_level[num-1]["class_specific"].map { |k, v| "#{k}: #{v}" },
     }
     level_data
   end
 
-  def features
-    fetch_level["features"]
+  def features(num)
+    fetch_level[num]["features"]
   end
 
-  def class_specifics
-    fetch_level["class_specific"]
+  def class_specifics(num)
+    fetch_level[num]["class_specific"]
   end
 
   def max_spell_level(spellcasting_level)
@@ -131,4 +126,5 @@ class DndClassesController < ApplicationController
       return 1
     end
   end
+
 end
