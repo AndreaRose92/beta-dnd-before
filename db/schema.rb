@@ -54,14 +54,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_143435) do
     t.integer "dnd_class_id", null: false
     t.integer "race_id", null: false
     t.integer "user_id", null: false
-    t.integer "strength"
-    t.integer "dexterity"
-    t.integer "constitution"
-    t.integer "intelligence"
-    t.integer "wisdom"
-    t.integer "charisma"
-    t.integer "max_hp"
-    t.integer "current_hp"
+    t.integer "strength", default: 10
+    t.integer "dexterity", default: 10
+    t.integer "constitution", default: 10
+    t.integer "intelligence", default: 10
+    t.integer "wisdom", default: 10
+    t.integer "charisma", default: 10
+    t.integer "max_hp", default: 20
+    t.integer "current_hp", default: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dnd_class_id"], name: "index_characters_on_dnd_class_id"

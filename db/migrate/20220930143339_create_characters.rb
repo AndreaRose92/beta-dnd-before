@@ -7,14 +7,14 @@ class CreateCharacters < ActiveRecord::Migration[7.0]
       t.belongs_to :dnd_class, null: false, foreign_key: true
       t.belongs_to :race, null: false, foreign_key: true
       t.belongs_to :user, null: false, foreign_key: true
-      t.integer :strength
-      t.integer :dexterity
-      t.integer :constitution
-      t.integer :intelligence
-      t.integer :wisdom
-      t.integer :charisma
-      t.integer :max_hp
-      t.integer :current_hp
+      t.integer :strength, default: 10
+      t.integer :dexterity, default: 10
+      t.integer :constitution, default: 10
+      t.integer :intelligence, default: 10
+      t.integer :wisdom, default: 10
+      t.integer :charisma, default: 10
+      t.integer :max_hp, default: 20
+      t.integer :current_hp, default: 20
 
       t.timestamps
     end

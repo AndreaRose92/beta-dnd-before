@@ -6,14 +6,21 @@ class Character < ApplicationRecord
   has_many :character_skills, dependent: :destroy
   has_many :skills, through: :character_skills
   has_many :spells, through: :character_spells
+  has_many :dnd_class_levels, through: :dnd_class
 
   validates :name, presence: :true
   validates :level, inclusion: (1..20)
+  validates :current_hp, comparison: {less_than_or_equal_to: :max_hp}
   validates :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma, inclusion: (3..20)
 
-  attr_accessor :hp_option, :hp_values, :skill_choices, :starting_spells, :spellcasting_modifier
+  attr_accessor :hp_option, :hp_values, :skill_choices, :spell_choices, :spellcasting_modifier, :class_levels
+
+  def class_levels
+    self.dnd_class.dnd_class_levels.first(self.level)
+  end
+  
   def race_bonus stat_name
-    self[stat_name] + self.race[stat_name]
+    self.race.subraces[0] ? self[stat_name] + self.race[stat_name] + self.race.subraces[0][stat_name] : self[stat_name] + self.race[stat_name]
   end
 
   def stat_modifier number
@@ -34,6 +41,7 @@ class Character < ApplicationRecord
     modifier = self.stat_modifier(self.race_bonus("constitution"))
     base_hp = (hit_die + modifier)
     avg_hit_die = ((hit_die + 1)/2)
+    total_hp = 0
     if option == 'fixed'
       total_hp = (avg_hit_die + modifier) * (self.level - 1)
     elsif option == 'rolled'
