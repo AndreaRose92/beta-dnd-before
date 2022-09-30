@@ -16,7 +16,7 @@ races_data.each { |race|
     race_data = JSON.parse(race_response)
     race = Race.create(
         name: race_data["name"],
-        api_index: race_data["index"],
+        index: race_data["index"],
         url: race_data["url"],
         size: race_data["size"],
         speed: race_data["speed"],
@@ -55,7 +55,7 @@ subraces_data.each do |subrace|
     subrace = Subrace.create(
         name: subrace_data["name"],
         race: Race.find_by(name: subrace_data["race"]["name"]),
-        api_index: subrace_data["index"],
+        index: subrace_data["index"],
         url: subrace_data["url"],
         traits: subrace_data["racial_traits"].pluck("name"),
         Strength: 0,

@@ -1,3 +1,3 @@
 class Feature < ApplicationRecord
-  has_one :dnd_class
+  belongs_to :dnd_class
 end

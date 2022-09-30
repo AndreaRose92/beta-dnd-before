@@ -1,7 +1,13 @@
 class DndClassSerializer < ActiveModel::Serializer
-  attributes :id, :name, :url, :hit_die, :recommended_stat_one, :recommended_stat_two
-  has_many :dnd_class_levels
-  has_many :proficiencies
+  attributes :id, :name, :index, :hit_die, :recommended_stat_one, :recommended_stat_two
+  has_many :skills, serializer: SkillSerializer
+  has_many :dnd_class_levels, serializer: DndClassLevelSerializer
+  has_many :subclasses, serializer: SubclassSerializer
+  has_many :features, serializer: FeatureSerializer
+  # has_many :features
+  # has_many :skills
+  # has_many :dnd_class_levels
+  # has_many :subclasses
 
   def attributes(*args)
     hash = super
@@ -12,32 +18,4 @@ class DndClassSerializer < ActiveModel::Serializer
     }
     hash
   end
-
-  # has_many :spell_levels
-
-  # def spell_levels
-  #   case self.object.name
-  #   when "Bard"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Bard"))
-  #   when "Cleric"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Cleric"))
-  #   when "Druid"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Druid"))
-  #   when "Paladin"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Paladin"))
-  #   when "Ranger"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Ranger"))
-  #   when "Sorcerer"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Sorcerer"))
-  #   when "Warlock"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Warlock"))
-  #     spells = spells.map { |spell| spell.calculate_warlock_slot }
-  #     spells
-  #   when "Wizard"
-  #     spells = SpellLevel.where(dnd_class: DndClass.find_by(name: "Wizard"))
-  #   when "Barbarian" || "Fighter" || "Monk" || "Rogue"
-  #     spells = nil
-  #   end
-  #   spells
-  # end
 end

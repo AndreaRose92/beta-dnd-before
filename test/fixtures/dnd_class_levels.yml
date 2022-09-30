@@ -2,18 +2,114 @@
 
 one:
   dnd_class: one
+  index: MyString
+  features: MyString
   level: 1
   ability_score_bonuses: 1
   prof_bonus: 1
-  features: MyString
-  class_specific: MyString
-  spells: MyString
+  cantrips_known: 1
+  spells_known: 1
+  lvl_1_spell_slots: 1
+  lvl_2_spell_slots: 1
+  lvl_3_spell_slots: 1
+  lvl_4_spell_slots: 1
+  lvl_5_spell_slots: 1
+  lvl_6_spell_slots: 1
+  lvl_7_spell_slots: 1
+  lvl_8_spell_slots: 1
+  lvl_9_spell_slots: 1
+  rage_count: 1
+  rage_damage_bonus: 1
+  brutal_critical_dice: 1
+  bardic_inspiration_die: 1
+  song_of_rest_die: 1
+  magical_secrets_max_5: 1
+  magical_secrets_max_7: 1
+  magical_secrets_max_9: 1
+  channel_divinity_charges: 1
+  destroy_undead_cr: 1
+  wild_shape_max_cr: 1
+  wild_shape_swim: 1
+  wild_shape_fly: 1
+  action_surges: 1
+  indomitable_uses: 1
+  extra_attacks: 1
+  martial_arts_dice_count: 1
+  martial_arts_dice_value: 1
+  ki_points: 1
+  unarmored_movement: 1
+  aura_range: 1
+  favored_enemies: 1
+  favored_terrain: 1
+  sneak_attack_dice_count: 1
+  sneak_attack_dice_value: 1
+  sorcery_points: 1
+  metamagic_known: 1
+  create_lvl_1_slot: 1
+  create_lvl_2_slot: 1
+  create_lvl_3_slot: 1
+  create_lvl_4_slot: 1
+  create_lvl_5_slot: 1
+  invocations_known: 1
+  mystic_arcanum_level_6: 1
+  mystic_arcanum_level_7: 1
+  mystic_arcanum_level_8: 1
+  mystic_arcanum_level_9: 1
+  arcane_recovery_levels: 1
 
 two:
   dnd_class: two
+  index: MyString
+  features: MyString
   level: 1
   ability_score_bonuses: 1
   prof_bonus: 1
-  features: MyString
-  class_specific: MyString
-  spells: MyString
+  cantrips_known: 1
+  spells_known: 1
+  lvl_1_spell_slots: 1
+  lvl_2_spell_slots: 1
+  lvl_3_spell_slots: 1
+  lvl_4_spell_slots: 1
+  lvl_5_spell_slots: 1
+  lvl_6_spell_slots: 1
+  lvl_7_spell_slots: 1
+  lvl_8_spell_slots: 1
+  lvl_9_spell_slots: 1
+  rage_count: 1
+  rage_damage_bonus: 1
+  brutal_critical_dice: 1
+  bardic_inspiration_die: 1
+  song_of_rest_die: 1
+  magical_secrets_max_5: 1
+  magical_secrets_max_7: 1
+  magical_secrets_max_9: 1
+  channel_divinity_charges: 1
+  destroy_undead_cr: 1
+  wild_shape_max_cr: 1
+  wild_shape_swim: 1
+  wild_shape_fly: 1
+  action_surges: 1
+  indomitable_uses: 1
+  extra_attacks: 1
+  martial_arts_dice_count: 1
+  martial_arts_dice_value: 1
+  ki_points: 1
+  unarmored_movement: 1
+  aura_range: 1
+  favored_enemies: 1
+  favored_terrain: 1
+  sneak_attack_dice_count: 1
+  sneak_attack_dice_value: 1
+  sorcery_points: 1
+  metamagic_known: 1
+  create_lvl_1_slot: 1
+  create_lvl_2_slot: 1
+  create_lvl_3_slot: 1
+  create_lvl_4_slot: 1
+  create_lvl_5_slot: 1
+  invocations_known: 1
+  mystic_arcanum_level_6: 1
+  mystic_arcanum_level_7: 1
+  mystic_arcanum_level_8: 1
+  mystic_arcanum_level_9: 1
+  arcane_recovery_levels: 1

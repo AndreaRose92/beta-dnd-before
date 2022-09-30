@@ -2,12 +2,16 @@
 
 one:
   name: MyString
-  class_levels: MyString
+  index: MyString
   hit_die: 1
-  proficiency_choices: MyString
+  recommended_stat_one: MyString
+  recommended_stat_two: MyString
+  starting_skills: 1
 
 two:
   name: MyString
-  class_levels: MyString
+  index: MyString
   hit_die: 1
-  proficiency_choices: MyString
+  recommended_stat_one: MyString
+  recommended_stat_two: MyString
+  starting_skills: 1

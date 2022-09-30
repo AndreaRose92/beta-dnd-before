@@ -2,20 +2,52 @@
 
 one:
   name: MyString
+  index: MyString
+  level: 1
   desc: MyString
   higher_level: MyString
   range: MyString
-  ritual: false
   duration: MyString
+  casting_time: MyString
+  dc: MyString
+  ritual: false
   concentration: false
-  level: 1
+  slot_lvl_1_damage: MyString
+  slot_lvl_2_damage: MyString
+  slot_lvl_3_damage: MyString
+  slot_lvl_4_damage: MyString
+  slot_lvl_5_damage: MyString
+  slot_lvl_6_damage: MyString
+  slot_lvl_7_damage: MyString
+  slot_lvl_8_damage: MyString
+  slot_lvl_9_damage: MyString
+  char_lvl_1_damage: MyString
+  char_lvl_5_damage: MyString
+  char_lvl_11_damage: MyString
+  char_lvl_17_damage: MyString
 
 two:
   name: MyString
+  index: MyString
+  level: 1
   desc: MyString
   higher_level: MyString
   range: MyString
-  ritual: false
   duration: MyString
+  casting_time: MyString
+  dc: MyString
+  ritual: false
   concentration: false
-  level: 1
+  slot_lvl_1_damage: MyString
+  slot_lvl_2_damage: MyString
+  slot_lvl_3_damage: MyString
+  slot_lvl_4_damage: MyString
+  slot_lvl_5_damage: MyString
+  slot_lvl_6_damage: MyString
+  slot_lvl_7_damage: MyString
+  slot_lvl_8_damage: MyString
+  slot_lvl_9_damage: MyString
+  char_lvl_1_damage: MyString
+  char_lvl_5_damage: MyString
+  char_lvl_11_damage: MyString
+  char_lvl_17_damage: MyString

@@ -2,18 +2,22 @@
 
 one:
   name: MyString
+  index: MyString
   weapon_category: MyString
   weapon_range: MyString
   dSize: 1
   dAmt: 1
+  modifier: 1
   damage_type: MyString
   properties: MyString
 
 two:
   name: MyString
+  index: MyString
   weapon_category: MyString
   weapon_range: MyString
   dSize: 1
   dAmt: 1
+  modifier: 1
   damage_type: MyString
   properties: MyString

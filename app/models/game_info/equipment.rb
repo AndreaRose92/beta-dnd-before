@@ -1,5 +1,3 @@
 class Equipment < ApplicationRecord
-
-    validates :name, presence: true
-
+    has_many :character_equips, dependent: :destroy
 end

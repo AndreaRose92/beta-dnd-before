@@ -2,8 +2,8 @@
 
 one:
   race: one
-  proficiency: one
+  skill: one
 
 two:
   race: two
-  proficiency: two
+  skill: two

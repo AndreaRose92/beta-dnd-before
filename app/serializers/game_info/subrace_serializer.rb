@@ -1,6 +1,7 @@
 class SubraceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :url, :languages, :traits, :Strength, :Dexterity, :Constitution, :Intelligence, :Wisdom, :Charisma
-
+  attributes :id, :name, :index, :languages, :strength, :dexterity, :constitution, :intelligence, :wisdom, :charisma
+  has_many :traits, serializer: TraitSerializer
+  # has_many :traits
   def attributes(*args)
     hash = super
     hash.each { |k, v|
@@ -10,4 +11,5 @@ class SubraceSerializer < ActiveModel::Serializer
     }
     hash
   end
+
 end

@@ -2,8 +2,8 @@
 
 one:
   dnd_class: one
-  proficiency: one
+  skill: one
 
 two:
   dnd_class: two
-  proficiency: two
+  skill: two

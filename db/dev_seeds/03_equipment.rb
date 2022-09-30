@@ -23,7 +23,7 @@ all_weapons.each { |weapon|
     item = Equipment.create(
         name: weapon_data["name"],
         url: weapon_data["url"],
-        api_index: weapon_data["index"]
+        index: weapon_data["index"]
     )
 
     if weapon_data["damage"]

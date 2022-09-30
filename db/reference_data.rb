@@ -1,3 +1,4 @@
+$api_url = "http://www.dnd5eapi.co/api"
 $barbarian = DndClass.find_by(name: "Barbarian")
 $bard = DndClass.find_by(name: "Bard")
 $cleric = DndClass.find_by(name: "Cleric")
@@ -10,24 +11,117 @@ $rogue = DndClass.find_by(name: "Rogue")
 $sorcerer = DndClass.find_by(name: "Sorcerer")
 $warlock = DndClass.find_by(name: "Warlock")
 $wizard = DndClass.find_by(name: "Wizard")
-$class_skills = [[$barbarian, 2], [$barbarian, 4], [$barbarian, 8], [$barbarian, 11], [$barbarian, 12], [$barbarian, 18], [$barbarian, 19], [$barbarian, 21], [$bard, 1], [$bard, 2], [$bard, 3], [$bard, 4], [$bard, 5], [$bard, 6], [$bard, 7], [$bard, 8], [$bard, 9], [$bard, 10], [$bard, 11], [$bard, 12], [$bard, 13], [$bard, 14], [$bard, 15], [$bard, 16], [$bard, 17], [$bard, 18], [$bard, 20], [$bard, 24], [$cleric, 6], [$cleric, 7], [$cleric, 10], [$cleric, 14], [$cleric, 15], [$cleric, 23], [$cleric, 24], [$druid, 3], [$druid, 2], [$druid, 7], [$druid, 10], [$druid, 11], [$druid, 12], [$druid, 15], [$druid, 18], [$druid, 22], [$druid, 23], [$fighter, 1], [$fighter, 2], [$fighter, 4], [$fighter, 6], [$fighter, 7], [$fighter, 8], [$fighter, 9], [$fighter, 12], [$fighter, 18], [$fighter, 19], [$fighter, 21], [$monk, 1], [$monk, 4], [$monk, 6], [$monk, 7], [$monk, 15], [$monk, 17], [$monk, 19], [$monk, 20], [$paladin, 4], [$paladin, 7], [$paladin, 8], [$paladin, 10], [$paladin, 14], [$paladin, 15], [$paladin, 23], [$paladin, 24], [$ranger, 2], [$ranger, 4], [$ranger, 7], [$ranger, 9], [$ranger, 11], [$ranger, 12], [$ranger, 17], [$ranger, 18], [$ranger, 19], [$ranger, 20], [$rogue, 1], [$rogue, 4], [$rogue, 5], [$rogue, 7], [$rogue, 8], [$rogue, 9], [$rogue, 12], [$rogue, 13], [$rogue, 14], [$rogue, 16], [$rogue, 17], [$rogue, 20], [$rogue, 22], [$sorcerer, 3], [$sorcerer, 5], [$sorcerer, 7], [$sorcerer, 8], [$sorcerer, 14], [$sorcerer, 15], [$sorcerer, 21], [$sorcerer, 24], [$warlock, 3], [$warlock, 5], [$warlock, 6], [$warlock, 8], [$warlock, 9], [$warlock, 15], [$warlock, 23], [$warlock, 24], [$wizard, 3], [$wizard, 6], [$wizard, 7], [$wizard, 9], [$wizard, 10], [$wizard, 15], [$wizard, 22], [$wizard, 23]]
-$bard_filters = ["Bardic Inspiration", "Song of Rest", "Spellcasting"]
-$cleric_filters = ["Channel Divinity", "Destroy Undead", "Spellcasting"]
-$druid_filters = ["Wild Shape", "Spellcasting"]
-$fighter_filters = ["Action Surge", "Extra Attack", "Indomitable"]
-$monk_filters = ["Martial Arts", "Unarmored Movement"]
-$paladin_filters = ["Spellcasting"]
-$ranger_filters = ["Favored Enemy", "Spellcasting", "Natural Explorer"]
-$rogue_filters = ["Sneak Attack"]
-$sorcerer_filters = ["Spellcasting", "Flexible Casting", "Metamagic"]
-$warlock_filters = ["Eldritch Invocations", "Mystic Arcanum"]
-$wizard_filters = ["Spellcasting", "Arcane Recovery"]
-$classes_with_spells = ["bard", "cleric", "druid", "paladin", "ranger", "sorcerer", "warlock", "wizard"]
-$bardSlots = [[2, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0], [2, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0], [2, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0], [3, 7, 4, 3, 0, 0, 0, 0, 0, 0, 0], [3, 8, 4, 3, 1, 0, 0, 0, 0, 0, 0], [3, 9, 4, 3, 2, 0, 0, 0, 0, 0, 0], [3, 10, 4, 3, 3, 1, 0, 0, 0, 0, 0], [3, 11, 4, 3, 3, 2, 0, 0, 0, 0, 0], [3, 12, 4, 3, 3, 3, 1, 0, 0, 0, 0], [3, 14, 4, 3, 3, 3, 2, 0, 0, 0, 0], [3, 15, 4, 3, 3, 3, 2, 1, 0, 0, 0], [3, 15, 4, 3, 3, 3, 2, 1, 0, 0, 0], [3, 16, 4, 3, 3, 3, 2, 1, 1, 0, 0], [3, 18, 4, 3, 3, 3, 2, 1, 1, 0, 0], [3, 19, 4, 3, 3, 3, 2, 1, 1, 1, 0], [3, 19, 4, 3, 3, 3, 2, 1, 1, 1, 0], [3, 20, 4, 3, 3, 3, 2, 1, 1, 1, 1], [3, 22, 4, 3, 3, 3, 2, 1, 1, 1, 1], [3, 22, 4, 3, 3, 3, 3, 1, 1, 1, 1], [3, 22, 4, 3, 3, 3, 3, 2, 1, 1, 1]]
-$clericSlots = [[3, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0], [3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [3, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 2, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 1, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 2, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 3, 1, 0, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 0, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 1, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 1, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 1, 1], [5, 0, 4, 3, 3, 3, 3, 1, 1, 1, 1], [5, 0, 4, 3, 3, 3, 3, 2, 1, 1, 1], [5, 0, 4, 3, 3, 3, 3, 2, 2, 1, 1]]
-$druidSlots = [[2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0], [2, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [2, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0], [3, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0], [3, 0, 4, 3, 2, 0, 0, 0, 0, 0, 0], [3, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0], [3, 0, 4, 3, 3, 1, 0, 0, 0, 0, 0], [3, 0, 4, 3, 3, 2, 0, 0, 0, 0, 0], [3, 0, 4, 3, 3, 3, 1, 0, 0, 0, 0], [4, 0, 4, 3, 3, 3, 2, 0, 0, 0, 0], [4, 0, 4, 3, 3, 3, 2, 1, 0, 0, 0], [4, 0, 4, 3, 3, 3, 2, 1, 0, 0, 0], [4, 0, 4, 3, 3, 3, 2, 1, 1, 0, 0], [4, 0, 4, 3, 3, 3, 2, 1, 1, 0, 0], [4, 0, 4, 3, 3, 3, 2, 1, 1, 1, 0], [4, 0, 4, 3, 3, 3, 2, 1, 1, 1, 0], [4, 0, 4, 3, 3, 3, 2, 1, 1, 1, 1], [4, 0, 4, 3, 3, 3, 3, 1, 1, 1, 1], [4, 0, 4, 3, 3, 3, 3, 2, 1, 1, 1], [4, 0, 4, 3, 3, 3, 3, 2, 2, 1, 1]]
-$paladinSlots = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0], [0, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0], [0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0], [0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0], [0, 0, 4, 3, 2, 0, 0, 0, 0, 0, 0], [0, 0, 4, 3, 2, 0, 0, 0, 0, 0, 0], [0, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0], [0, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0], [0, 0, 4, 3, 3, 1, 0, 0, 0, 0, 0], [0, 0, 4, 3, 3, 1, 0, 0, 0, 0, 0], [0, 0, 4, 3, 3, 2, 0, 0, 0, 0, 0], [0, 0, 4, 3, 3, 2, 0, 0, 0, 0, 0], [0, 0, 4, 3, 3, 3, 1, 0, 0, 0, 0], [0, 0, 4, 3, 3, 3, 1, 0, 0, 0, 0], [0, 0, 4, 3, 3, 3, 2, 0, 0, 0, 0], [0, 0, 4, 3, 3, 3, 2, 0, 0, 0, 0]]
-$rangerSlots = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0], [0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0], [0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0], [0, 4, 4, 2, 0, 0, 0, 0, 0, 0, 0], [0, 4, 4, 2, 0, 0, 0, 0, 0, 0, 0], [0, 5, 4, 3, 0, 0, 0, 0, 0, 0, 0], [0, 5, 4, 3, 0, 0, 0, 0, 0, 0, 0], [0, 6, 4, 3, 2, 0, 0, 0, 0, 0, 0], [0, 6, 4, 3, 2, 0, 0, 0, 0, 0, 0], [0, 7, 4, 3, 3, 0, 0, 0, 0, 0, 0], [0, 7, 4, 3, 3, 0, 0, 0, 0, 0, 0], [0, 8, 4, 3, 3, 1, 0, 0, 0, 0, 0], [0, 8, 4, 3, 3, 1, 0, 0, 0, 0, 0], [0, 9, 4, 3, 3, 2, 0, 0, 0, 0, 0], [0, 9, 4, 3, 3, 2, 0, 0, 0, 0, 0], [0, 10, 4, 3, 3, 3, 1, 0, 0, 0, 0], [0, 10, 4, 3, 3, 3, 1, 0, 0, 0, 0], [0, 11, 4, 3, 3, 3, 2, 0, 0, 0, 0], [0, 11, 4, 3, 3, 3, 2, 0, 0, 0, 0]]
-$sorcererSlots = [[4, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0], [4, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0], [4, 4, 4, 2, 0, 0, 0, 0, 0, 0, 0], [5, 5, 4, 3, 0, 0, 0, 0, 0, 0, 0], [5, 6, 4, 3, 2, 0, 0, 0, 0, 0, 0], [5, 7, 4, 3, 3, 0, 0, 0, 0, 0, 0], [5, 8, 4, 3, 3, 1, 0, 0, 0, 0, 0], [5, 9, 4, 3, 3, 2, 0, 0, 0, 0, 0], [5, 10, 4, 3, 3, 3, 1, 0, 0, 0, 0], [6, 11, 4, 3, 3, 3, 2, 0, 0, 0, 0], [6, 12, 4, 3, 3, 3, 2, 1, 0, 0, 0], [6, 12, 4, 3, 3, 3, 2, 1, 1, 0, 0], [6, 13, 4, 3, 3, 3, 2, 1, 1, 0, 0], [6, 13, 4, 3, 3, 3, 2, 1, 1, 0, 0], [6, 14, 4, 3, 3, 3, 2, 1, 1, 1, 0], [6, 14, 4, 3, 3, 3, 2, 1, 1, 1, 0], [6, 15, 4, 3, 3, 3, 2, 1, 1, 1, 1], [6, 15, 4, 3, 3, 3, 3, 1, 1, 1, 1], [6, 15, 4, 3, 3, 3, 3, 2, 1, 1, 1], [6, 15, 4, 3, 3, 3, 3, 2, 2, 1, 1]]
-$warlockSlots = [[2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0], [2, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0], [2, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0], [3, 5, 0, 2, 0, 0, 0, 0, 0, 0, 0], [3, 6, 0, 0, 2, 0, 0, 0, 0, 0, 0], [3, 7, 0, 0, 2, 0, 0, 0, 0, 0, 0], [3, 8, 0, 0, 0, 2, 0, 0, 0, 0, 0], [3, 9, 0, 0, 0, 2, 0, 0, 0, 0, 0], [3, 10, 0, 0, 0, 0, 2, 0, 0, 0, 0], [4, 10, 0, 0, 0, 0, 2, 0, 0, 0, 0], [4, 11, 0, 0, 0, 0, 3, 0, 0, 0, 0], [4, 11, 0, 0, 0, 0, 3, 0, 0, 0, 0], [4, 12, 0, 0, 0, 0, 3, 0, 0, 0, 0], [4, 12, 0, 0, 0, 0, 3, 0, 0, 0, 0], [4, 13, 0, 0, 0, 0, 3, 0, 0, 0, 0], [4, 13, 0, 0, 0, 0, 3, 0, 0, 0, 0], [4, 14, 0, 0, 0, 0, 4, 0, 0, 0, 0], [4, 14, 0, 0, 0, 0, 4, 0, 0, 0, 0], [4, 15, 0, 0, 0, 0, 4, 0, 0, 0, 0], [4, 15, 0, 0, 0, 0, 4, 0, 0, 0, 0]]
-$wizardSlots = [[3, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0], [3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0], [3, 0, 4, 2, 0, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 2, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 0, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 1, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 2, 0, 0, 0, 0, 0], [4, 0, 4, 3, 3, 3, 1, 0, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 0, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 0, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 0, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 1, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 1, 0], [5, 0, 4, 3, 3, 3, 2, 1, 1, 1, 1], [5, 0, 4, 3, 3, 3, 2, 1, 1, 1, 1], [5, 0, 4, 3, 3, 3, 3, 2, 1, 1, 1], [5, 0, 4, 3, 3, 3, 3, 2, 2, 1, 1]]
+$dragonborn = Race.find_by(name: "Dragonborn")
+$dwarf = Race.find_by(name: "Dwarf")
+$elf = Race.find_by(name: "Elf")
+$gnome = Race.find_by(name: "Gnome")
+$half_elf = Race.find_by(name: "Half-Elf")
+$half_orc = Race.find_by(name: "Half-Orc")
+$halfling = Race.find_by(name: "Halfling")
+$human = Race.find_by(name: "Human")
+$tiefling = Race.find_by(name: "Tiefling")
+$barbarian_filters = ["Brutal"]
+$bard_filters = ["Bard", "Song"]
+$cleric_filters = ["Channel", "Undead", "Cleric"]
+$druid_filters = ["Wild", "Druid"]
+$fighter_filters = ["Action", "Extra", "Indomitable"]
+$monk_filters = ["Martial", "Unarmored"]
+$paladin_filters = ["Paladin"]
+$ranger_filters = ["Favored", "Ranger", "Natural"]
+$rogue_filters = ["Sneak"]
+$sorcerer_filters = ["Sorcerer", "Casting", "Metamagic"]
+$warlock_filters = ["Eldritch", "Mystic"]
+$wizard_filters = ["Wizard", "Arcane"]
+
+def feature_filter name, string
+  features = string.split(',').split(' ')
+  case name
+  when "Barbarian"
+    features
+  when "Bard"
+    features = features.filter{ |elem| $bard_filters.each {|v| elem.include?(v) } }
+  when "Cleric"
+    features = features.filter{ |elem| $cleric_filters.each {|v| elem.include?(v) } }
+  when "Druid"
+    features = features.filter{ |elem| $druid_filters.each {|v| elem.include?(v) } }
+  when "Fighter"
+    features = features.filter{ |elem| $fighter_filters.each {|v| elem.include?(v) } }
+  when "Monk"
+    features = features.filter{ |elem| $monk_filters.each {|v| elem.include?(v) } }
+  when "Paladin"
+    features = features.filter{ |elem| $paladin_filters.each {|v| elem.include?(v) } }
+  when "Ranger"
+    features = features.filter{ |elem| $ranger_filters.each {|v| elem.include?(v) } }
+  when "Rogue"
+    features = features.filter{ |elem| $rogue_filters.each {|v| elem.include?(v) } }
+  when "Sorcerer"
+    features = features.filter{ |elem| $sorcerer_filters.each {|v| elem.include?(v) } }
+  when "Warlock"
+    features = features.filter{ |elem| $warlock_filters.each {|v| elem.include?(v) } }
+  when "Wizard"
+    features = features.filter{ |elem| $wizard_filters.each {|v| elem.include?(v) } }
+  end
+  if features.size > 1
+    features = features.join(", ")
+  elsif features.size == 1
+    features = features[0]
+  else
+    features = nil
+  end
+  features
+end
+
+def parse_stat(stat)
+  case stat
+  when "STR"
+    "strength"
+  when "DEX"
+    "dexterity"
+  when "CON"
+    "constitution"
+  when "INT"
+    "intelligence"
+  when "WIS"
+    "wisdom"
+  when "CHA"
+    "charisma"
+  end
+end
+
+def stringify_fetch(array)
+  array.pluck("name").join(", ")
+end
+
+def find_abi(array)
+  stat_bonuses = {
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+  }
+  array.each { |stat|
+    stat_bonuses[parse_stat(stat["ability_score"]["name"])] = stat["bonus"]
+  }
+  stat_bonuses
+end
+
+def stringify_fetch(array)
+  array.pluck("name").join(", ")
+end
+
+def damage_data(string)
+  if string.include?("+")
+    dice = string.split("+")[0]
+    modifier = string.split("+")[1]
+  else
+    modifier = 0
+    dice = string
+  end
+
+  dSize = dice.split("d")[1]
+  dAmt = dice.split("d")[0]
+
+  return [dAmt, dSize, modifier]
+end
