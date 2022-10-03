@@ -19,28 +19,34 @@ class NewCharacterSerializer < ActiveModel::Serializer
   end
 
   def skill_options
-    self.object.dnd_class.skills.pluck(:name)
+    self.object.dnd_class.skills.where(is_save: false).pluck(:name)
+  end
+
+  def spellcasting_level
+    self.object.class_levels.last
   end
 
   def max_spell_level
-    if self.object.class_levels.last.lvl_9_spell_slots > 0
+    if spellcasting_level.lvl_9_spell_slots && spellcasting_level.lvl_9_spell_slots > 0
       9
-    elsif self.object.class_levels.last.lvl_8_spell_slots > 0
+    elsif spellcasting_level.lvl_8_spell_slots && spellcasting_level.lvl_8_spell_slots > 0
       8
-    elsif self.object.class_levels.last.lvl_7_spell_slots > 0
+    elsif spellcasting_level.lvl_7_spell_slots && spellcasting_level.lvl_7_spell_slots > 0
       7
-    elsif self.object.class_levels.last.lvl_6_spell_slots > 0
+    elsif spellcasting_level.lvl_6_spell_slots && spellcasting_level.lvl_6_spell_slots > 0
       6
-    elsif self.object.class_levels.last.lvl_5_spell_slots > 0
+    elsif spellcasting_level.lvl_5_spell_slots && spellcasting_level.lvl_5_spell_slots > 0
       5
-    elsif self.object.class_levels.last.lvl_4_spell_slots > 0
+    elsif spellcasting_level.lvl_4_spell_slots && spellcasting_level.lvl_4_spell_slots > 0
       4
-    elsif self.object.class_levels.last.lvl_3_spell_slots > 0
+    elsif spellcasting_level.lvl_3_spell_slots && spellcasting_level.lvl_3_spell_slots > 0
       3
-    elsif self.object.class_levels.last.lvl_2_spell_slots > 0
+    elsif spellcasting_level.lvl_2_spell_slots && spellcasting_level.lvl_2_spell_slots > 0
       2
-    elsif self.object.class_levels.last.lvl_1_spell_slots > 0
+    elsif spellcasting_level.lvl_1_spell_slots && spellcasting_level.lvl_1_spell_slots > 0
       1
+    else
+      nil
     end
   end
 

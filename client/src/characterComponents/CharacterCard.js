@@ -1,12 +1,10 @@
 import React from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { NavButton } from '../hookComponents'
+import { Link, useNavigate } from 'react-router-dom'
 import { CharCard } from '../styles'
 import { CharButtons, CharName } from '../styles/Grids.styles'
 
 export const CharacterCard = ({character, deleteCharacter}) => {
 
-    const params = useParams()
     const navigate = useNavigate()
 
     return (

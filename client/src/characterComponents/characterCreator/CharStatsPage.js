@@ -5,25 +5,25 @@ import { NavButton } from '../../hookComponents';
 
 export const CharStatsPage = () => {
 
-     const [formHandlers, newCharacter] = useOutletContext()
+     const [formHandlers, formData] = useOutletContext()
 
      return (
-          <FormBox>
+          <FormBox name='stats' onSubmit={e=>formHandlers.handlePageSubmit(e, 'skills')}>
                <h2>Stats</h2>
                <label>Strength</label>
-               <input type='number' name='Strength' defaultValue={newCharacter.Strength} onChange={formHandlers.handleStats}/>
+               <input type='number' name='strength' defaultValue={formData.stats.Strength} onChange={e=>formHandlers.handleInput(e)}/>
                <label>Dexterity</label>
-               <input type='number' name='Dexterity' defaultValue={newCharacter.Dexterity} onChange={formHandlers.handleStats}/>
+               <input type='number' name='dexterity' defaultValue={formData.stats.Dexterity} onChange={e=>formHandlers.handleInput(e)}/>
                <label>Constitution</label>
-               <input type='number' name='Constitution' defaultValue={newCharacter.Constitution} onChange={formHandlers.handleStats}/>
+               <input type='number' name='constitution' defaultValue={formData.stats.Constitution} onChange={e=>formHandlers.handleInput(e)}/>
                <label>Intelligence</label>
-               <input type='number' name='Intelligence' defaultValue={newCharacter.Intelligence} onChange={formHandlers.handleStats}/>
+               <input type='number' name='intelligence' defaultValue={formData.stats.Intelligence} onChange={e=>formHandlers.handleInput(e)}/>
                <label>Wisdom</label>
-               <input type='number' name='Wisdom' defaultValue={newCharacter.Wisdom} onChange={formHandlers.handleStats}/>
+               <input type='number' name='wisdom' defaultValue={formData.stats.Wisdom} onChange={e=>formHandlers.handleInput(e)}/>
                <label>Charisma</label>
-               <input type='number' name='Charisma' defaultValue={newCharacter.Charisma} onChange={formHandlers.handleStats}/>
-               <NavButton path={'/new_character/basic'} text={'Back'}/>
-               <NavButton path={'/new_character/skills'} text={'Next'}/>
+               <input type='number' name='charisma' defaultValue={formData.stats.Charisma} onChange={e=>formHandlers.handleInput(e)}/>
+               <NavButton path={'./basics'} text={'Back'}/>
+               <button type='submit' name='stats'>Next</button>
           </FormBox>
      )
 

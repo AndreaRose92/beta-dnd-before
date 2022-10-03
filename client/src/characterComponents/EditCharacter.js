@@ -23,7 +23,7 @@ export const EditCharacter = () => {
         r.json().then(errors=>setErrors(errors))
       }
     })
-  }, [])
+  }, [character.stats, params.id, setCharacter, setErrors])
 
   const handleInput = e => {
     const formName = e.target.name
@@ -59,7 +59,7 @@ export const EditCharacter = () => {
   }
 
   const renderStats = stats ? stats.map(stat => {
-    if (stat !== null){
+    if (stat !== null) {
     return (
       <EditStatBox key={stat.name}>
         <div>
@@ -70,7 +70,9 @@ export const EditCharacter = () => {
           <div className='bottom'><h4>{stat.value}</h4></div>
         </div>
       </EditStatBox>
-    )}
+    )} else {
+      return null
+    }
   }) : null
 
   if (!character) {

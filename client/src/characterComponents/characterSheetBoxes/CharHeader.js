@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, CSHeader, Error } from '../../styles'
+import { Button, CSHeader } from '../../styles'
 
 export const CharHeader = ({character}) => {
   

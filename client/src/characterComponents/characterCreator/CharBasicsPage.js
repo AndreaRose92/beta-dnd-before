@@ -1,26 +1,25 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { FormBox } from '../../styles';
-import { NavButton } from '../../hookComponents';
 
 export const CharBasicsPage = () => {
 	
-     const [formHandlers, fromData, newCharacter] = useOutletContext()
+     const [formHandlers, formData] = useOutletContext()
 
      return (
-          <FormBox>
+          <FormBox name='basics' onSubmit={e=>formHandlers.handlePageSubmit(e, 'skills')}>
                <h2>Basic Info</h2>
                <label>Name: 
-                    <input type='text' name='name' defaultValue={newCharacter.name} onChange={formHandlers.handleInput} /><br/>
+                    <input type='text' name='name' defaultValue={formData.basics.name} onChange={e=>formHandlers.handleInput(e)} /><br/>
                </label>
                <label>Level: 
-                    <input type='number' name='level' defaultValue={newCharacter.level} onChange={formHandlers.handleInput} /><br/>
+                    <input type='number' name='level' defaultValue={formData.basics.level} onChange={e=>formHandlers.handleInput(e)} /><br/>
                </label>
-               <label htmlFor='image'>Avatar: 
-                    <input type='text' name='image' defaultValue={newCharacter.image} onChange={formHandlers.handleInput}/><br/>
-               </label>
+               {/* <label htmlFor='image'>Avatar: 
+                    <input type='text' name='image' defaultValue={formData.basics.image} onChange={e=>formHandlers.handleInput(e)}/><br/>
+               </label> */}
                <label>Class:
-                    <select name='dnd_class' defaultValue={newCharacter.dnd_class} onChange={formHandlers.handleClassChange}>
+                    <select name='dnd_class' defaultValue={formData.basics.dnd_class} onChange={e=>formHandlers.handleInput(e)}>
                          <option value=''>---</option>
                          <option value='barbarian'>Barbarian</option>
                          <option value='bard'>Bard</option>
@@ -37,7 +36,7 @@ export const CharBasicsPage = () => {
                     </select><br/>
                </label>
                <label>Race: 
-                    <select name='race' defaultValue={newCharacter.race} onChange={formHandlers.handleInput}>
+                    <select name='race' defaultValue={formData.basics.race} onChange={e=>formHandlers.handleInput(e)}>
                          <option value="">---</option>
                          <option value="dragonborn">Dragonborn</option>
                          <option value="dwarf">Dwarf</option>
@@ -50,7 +49,7 @@ export const CharBasicsPage = () => {
                          <option value="tiefling">Tiefling</option>
                     </select><br/>
                </label>
-               <NavButton path={'../stats'} text={'Next'}/>
+               <button name='basics' type='submit'>Next</button>
           </FormBox>
      )
 };

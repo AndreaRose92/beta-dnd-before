@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
     resources :characters
-    resources :dnd_classes, only: [:index, :show]
-    resources :races, only: [:index, :show]
-    resources :equipment, only: [:index, :show]
+    resources :dnd_classes, only: [:index, :show, :create]
+    resources :races, only: [:index, :show, :create]
+    resources :equipment, only: [:index, :show, :create]
 
     get "/me", to: "users#show"
     post "/singup", to: "users#create"

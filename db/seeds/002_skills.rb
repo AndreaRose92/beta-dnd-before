@@ -14,30 +14,37 @@ all_skills.each do |skill|
     desc: skill_data["desc"][0],
     stat: parse_stat(skill_data["ability_score"]["name"]),
     index: skill_data["index"],
+    is_save: false
   )
 end
 
 Skill.create(
   name: "strength save",
   stat: "strength",
+  is_save: true
 )
 Skill.create(
   name: "dexterity save",
-  stat: "Dexterity",
+  stat: "dexterity",
+  is_save: true
 )
 Skill.create(
   name: "constitution save",
   stat: "constitution",
+  is_save: true
 )
 Skill.create(
   name: "intelligence save",
   stat: "intelligence",
+  is_save: true
 )
 Skill.create(
   name: "wisdom save",
   stat: "wisdom",
+  is_save: true
 )
 Skill.create(
   name: "charisma save",
   stat: "charisma",
+  is_save: true
 )

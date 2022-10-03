@@ -1,41 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { FormBox } from '../../styles';
 import { NavButton } from '../../hookComponents';
 
 export const CharSkillsPage = () => {
 	
-     const [formHandlers, formData, newCharacter] = useOutletContext()
+     const [formHandlers, formData] = useOutletContext()
+     const [chosen, setChosen] = useState([])
 
-     // useEffect(()=>{formHandlers.handleSpells()}, [newCharacter, formHandlers])
+     const skillOptions = formData.returnData.skill_options
+     const amount = formData.returnData.skill_amount
 
-     const filteredSkills = formData.skills.filter(skill => skill.name !== formData.skillOne || skill.name !== formData.skillTwo || skill.name !== formData.skillThree || skill.name !== formData.skillFour)
+     const handleClick = e => {
+          formHandlers.handleInput(e)
+          if (chosen.includes(e.target.value)) {
+               setChosen(chosen.filter(skill => skill !== e.target.value))
+          } else {
+               setChosen([...chosen, e.target.value])
+          }
+     }
 
-     const renderSkills = filteredSkills.map(skill => {
-          return <option key={Math.random()} value={skill.name}>{skill.name}</option>
-     })
+     const renderSkills = skillOptions.map(skill => {
+          return <button type='button' key={skill} name='skills' disabled={chosen.length >= amount && !chosen.includes(skill)} value={skill} onClick={e=>handleClick(e)}>{skill}</button>}
+     )
 
      return (
-          <FormBox >
-               <h2>Skills</h2>
-               <select name='skillOne' value={formData.skillOne} onChange={formHandlers.handleSkill}>
-                    <option value='default'>---</option>
-                    {renderSkills}
-               </select>
-               <select name='skillTwo' value={formData.skillTwo} onChange={formHandlers.handleSkill}>
-                    <option value='default'>---</option>
-                    {renderSkills}
-               </select>
-               {formData.amount >= 3 ? <select name='skillThree' value={formData.skillThree} onChange={formHandlers.handleSkill}>
-                    <option value='default'>---</option>
-                    {renderSkills}
-               </select> : null}
-               {formData.amount >= 4 ? <select name='skillFour' value={formData.skillFour} onChange={formHandlers.handleSkill}>
-                    <option value='default'>---</option>
-                    {renderSkills}
-               </select> : null}
-               <NavButton path={'../stats'} text={'Back'}/>
-               <NavButton path={'../review'} text={'Next'}/>
+          <FormBox name='skills' onSubmit={e=>formHandlers.handlePageSubmit(e, `spells`)}>
+               <h3>{`Pick ${amount}`}</h3>
+               {renderSkills}
+               <NavButton path={'/new_character/basics'} test={'Back'}/>
+               <button name='skills' type='submit'>Next</button>
           </FormBox>
      )
 };

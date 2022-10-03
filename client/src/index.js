@@ -6,11 +6,13 @@ import { ErrorProvider, UserProvider } from './hookComponents';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ErrorProvider>
-    <UserProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UserProvider>
-  </ErrorProvider>
+  <React.StrictMode>
+    <ErrorProvider>
+      <UserProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </UserProvider>
+    </ErrorProvider>
+  </React.StrictMode>
 );
