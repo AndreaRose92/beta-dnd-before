@@ -19,9 +19,9 @@ export const UserPage = () => {
         })
     }, [setErrors])
 
-    const deleteCharacter = e => {
-        fetch(`/characters/${e.target.value}`, {method: "DELETE"})
-        setCharacters(characters.filter(char => char.id !== e.target.value))
+    const deleteCharacter = data => {
+        setCharacters(characters.filter(character => character !== data))
+        fetch(`/characters/${data.id}`, {method: "DELETE"})
     }
 
     const renderCards = characters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter} />)

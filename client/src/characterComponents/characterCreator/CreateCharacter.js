@@ -1,14 +1,15 @@
 import { useContext, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { Error, FormGrid } from '../../styles'
+import { FormGrid } from '../../styles'
 import { ErrorContext, UserContext } from '../../hookComponents'
+import { CharacterFormButtons } from './testComponents/CharacterFormButtons'
 
 export const CreateCharacter = () => {
 
      const navigate = useNavigate()
      const {errors, setErrors} = useContext(ErrorContext)
      const {user} = useContext(UserContext)
-     const [returnData, setReturnData] = useState({id: 0})
+     const [returnData, setReturnData] = useState(null)
      const [basics, setBasics] = useState({
           name: '',
           dnd_class: '',
@@ -25,7 +26,8 @@ export const CreateCharacter = () => {
      })
      const [skillChoices, setSkillChoices] = useState([])
      const [spellChoices, setSpellChoices] = useState([])
-     const newCharacter = {basics, stats, skillChoices, spellChoices}
+     const [cantripChoices, setCantripChoices] = useState([])
+     const newCharacter = {...basics, ...stats, skill_choices: [...skillChoices], spell_choices: [...spellChoices, ...cantripChoices]}
 
      const handleInput = e => {
           const formName = e.target.name
@@ -42,7 +44,7 @@ export const CreateCharacter = () => {
                case "level":
                     setBasics({
                          ...basics,
-                         [formName]: parseInt(formValue)
+                         [formName]: formValue
                     })
                     break;
                case "strength":
@@ -63,7 +65,22 @@ export const CreateCharacter = () => {
                          setSkillChoices(skills=>[...skills, formValue])
                     }
                     break;
-               case "spellChoices":
+               case "0":
+                    if (cantripChoices.includes(formValue)) {
+                         setCantripChoices(cantripChoices.filter(cantrip => cantrip !== formValue))
+                    } else {
+                         setCantripChoices(cantrips => [...cantrips, formValue])
+                    }
+                    break;
+               case '1':
+               case '2':
+               case '3':
+               case '4':
+               case '5':
+               case '6':
+               case '7':
+               case '8':
+               case '9':
                     if (spellChoices.includes(formValue)) {
                          setSpellChoices(spellChoices.filter(spell => spell !== formValue))
                     } else {
@@ -75,52 +92,47 @@ export const CreateCharacter = () => {
           }
      }
 
-     const handlePageSubmit = (e, nextPage) => {
+     const handlePageSubmit = e => {
           e.preventDefault()
-          if (e.target[0].name === 'name') {
+          if (returnData === null) {
                fetch('/characters', {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(basics)
                }).then(r=>{
                     if (r.ok) {
-                         r.json().then(data=>{setReturnData(data); navigate(`./${nextPage}`)})
+                         r.json().then(data=>{setReturnData(data); setErrors(null); navigate(`./${e.target.value}`)})
                     } else {
-                         r.json().then(errors=>console.log(errors))
+                         r.json().then(errors=>setErrors(errors))
                     }
                })
           } else {
-               navigate(`./${nextPage}`)
+               setErrors(null)
+               navigate(`./${e.target.value}`)
           }
      }
 
      const handleFullSubmit = e => {
           e.preventDefault()
+          console.log(newCharacter)
           fetch(`/characters/${returnData.id}/finalize`, {
                method: "POST",
                headers: {"Content-Type": "application/json"},
-               body: JSON.stringify(newCharacter).then(r=>{
-                    if (r.ok) {
-                         r.json().then(data=>navigate(`/users/${user.username}/characters/${data.id}`))
-                    } else {
-                         r.json().then(error=>setErrors(error.errors))
-                    }
-               })
+               body: JSON.stringify(newCharacter)}).then(r=>{
+               if (r.ok) {
+                    r.json().then(data=>navigate(`/users/${user.username}/characters/${data.id}`))
+               } else {
+                    r.json().then(error=>setErrors(error.errors))
+               }
           })
      }
-
-     const formHandlers = {handleInput, handlePageSubmit, handleFullSubmit}
-
-     const formData = {basics, stats, skillChoices, spellChoices, returnData}
 
      return (
           <FormGrid>
                <h1>New Character</h1>
-               {errors ? errors.map(err => (
-                    <Error key={err}>{err}</Error>
-               )) : null}
-               <Outlet context={[formHandlers, formData]}/>
-\          </FormGrid>
+               <Outlet context={{handleInput, handlePageSubmit, handleFullSubmit, basics, stats, returnData, skillChoices, cantripChoices, spellChoices}}/>
+               <CharacterFormButtons handlePage={handlePageSubmit} errors={errors ? errors.errors : null} />
+         </FormGrid>
      )
 
 }

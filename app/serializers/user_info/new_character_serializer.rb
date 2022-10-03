@@ -1,5 +1,5 @@
 class NewCharacterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :level, :skill_amount, :skill_options, :spell_options, :max_spell_level
+  attributes :id, :name, :level, :skill_amount, :skill_options, :spell_options, :max_spell_level, :spellcasting_level
   has_many :class_levels, serializer: DndClassLevelSerializer
   has_one :dnd_class
   has_one :race
@@ -51,18 +51,7 @@ class NewCharacterSerializer < ActiveModel::Serializer
   end
 
   def spell_options
-    {
-      cantrips: self.object.dnd_class.spells.where(level: 0).pluck("name"),
-      lvl_1: self.object.dnd_class.spells.where(level: 1).pluck("name"),
-      lvl_2: self.object.dnd_class.spells.where(level: 2).pluck("name"),
-      lvl_3: self.object.dnd_class.spells.where(level: 3).pluck("name"),
-      lvl_4: self.object.dnd_class.spells.where(level: 4).pluck("name"),
-      lvl_5: self.object.dnd_class.spells.where(level: 5).pluck("name"),
-      lvl_6: self.object.dnd_class.spells.where(level: 6).pluck("name"),
-      lvl_7: self.object.dnd_class.spells.where(level: 7).pluck("name"),
-      lvl_8: self.object.dnd_class.spells.where(level: 8).pluck("name"),
-      lvl_9: self.object.dnd_class.spells.where(level: 9).pluck("name")
-    }
+    self.object.dnd_class.spells.where('level <= ?', max_spell_level).pluck(:name, :level)
   end
 
 end

@@ -1,9 +1,9 @@
 require "./db/reference_data.rb"
 
-DndClassLevel.destroy_all
-DndClassLevel.reset_pk_sequence
 SubclassLevel.destroy_all
 SubclassLevel.reset_pk_sequence
+DndClassLevel.destroy_all
+DndClassLevel.reset_pk_sequence
 
 DndClass.all.each do |dc|
   20.times do |c|
@@ -60,7 +60,7 @@ DndClass.all.each do |dc|
       features: filter_features(dc.name, level_data),
       ability_score_bonuses: level_data["ability_score_bonuses"],
       prof_bonus: level_data["prof_bonus"],
-      cantrips_known: spellcasting && spellcasting["cantips_known"] ? spellcasting["cantrips_known"] : nil,
+      cantrips_known: spellcasting && spellcasting["cantrips_known"] ? spellcasting["cantrips_known"] : nil,
       spells_known: spellcasting && spellcasting["spells_known"] ? spellcasting["spells_known"] : nil,
       lvl_1_spell_slots: spellcasting && spellcasting["spell_slots_level_1"] ? spellcasting["spell_slots_level_1"] : nil,
       lvl_2_spell_slots: spellcasting && spellcasting["spell_slots_level_2"] ? spellcasting["spell_slots_level_2"] : nil,

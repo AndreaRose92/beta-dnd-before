@@ -17,8 +17,8 @@ export const CharacterCard = ({character, deleteCharacter}) => {
             <h4>Level {character.level} {character.race.name} {character.dnd_class.name}</h4>
         </CharName>
         <CharButtons>
-            <button className='edit' onClick={()=>navigate(`./characters/${character.id}/edit`)}>Edit</button>
-            <button className='delete' value={character.id} onClick={deleteCharacter}>Delete</button>
+            <button type='button' className='edit' onClick={()=>navigate(`./characters/${character.id}/edit`)}>Edit</button>
+            <button type='button' className='delete' onClick={()=>deleteCharacter(character)}>Delete</button>
         </CharButtons>
     </CharCard>
   )

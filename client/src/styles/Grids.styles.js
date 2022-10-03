@@ -104,13 +104,19 @@ export const DiceBox = styled.div`
 export const FormGrid = styled.div`
      display: grid;
      grid-template-columns: 100px 1fr 100px;
-     grid-template-rows: 60px 1fr;
+     grid-template-rows: 60px 1fr 1fr;
      justify-content: center;
 
      h1 {
           grid-column: 2;
           grid-row: 1;
           text-align: center;
+     }
+
+     .navButtons {
+        grid-column: 2;
+        grid-row: 3;
+        align-content: center;
      }
 `
 export const FormBox = styled.form`
@@ -165,6 +171,7 @@ export const CharCard = styled.div`
             case 'Sorcerer': return '#C1525B';
             case 'Warlock': return '#8253B1';
             case 'Wizard': return '#2C5EB5';
+            default: return 'gray'
         }
     }};
 

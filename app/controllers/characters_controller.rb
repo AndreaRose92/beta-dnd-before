@@ -4,26 +4,25 @@ class CharactersController < ApplicationController
   end
 
   def show
-    render json: find_character
+    render json: Character.find(params[:id])
   end
 
   def create
-    char = Character.create!(
-      name: basics_params[:name],
-      level: basics_params[:level],
-      dnd_class: DndClass.find_by(index: basics_params[:dnd_class]),
-      race: Race.find_by(index: basics_params[:race]),
-      user: current_user
-    )
+    char = find_character
+    if char
+      char.update!(basics_applied)
+    else
+      char = Character.create!(basics_applied)
+    end
     render json: char, serializer: NewCharacterSerializer, status: :created
   end
 
   def finalize_new_character
     char = find_character
-    char.update!(char_params)
+    char.update!(stats_params)
     char.calculate_hp(hp_params)
     params[:skill_choices].each do |skill|
-      CharacterSkill.create!(character: char, skill: Skill.find_by(name: skill[:name]))
+      CharacterSkill.create!(character: char, skill: Skill.find_by(name: skill))
     end
     char.dnd_class.skills.last(2).each do |save|
       CharacterSkill.create!(character: char, skill: save)
@@ -36,7 +35,7 @@ class CharactersController < ApplicationController
 
   def update
     char = find_character
-    char.update!(char_params)
+    char.update!(stats_params)
     render json: char, status: :accepted
   end
 
@@ -47,18 +46,29 @@ class CharactersController < ApplicationController
   end
 
   def destroy
-    find_character.destroy
+    char = Character.find(params[:id])
+    char.destroy
     head :no_content
   end
 
   private
 
   def find_character
-    Character.find(params[:id])
+    Character.find_by(name: params[:name], user: current_user)
   end
 
   def basics_params
     params.permit(:name, :dnd_class, :race, :level)
+  end
+
+  def basics_applied
+    {
+      name: basics_params[:name],
+      dnd_class: DndClass.find_by(index: basics_params[:dnd_class]),
+      race: Race.find_by(index: basics_params[:race]),
+      level: basics_params[:level].to_i,
+      user: current_user
+    }
   end
 
   def stats_params

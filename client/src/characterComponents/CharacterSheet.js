@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { CharacterGrid, CharacterWrapper } from '../styles';
 import { CharacterContext, ErrorContext } from '../hookComponents';
-import { ActionBox, CombatBox, SkillBox, Traits, SavingThrows, HPBox, AuxBox, StatGrid, CharHeader, DiceLog } from './characterSheetBoxes';
+import * as All from './characterSheetBoxes';
 
 export const CharacterSheet = () => {
     const params = useParams();
@@ -44,17 +44,17 @@ export const CharacterSheet = () => {
 
     return (
         <CharacterWrapper>
-            <CharHeader {...charStats} errors={errors}/>
+            <All.CharHeader {...charStats} errors={errors}/>
             <CharacterGrid>
-                <StatGrid {...charStats}/>
-                <AuxBox {...charStats}/>
-                <HPBox character={character} setCharacter={setCharacter} setErrors={setErrors}/>
-                <SavingThrows {...charStats} {...calculations}/>
-                <Traits {...charStats} />
-                <SkillBox {...calculations}/>
-                <CombatBox dex={stats[1]} />
-                <ActionBox {...charStats}/>
-                <DiceLog/>
+                <All.StatGrid {...charStats}/>
+                <All.AuxBox {...charStats}/>
+                <All.HPBox character={character} setCharacter={setCharacter} setErrors={setErrors}/>
+                <All.SavingThrows {...charStats} {...calculations}/>
+                {/* <All.Traits {...charStats} /> */}
+                <All.SkillBox {...calculations}/>
+                <All.CombatBox dex={stats[1]} />
+                <All.ActionBox {...charStats}/>
+                <All.DiceLog/>
             </CharacterGrid>
         </CharacterWrapper>
     );

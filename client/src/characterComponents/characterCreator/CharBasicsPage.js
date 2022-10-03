@@ -4,22 +4,19 @@ import { FormBox } from '../../styles';
 
 export const CharBasicsPage = () => {
 	
-     const [formHandlers, formData] = useOutletContext()
+     const context = useOutletContext()
 
      return (
-          <FormBox name='basics' onSubmit={e=>formHandlers.handlePageSubmit(e, 'skills')}>
+          <FormBox name='basics' onSubmit={e=>context.handlePageSubmit(e, 'stats')}>
                <h2>Basic Info</h2>
                <label>Name: 
-                    <input type='text' name='name' defaultValue={formData.basics.name} onChange={e=>formHandlers.handleInput(e)} /><br/>
+                    <input type='text' name='name' value={context.basics.name} onChange={context.handleInput} /><br/>
                </label>
                <label>Level: 
-                    <input type='number' name='level' defaultValue={formData.basics.level} onChange={e=>formHandlers.handleInput(e)} /><br/>
+                    <input type='number' name='level' value={context.basics.level} placeholder={0} onChange={context.handleInput} /><br/>
                </label>
-               {/* <label htmlFor='image'>Avatar: 
-                    <input type='text' name='image' defaultValue={formData.basics.image} onChange={e=>formHandlers.handleInput(e)}/><br/>
-               </label> */}
                <label>Class:
-                    <select name='dnd_class' defaultValue={formData.basics.dnd_class} onChange={e=>formHandlers.handleInput(e)}>
+                    <select name='dnd_class' value={context.basics.dnd_class} onChange={context.handleInput}>
                          <option value=''>---</option>
                          <option value='barbarian'>Barbarian</option>
                          <option value='bard'>Bard</option>
@@ -36,7 +33,7 @@ export const CharBasicsPage = () => {
                     </select><br/>
                </label>
                <label>Race: 
-                    <select name='race' defaultValue={formData.basics.race} onChange={e=>formHandlers.handleInput(e)}>
+                    <select name='race' value={context.basics.race} onChange={context.handleInput}>
                          <option value="">---</option>
                          <option value="dragonborn">Dragonborn</option>
                          <option value="dwarf">Dwarf</option>
@@ -49,7 +46,6 @@ export const CharBasicsPage = () => {
                          <option value="tiefling">Tiefling</option>
                     </select><br/>
                </label>
-               <button name='basics' type='submit'>Next</button>
           </FormBox>
      )
 };

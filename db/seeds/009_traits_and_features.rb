@@ -1,5 +1,10 @@
 require "./db/reference_data.rb"
 
+Trait.destroy_all
+Trait.reset_pk_sequence
+Feature.destroy_all
+Feature.reset_pk_sequence
+
 all_traits = JSON.parse(RestClient.get("#{$api_url}/traits"))["results"]
 all_features = JSON.parse(RestClient.get("#{$api_url}/features"))["results"]
 

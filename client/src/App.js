@@ -40,16 +40,15 @@ export const App = () => {
 						<Route path='races' element={<AllInfo.RaceIndex/>}/>
 						<Route path='races/:race' element={<AllInfo.RaceDetail/>}/>
 						<Route path='classes/:dnd_class'element={<AllInfo.DndClassDetails/>}/>
-						<Route path='/users/:username' element={<AuthRoutes><AllUtil.UserPage/></AuthRoutes>}>
-							<Route path='characters/:id/' element={<DiceProvider><AllChar.CharacterSheet/></DiceProvider>}/>
-							<Route path='characters/:id/edit' element={<AllChar.EditCharacter/>}/>
-						</Route>
-						<Route path='/new_character' element={<AuthRoutes><AllChar.CreateCharacter/></AuthRoutes>}>
-							<Route exact path='basics' element={<AllChar.CharBasicsPage/>}/>
-							<Route exact path='stats' element={<AllChar.CharStatsPage/>}/>
-							<Route exact path='skills' element={<AllChar.CharSkillsPage/>}/>
-							{/* <Route exact path='spells' element={<AllChar.CharSpellsPage/>}/> */}
-							<Route exact path='review' element={<AllChar.CharReviewPage/>}/>
+						<Route path='/users/:username' element={<AuthRoutes><AllUtil.UserPage/></AuthRoutes>}/>
+						<Route path='/users/:username/characters/:id/' element={<DiceProvider><AllChar.CharacterSheet/></DiceProvider>}/>
+						<Route path='/users/:username/characters/:id/edit' element={<AllChar.EditCharacter/>}/>
+						<Route path='/new_character/*' element={<AuthRoutes><AllChar.CreateCharacter/></AuthRoutes>}>
+							<Route path='basics' element={<AllChar.CharBasicsPage/>}/>
+							<Route path='stats' element={<AllChar.CharStatsPage/>}/>
+							<Route path='skills' element={<AllChar.CharSkillsPage/>}/>
+							<Route path='spells' element={<AllChar.CharSpellsPage/>}/>
+							<Route path='review' element={<AllChar.CharReviewPage/>}/>
 						</Route>
 						<Route path='test' element={<StatTestSheet/>}/>
 					</Routes>
