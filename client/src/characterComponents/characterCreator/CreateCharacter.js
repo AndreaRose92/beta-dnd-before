@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { FormGrid } from '../../styles'
 import { ErrorContext, UserContext } from '../../hookComponents'
-import { CharacterFormButtons } from './testComponents/CharacterFormButtons'
+import { CharacterFormButtons } from '../index'
 
 export const CreateCharacter = () => {
 

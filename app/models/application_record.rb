@@ -8,28 +8,28 @@ class ApplicationRecord < ActiveRecord::Base
   def parse_stat string
     case string
     when "STR"
-      "Strength"
+      "strength"
     when "DEX"
-      "Dexterity"
+      "dexterity"
     when "CON"
-      "Constitution"
+      "constitution"
     when "INT"
-      "Intelligence"
+      "intelligence"
     when "WIS"
-      "Wisdom"
+      "wisdom"
     when "CHA"
-      "Charisma"
+      "charisma"
     end
   end
 
   def find_abi array
     stat_bonuses = {
       Strengh: 0,
-      Dexterity: 0,
-      Constitution: 0,
-      Intelligence: 0,
-      Wisdom: 0,
-      Charisma: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom: 0,
+      charisma: 0,
     }
     array.each { |stat| 
       stat_bonuses[parse_stat(stat["ability_score"]["name"])] = stat["bonus"]

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { NavButton, capitalize } from "../hookComponents"
+import { capitalize } from "../hookComponents"
 
 export const RaceDetail = () => {
 
@@ -52,7 +52,6 @@ export const RaceDetail = () => {
                 <li>Languages: {race.languages}</li>
             </ul>
             {renderSubraces}
-            <NavButton path="/races"/>
         </div>
     )
 

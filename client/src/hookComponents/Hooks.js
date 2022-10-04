@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { createContext, useState, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-export const UserContext = React.createContext();
+export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
 	);
 };
 
-export const CharacterContext = React.createContext();
+export const CharacterContext = createContext();
 
 export const CharacterProvider = ({ children }) => {
 	const [character, setCharacter] = useState({
@@ -23,12 +23,12 @@ export const CharacterProvider = ({ children }) => {
 		dnd_class_id: 0,
 		race_id: 0,
 		stats: {
-          Strength: 0,
-          Dexterity: 0,
-          Constitution: 0,
-          Intelligence: 0,
-          Wisdom: 0,
-          Charisma: 0,
+          strength: 0,
+          dexterity: 0,
+          constitution: 0,
+          intelligence: 0,
+          wisdom: 0,
+          charisma: 0,
 		},
 		hp: 0,
 		current_hp: 0,
@@ -45,44 +45,13 @@ export const NavButton = ({ path = '/', text = 'back' }) => {
 	return <button onClick={() => navigate(path)}>{text}</button>;
 };
 
-export const Logout = () => {
-	const { setUser } = useContext(UserContext);
-	const navigate = useNavigate();
-	const handleLogout = () => {
-		fetch('/logout', { method: 'DELETE' }).then(() => {
-			setUser(null);
-			navigate('/');
-		});
-	};
-	return <button onClick={handleLogout}>Logout</button>;
-};
-
-export const AuthRoutes = ({ children }) => {
-
-	const [user, setUser] = useState(null)
-
-	const navigate = useNavigate()
-
-	useEffect(() => {
-		fetch('/me').then((r) => {
-			if (r.ok) {
-				r.json().then((user) => setUser(user));
-			} else {
-				r.json().then(()=>navigate('/not_found'));
-			}
-		});
-	}, [setUser, navigate]);
-
-	return <React.Fragment>{children}</React.Fragment>;
-};
-
 export const capitalize = (string) => {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 export const FullCaster = ({ variant }) => {
 	return (
-		<React.Fragment>
+		<Fragment>
 			<h3>Spell Slots per Spell Level</h3>
 			<div className='spellTable' variant={variant}>
 				<h4>1st</h4>
@@ -95,13 +64,13 @@ export const FullCaster = ({ variant }) => {
 				<h4>8th</h4>
 				<h4>9th</h4>
 			</div>
-		</React.Fragment>
+		</Fragment>
 	);
 };
 
 export const HalfCaster = ({ variant }) => {
 	return (
-		<React.Fragment>
+		<Fragment>
 			<h3>Spell Slots per Spell Level</h3>
 			<div className='halfSpellTable' variant={variant}>
 				<h4>1st</h4>
@@ -110,7 +79,7 @@ export const HalfCaster = ({ variant }) => {
 				<h4>4th</h4>
 				<h4>5th</h4>
 			</div>
-		</React.Fragment>
+		</Fragment>
 	);
 };
 

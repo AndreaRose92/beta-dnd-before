@@ -22,27 +22,27 @@ races_data.each { |race|
         speed: race_data["speed"],
         languages: race_data["languages"].pluck("name").join(", "),
         traits: race_data["traits"].pluck("name").join(", "),
-        Strength: 0,
-        Dexterity: 0,
-        Constitution: 0,
-        Intelligence: 0,
-        Wisdom: 0,
-        Charisma: 0
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0
     )
     race_data["ability_bonuses"].each { |stat|
         case stat["ability_score"]["name"]
         when "STR"
-            race.update(Strength: stat["bonus"])
+            race.update(strength: stat["bonus"])
         when "DEX"
-            race.update(Dexterity: stat["bonus"])
+            race.update(dexterity: stat["bonus"])
         when "CON"
-            race.update(Constitution: stat["bonus"])
+            race.update(constitution: stat["bonus"])
         when "INT"
-            race.update(Intelligence: stat["bonus"])
+            race.update(intelligence: stat["bonus"])
         when "WIS"
-            race.update(Wisdom: stat["bonus"])
+            race.update(wisdom: stat["bonus"])
         when "CHA"
-            race.update(Charisma: stat["bonus"])
+            race.update(charisma: stat["bonus"])
         end
     }
 }
@@ -58,28 +58,28 @@ subraces_data.each do |subrace|
         index: subrace_data["index"],
         url: subrace_data["url"],
         traits: subrace_data["racial_traits"].pluck("name"),
-        Strength: 0,
-        Dexterity: 0,
-        Constitution: 0,
-        Intelligence: 0,
-        Wisdom: 0,
-        Charisma: 0
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0
 
     )
     subrace_data["ability_bonuses"].each do |stat|
         case stat["ability_score"]["name"]
         when "STR"
-            subrace.update(Strength: stat["bonus"])
+            subrace.update(strength: stat["bonus"])
         when "DEX"
-            subrace.update(Dexterity: stat["bonus"])
+            subrace.update(dexterity: stat["bonus"])
         when "CON"
-            subrace.update(Constitution: stat["bonus"])
+            subrace.update(constitution: stat["bonus"])
         when "INT"
-            subrace.update(Intelligence: stat["bonus"])
+            subrace.update(intelligence: stat["bonus"])
         when "WIS"
-            subrace.update(Wisdom: stat["bonus"])
+            subrace.update(wisdom: stat["bonus"])
         when "CHA"
-            subrace.update(Charisma: stat["bonus"])
+            subrace.update(charisma: stat["bonus"])
         end
     end
 end

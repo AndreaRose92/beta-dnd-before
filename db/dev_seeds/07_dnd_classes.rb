@@ -21,18 +21,18 @@ class_response = RestClient.get("http://www.dnd5eapi.co/api/classes")
 dnd_classes = JSON.parse(class_response)["results"]
 dnd_classes.each { |dc| DndClass.create(name: dc["name"], url: dc["url"], index: dc["index"],) }
 
-DndClass.find_by(name: "Barbarian").update(hit_die: 12, recommended_stat_one: "Strength", recommended_stat_two: "Constitution", starting_proficiencies: 2)
-DndClass.find_by(name: "Bard").update(hit_die: 8, recommended_stat_one: "Charisma", recommended_stat_two: "Dexterity", starting_proficiencies: 3)
-DndClass.find_by(name: "Cleric").update(hit_die: 8, recommended_stat_one: "Wisdom", recommended_stat_two: "Strength or Constitution", starting_proficiencies: 2)
-DndClass.find_by(name: "Druid").update(hit_die: 8, recommended_stat_one: "Wisdom", recommended_stat_two: "Constitution", starting_proficiencies: 2)
-DndClass.find_by(name: "Fighter").update(hit_die: 10, recommended_stat_one: "Strength or Dexterity", recommended_stat_two: "Constitution", starting_proficiencies: 2)
-DndClass.find_by(name: "Monk").update(hit_die: 8, recommended_stat_one: "Dexterity", recommended_stat_two: "Wisdom", starting_proficiencies: 2)
-DndClass.find_by(name: "Paladin").update(hit_die: 10, recommended_stat_one: "Strength", recommended_stat_two: "Charisma", starting_proficiencies: 2)
-DndClass.find_by(name: "Ranger").update(hit_die: 10, recommended_stat_one: "Dexterity", recommended_stat_two: "Wisdom", starting_proficiencies: 3)
-DndClass.find_by(name: "Rogue").update(hit_die: 8, recommended_stat_one: "Dexterity", recommended_stat_two: "Intelligence or Charisma", starting_proficiencies: 4)
-DndClass.find_by(name: "Sorcerer").update(hit_die: 6, recommended_stat_one: "Charisma", recommended_stat_two: "Constitution", starting_proficiencies: 2)
-DndClass.find_by(name: "Warlock").update(hit_die: 8, recommended_stat_one: "Charisma", recommended_stat_two: "Constitution", starting_proficiencies: 2)
-DndClass.find_by(name: "Wizard").update(hit_die: 6, recommended_stat_one: "Intelligence", recommended_stat_two: "Constitution or Dexterity", starting_proficiencies: 2)
+DndClass.find_by(name: "Barbarian").update(hit_die: 12, recommended_stat_one: "strength", recommended_stat_two: "constitution", starting_proficiencies: 2)
+DndClass.find_by(name: "Bard").update(hit_die: 8, recommended_stat_one: "charisma", recommended_stat_two: "dexterity", starting_proficiencies: 3)
+DndClass.find_by(name: "Cleric").update(hit_die: 8, recommended_stat_one: "wisdom", recommended_stat_two: "strength or constitution", starting_proficiencies: 2)
+DndClass.find_by(name: "Druid").update(hit_die: 8, recommended_stat_one: "wisdom", recommended_stat_two: "constitution", starting_proficiencies: 2)
+DndClass.find_by(name: "Fighter").update(hit_die: 10, recommended_stat_one: "strength or dexterity", recommended_stat_two: "constitution", starting_proficiencies: 2)
+DndClass.find_by(name: "Monk").update(hit_die: 8, recommended_stat_one: "dexterity", recommended_stat_two: "wisdom", starting_proficiencies: 2)
+DndClass.find_by(name: "Paladin").update(hit_die: 10, recommended_stat_one: "strength", recommended_stat_two: "charisma", starting_proficiencies: 2)
+DndClass.find_by(name: "Ranger").update(hit_die: 10, recommended_stat_one: "dexterity", recommended_stat_two: "wisdom", starting_proficiencies: 3)
+DndClass.find_by(name: "Rogue").update(hit_die: 8, recommended_stat_one: "dexterity", recommended_stat_two: "intelligence or charisma", starting_proficiencies: 4)
+DndClass.find_by(name: "Sorcerer").update(hit_die: 6, recommended_stat_one: "charisma", recommended_stat_two: "constitution", starting_proficiencies: 2)
+DndClass.find_by(name: "Warlock").update(hit_die: 8, recommended_stat_one: "charisma", recommended_stat_two: "constitution", starting_proficiencies: 2)
+DndClass.find_by(name: "Wizard").update(hit_die: 6, recommended_stat_one: "intelligence", recommended_stat_two: "constitution or dexterity", starting_proficiencies: 2)
 
 DndClass.all.each do |dc|
 

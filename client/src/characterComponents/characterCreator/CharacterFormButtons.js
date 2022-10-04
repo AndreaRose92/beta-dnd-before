@@ -1,5 +1,5 @@
 import React from 'react'
-import { Error } from '../../../styles'
+import { Error } from '../../styles'
 
 export const CharacterFormButtons = ({handlePage, errors}) => {
   return (

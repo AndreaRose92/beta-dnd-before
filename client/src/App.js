@@ -1,13 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Fragment, useContext, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import { ContentWrapper, PageWrapper } from './styles';
-import {
-	CharacterProvider,
-	UserContext,
-	DiceProvider,
-	AuthRoutes,
-} from './hookComponents';
+import { CharacterProvider, UserContext, DiceProvider } from './hookComponents';
 import { StatTestSheet } from './StatTestSheet';
 import * as AllChar from './characterComponents';
 import * as AllUtil from './utilityComponents';
@@ -37,7 +32,6 @@ export const App = () => {
 						<Route path='*' element={<AllUtil.NotFound/>}/>
 						<Route path='login' element={<AllUtil.Login/>}/>
 						<Route path='signup' element={<AllUtil.Signup/>}/>
-						<Route path='races' element={<AllInfo.RaceIndex/>}/>
 						<Route path='races/:race' element={<AllInfo.RaceDetail/>}/>
 						<Route path='classes/:dnd_class'element={<AllInfo.DndClassDetails/>}/>
 						<Route path='/users/:username' element={<AuthRoutes><AllUtil.UserPage/></AuthRoutes>}/>
@@ -56,4 +50,17 @@ export const App = () => {
 			</PageWrapper>
 		</CharacterProvider>
 	);
+};
+
+const AuthRoutes = ({ children }) => {
+
+	const {user} = useContext(UserContext)
+
+	const navigate = useNavigate()
+
+	if (!user) {
+		navigate('/not_found')
+	}
+
+	return <Fragment>{children}</Fragment>;
 };
