@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_03_131141) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_30_143435) do
   create_table "character_equips", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "equipment_id", null: false
@@ -234,9 +234,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_131141) do
     t.string "stat"
     t.string "desc"
     t.string "index"
+    t.boolean "is_save"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_save"
   end
 
   create_table "spells", force: :cascade do |t|
@@ -248,7 +248,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_131141) do
     t.string "range"
     t.string "duration"
     t.string "casting_time"
-    t.string "dc"
+    t.string "dc_type"
+    t.string "dc_success"
+    t.string "dc_desc"
     t.boolean "ritual"
     t.boolean "concentration"
     t.string "damage_type"
@@ -265,6 +267,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_131141) do
     t.string "char_lvl_5_damage"
     t.string "char_lvl_11_damage"
     t.string "char_lvl_17_damage"
+    t.string "slot_lvl_1_heal"
+    t.string "slot_lvl_2_heal"
+    t.string "slot_lvl_3_heal"
+    t.string "slot_lvl_4_heal"
+    t.string "slot_lvl_5_heal"
+    t.string "slot_lvl_6_heal"
+    t.string "slot_lvl_7_heal"
+    t.string "slot_lvl_8_heal"
+    t.string "slot_lvl_9_heal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
