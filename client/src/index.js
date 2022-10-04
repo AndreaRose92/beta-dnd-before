@@ -10,7 +10,7 @@ root.render(
     <ErrorProvider>
       <UserProvider>
         <BrowserRouter>
-          <App />
+          <App/>
         </BrowserRouter>
       </UserProvider>
     </ErrorProvider>

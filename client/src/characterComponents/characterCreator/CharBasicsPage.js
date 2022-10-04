@@ -10,10 +10,10 @@ export const CharBasicsPage = () => {
           <FormBox name='basics' onSubmit={e=>context.handlePageSubmit(e, 'stats')}>
                <h2>Basic Info</h2>
                <label>Name: 
-                    <input type='text' name='name' value={context.basics.name} onChange={context.handleInput} /><br/>
+                    <input type='text' name='name' value={context.basics.name} onChange={context.handleInput}/><br/>
                </label>
                <label>Level: 
-                    <input type='number' name='level' value={context.basics.level} placeholder={0} onChange={context.handleInput} /><br/>
+                    <input type='number' name='level' value={context.basics.level} placeholder={0} onChange={context.handleInput}/><br/>
                </label>
                <label>Class:
                     <select name='dnd_class' value={context.basics.dnd_class} onChange={context.handleInput}>

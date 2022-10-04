@@ -31,8 +31,8 @@ export const Login = () => {
     return (
         <AuthForm>
             <form onSubmit={onLogin}>
-                <input type='text' placeholder="username" onChange={e=>setUsername(e.target.value)} /><br/>
-                <input type='password' placeholder="password" onChange={e=>setPassword(e.target.value)} /><br/>
+                <input type='text' placeholder="username" onChange={e=>setUsername(e.target.value)}/><br/>
+                <input type='password' placeholder="password" onChange={e=>setPassword(e.target.value)}/><br/>
                 <button type='submit'>Submit</button>
                 {errors && errors.error !== "Not authorized" ? errors.map(err=>(
                     <Error key={err}>

@@ -1,7 +1,7 @@
 import { SensesBox } from "../../styles";
 
-export const Traits = ({ character }) => {
-    if (character.race.languages === null) {
+export const Traits = ({ race }) => {
+    if (race.languages === null) {
       return (
         <SensesBox>
           <h3>Race Data Not Found</h3>
@@ -12,10 +12,10 @@ export const Traits = ({ character }) => {
     return (
       <SensesBox>
         <p>LANGUAGES</p>
-        <h3>{character.race.languages.replace(/[\]"]+/g, '')}</h3>
+        <h3>{race.languages}</h3>
         <p>TRAITS</p>
         <h3>
-          {character.race.traits.replace(/[\]"]+/g, '').replace(/[,]/g, '\n')}
+          {race.traits}
         </h3>
       </SensesBox>
     );

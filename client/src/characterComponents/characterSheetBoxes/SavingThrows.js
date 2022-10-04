@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { savingThrows, DiceContext, diceRoll } from "../../hookComponents";
+import { DiceContext, diceRoll } from "../../hookComponents";
 import { SavingThrow } from "../../styles";
 
-export const SavingThrows = ({ isProficient, skillProficiency }) => { 
+export const SavingThrows = ({ saves, prof_bonus }) => { 
 
   const {diceHistory, setDiceHistory} = useContext(DiceContext)
   
@@ -13,17 +13,16 @@ export const SavingThrows = ({ isProficient, skillProficiency }) => {
     setDiceHistory(history => [...history,newRoll])
   }
 
-  const renderSaves = savingThrows.map((save) => {
-    
-    const modifier = skillProficiency(save.name, save.stat)
-
+  const renderSaves = saves.map((save) => {
+    let mod = save.is_proficient ? save.modifier + prof_bonus : save.modifier
+    let displayMod = mod > 0 ? `+${mod}` : mod
     return (
         <React.Fragment key={save.name}>
-          <div onClick={()=>skillCheck(save.name, modifier)}>
-            <div>{isProficient(save.name) ? '●' : '○'} </div>
+          <div onClick={()=>skillCheck(save.name, mod)}>
+            <div>{save.is_proficient ? '●' : '○'} </div>
           </div>
-          <div onClick={()=>skillCheck(save.name, modifier)}>
-            <h3 className="save" >{`${save.stat.slice(0, 3)} ${modifier}`}</h3>
+          <div onClick={()=>skillCheck(save.name)}>
+            <h3 className="save" >{`${save.stat.slice(0, 3)} ${displayMod}`}</h3>
           </div>
         </React.Fragment>
       );

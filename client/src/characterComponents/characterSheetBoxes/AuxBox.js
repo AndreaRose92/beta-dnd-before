@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AuxiliaryBox, InspirationBox } from "../../styles";
 
-export const AuxBox = ({ character, prof_bonus }) => {
+export const AuxBox = ({ race, prof_bonus }) => {
     const [isInspired, setIsInspired] = useState(false);
 
     const handleInspiration = () => {setIsInspired((pv) => !pv);};
@@ -12,7 +12,7 @@ export const AuxBox = ({ character, prof_bonus }) => {
                 <div>
                     <div><p>WALKING</p></div>
                     <div className='mid'>
-                        <h2>{character.race.speed}</h2>
+                        <h2>{race.speed}</h2>
                         <h4>{`ft.`}</h4>
                     </div>
                     <div className='bottom'><h4>SPEED</h4></div>

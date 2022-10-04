@@ -2,8 +2,7 @@ import { Fragment, useContext, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import { ContentWrapper, PageWrapper } from './styles';
-import { CharacterProvider, UserContext, DiceProvider } from './hookComponents';
-import { StatTestSheet } from './StatTestSheet';
+import { UserContext, DiceProvider } from './hookComponents';
 import * as AllChar from './characterComponents';
 import * as AllUtil from './utilityComponents';
 import * as AllInfo from './gameInfoComponents';
@@ -22,7 +21,7 @@ export const App = () => {
 	}, [setUser]);
 
 	return (
-		<CharacterProvider>
+		// <CharacterProvider>
 			<PageWrapper>
 				<GlobalStyles/>
 				<AllUtil.NavBar user={user} setUser={setUser}/>
@@ -44,11 +43,10 @@ export const App = () => {
 							<Route path='spells' element={<AllChar.CharSpellsPage/>}/>
 							<Route path='review' element={<AllChar.CharReviewPage/>}/>
 						</Route>
-						<Route path='test' element={<StatTestSheet/>}/>
 					</Routes>
 				</ContentWrapper>
 			</PageWrapper>
-		</CharacterProvider>
+		// </CharacterProvider>
 	);
 };
 

@@ -36,9 +36,9 @@ export const Signup = () => {
     return (
         <AuthForm>
             <form onSubmit={onSignup}>
-                <input type='text' placeholder="username" onChange={e=>setUsername(e.target.value)} /><br/>
-                <input type='password' placeholder="password" onChange={e=>setPassword(e.target.value)} /><br/>
-                <input type='password' placeholder="password confirmation" onChange={e=>setPasswordConfirmation(e.target.value)} /><br/>
+                <input type='text' placeholder="username" onChange={e=>setUsername(e.target.value)}/><br/>
+                <input type='password' placeholder="password" onChange={e=>setPassword(e.target.value)}/><br/>
+                <input type='password' placeholder="password confirmation" onChange={e=>setPasswordConfirmation(e.target.value)}/><br/>
                 <button type='submit'>Sign Up</button>
                 {errors ? errors.map(err=>(
                     <Error key={err}>

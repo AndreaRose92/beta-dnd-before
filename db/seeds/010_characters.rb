@@ -34,5 +34,8 @@ User.all.each do |user|
     while char.skills.size < char.dnd_class.starting_skills + 2
       CharacterSkill.create(character: char, skill: char.dnd_class.skills.sample)
     end
+    char.assign_random_cantrips
+    char.assign_random_spells
+    puts char.name
   end
 end

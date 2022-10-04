@@ -6,7 +6,7 @@ export const PaladinHeader = () => {
 	return (
 		<React.Fragment>
 			<h2>Features</h2>
-			<HalfCaster variant='Paladin' />
+			<HalfCaster variant='Paladin'/>
 		</React.Fragment>
 	);
 };

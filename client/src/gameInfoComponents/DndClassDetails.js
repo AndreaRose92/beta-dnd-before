@@ -25,18 +25,18 @@ export const DndClassDetails = () => {
   const renderHeader = () => {
     if (params.dnd_class !== null) {
       switch (capitalize(params.dnd_class)) {
-        case "Barbarian": return <All.BarbarianHeader />;
-        case "Bard": return <All.BardHeader />;
-        case "Cleric": return <All.ClericHeader />;
-        case "Druid": return <All.DruidHeader />;
-        case "Fighter": return <All.FighterHeader />;
-        case "Monk": return <All.MonkHeader />;
-        case "Paladin": return <All.PaladinHeader />;
-        case "Ranger": return <All.RangerHeader />;
-        case "Rogue": return <All.RogueHeader />;
-        case "Sorcerer": return <All.SorcererHeader />;
-        case "Warlock": return <All.WarlockHeader />;
-        case "Wizard": return <All.WizardHeader />;
+        case "Barbarian": return <All.BarbarianHeader/>;
+        case "Bard": return <All.BardHeader/>;
+        case "Cleric": return <All.ClericHeader/>;
+        case "Druid": return <All.DruidHeader/>;
+        case "Fighter": return <All.FighterHeader/>;
+        case "Monk": return <All.MonkHeader/>;
+        case "Paladin": return <All.PaladinHeader/>;
+        case "Ranger": return <All.RangerHeader/>;
+        case "Rogue": return <All.RogueHeader/>;
+        case "Sorcerer": return <All.SorcererHeader/>;
+        case "Warlock": return <All.WarlockHeader/>;
+        case "Wizard": return <All.WizardHeader/>;
         default: return <h1>Damn Dude, you broke it!</h1>;
     }}
   }

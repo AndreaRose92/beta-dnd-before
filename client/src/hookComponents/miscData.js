@@ -1,4 +1,4 @@
-export const skills = [
+export const allSkills = [
 	{ name: 'Acrobatics', stat: 'dexterity' },
 	{ name: 'Animal Handling', stat: 'wisdom' },
 	{ name: 'Arcana', stat: 'intelligence' },

@@ -7,7 +7,7 @@ export const RangerHeader = () => {
 		<React.Fragment>
 			<h2>Features</h2>
 			<h2>Spells Known</h2>
-			<HalfCaster variant='Ranger' />
+			<HalfCaster variant='Ranger'/>
 		</React.Fragment>
 	);
 };

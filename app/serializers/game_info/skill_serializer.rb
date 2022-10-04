@@ -1,5 +1,5 @@
 class SkillSerializer < ActiveModel::Serializer
-  attributes :id, :name, :stat, :desc, :index
+  attributes :name, :stat, :desc, :index, :is_save
   def attributes(*args)
     hash = super
     hash.each { |k, v|

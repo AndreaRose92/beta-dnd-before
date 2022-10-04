@@ -23,7 +23,7 @@ export const CharSpellsPage = () => {
 		<h2>Spell Levels</h2>
 		<Buttons display={display} level={level} cantripsKnown={cantripsKnown} handleDisplay={handleDisplay}/>
 		<h2>Spell Options</h2>
-		<SpellMenu spells={spells} maxedOutSpells={maxedOutSpells} handleInput={context.handleInput} selectedCantrips={selectedCantrips} selectedSpells={selectedSpells} />
+		<SpellMenu spells={spells} maxedOutSpells={maxedOutSpells} handleInput={context.handleInput} selectedCantrips={selectedCantrips} selectedSpells={selectedSpells}/>
 	</FormBox>
   )
 }

@@ -1,12 +1,13 @@
 class CharacterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :image, :level, :stats, :max_hp, :current_hp, :cantrips, :lvl_1_spells, :lvl_2_spells, :lvl_3_spells, :lvl_4_spells, :lvl_5_spells, :lvl_6_spells, :lvl_7_spells, :lvl_8_spells, :lvl_9_spells, :spellcasting_modifier
+  attributes :id, :name, :image, :level, :stats, :prof_bonus, :max_hp, :current_hp, :spellcasting_modifier
   # has_many :equipment
   # has_many :feats
+  has_many :spells, serializer: SpellSerializer
   has_many :class_levels, serializer: DndClassLevelSerializer
   has_many :skills
+  has_many :saves
   has_one :dnd_class
-  has_one :race
-
+  has_one :race, serializer: CharacterRaceSerializer
   
   def stats
     [
@@ -19,54 +20,62 @@ class CharacterSerializer < ActiveModel::Serializer
     ]
   end
   
-  def cantrips
-    spells = self.object.spells.where(level: 0)
-    spells.empty? ? spells = nil : spells = spells
-  end
+    def skills
+      data = []
+        Skill.all.filter{ |skill| !skill.name.include?('save') }.each {|skill|
+        data << {
+          name: skill.name,
+          stat: skill.stat,
+          is_proficient: self.object.is_proficient(skill.name),
+          modifier: self.object.stat_modifier(self.object.race_bonus(skill.stat))
+        }
+        }
+      data
+    end
   
-  def lvl_1_spells
-    spells = self.object.spells.where(level: 1)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_2_spells
-    spells = self.object.spells.where(level: 2)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_3_spells
-    spells = self.object.spells.where(level: 3)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_4_spells
-    spells = self.object.spells.where(level: 4)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_5_spells
-    spells = self.object.spells.where(level: 5)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_6_spells
-    spells = self.object.spells.where(level: 6)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_7_spells
-    spells = self.object.spells.where(level: 7)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_8_spells
-    spells = self.object.spells.where(level: 8)
-    spells.empty? ? spells = nil : spells = spells
-  end
-  
-  def lvl_9_spells
-    spells = self.object.spells.where(level: 9)
-    spells.empty? ? spells = nil : spells = spells
+    def saves
+      [
+        {
+          name: 'strength save',
+          stat: 'strength',
+          is_proficient: self.object.is_proficient('strength save'),
+          modifier: self.stats[0][:modifier]
+        },
+        {
+          name: 'dexterity save',
+          stat: 'dexterity',
+          is_proficient: self.object.is_proficient('dexterity save'),
+          modifier: self.stats[1][:modifier]
+        },
+        {
+          name: 'constitution save',
+          stat: 'constitution',
+          is_proficient: self.object.is_proficient('constitution save'),
+          modifier: self.stats[2][:modifier]
+        },
+        {
+          name: 'intelligence save',
+          stat: 'intelligence',
+          is_proficient: self.object.is_proficient('intelligence save'),
+          modifier: self.stats[3][:modifier]
+        },
+        {
+          name: 'wisdom save',
+          stat: 'wisdom',
+          is_proficient: self.object.is_proficient('wisdom save'),
+          modifier: self.stats[4][:modifier]
+        },
+        {
+          name: 'charisma save',
+          stat: 'charisma',
+          is_proficient: self.object.is_proficient('charisma save'),
+          modifier: self.stats[5][:modifier]
+        }
+      ]
+    end
+
+  def prof_bonus
+    self.object.class_levels.last.prof_bonus
   end
   
   def attributes(*args)

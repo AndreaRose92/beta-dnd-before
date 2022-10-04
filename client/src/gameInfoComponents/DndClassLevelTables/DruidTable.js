@@ -7,7 +7,7 @@ export const DruidHeader = () => {
 		<React.Fragment>
 			<h2>Features</h2>
 			<h2>Cantrips Known</h2>
-			<FullCaster variant='Druid' />
+			<FullCaster variant='Druid'/>
 		</React.Fragment>
 	);
 };

@@ -7,7 +7,7 @@ export const ClericHeader = () => {
 		<React.Fragment>
 			<h2>Features</h2>
 			<h2>Cantrips Known</h2>
-			<FullCaster variant='Cleric' />
+			<FullCaster variant='Cleric'/>
 		</React.Fragment>
 	);
 };

@@ -7,7 +7,7 @@ export const WizardHeader = () => {
 		<React.Fragment>
 			<h2>Features</h2>
 			<h2>Cantrips Known</h2>
-			<FullCaster variant='Wizard' />
+			<FullCaster variant='Wizard'/>
 		</React.Fragment>
 	);
 };

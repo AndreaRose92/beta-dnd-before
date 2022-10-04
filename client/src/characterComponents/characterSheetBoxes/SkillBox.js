@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { skills, DiceContext, diceRoll } from "../../hookComponents";
+import { allSkills, DiceContext, diceRoll } from "../../hookComponents";
 import { ProficiencyBox, SkillButton } from "../../styles";
 
-export const SkillBox = ({ isProficient, skillProficiency }) => {
+export const SkillBox = ({ skills, prof_bonus }) => {
 
   const {diceHistory, setDiceHistory} = useContext(DiceContext)
   
@@ -14,15 +14,14 @@ export const SkillBox = ({ isProficient, skillProficiency }) => {
   }
 
     const renderSkills = skills.map((skill) => {
-
-      const modifier = skillProficiency(skill.name, skill.stat)
-
+      let mod = skill.is_proficient ? skill.modifier + prof_bonus : skill.modifier
+      let displayMod = mod > 0 ? `+${mod}` : mod
       return (
         <React.Fragment key={skill.name}>
-          <h3>{isProficient(skill.name) ? '●' : '○'} </h3>
+          <h3>{skill.is_proficient ? '●' : '○'} </h3>
           <h3>{skill.stat.slice(0, 3)}</h3>
           <h3 className='skill'>{skill.name}</h3>
-          <SkillButton onClick={()=>skillCheck(skill.name, modifier)}>{modifier}</SkillButton>
+          <SkillButton onClick={()=>skillCheck(skill.name, mod)}>{displayMod}</SkillButton>
         </React.Fragment>
       );
     });

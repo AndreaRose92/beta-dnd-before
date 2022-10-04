@@ -72,4 +72,105 @@ class Character < ApplicationRecord
     end
   end
 
+  def is_proficient name
+    self.skills.pluck(:name).include?(name)
+  end
+
+  def max_spell_level
+    if self.class_levels.last.lvl_9_spell_slots != nil
+      9
+    elsif self.class_levels.last.lvl_8_spell_slots != nil
+      8
+    elsif self.class_levels.last.lvl_7_spell_slots != nil
+      7
+    elsif self.class_levels.last.lvl_6_spell_slots != nil
+      6
+    elsif self.class_levels.last.lvl_5_spell_slots != nil
+      5
+    elsif self.class_levels.last.lvl_4_spell_slots != nil
+      4
+    elsif self.class_levels.last.lvl_3_spell_slots != nil
+      3
+    elsif self.class_levels.last.lvl_2_spell_slots != nil
+      2
+    elsif self.class_levels.last.lvl_1_spell_slots != nil
+      1
+    end
+  end
+
+  def assign_cantrips
+    while self.spells.where(level: 0).size < self.class_levels.last.cantrips_known - 1
+      CharacterSpell.create(character: self, spell: self.dnd_class.spells.where(level: 0).sample)
+    end
+  end
+
+  def assign_spells_known
+    while self.spells.where('level > ?', 0).size < self.class_levels.last.spells_known - 1
+      CharacterSpell.create(character: self, spell: self.dnd_class.spells.where('level <= ?', self.max_spell_level).sample)
+    end
+  end
+
+  def assign_spells_by_modifier stat
+    while self.spells.where('level > ?', 0).size < self.stat_modifier(self.race_bonus(stat)) + self.level - 1
+      CharacterSpell.create(character: self, spell: self.dnd_class.spells.where('level <= ?', self.max_spell_level).sample)
+    end
+  end
+
+  def assign_random_cantrips
+    case self.dnd_class.name
+    when "Bard"
+      self.assign_cantrips
+    when "Cleric"
+      self.assign_cantrips
+    when "Druid"
+      self.assign_cantrips
+    when "Sorcerer"
+      self.assign_cantrips
+    when "Warlock"
+      self.assign_cantrips
+    when "Wizard"
+      self.assign_cantrips
+    when "Barbarian"
+      nil
+    when "Fighter"
+      nil
+    when "Monk"
+      nil
+    when "Paladin"
+      nil
+    when "Ranger"
+      nil
+    when "Rogue"
+      nil
+    end
+  end
+
+  def assign_random_spells
+    case self.dnd_class.name
+    when "Bard"
+      self.assign_spells_known
+    when "Ranger"
+      self.assign_spells_known
+    when "Sorcer"
+      self.assign_spells_known
+    when "Warlock"
+      self.assign_spells_known
+    when "Cleric"
+      self.assign_spells_by_modifier("wisdom")
+    when "Druid"
+      self.assign_spells_by_modifier("wisdom")
+    when "Wizard"
+      self.assign_spells_by_modifier("intelligence")
+    when "Paladin"
+      self.assign_spells_by_modifier("charisma")
+    when "Barbarian"
+      nil
+    when "Fighter"
+      nil
+    when "Monk"
+      nil
+    when "Rogue"
+      nil
+    end
+  end
 end

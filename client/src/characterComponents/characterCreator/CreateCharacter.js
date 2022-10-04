@@ -131,7 +131,7 @@ export const CreateCharacter = () => {
           <FormGrid>
                <h1>New Character</h1>
                <Outlet context={{handleInput, handlePageSubmit, handleFullSubmit, basics, stats, returnData, skillChoices, cantripChoices, spellChoices}}/>
-               <CharacterFormButtons handlePage={handlePageSubmit} errors={errors ? errors.errors : null} />
+               <CharacterFormButtons handlePage={handlePageSubmit} errors={errors ? errors.errors : null}/>
          </FormGrid>
      )
 

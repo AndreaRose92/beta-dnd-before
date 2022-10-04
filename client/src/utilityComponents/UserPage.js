@@ -24,7 +24,7 @@ export const UserPage = () => {
         fetch(`/characters/${data.id}`, {method: "DELETE"})
     }
 
-    const renderCards = characters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter} />)
+    const renderCards = characters.map(character => <CharacterCard key={character.id} character={character} deleteCharacter={deleteCharacter}/>)
 
     if (!user) {
         return (

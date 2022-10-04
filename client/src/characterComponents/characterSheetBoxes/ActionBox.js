@@ -4,19 +4,19 @@ import { EquipmentBox } from "../../styles"
 import * as All from './actionBoxTabs'
 
 
-export const ActionBox = ({stats}) => {
+export const ActionBox = ({stats, spells, spellcasting_modifier}) => {
     const [box, setBox] = useState('actions')
     let boxType
     if (box === 'actions') {
         boxType = <All.ActionGrid stats={stats}/>
     } else if (box === 'spells') {
-        boxType = <All.SpellBook />
+        boxType = <All.SpellBook spells={spells} spellcasting_modifier={spellcasting_modifier}/>
     } else if (box === 'equipment') {
-        boxType = <All.Inventory />
+        boxType = <All.Inventory/>
     } else if (box === 'traits') {
-        boxType = <All.Specialties />
+        boxType = <All.Specialties/>
     } else if (box === 'extras') {
-        boxType = <All.Misc />
+        boxType = <All.Misc/>
     }
 
     return (
