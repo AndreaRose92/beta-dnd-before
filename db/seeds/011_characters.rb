@@ -36,6 +36,9 @@ User.all.each do |user|
     end
     char.assign_random_cantrips
     char.assign_random_spells
+    3.times do
+      CharacterEquip.create(character: char, equipment: char.dnd_class.equipment.sample)
+    end
     puts char.name
   end
 end

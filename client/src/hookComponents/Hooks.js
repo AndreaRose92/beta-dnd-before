@@ -98,6 +98,7 @@ export const damageTypeIcon = (damageType) => {
 		case 'Radiant': return '🔆';
 		case 'Slashing': return '⚔️';
 		case 'Thunder': return '⛈️';
+		case 'Healing': return '💖';
 		default: return '-'
 	}
 }

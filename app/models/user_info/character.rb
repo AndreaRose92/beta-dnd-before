@@ -4,8 +4,10 @@ class Character < ApplicationRecord
   belongs_to :user
   has_many :character_spells, dependent: :destroy
   has_many :character_skills, dependent: :destroy
+  has_many :character_equips, dependent: :destroy
   has_many :skills, through: :character_skills
   has_many :spells, through: :character_spells
+  has_many :equipment, through: :character_equips
   has_many :dnd_class_levels, through: :dnd_class
 
   validates :name, presence: :true

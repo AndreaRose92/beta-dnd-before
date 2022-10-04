@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_143435) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
   create_table "character_equips", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "equipment_id", null: false
@@ -67,6 +67,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_143435) do
     t.index ["dnd_class_id"], name: "index_characters_on_dnd_class_id"
     t.index ["race_id"], name: "index_characters_on_race_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
+  end
+
+  create_table "class_equips", force: :cascade do |t|
+    t.integer "dnd_class_id", null: false
+    t.integer "equipment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dnd_class_id"], name: "index_class_equips_on_dnd_class_id"
+    t.index ["equipment_id"], name: "index_class_equips_on_equipment_id"
   end
 
   create_table "class_skills", force: :cascade do |t|
@@ -354,6 +363,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_143435) do
   add_foreign_key "characters", "dnd_classes"
   add_foreign_key "characters", "races"
   add_foreign_key "characters", "users"
+  add_foreign_key "class_equips", "dnd_classes"
+  add_foreign_key "class_equips", "equipment"
   add_foreign_key "class_skills", "dnd_classes"
   add_foreign_key "class_skills", "skills"
   add_foreign_key "class_spells", "dnd_classes"

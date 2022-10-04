@@ -19,6 +19,9 @@ all_spells.each do |spell|
   if damage && damage["damage_at_character_level"]
     character_damage = damage["damage_at_character_level"]
   end
+  if damage && damage["damage_type"]
+    damage_type = damage["damage_type"]["name"]
+  end
   if spell_data["higher_level"][0]
     higher_level = spell_data["higher_level"].join(' ')
   end
@@ -29,6 +32,7 @@ all_spells.each do |spell|
   end
   if spell_data["heal_at_slot_level"]
     healing = spell_data["heal_at_slot_level"]
+    damage_type = "Healing"
   end
 
   Spell.create!(
@@ -45,7 +49,7 @@ all_spells.each do |spell|
     dc_type: dc_type ? dc_type : nil,
     dc_success: dc_success ? dc_success : nil,
     dc_desc: dc_desc ? dc_desc : nil,
-    damage_type: damage && damage["damage_type"] ? damage["damage_type"]["name"] : nil,
+    damage_type: damage_type ? damage_type : nil,
     slot_lvl_1_damage: slot_damage ? slot_damage["1"] : nil,
     slot_lvl_2_damage: slot_damage ? slot_damage["2"] : nil,
     slot_lvl_3_damage: slot_damage ? slot_damage["3"] : nil,

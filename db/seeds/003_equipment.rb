@@ -16,7 +16,7 @@ all_weapons.each do |weapon|
   weapon_range = weapon_data["weapon_range"] ? weapon_data["weapon_range"] : nil
   normal_range = range ? range["normal"] : nil
   long_range = range ? range["long"] ? range["long"] : nil : nil
-  desc = weapon_data["desc"] ? stringify_fetch(weapon_data["desc"]) : nil
+  desc = weapon_data["desc"] ? weapon_data["desc"].join('. ') : nil
   properties = weapon_data["properties"] ? stringify_fetch(weapon_data["properties"]) : nil
 
   Equipment.create!(

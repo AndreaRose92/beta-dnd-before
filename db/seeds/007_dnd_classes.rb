@@ -23,7 +23,7 @@ all_classes.each { |dc|
     hit_die: class_data["hit_die"],
     recommended_stat_one: parse_stat(saves[0]["name"]),
     recommended_stat_two: parse_stat(saves[1]["name"]),
-    starting_skills: class_data["proficiency_choices"][0]["choose"],
+    starting_skills: class_data["proficiency_choices"][0]["choose"]
   )
   skills.each do |skill|
     ClassSkill.create(dnd_class: new_class, skill: Skill.find_by(index: skill))

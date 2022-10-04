@@ -1,7 +1,7 @@
-import { ActionGrid } from "./ActionGrid";
+import { ActionTab } from "./ActionTab";
 import { Inventory } from "./Inventory";
 import { Misc } from "./Misc";
 import { Specialties } from "./Specialties";
 import { SpellBook } from "./SpellBook";
 
-export { ActionGrid, Inventory, Misc, Specialties, SpellBook }
+export { ActionTab, Inventory, Misc, Specialties, SpellBook }
