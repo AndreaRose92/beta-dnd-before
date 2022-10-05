@@ -6,7 +6,8 @@ export const CSHeader = styled.section`
   display: grid;
   grid-template-columns: .5fr .5fr .5fr 4.5fr;
   grid-template-rows: 1fr 1fr;
-  border: 3px black solid;
+  border-top: 3px black solid;
+  border-bottom: 3px black solid;
   background-color: ${props => {
         switch (props.variant) {
             case 'Barbarian': return '#B87333';
@@ -21,6 +22,7 @@ export const CSHeader = styled.section`
             case 'Sorcerer': return '#C1525B';
             case 'Warlock': return '#8253B1';
             case 'Wizard': return '#2C5EB5';
+            default: return 'gray'
         }
     }};
 

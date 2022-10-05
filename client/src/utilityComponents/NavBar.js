@@ -19,7 +19,7 @@ export const NavBar = ({user, setUser}) => {
 
     return (
         <NavWrapper>
-            <Logo as={NavLink} to='/' ><h1>DnD Before</h1></Logo>
+            <Logo as={NavLink} to='/'><h1>DnD Before</h1></Logo>
             {loginLink}
             {signupLink}
             <DropDown>

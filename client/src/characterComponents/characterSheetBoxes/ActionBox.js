@@ -13,20 +13,20 @@ export const ActionBox = (character) => {
         boxType = <All.SpellBook {...character}/>
     } else if (box === 'equipment') {
         boxType = <All.Inventory {...character}/>
-    } else if (box === 'traits') {
+    } else if (box === 'features') {
         boxType = <All.Specialties/>
-    } else if (box === 'extras') {
-        boxType = <All.Misc/>
+    // } else if (box === 'extras') {
+    //     boxType = <All.Misc/>
     }
 
     return (
         <EquipmentBox>
             <div className='eq-box-header'>
+                <Button onClick={()=>setBox("features")}>FEATURES</Button>
                 <Button onClick={()=>setBox("actions")}>ACTIONS</Button>
-                <Button onClick={()=>setBox("spells")}>SPELLS</Button>
-                <Button onClick={()=>setBox("equipment")}>EQUIPMENT</Button>
-                <Button onClick={()=>setBox("traits")}>TRAITS</Button>
-                <Button onClick={()=>setBox("extras")}>EXTRAS</Button>
+                {character.spells ? <Button onClick={()=>setBox("spells")}>SPELLS</Button> : null}
+                <Button onClick={()=>setBox("equipment")}>INVENTORY</Button>
+                {/* <Button onClick={()=>setBox("extras")}>EXTRAS</Button> */}
             </div>
             {boxType}
         </EquipmentBox>

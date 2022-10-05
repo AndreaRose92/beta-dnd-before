@@ -57,6 +57,7 @@ export const SpellBook = ({spells, spellcasting_modifier, level}) => {
                 <h3>Range</h3>
                 <h3>Hit/DC</h3>
                 <h3>Effect</h3>
+                <h3>Duration</h3>
                 <h3>Notes</h3>
             </SpellHeader>
             <SpellGrid>

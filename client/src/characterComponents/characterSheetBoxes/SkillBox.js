@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { allSkills, DiceContext, diceRoll } from "../../hookComponents";
+import { DiceContext, diceRoll } from "../../hookComponents";
 import { ProficiencyBox, SkillButton } from "../../styles";
 
 export const SkillBox = ({ skills, prof_bonus }) => {

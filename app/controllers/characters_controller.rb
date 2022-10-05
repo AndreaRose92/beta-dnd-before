@@ -20,6 +20,7 @@ class CharactersController < ApplicationController
   def finalize_new_character
     char = find_character
     char.update!(stats_params)
+    char.update(image: "https://www.dndbeyond.com/avatars/9221/765/637202353794223452.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp")
     char.calculate_hp(hp_params)
     params[:skill_choices].each do |skill|
       CharacterSkill.create!(character: char, skill: Skill.find_by(name: skill))
@@ -36,6 +37,10 @@ class CharactersController < ApplicationController
   def update
     char = find_character
     char.update!(stats_params)
+    char.calculate_hp(hp_params)
+    params[:skill_choices].each do |skill|
+      CharacterSkill.create(character: char, skill: Skill.find_by(name: skill["name"]))
+    end
     render json: char, status: :accepted
   end
 

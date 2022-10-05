@@ -1,4 +1,4 @@
-import { EditCharacter } from './EditCharacter'
+import { EditCharacter } from './characterEditor/EditCharacter'
 import { CharacterSheet } from './CharacterSheet'
 import { CharacterCard } from './CharacterCard'
 import { CreateCharacter } from './characterCreator/CreateCharacter'

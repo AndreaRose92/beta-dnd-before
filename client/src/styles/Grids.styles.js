@@ -10,40 +10,65 @@ export const PageWrapper = styled.div`
 `
 export const NavWrapper = styled.div`
     display: grid;
-    grid-row: 1/2;
+    grid-row: 1;
     grid-template-columns: 20% 1fr 1fr 1fr 1fr 20%;
     gap: 5px;
-    max-height: fit-content;
+    max-height: 80px;
 `
 
 export const ContentWrapper = styled.div`
-    margin-top: 50px;
+    /* margin-top: 50px; */
     grid-row: 2;
 
 `
 
 export const CharacterWrapper = styled.div`
-    margin: 25px;
     display: grid;
     grid-template-rows: 1fr 5fr;
+    `
+
+export const CharacterFooter = styled.div`
+    grid-area: 'ft';
+    grid-column: 1 / 14;
+    display: block;
+    margin-bottom: 35px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    background-color: ${props => {
+        switch (props.variant) {
+            case 'Barbarian': return '#B87333';
+            case 'Bard': return '#B990BA';
+            case 'Cleric': return '#AAABAD';
+            case 'Druid': return '#8A9453';
+            case 'Fighter': return '#674A37';
+            case 'Monk': return '#6DB7D5';
+            case 'Paladin': return '#B49E53';
+            case 'Ranger': return '#4E8062';
+            case 'Rogue': return '#4A4B45';
+            case 'Sorcerer': return '#C1525B';
+            case 'Warlock': return '#8253B1';
+            case 'Wizard': return '#2C5EB5';
+            default: return 'gray'
+        }
+    }};
 `
 
 export const CharacterGrid = styled.div`
     grid-row: 2;
     display: grid;
     grid-template-columns: repeat(12, 110px) 1fr;
-    grid-template-rows: repeat(5, 110px);
+    grid-template-rows: repeat(6, 110px);
     grid-template-areas: 
     'sb sb sb sb sb sb ab ab hb hb hb hb dl'
     'st st st pb pb pb it ac in dc dc dc dl'
     'st st st pb pb pb eb eb eb eb eb eb dl'
     'sn sn sn pb pb pb eb eb eb eb eb eb dl'
     'sn sn sn pb pb pb eb eb eb eb eb eb dl'
+    'ft ft ft ft ft ft ft ft ft ft ft ft ft'
     ;
     gap: 10px;
     `
 export const DiceBox = styled.div`
-    /* grid-column: 13; */
     grid-row: 1 / 6;
     grid-area: 'dl';
     border-radius: 10px;

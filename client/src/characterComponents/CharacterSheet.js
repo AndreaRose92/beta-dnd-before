@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CharacterGrid, CharacterWrapper } from '../styles';
-// import { CharacterContext, ErrorContext } from '../hookComponents';
+import { CharacterFooter } from '../styles/Grids.styles';
 import * as All from './characterSheetBoxes';
 
 export const CharacterSheet = () => {
+    
     const params = useParams();
     const [character, setCharacter] = useState(null)
 
@@ -35,6 +36,7 @@ export const CharacterSheet = () => {
                 <All.CombatBox dex={character.stats[1]}/>
                 <All.ActionBox {...character}/>
                 <All.DiceLog/>
+                <CharacterFooter variant={character.dnd_class.name} />
             </CharacterGrid>
         </CharacterWrapper>
     );

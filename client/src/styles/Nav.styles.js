@@ -1,7 +1,7 @@
 import styled from "styled-components";
-
+ 
 export const NavButton = styled.div`
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     background-color: blanchedalmond;
@@ -17,6 +17,10 @@ export const Logo = styled.h1`
     margin-top: 13px;
     text-align: right;
     margin-right: 20px;
+
+    img {
+        background-size: 0px;
+    }
 `
 export const DropDown = styled.div`
     display: flex;
