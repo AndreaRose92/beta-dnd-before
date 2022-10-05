@@ -57,7 +57,7 @@ DndClass.all.each do |dc|
       dnd_class: dc,
       index: level_data["index"],
       level: level_data["level"],
-      features: filter_features(dc.name, level_data),
+      feature_names: filter_features(dc.name, level_data),
       ability_score_bonuses: level_data["ability_score_bonuses"],
       prof_bonus: level_data["prof_bonus"],
       cantrips_known: spellcasting && spellcasting["cantrips_known"] ? spellcasting["cantrips_known"] : nil,
@@ -126,7 +126,7 @@ Subclass.all.each do |subclass|
     SubclassLevel.create!(
       dnd_class_level: DndClassLevel.find_by(dnd_class: subclass.dnd_class, level: level["level"]),
       subclass: subclass,
-      features: stringify_fetch(level["features"]),
+      feature_names: stringify_fetch(level["features"]),
       subclass_specific: specs,
       index: level["index"],
     )

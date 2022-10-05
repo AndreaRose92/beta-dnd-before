@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     delete "/logout", to: "sessions#destroy"
     patch "/characters/:id/health", to: "characters#health"
     post "/characters/:id/finalize", to: "characters#finalize_new_character"
+    get "/dnd_classes/:id/:level", to: "dnd_classes#show_level"
 
 end

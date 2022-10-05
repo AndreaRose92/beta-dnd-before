@@ -1,5 +1,10 @@
 class FeatureSerializer < ActiveModel::Serializer
-  attributes :id, :name, :index, :desc, :level
+  attributes :name, :index, :desc, :level
+
+  def level
+    self.object.dnd_class_level.level
+  end
+
   def attributes(*args)
     hash = super
     hash.each { |k, v|

@@ -3,7 +3,7 @@ class CreateDndClassLevels < ActiveRecord::Migration[7.0]
     create_table :dnd_class_levels do |t|
       t.belongs_to :dnd_class, null: false, foreign_key: true
       t.string :index
-      t.string :features
+      t.string :feature_names
       t.integer :level
       t.integer :ability_score_bonuses
       t.integer :prof_bonus

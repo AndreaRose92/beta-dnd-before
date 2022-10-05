@@ -94,7 +94,7 @@ export const CreateCharacter = () => {
 
      const handlePageSubmit = e => {
           e.preventDefault()
-          if (returnData === null) {
+          if ( returnData === null || basics !== returnData.basics ) {
                fetch('/characters', {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
@@ -130,8 +130,8 @@ export const CreateCharacter = () => {
      return (
           <FormGrid>
                <h1>New Character</h1>
-               <Outlet context={{handleInput, handlePageSubmit, handleFullSubmit, basics, stats, returnData, skillChoices, cantripChoices, spellChoices}}/>
                <CharacterFormButtons handlePage={handlePageSubmit} errors={errors ? errors.errors : null}/>
+               <Outlet context={{handleInput, handlePageSubmit, handleFullSubmit, basics, stats, returnData, skillChoices, cantripChoices, spellChoices}}/>
          </FormGrid>
      )
 

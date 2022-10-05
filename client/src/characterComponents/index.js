@@ -7,7 +7,7 @@ import { CharStatsPage } from './characterCreator/CharStatsPage'
 import { CharSkillsPage } from './characterCreator/CharSkillsPage'
 import { CharReviewPage } from './characterCreator/CharReviewPage'
 import { CharSpellsPage } from './characterCreator/CharSpellsPage'
-import { levelOne } from './characterCreator/testComponents/levelOne'
+import { CharLevelsPage } from './characterCreator/CharLevelsPage'
 import { CharacterFormButtons } from './characterCreator/CharacterFormButtons'
 
-export { EditCharacter, CharacterSheet, CharacterCard, CreateCharacter, CharBasicsPage, CharStatsPage, CharSkillsPage, CharReviewPage, CharSpellsPage, levelOne, CharacterFormButtons }
+export { EditCharacter, CharacterSheet, CharacterCard, CreateCharacter, CharBasicsPage, CharStatsPage, CharSkillsPage, CharReviewPage, CharSpellsPage, CharLevelsPage, CharacterFormButtons }

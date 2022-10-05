@@ -1,31 +1,35 @@
 class NewCharacterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :level, :skill_amount, :skill_options, :spell_options, :max_spell_level, :spellcasting_level
+  attributes :id, :name, :level, :skill_amount, :skill_options, :spell_options, :max_spell_level, :spellcasting_level, :basics
   has_many :class_levels, serializer: DndClassLevelSerializer
+  has_many :features, serializer: FeatureSerializer
   has_one :dnd_class
   has_one :race
 
-  def attributes(*args)
-    hash = super
-    hash.each { |k, v|
-      if v.nil?
-        hash.delete(k)
-      end
+  def basics
+    {
+      name: self.object.name,
+      level: self.object.level,
+      dnd_class: self.object.dnd_class.index,
+      race: self.object.race.index
     }
-    hash
   end
 
+  def features
+    self.object.dnd_class.features.filter {|feature| feature.dnd_class_level.level <= self.object.level}
+  end
+  
   def skill_amount
     self.object.dnd_class.starting_skills
   end
-
+  
   def skill_options
     self.object.dnd_class.skills.where(is_save: false).pluck(:name)
   end
-
+  
   def spellcasting_level
     self.object.class_levels.last
   end
-
+  
   def max_spell_level
     if spellcasting_level.lvl_9_spell_slots && spellcasting_level.lvl_9_spell_slots > 0
       9
@@ -49,9 +53,19 @@ class NewCharacterSerializer < ActiveModel::Serializer
       nil
     end
   end
-
+  
   def spell_options
     self.object.dnd_class.spells.where('level <= ?', max_spell_level).pluck(:name, :level)
   end
-
+  
+    def attributes(*args)
+      hash = super
+      hash.each { |k, v|
+        if v.nil?
+          hash.delete(k)
+        end
+      }
+      hash
+    end
+  
 end

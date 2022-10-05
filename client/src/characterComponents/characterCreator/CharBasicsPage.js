@@ -7,7 +7,7 @@ export const CharBasicsPage = () => {
      const context = useOutletContext()
 
      return (
-          <FormBox name='basics' onSubmit={e=>context.handlePageSubmit(e, 'stats')}>
+          <FormBox>
                <h2>Basic Info</h2>
                <label>Name: 
                     <input type='text' name='name' value={context.basics.name} onChange={context.handleInput}/><br/>

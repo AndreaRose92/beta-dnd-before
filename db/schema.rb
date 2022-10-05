@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_05_151804) do
   create_table "character_equips", force: :cascade do |t|
     t.integer "character_id", null: false
     t.integer "equipment_id", null: false
@@ -27,6 +27,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_character_feats_on_character_id"
     t.index ["feat_id"], name: "index_character_feats_on_feat_id"
+  end
+
+  create_table "character_features", force: :cascade do |t|
+    t.integer "character_id", null: false
+    t.integer "feature_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_character_features_on_character_id"
+    t.index ["feature_id"], name: "index_character_features_on_feature_id"
   end
 
   create_table "character_skills", force: :cascade do |t|
@@ -99,7 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
   create_table "dnd_class_levels", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
     t.string "index"
-    t.string "features"
+    t.string "feature_names"
     t.integer "level"
     t.integer "ability_score_bonuses"
     t.integer "prof_bonus"
@@ -195,13 +204,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
 
   create_table "features", force: :cascade do |t|
     t.integer "dnd_class_id", null: false
+    t.integer "dnd_class_level_id", null: false
     t.string "name"
     t.string "index"
     t.string "desc"
-    t.integer "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dnd_class_id"], name: "index_features_on_dnd_class_id"
+    t.index ["dnd_class_level_id"], name: "index_features_on_dnd_class_level_id"
   end
 
   create_table "race_skills", force: :cascade do |t|
@@ -294,7 +304,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
     t.integer "subclass_id", null: false
     t.string "index"
     t.string "subclass_specific"
-    t.string "features"
+    t.string "feature_names"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dnd_class_level_id"], name: "index_subclass_levels_on_dnd_class_level_id"
@@ -356,6 +366,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
   add_foreign_key "character_equips", "equipment"
   add_foreign_key "character_feats", "characters"
   add_foreign_key "character_feats", "feats"
+  add_foreign_key "character_features", "characters"
+  add_foreign_key "character_features", "features"
   add_foreign_key "character_skills", "characters"
   add_foreign_key "character_skills", "skills"
   add_foreign_key "character_spells", "characters"
@@ -370,6 +382,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_04_203848) do
   add_foreign_key "class_spells", "dnd_classes"
   add_foreign_key "class_spells", "spells"
   add_foreign_key "dnd_class_levels", "dnd_classes"
+  add_foreign_key "features", "dnd_class_levels"
   add_foreign_key "features", "dnd_classes"
   add_foreign_key "race_skills", "races"
   add_foreign_key "race_skills", "skills"

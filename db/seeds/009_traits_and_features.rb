@@ -40,12 +40,13 @@ puts "seeding features..."
 
 all_features.each do |feature|
   feature_data = JSON.parse(RestClient.get("#{$api_url}/features/#{feature["index"]}"))
+  dnd_class = DndClass.find_by(name: feature_data["class"]["name"])
 
   Feature.create!(
     name: feature_data["name"],
     index: feature_data["index"],
     desc: feature_data["desc"][0],
-    level: feature_data["level"],
-    dnd_class_id: DndClass.find_by(name: feature_data["class"]["name"]).id,
+    dnd_class: dnd_class,
+    dnd_class_level: DndClassLevel.find_by(dnd_class: dnd_class, level: feature_data["level"])
   )
 end

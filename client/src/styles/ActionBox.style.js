@@ -88,3 +88,4 @@ export const ActionRow = styled.div`
 	grid-template-columns: 3fr 1fr 1fr 2fr 3fr;
 	height: 40px;
 `;
+

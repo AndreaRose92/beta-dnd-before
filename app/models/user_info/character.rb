@@ -2,6 +2,7 @@ class Character < ApplicationRecord
   belongs_to :dnd_class
   belongs_to :race
   belongs_to :user
+  has_many :character_features, dependent: :destroy
   has_many :character_spells, dependent: :destroy
   has_many :character_skills, dependent: :destroy
   has_many :character_equips, dependent: :destroy
@@ -9,6 +10,7 @@ class Character < ApplicationRecord
   has_many :spells, through: :character_spells
   has_many :equipment, through: :character_equips
   has_many :dnd_class_levels, through: :dnd_class
+  has_many :features, through: :character_features
 
   validates :name, presence: :true
   validates :level, inclusion: (1..20)
@@ -153,7 +155,7 @@ class Character < ApplicationRecord
       self.assign_spells_known
     when "Ranger"
       self.assign_spells_known
-    when "Sorcer"
+    when "Sorcerer"
       self.assign_spells_known
     when "Warlock"
       self.assign_spells_known

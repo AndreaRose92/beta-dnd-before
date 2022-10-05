@@ -18,8 +18,10 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
     width: 100%;
     /* min-width: 1920px; */
-    background: radial-gradient(farthest-corner at 40px 40px,
-    #fff 0%, #d4af37 100%);
+    /* background: radial-gradient(farthest-corner at 40px 40px,
+    #fff 0%, #d4af37 100%); */
+    background-color: #6f6e63;
+    
   }
 
   h2 {

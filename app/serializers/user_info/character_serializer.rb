@@ -1,14 +1,14 @@
 class CharacterSerializer < ActiveModel::Serializer
   attributes :id, :name, :image, :level, :stats, :prof_bonus, :max_hp, :current_hp, :spellcasting_modifier
-  # has_many :feats
-  has_many :equipment, serializer: EquipmentSerializer
   has_many :skills
   has_many :saves
+  has_many :features, serializer: FeatureSerializer
+  has_many :equipment, serializer: EquipmentSerializer
   has_many :spells, serializer: SpellSerializer
   has_many :class_levels, serializer: DndClassLevelSerializer
   has_one :dnd_class, serializer: CharacterClassSerializer
   has_one :race, serializer: CharacterRaceSerializer
-  
+
   def stats
     [
       self.object.stat_data(:strength),

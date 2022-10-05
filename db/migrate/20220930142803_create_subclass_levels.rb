@@ -5,7 +5,7 @@ class CreateSubclassLevels < ActiveRecord::Migration[7.0]
       t.belongs_to :subclass, null: false, foreign_key: true
       t.string :index
       t.string :subclass_specific
-      t.string :features
+      t.string :feature_names
 
       t.timestamps
     end

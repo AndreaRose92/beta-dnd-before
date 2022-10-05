@@ -41,6 +41,7 @@ export const App = () => {
 							<Route path='stats' element={<AllChar.CharStatsPage/>}/>
 							<Route path='skills' element={<AllChar.CharSkillsPage/>}/>
 							<Route path='spells' element={<AllChar.CharSpellsPage/>}/>
+							<Route path='levels' element={<AllChar.CharLevelsPage/>}/>
 							<Route path='review' element={<AllChar.CharReviewPage/>}/>
 						</Route>
 					</Routes>
@@ -56,9 +57,7 @@ const AuthRoutes = ({ children }) => {
 
 	const navigate = useNavigate()
 
-	if (!user) {
-		navigate('/not_found')
-	}
+	useEffect((user) => {if (user === null) {navigate('/not_found')} } , [navigate, user] )
 
 	return <Fragment>{children}</Fragment>;
 };

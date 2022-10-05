@@ -101,36 +101,6 @@ export const DiceBox = styled.div`
     }
 `
 
-export const FormGrid = styled.div`
-     display: grid;
-     grid-template-columns: 100px 1fr 100px;
-     grid-template-rows: 60px 1fr 1fr;
-     justify-content: center;
-
-     h1 {
-          grid-column: 2;
-          grid-row: 1;
-          text-align: center;
-     }
-
-     .navButtons {
-        grid-column: 2;
-        grid-row: 3;
-        align-content: center;
-     }
-`
-export const FormBox = styled.form`
-     grid-column: 2;
-     grid-row: 2;
-     justify-self: center;
-     
-     h2, input, select, button {
-          margin: 5px;
-          display: block;
-     }
-
-`
-
 export const UserWrapper = styled.div`
     display: grid;
     grid-template-rows: 80px 1fr;
@@ -153,11 +123,14 @@ export const CardWrapper = styled.div`
 export const CharCard = styled.div`
     height: 200px;
     border-radius: 10px;
-    border: black 2px solid;
+    border: 1px solid black;
+    box-shadow: 2px 2px black;
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr 1fr;
-    background-color: ${props => {
+    background: radial-gradient(
+        farthest-side at 0px 0px, #000 0%, 
+    ${props => {
         switch (props.variant) {
             case 'Barbarian': return '#B87333';
             case 'Bard': return '#B990BA';
@@ -173,7 +146,7 @@ export const CharCard = styled.div`
             case 'Wizard': return '#2C5EB5';
             default: return 'gray'
         }
-    }};
+    }} 100%);
 
     .avatar > img {
         border: black 2px solid;

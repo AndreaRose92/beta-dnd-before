@@ -4,14 +4,13 @@ export const NavButton = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: gold;
-    color: silver;
+    background-color: blanchedalmond;
 
     .active {
         background-color: crimson;
     }
     :hover {
-        background-color: crimson;
+        background-color: aliceblue
     }
 `
 export const Logo = styled.h1`
@@ -23,7 +22,7 @@ export const DropDown = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: gold;
+    background-color: blanchedalmond;
     color: silver;
     text-align: center;
     max-height: fit-content;
@@ -32,7 +31,7 @@ export const DropDown = styled.div`
         background-color: crimson;
     }
     :hover {
-        background-color: crimson;
+        background-color: aliceblue
     }
     :hover {
         display: block;
