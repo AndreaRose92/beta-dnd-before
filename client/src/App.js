@@ -6,6 +6,7 @@ import { UserContext, DiceProvider } from './hookComponents';
 import * as AllChar from './characterComponents';
 import * as AllUtil from './utilityComponents';
 import * as AllInfo from './gameInfoComponents';
+import { DetailProvider } from './hookComponents/PlayerEvents';
 
 export const App = () => {
 	const { user, setUser } = useContext(UserContext);
@@ -34,7 +35,7 @@ export const App = () => {
 						<Route path='races/:race' element={<AllInfo.RaceDetail/>}/>
 						<Route path='classes/:dnd_class'element={<AllInfo.DndClassDetails/>}/>
 						<Route path='/users/:username' element={<AuthRoutes><AllUtil.UserPage/></AuthRoutes>}/>
-						<Route path='/users/:username/characters/:id/' element={<DiceProvider><AllChar.CharacterSheet/></DiceProvider>}/>
+						<Route path='/users/:username/characters/:id/' element={<DiceProvider><DetailProvider><AllChar.CharacterSheet/></DetailProvider></DiceProvider>}/>
 						<Route path='/users/:username/characters/:id/edit' element={<AllChar.EditCharacter/>}/>
 						<Route path='/new_character/*' element={<AuthRoutes><AllChar.CreateCharacter/></AuthRoutes>}>
 							<Route path='basics' element={<AllChar.CharBasicsPage/>}/>

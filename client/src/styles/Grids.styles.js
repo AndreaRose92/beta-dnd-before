@@ -79,7 +79,16 @@ export const DiceBox = styled.div`
     padding: 5px 10px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 40px 1fr;
+    
+    h2 {
+        grid-row: 1;
+    }
+
+    div.rollContainer {
+        grid-row: 2;
+        overflow-y: auto;
+    }
 
     div.rollBox {
         display: grid;

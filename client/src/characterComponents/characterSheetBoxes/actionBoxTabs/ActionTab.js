@@ -43,7 +43,7 @@ export const ActionTab = ({ stats, equipment, prof_bonus }) => {
 				<h3>Damage</h3>
 				<h3>Notes</h3>
 			</ActionHeader>
-			<ActionGrid>{renderActions}</ActionGrid>
+			<ActionGrid  length={equipment.length}>{renderActions}</ActionGrid>
 		</ActionTable>
 	);
 };

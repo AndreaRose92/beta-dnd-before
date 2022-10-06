@@ -1,12 +1,15 @@
 import React, { useContext } from 'react'
 import { damageTypeIcon, DiceContext, diceRoll } from '../../../hookComponents'
+import { DetailContext } from '../../../hookComponents/PlayerEvents'
 import { SpellGrid, SpellHeader, SpellRow, SpellTable, SpellButton } from '../../../styles'
 
 export const SpellBook = ({spells, spellcasting_modifier, level}) => {
   
     const {diceHistory, setDiceHistory} = useContext(DiceContext)
+    const {setDetails} = useContext(DetailContext)
 
     const spellAttack = (name, modifier, dSize, dAmt) => {
+        setDetails(null)
         let newRoll = diceRoll(name, modifier, dSize, dAmt)
         if (!diceHistory[0]) {newRoll.id = 1}
         else {newRoll.id = diceHistory[diceHistory.length - 1].id + 1 }
@@ -36,15 +39,15 @@ export const SpellBook = ({spells, spellcasting_modifier, level}) => {
         const damageButton = spell.damage ? <SpellButton onClick={()=>spellAttack(spell.name, spellcasting_modifier, slotLevel.dSize, slotLevel.dAmt)}>{damage}{damageTypeIcon(spell.damage_type)}</SpellButton> : <h4>---</h4>
 
         return (
-            <SpellRow key={spell.name}>
-                <h4>{spell.name}</h4>
-                <h4>{spell.casting_time}</h4>
-                <h4>{spell.range}</h4>
-                <h4>{spell.dc_type ? `${spellcasting_modifier + 8} ${spell.dc_type.slice(0, 3)}` : null}</h4>
+            <SpellRow key={spell.name} >
+                <h4 onClick={()=>setDetails(spell)}>{spell.name}</h4>
+                <h4 onClick={()=>setDetails(spell)}>{spell.casting_time}</h4>
+                <h4 onClick={()=>setDetails(spell)}>{spell.range}</h4>
+                <h4 onClick={()=>setDetails(spell)}>{spell.dc_type ? `${spellcasting_modifier + 8} ${spell.dc_type.slice(0, 3)}` : null}</h4>
                 {damageButton}
-                <h4>{spell.duration}</h4>
-                <h4>{spell.concentration ? '©️' :  null}</h4>
-                <h4>{spell.ritual ? '®️' :  null}</h4>
+                <h4 onClick={()=>setDetails(spell)}>{spell.duration}</h4>
+                <h4 onClick={()=>setDetails(spell)}>{spell.concentration ? '©️' :  null}</h4>
+                <h4 onClick={()=>setDetails(spell)}>{spell.ritual ? '®️' :  null}</h4>
             </SpellRow>
         )
     })

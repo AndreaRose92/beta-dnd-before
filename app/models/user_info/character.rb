@@ -10,7 +10,7 @@ class Character < ApplicationRecord
   has_many :spells, through: :character_spells
   has_many :equipment, through: :character_equips
   has_many :dnd_class_levels, through: :dnd_class
-  has_many :features, through: :character_features
+  has_many :features, through: :dnd_class
 
   validates :name, presence: :true
   validates :level, inclusion: (1..20)
@@ -134,18 +134,6 @@ class Character < ApplicationRecord
       self.assign_cantrips
     when "Wizard"
       self.assign_cantrips
-    when "Barbarian"
-      nil
-    when "Fighter"
-      nil
-    when "Monk"
-      nil
-    when "Paladin"
-      nil
-    when "Ranger"
-      nil
-    when "Rogue"
-      nil
     end
   end
 
@@ -167,14 +155,6 @@ class Character < ApplicationRecord
       self.assign_spells_by_modifier("intelligence")
     when "Paladin"
       self.assign_spells_by_modifier("charisma")
-    when "Barbarian"
-      nil
-    when "Fighter"
-      nil
-    when "Monk"
-      nil
-    when "Rogue"
-      nil
     end
   end
 end
