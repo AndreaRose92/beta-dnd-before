@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { NavWrapper, DropButton, DropDown, DropDownContent, Logo, NavButton } from '../styles'
-import { classes, races } from '../hookComponents'
+import { NavWrapper, Logo, NavButton } from '../styles'
 
 export const NavBar = ({user, setUser}) => {
 
@@ -14,9 +13,6 @@ export const NavBar = ({user, setUser}) => {
 
     const signupLink = user ? <NavButton as={NavLink} to='/logout' onClick={handleLogout}><h1>Logout</h1></NavButton> : <NavButton as={NavLink} to='/signup'><h1>Signup</h1></NavButton>
 
-    // const raceLinks = races.map(race => <DropButton key={race} as={NavLink} to={`/races/${race.toLowerCase()}`}>{race}</DropButton>)
-    // const classLinks = classes.map(c => <DropButton key={c} as={NavLink} to={`/classes/${c.toLowerCase()}`}>{c}</DropButton>)
-
     return (
         <NavWrapper>
             <Logo as={NavLink} to='/'><h1>DnD Before</h1></Logo>
@@ -24,18 +20,6 @@ export const NavBar = ({user, setUser}) => {
             {signupLink}
             <NavButton as={NavLink} to='/races'><h1>Races</h1></NavButton>
             <NavButton as={NavLink} to='/classes'><h1>Classes</h1></NavButton>
-            {/* <DropDown>
-                <h1>Races</h1>
-                <DropDownContent>
-                    {raceLinks}
-                </DropDownContent>
-            </DropDown>
-            <DropDown>
-                <h1>Classes</h1>
-                <DropDownContent>
-                    {classLinks}
-                </DropDownContent>
-            </DropDown> */}
             {user ? <NavButton as={NavLink} to='/new_character/basics'><h1>New Character</h1></NavButton> : null}
         </NavWrapper>
   )

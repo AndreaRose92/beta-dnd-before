@@ -3,16 +3,13 @@ class DndClassSerializer < ActiveModel::Serializer
   has_many :skills, serializer: SkillSerializer
   has_many :dnd_class_levels, serializer: DndClassLevelSerializer
   has_many :subclasses, serializer: SubclassSerializer
-  # has_many :features, serializer: FeatureSerializer
-  has_many :features
+  has_many :features, serializer: FeatureSerializer
+  # has_many :features
   # has_many :skills
   # has_many :dnd_class_levels
   # has_many :subclasses
 
-  def features
-    self.object.features.pluck(:name)
-  end
-
+  
 
   def attributes(*args)
     hash = super

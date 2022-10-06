@@ -1,4 +1,3 @@
-import { BarbarianHeader, BarbarianRows } from './BarbarianTable'
 import { BardHeader, BardRows } from './BardTable'
 import { ClericHeader, ClericRows } from './ClericTable'
 import { DruidHeader, DruidRows } from './DruidTable'
@@ -11,4 +10,4 @@ import { SorcererHeader, SorcererRows } from './SorcererTable'
 import { WarlockHeader, WarlockRows } from './WarlockTable'
 import { WizardHeader, WizardRows } from './WizardTable'
 
-export { BarbarianHeader, BarbarianRows, BardHeader, BardRows, ClericHeader, ClericRows, DruidHeader, DruidRows, FighterHeader, FighterRows, MonkHeader, MonkRows, PaladinHeader, PaladinRows, RangerHeader, RangerRows, RogueHeader, RogueRows, SorcererHeader, SorcererRows, WarlockHeader, WarlockRows, WizardHeader, WizardRows }
+export { BardHeader, BardRows, ClericHeader, ClericRows, DruidHeader, DruidRows, FighterHeader, FighterRows, MonkHeader, MonkRows, PaladinHeader, PaladinRows, RangerHeader, RangerRows, RogueHeader, RogueRows, SorcererHeader, SorcererRows, WarlockHeader, WarlockRows, WizardHeader, WizardRows }

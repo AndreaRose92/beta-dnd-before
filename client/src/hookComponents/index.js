@@ -2,5 +2,6 @@ import { UserContext, UserProvider, CharacterContext, CharacterProvider, NavButt
 import { DiceContext, DiceProvider, diceRoll } from './PlayerEvents'
 import { allSkills, savingThrows, classes, races } from './miscData'
 import { ErrorContext, ErrorProvider } from './Errors'
+import { DetailContext, DetailProvider } from './PlayerEvents'
 
-export { UserContext, UserProvider, CharacterContext, CharacterProvider, NavButton, capitalize, FullCaster, HalfCaster, damageTypeIcon, DiceContext, DiceProvider, diceRoll, allSkills, savingThrows, classes, races, ErrorContext, ErrorProvider }
+export { UserContext, UserProvider, CharacterContext, CharacterProvider, NavButton, capitalize, FullCaster, HalfCaster, damageTypeIcon, DiceContext, DiceProvider, diceRoll, allSkills, savingThrows, classes, races, ErrorContext, ErrorProvider, DetailContext, DetailProvider }

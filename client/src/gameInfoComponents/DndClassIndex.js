@@ -15,7 +15,7 @@ export const DndClassIndex = () => {
                 r.json().then(errors=>console.log(errors))
             }
         })
-    })
+    }, [])
 
     const tabs = classes.map(dc => {return <React.Fragment key={dc.name}><NavButton path={`./${dc.index}`} text={dc.name}/><br/></React.Fragment>})
 

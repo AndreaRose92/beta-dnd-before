@@ -2,11 +2,11 @@ import { Fragment, useContext, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import { ContentWrapper, PageWrapper } from './styles';
-import { UserContext, DiceProvider } from './hookComponents';
+import { UserContext, DiceProvider, DetailProvider } from './hookComponents';
 import * as AllChar from './characterComponents';
 import * as AllUtil from './utilityComponents';
 import * as AllInfo from './gameInfoComponents';
-import { DetailProvider } from './hookComponents/PlayerEvents';
+
 
 export const App = () => {
 	const { user, setUser } = useContext(UserContext);
