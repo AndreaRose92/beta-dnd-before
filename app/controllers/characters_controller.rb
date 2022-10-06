@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
   end
 
   def show
-    render json: Character.find(params[:id])
+    render json: find_id
   end
 
   def create
@@ -22,15 +22,12 @@ class CharactersController < ApplicationController
     char.update!(stats_params)
     char.update(image: "https://www.dndbeyond.com/avatars/9221/765/637202353794223452.jpeg?width=150&height=150&fit=crop&quality=95&auto=webp")
     char.calculate_hp(hp_params)
-    params[:skill_choices].each do |skill|
-      CharacterSkill.create!(character: char, skill: Skill.find_by(name: skill))
+    params[:skill_choices].each do |skill| CharacterSkill.create!(character: char, skill: Skill.find_by(name: skill)) end
+    char.dnd_class.skills.last(2).each do |save| CharacterSkill.create!(character: char, skill: save) end
+    if char.race.skills != []
+      char.race.skills.each do |skill| CharacterSkill.create!(character: char, skill: skill) end
     end
-    char.dnd_class.skills.last(2).each do |save|
-      CharacterSkill.create!(character: char, skill: save)
-    end
-    params[:spell_choices].each do |spell|
-      CharacterSpell.create!(character: char, spell: Spell.find_by(name: spell))
-    end
+    params[:spell_choices].each do |spell| CharacterSpell.create!(character: char, spell: Spell.find_by(name: spell)) end
     render json: char, status: :accepted
   end
 
@@ -51,8 +48,7 @@ class CharactersController < ApplicationController
   end
 
   def destroy
-    char = Character.find(params[:id])
-    char.destroy
+    find_id.destroy
     head :no_content
   end
 
@@ -60,6 +56,10 @@ class CharactersController < ApplicationController
 
   def find_character
     Character.find_by(name: params[:name], user: current_user)
+  end
+
+  def find_id
+    Character.find(params[:id])
   end
 
   def basics_params
@@ -72,7 +72,7 @@ class CharactersController < ApplicationController
       dnd_class: DndClass.find_by(index: basics_params[:dnd_class]),
       race: Race.find_by(index: basics_params[:race]),
       level: basics_params[:level].to_i,
-      user: current_user
+      user: current_user,
     }
   end
 

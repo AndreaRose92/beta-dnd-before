@@ -71,6 +71,6 @@ all_spells.each do |spell|
     slot_lvl_6_heal: healing && healing["6"] ? healing["6"] : nil,
     slot_lvl_7_heal: healing && healing["7"] ? healing["7"] : nil,
     slot_lvl_8_heal: healing && healing["8"] ? healing["8"] : nil,
-    slot_lvl_9_heal: healing && healing["9"] ? healing["9"] : nil,
+    slot_lvl_9_heal: healing && healing["9"] ? healing["9"] : nil
   )
 end

@@ -61,4 +61,19 @@ class ApplicationController < ActionController::API
     }
     stat_bonuses
   end
+
+  def damage_data(string)
+    if string.include?("+")
+      dice = string.split("+")[0]
+      modifier = string.split("+")[1]
+    else
+      modifier = 0
+      dice = string
+    end
+  
+    dSize = dice.split("d")[1]
+    dAmt = dice.split("d")[0]
+  
+    return [dAmt, dSize, modifier]
+  end
 end
