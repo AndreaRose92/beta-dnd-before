@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { capitalize } from "../hookComponents"
+import { InfoTab } from "../styles/Grids.styles"
 
 export const RaceDetail = () => {
 
@@ -15,6 +16,7 @@ export const RaceDetail = () => {
     })
 
     const subraces = race && race.subraces ? race.subraces : []
+    const traits = race && race.traits ? race.traits : []
     
     useEffect(()=>{
         fetch(`/races/${params.race}`).then(r=>{
@@ -26,13 +28,31 @@ export const RaceDetail = () => {
         })
     }, [params.race])
 
+    const renderTraits = traits.map(trait => {
+        return (
+            <>
+                <h4>{trait.name}</h4>
+                <p>{trait.desc}</p>
+            </>
+        )
+    })
+
+    const renderABI = data => {
+        let text = ''
+        if (data.strength !== 0) {text = `STR +${data.strength}`}
+        if (data.dexterity !== 0) {text =  `DEX +${data.dexterity}`}
+        if (data.constitution !== 0) {text =  `CON +${data.constitution}`}
+        if (data.intelligence !== 0) {text =  `INT +${data.intelligence}`}
+        if (data.wisdom !== 0) {text =  `WIS +${data.wisdom}`}
+        if (data.charisma !== 0) {text =  `CHA +${data.charisma}`}
+        return text
+    }
+
     const renderSubraces = subraces.map(subrace => {
         return (<div key={subrace.id}>
             <h4>{subrace.name}</h4>
             <ul>
-                <li>ABI: {subrace.ability_score_bonuses}</li>
-                <li>Traits: {subrace.traits}</li>
-                {subrace.languages ? <li>Pick One Language: {subrace.languages}</li> : null}
+                <li>ABI: {renderABI(subrace)}</li>
             </ul>
         </div>)
     })
@@ -42,17 +62,21 @@ export const RaceDetail = () => {
     }
 
     return (
-        <div>
-            <h2>{capitalize(race.name)}</h2>
+        <InfoTab>
+            <h1>{capitalize(race.name)}</h1>
             <ul>
-                <li>ABI: {race.ability_score_bonuses}</li>
+                <h2>Basic Info</h2>
+                <li>ABI: {renderABI(race)}</li>
                 <li>Speed: {race.speed}ft</li>
                 <li>Size: {race.size}</li>
-                <li>Traits: {race.traits}</li>
                 <li>Languages: {race.languages}</li>
             </ul>
+            <ul>
+                <h2>Traits</h2>
+                {renderTraits}
+            </ul>
             {renderSubraces}
-        </div>
+        </InfoTab>
     )
 
 }

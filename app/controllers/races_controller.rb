@@ -12,6 +12,8 @@ class RacesController < ApplicationController
             race = parse_race_data
             race[:subraces] = []
             race[:subraces] << parse_subrace_data
+            race[:traits] = []
+            race[:traits] << parse_trait_data(false)
         end
         render json: race
     end
@@ -24,6 +26,7 @@ class RacesController < ApplicationController
                 subrace.update(parse_subrace_data)
             end
         end
+        parse_trait_data(true, race)
         render json: race
     end
 
@@ -35,6 +38,10 @@ class RacesController < ApplicationController
 
     def subrace_data
         JSON.parse(RestClient.get("#{api_url}/subraces/#{race_data["subraces"][0]["index"]}"))
+    end
+
+    def traits_data
+        JSON.parse(RestClient.get("#{api_url}/races/#{params[:race]}/traits"))
     end
 
     def parse_race_data
@@ -57,5 +64,21 @@ class RacesController < ApplicationController
         }
         stats = find_abi(subrace_data["ability_bonuses"])
         subrace.merge(stats)
+    end
+
+    def parse_trait_data post, race
+        traits_data.each do |trait|
+            data = JSON.parse(RestClient.get("#{api_url}/traits/#{trait["index"]}"))
+            trait = {
+                name: data["name"],
+                index: data["index"],
+                desc: data["desc"][0],
+            }
+            if post
+                t = Trait.create(trait)
+                RaceTrait.create(race: race, trait: t)
+            end
+            trait
+        end
     end
 end

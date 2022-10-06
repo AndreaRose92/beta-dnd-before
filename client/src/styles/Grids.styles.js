@@ -8,6 +8,28 @@ export const PageWrapper = styled.div`
     grid-template-rows: 80px calc(100vh - 100px);
     gap: 10px;
 `
+
+export const IndexWrapper = styled.div`
+    display: grid;
+    grid-template-columns: 15% 85%;
+`
+
+export const IndexTabs = styled.div`
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 80px repeat(12, 50px);
+`
+
+export const IndexButtons = styled.div`
+    grid-column: 2;
+`
+
+export const InfoTab = styled.div`
+    grid-column: 2;
+    
+`
+
 export const NavWrapper = styled.div`
     display: grid;
     grid-row: 1;

@@ -14,15 +14,17 @@ export const NavBar = ({user, setUser}) => {
 
     const signupLink = user ? <NavButton as={NavLink} to='/logout' onClick={handleLogout}><h1>Logout</h1></NavButton> : <NavButton as={NavLink} to='/signup'><h1>Signup</h1></NavButton>
 
-    const raceLinks = races.map(race => <DropButton key={race} as={NavLink} to={`/races/${race.toLowerCase()}`}>{race}</DropButton>)
-    const classLinks = classes.map(c => <DropButton key={c} as={NavLink} to={`/classes/${c.toLowerCase()}`}>{c}</DropButton>)
+    // const raceLinks = races.map(race => <DropButton key={race} as={NavLink} to={`/races/${race.toLowerCase()}`}>{race}</DropButton>)
+    // const classLinks = classes.map(c => <DropButton key={c} as={NavLink} to={`/classes/${c.toLowerCase()}`}>{c}</DropButton>)
 
     return (
         <NavWrapper>
             <Logo as={NavLink} to='/'><h1>DnD Before</h1></Logo>
             {loginLink}
             {signupLink}
-            <DropDown>
+            <NavButton as={NavLink} to='/races'><h1>Races</h1></NavButton>
+            <NavButton as={NavLink} to='/classes'><h1>Classes</h1></NavButton>
+            {/* <DropDown>
                 <h1>Races</h1>
                 <DropDownContent>
                     {raceLinks}
@@ -33,7 +35,7 @@ export const NavBar = ({user, setUser}) => {
                 <DropDownContent>
                     {classLinks}
                 </DropDownContent>
-            </DropDown>
+            </DropDown> */}
             {user ? <NavButton as={NavLink} to='/new_character/basics'><h1>New Character</h1></NavButton> : null}
         </NavWrapper>
   )

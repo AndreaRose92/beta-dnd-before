@@ -32,8 +32,12 @@ export const App = () => {
 						<Route path='*' element={<AllUtil.NotFound/>}/>
 						<Route path='login' element={<AllUtil.Login/>}/>
 						<Route path='signup' element={<AllUtil.Signup/>}/>
-						<Route path='races/:race' element={<AllInfo.RaceDetail/>}/>
-						<Route path='classes/:dnd_class'element={<AllInfo.DndClassDetails/>}/>
+						<Route path='races' element={<AllInfo.RaceIndex />}>
+							<Route path=':race' element={<AllInfo.RaceDetail/>}/>
+						</Route>
+						<Route path='classes' element={<AllInfo.DndClassIndex/>}>
+							<Route path=':dnd_class'element={<AllInfo.DndClassDetails/>}/>
+						</Route>
 						<Route path='/users/:username' element={<AuthRoutes><AllUtil.UserPage/></AuthRoutes>}/>
 						<Route path='/users/:username/characters/:id/' element={<DiceProvider><DetailProvider><AllChar.CharacterSheet/></DetailProvider></DiceProvider>}/>
 						<Route path='/users/:username/characters/:id/edit' element={<AllChar.EditCharacter/>}/>

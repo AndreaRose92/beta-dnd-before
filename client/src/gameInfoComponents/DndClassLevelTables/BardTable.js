@@ -15,11 +15,10 @@ export const BardHeader = () => {
 	);
 };
 
-export const BardRows = ({ levels, spells }) => {
+export const BardRows = ({ levels }) => {
 	const renderRows =
-		levels && spells
+		levels
 			? levels.map((level) => {
-					let spell = level ? spells[level.level - 1] : null;
 
 					return (
 						<TableRow key={level.level} level={level.level} variant='Bard'>
@@ -30,17 +29,17 @@ export const BardRows = ({ levels, spells }) => {
 								{level.song_of_rest_die ? `d${level.song_of_rest_die}` : 'n/a'}
 							</h2>
 							<h2>{level.features !== '' ? level.features : '-'}</h2>
-							<h2>{spell.cantrips_known}</h2>
-							<h2>{spell.spells_known}</h2>
-							<h4>{spell.lvl_1 !== 0 ? spell.lvl_1 : `-`}</h4>
-							<h4>{spell.lvl_2 !== 0 ? spell.lvl_2 : `-`}</h4>
-							<h4>{spell.lvl_3 !== 0 ? spell.lvl_3 : `-`}</h4>
-							<h4>{spell.lvl_4 !== 0 ? spell.lvl_4 : `-`}</h4>
-							<h4>{spell.lvl_5 !== 0 ? spell.lvl_5 : `-`}</h4>
-							<h4>{spell.lvl_6 !== 0 ? spell.lvl_6 : `-`}</h4>
-							<h4>{spell.lvl_7 !== 0 ? spell.lvl_7 : `-`}</h4>
-							<h4>{spell.lvl_8 !== 0 ? spell.lvl_8 : `-`}</h4>
-							<h4>{spell.lvl_9 !== 0 ? spell.lvl_9 : `-`}</h4>
+							<h2>{level.cantrips_known}</h2>
+							<h2>{level.spells_known}</h2>
+							<h4>{level.lvl_1 !== 0 ? level.lvl_1_spell_slots : `-`}</h4>
+							<h4>{level.lvl_2 !== 0 ? level.lvl_2_spell_slots : `-`}</h4>
+							<h4>{level.lvl_3 !== 0 ? level.lvl_3_spell_slots : `-`}</h4>
+							<h4>{level.lvl_4 !== 0 ? level.lvl_4_spell_slots : `-`}</h4>
+							<h4>{level.lvl_5 !== 0 ? level.lvl_5_spell_slots : `-`}</h4>
+							<h4>{level.lvl_6 !== 0 ? level.lvl_6_spell_slots : `-`}</h4>
+							<h4>{level.lvl_7 !== 0 ? level.lvl_7_spell_slots : `-`}</h4>
+							<h4>{level.lvl_8 !== 0 ? level.lvl_8_spell_slots : `-`}</h4>
+							<h4>{level.lvl_9 !== 0 ? level.lvl_9_spell_slots : `-`}</h4>
 						</TableRow>
 					);
 			  })
