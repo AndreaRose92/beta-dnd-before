@@ -21,7 +21,7 @@ export const DndClassDetails = () => {
 
      const renderRows = levels ? levels.map(level => {
 
-          const features = dndClass.features.filter(feature => feature.level === level.level).map(feature => feature.name).join(', ')
+          const features = dndClass.filtered_features.filter(feature => feature.level === level.level).map(feature => feature.name).join(', ')
 
           return (
                <TableRow key={level.level} level={level.level} variant={dndClass.name}>
