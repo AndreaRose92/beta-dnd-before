@@ -2,13 +2,17 @@ import styled from 'styled-components';
 
 export const DetailGrid = styled.div`
 	display: grid;
-	grid-template-columns: 100px 1fr 4fr 100px;
+	grid-template-columns: 5px .5fr 4fr 1.5fr;
 	grid-template-rows: 50px 1fr 50px;
 `;
 
+export const DetailsPane = styled.div`
+	display: grid;
+	grid-column: 4;
+`
+
 export const TitleCard = styled.div`
 	grid-column: 2;
-	grid-row: 2;
 	h3 {
 		margin-left: 30px;
 	}
@@ -20,13 +24,14 @@ export const LevelsTable = styled.div`
 	grid-row: 2;
 	background-color: gray;
 	grid-template-columns: 1fr;
-	grid-template-rows: 60px 2fr;
-	row-gap: 40px;
+	grid-template-rows: (60px, 100px) 2fr;
+	padding-bottom: 5px;
 `;
 export const TableHeader = styled.div`
 	display: grid;
 	grid-row: 1;
 	text-align: center;
+	border-bottom: black 2px solid;
 	grid-template-columns: ${(props) => {
 		switch (props.variant) {
 			case 'Barbarian':
@@ -57,10 +62,10 @@ export const TableHeader = styled.div`
 				return 'none';
 		}
 	}};
+
 	h2 {
 		margin-top: 15px;
 		grid-row: 1 / 2;
-		border-bottom: 2px black solid;
 	}
 	h3 {
 		grid-row: 1;
@@ -103,10 +108,6 @@ export const TableHeader = styled.div`
 			}
 		}};
 	}
-	h4 {
-		/* margin-top: 4px; */
-		border-bottom: 2px black solid;
-	}
 `;
 export const TableGrid = styled.div`
 	display: grid;
@@ -114,15 +115,13 @@ export const TableGrid = styled.div`
 	grid-auto-rows: repeat(20, 40px);
 	grid-template-columns: 1fr;
 	text-align: center;
-	row-gap: 5px;
-     /* overflow-y: hidden; */
-     /* text-overflow: clip; */
 `;
 
 export const TableRow = styled.div`
 	display: grid;
 	border-bottom: 2px black solid;
 	text-align: center;
+	padding-top: 5px;
 	grid-row: ${(props) => props.level};
 	grid-template-columns: ${(props) => {
 		switch (props.variant) {
@@ -154,4 +153,8 @@ export const TableRow = styled.div`
 				return 'none';
 		}
 	}};
+
+	:hover {
+		background-color: gold;
+	}
 `;
