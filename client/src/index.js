@@ -6,7 +6,7 @@ import { ErrorProvider, UserProvider } from './hookComponents';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.Fragment>
+  <React.StrictMode>
     <ErrorProvider>
       <UserProvider>
         <BrowserRouter>
@@ -14,5 +14,5 @@ root.render(
         </BrowserRouter>
       </UserProvider>
     </ErrorProvider>
-  </React.Fragment>
+  </React.StrictMode>
 );

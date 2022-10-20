@@ -2,13 +2,19 @@ import styled from 'styled-components';
 
 export const DetailGrid = styled.div`
 	display: grid;
-	grid-template-columns: 5px .5fr 4fr 1.5fr;
+	grid-template-columns: 3.5fr 2fr 100px;
+	column-gap: 15px;
 	grid-template-rows: 50px 1fr 50px;
 `;
 
 export const DetailsPane = styled.div`
 	display: grid;
-	grid-column: 4;
+	grid-column: 2;
+`
+
+export const TitleRow = styled.h1`
+	grid-column: 1;
+	grid-row: 1;
 `
 
 export const TitleCard = styled.div`
@@ -20,7 +26,7 @@ export const TitleCard = styled.div`
 
 export const LevelsTable = styled.div`
 	display: grid;
-	grid-column: 3;
+	grid-column: 1;
 	grid-row: 2;
 	background-color: gray;
 	grid-template-columns: 1fr;
@@ -64,13 +70,14 @@ export const TableHeader = styled.div`
 	}};
 
 	h2 {
-		margin-top: 15px;
+		margin-top: 5px;
 		grid-row: 1 / 2;
 	}
 	h3 {
 		grid-row: 1;
-		margin-top: 4px;
+		margin-top: 5px;
 		border-bottom: 2px black solid;
+		font-size: xx-large;
 	}
 	div.spellTable {
 		grid-row: 2;

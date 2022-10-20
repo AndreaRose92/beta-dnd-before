@@ -53,7 +53,7 @@ export const ClassHeaderVariants = (name) => {
     case "Bard":
       return (
         <React.Fragment>
-          <h2>Bardic Inspiration</h2>
+          <h2>Bardic Insp.</h2>
           <h2>Song of Rest</h2>
           <h2>Cantrips Known</h2>
           <h2>Spells Known</h2>

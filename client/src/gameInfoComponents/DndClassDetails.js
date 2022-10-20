@@ -9,6 +9,7 @@ export const DndClassDetails = () => {
      const params = useParams()
      const [dndClass, setDndClass] = useState(null)
      const [infoDisplay, setInfoDisplay] = useState(0)
+     const [details, setDetails] = useState('')
      const levels = dndClass ? dndClass.dnd_class_levels : null
 
      useEffect(()=>{
@@ -19,6 +20,8 @@ export const DndClassDetails = () => {
                     r.json().then(errors=>console.log(errors))
                }
           })
+          setInfoDisplay(0)
+          setDetails('')
      }, [params.dnd_class])
 
      const filterFeatures = array => {
@@ -72,12 +75,27 @@ export const DndClassDetails = () => {
                <TableRow key={level.level} level={level.level} variant={dndClass.name} onClick={()=>setInfoDisplay(level.level)}>
                     <h2>{level.level}</h2>
                     <h2>{level.prof_bonus}</h2>
-                    <h2>{features}</h2>
+                    <h2>{features !== '' ? features : '-'}</h2>
                     {ClassDetailVariants(level, dndClass.name)}
                </TableRow>
           )
      }) : null
 
+     const renderDetails = infoDisplay !== 0 ? dndClass.features.filter(feature => feature.level === infoDisplay).map(
+          feature => {
+
+               const checkDetail = () => {
+                    details !== feature.name ? setDetails(feature.name) : setDetails('')
+               }
+
+               return (
+                    <React.Fragment key={feature.name}>
+                         <h1 onClick={checkDetail}>{feature.name}</h1>
+                         {details === feature.name ? <h3>{feature.desc}</h3> : null}
+                    </React.Fragment>
+               )
+          }
+     ) : null
 
      while (dndClass === null) {
           return <div><h4>Loading...</h4></div>
@@ -85,11 +103,7 @@ export const DndClassDetails = () => {
 
   return (
     <DetailGrid>
-     <TitleCard>
-          <h1>{dndClass.name}</h1>
-          <h2>Subclasses</h2>
-     </TitleCard>
-     <h1>Basic Details</h1>
+     <h1>{dndClass.name} Levels</h1>
      <LevelsTable>
           <TableHeader variant={dndClass.name}>
                <h2>Level</h2>
@@ -101,9 +115,10 @@ export const DndClassDetails = () => {
                {renderRows}
           </TableGrid>
      </LevelsTable>
-     <DetailsPane>
+     {infoDisplay !== 0 ? <DetailsPane>
           <h1>Additional Details</h1>
-     </DetailsPane>
+          {renderDetails}
+     </DetailsPane> : null}
     </DetailGrid>
   )
 }
