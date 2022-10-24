@@ -42,7 +42,7 @@ class CharactersController < ApplicationController
   end
 
   def health
-    char = find_character
+    char = Character.find(params[:id])
     char.update(current_hp: hp_params[:current_hp].clamp(0, char.max_hp))
     render json: char, status: :accepted
   end

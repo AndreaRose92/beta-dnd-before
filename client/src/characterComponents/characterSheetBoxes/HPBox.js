@@ -18,7 +18,7 @@ export const HPBox = ({ max_hp, current_hp, id, setCharacter }) => {
         }),
       }).then((r) => {
         if (r.ok) {
-          r.json().then((update) => setCharacter(update));
+          r.json().then((update) => {setCharacter(update); setNewHP(0)});
         } else {
           r.json().then((errors) => console.log(errors));
         }
