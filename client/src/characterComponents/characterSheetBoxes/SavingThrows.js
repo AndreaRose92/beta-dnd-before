@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
-import { DiceContext, diceRoll } from "../../hookComponents";
+import { DetailContext, DiceContext, diceRoll } from "../../hookComponents";
 import { SavingThrow } from "../../styles";
 
 export const SavingThrows = ({ saves, prof_bonus }) => { 
 
   const {diceHistory, setDiceHistory} = useContext(DiceContext)
+  const {setDetails} = useContext(DetailContext)
   
   const skillCheck = (skill, mod) => {
     let newRoll = diceRoll(skill, mod)
     if (!diceHistory[0]) { newRoll.id = 1 }
     else { newRoll.id = diceHistory[diceHistory.length - 1].id + 1 }
     setDiceHistory(history => [...history,newRoll])
+    setDetails(null)
   }
 
   const renderSaves = saves.map((save) => {
